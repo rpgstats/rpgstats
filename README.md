@@ -51,3 +51,10 @@ There is a chance, that this thingy can help you!
     * use random-drop generator for each source, based on drop chances
     * give tips for throwing dXX and table of drops
 
+## Mockups:
+
+[Mockplus](https://rp.mockplus.com/run/7Nj8yah2bn/gCAbzEb5Ma/MKw93MCLUL)
+
+<details>
+there will reside some screens
+</details>
