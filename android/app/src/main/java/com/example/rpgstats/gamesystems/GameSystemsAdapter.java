@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rpgstats.R;
+import com.example.rpgstats.entities.GameSystem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameSystemsAdapter extends RecyclerView.Adapter<GameSystemsAdapter.GameSystemHolder> {

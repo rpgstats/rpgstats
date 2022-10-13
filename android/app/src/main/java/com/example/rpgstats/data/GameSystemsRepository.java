@@ -1,6 +1,6 @@
 package com.example.rpgstats.data;
 
-import com.example.rpgstats.gamesystems.GameSystem;
+import com.example.rpgstats.entities.GameSystem;
 
 import java.util.List;
 
