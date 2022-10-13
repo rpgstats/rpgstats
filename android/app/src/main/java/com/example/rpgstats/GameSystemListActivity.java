@@ -3,6 +3,8 @@ package com.example.rpgstats;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.rpgstats.data.GameSystemsRepository;
+import com.example.rpgstats.data.PlugGameSystemsRepository;
 import com.example.rpgstats.gamesystems.GameSystem;
 import com.example.rpgstats.gamesystems.GameSystemsAdapter;
 
@@ -19,13 +21,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameSystemListActivity extends AppCompatActivity implements OnGameSystemClickListener {
 
     private ActivityMainBinding binding;
 
     // data
-    private ArrayList<GameSystem> mGameSystems;
+    private List<GameSystem> mGameSystems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +49,8 @@ public class GameSystemListActivity extends AppCompatActivity implements OnGameS
 
     // suppose getting from server in future
     private void fillGameSystems() {
-        for (int i = 35000; i < 40000; i++) {
-            mGameSystems.add(new GameSystem(i, "warhammer " + i, "1.1.2001"));
-        }
+        GameSystemsRepository gameSystemsRepository = new PlugGameSystemsRepository();
+        mGameSystems = gameSystemsRepository.getGameSystems();
     }
 
     @Override

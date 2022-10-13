@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.rpgstats.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameSystemsAdapter extends RecyclerView.Adapter<GameSystemsAdapter.GameSystemHolder> {
-    private ArrayList<GameSystem> mGameSystem;
+    private List<GameSystem> mGameSystem;
     private OnGameSystemClickListener mOnGameSystemClickListener;
 
-    public GameSystemsAdapter(ArrayList<GameSystem> mGameSystem, OnGameSystemClickListener mOnGameSystemClickListener) {
+    public GameSystemsAdapter(List<GameSystem> mGameSystem, OnGameSystemClickListener mOnGameSystemClickListener) {
         this.mGameSystem = mGameSystem;
         this.mOnGameSystemClickListener = mOnGameSystemClickListener;
     }
