@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.example.rpgstats.data.GameSystemsRepository;
 import com.example.rpgstats.data.PlugGameSystemsRepository;
-import GameSystem;
 
 import com.example.rpgstats.entities.GameSystem;
 import com.example.rpgstats.gamesystems.GameSystemsAdapter;
