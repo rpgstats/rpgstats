@@ -166,7 +166,7 @@
         },
         {
           "TaskID": 14,
-          "TaskName": "Мокапы: управление предметами",
+          "TaskName": "Мокапы: управление предметами тегами",
           "StartDate": "2022-10-14T01:00:00.000Z",
           "EndDate": "2022-10-21T10:00:00.000Z",
           "Duration": 8,
@@ -184,7 +184,7 @@
         },
         {
           "TaskID": 22,
-          "TaskName": "Мокапы: управление параметрами",
+          "TaskName": "Мокапы: управление параметрами и свойствами",
           "StartDate": "2022-10-14T01:00:00.000Z",
           "EndDate": "2022-10-21T10:00:00.000Z",
           "Duration": 8,
@@ -200,24 +200,6 @@
           "info": "<p><br></p>",
           "DurationUnit": "day",
           "subtasks": []
-        },
-        {
-          "TaskID": 24,
-          "TaskName": "Мокапы: управление тегами и свойствами",
-          "StartDate": "2022-10-14T01:00:00.000Z",
-          "EndDate": "2022-10-21T10:00:00.000Z",
-          "Duration": 8,
-          "Progress": 0,
-          "Predecessor": "13FS",
-          "resources": [
-            {
-              "resourceId": "Android+Designer",
-              "resourceName": "Android+Designer",
-              "unit": 100
-            }
-          ],
-          "info": "<p><br></p>",
-          "DurationUnit": "day"
         },
         {
           "TaskID": 26,
@@ -239,7 +221,7 @@
         },
         {
           "TaskID": 15,
-          "TaskName": "Callbacks: управление предметами",
+          "TaskName": "Callbacks: управление предметами и тегами",
           "StartDate": "2022-10-24T01:00:00.000Z",
           "EndDate": "2022-10-31T10:00:00.000Z",
           "Duration": 8,
@@ -257,7 +239,7 @@
         },
         {
           "TaskID": 27,
-          "TaskName": "Callbacks: управление параметрами",
+          "TaskName": "Callbacks: управление параметрами и свойствами",
           "StartDate": "2022-10-24T01:00:00.000Z",
           "EndDate": "2022-10-31T10:00:00.000Z",
           "Duration": 8,
@@ -267,24 +249,6 @@
             {
               "resourceId": "Android",
               "resourceName": "Android",
-              "unit": 100
-            }
-          ],
-          "info": "<p><br></p>",
-          "DurationUnit": "day"
-        },
-        {
-          "TaskID": 28,
-          "TaskName": "Callbacks: управление тегами и свойствами",
-          "StartDate": "2022-10-24T01:00:00.000Z",
-          "EndDate": "2022-10-31T10:00:00.000Z",
-          "Duration": 8,
-          "Progress": 0,
-          "Predecessor": "24FS+2 days,11FS+2 days",
-          "resources": [
-            {
-              "resourceId": "Android+Designer",
-              "resourceName": "Android+Designer",
               "unit": 100
             }
           ],
@@ -316,7 +280,7 @@
           "EndDate": "2022-11-06T10:00:00.000Z",
           "Duration": 4,
           "Progress": 0,
-          "Predecessor": "20FS+2 days,15FS+2 days,26FS+2 days,27FS+2 days,28FS+2 days,21FS+2 days",
+          "Predecessor": "20FS+2 days,15FS+2 days,26FS+2 days,27FS+2 days,21FS+2 days",
           "resources": [
             {
               "resourceId": "Analyst+Android-1",
@@ -480,7 +444,7 @@
           "EndDate": "2022-11-08T10:00:00.000Z",
           "Duration": 6,
           "Progress": 0,
-          "Predecessor": "28FS+2 days",
+          "Predecessor": "",
           "resources": [
             {
               "resourceId": "Android+Designer",
