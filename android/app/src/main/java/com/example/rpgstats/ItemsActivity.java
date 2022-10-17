@@ -9,6 +9,6 @@ public class ItemsActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.items_activity);
+        setContentView(R.layout.activity_items);
     }
 }

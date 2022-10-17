@@ -20,7 +20,7 @@
 
         <include layout="@layout/user_info"
             android:layout_marginBottom="@dimen/activity_margin"
-            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginStart="@dimen/activity_margin"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
