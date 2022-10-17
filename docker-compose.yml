@@ -1,0 +1,24 @@
+services:
+  backend:
+    image: 'rpgstats/backend:latest'
+    build: ./backend/
+    depends_on:
+      - db
+    ports :
+      - 80:80/tcp
+      - 8080:8080/tcp
+      - 443:443/tcp
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-container:5432/rpgstats
+      SPRING_DATASOURCE_USERNAME: compose-postgres
+      SPRING_DATASOURCE_PASSWORD: compose-postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+  db:
+    image: 'postgres:14-alpine'
+    container_name: db-container
+    ports:
+      - 5432:5432/tcp
+    environment:
+      POSTGRES_USER: compose-postgres
+      POSTGRES_PASSWORD: compose-postgres
+      POSTGRES_DB: rpgstats
