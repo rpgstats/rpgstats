@@ -27,6 +27,12 @@
                 android:value="" />
         </activity>
         <activity android:name=".GameSystemInfoActivity"/>
+
+        <activity android:name=".ItemsActivity"/>
+        <activity android:name=".NpcActivity"/>
+        <activity android:name=".ParametersActivity"/>
+        <activity android:name=".PropertiesActivity"/>
+        <activity android:name=".TagsActivity"/>
     </application>
 
 </manifest>
