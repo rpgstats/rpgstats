@@ -46,6 +46,12 @@ public class GameSystemListActivity extends AppCompatActivity implements OnGameS
         GameSystemsAdapter mAdapter = new GameSystemsAdapter(mGameSystems, this);
         gameSystemsRecyclerView.setAdapter(mAdapter);
         gameSystemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // setup add game system button
+        findViewById(R.id.plus_button).setOnClickListener(view -> {
+            Intent intent = new Intent(this, AddGameSystemActivity.class);
+            startActivity(intent);
+        });
     }
 
     // suppose getting from server in future
