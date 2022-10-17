@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center_horizontal">
     <TextView
@@ -9,10 +9,12 @@
         android:layout_height="wrap_content"
         android:text="@string/game_systems_header"
         android:textColor="@color/black"
-        android:textSize="@dimen/header_text_size" />
+        android:textSize="@dimen/header_text_size"
+        android:layout_gravity="center_vertical"/>
 
-    <Button
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/text_margin" />
+        android:layout_marginStart="@dimen/text_margin"
+        android:src="@drawable/plus_sign"/>
 </LinearLayout>
