@@ -24,7 +24,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameSystemListActivity extends AppCompatActivity implements OnGameSystemClickListener {
+public class MainActivity extends AppCompatActivity implements OnGameSystemClickListener {
 
     private ActivityMainBinding binding;
 

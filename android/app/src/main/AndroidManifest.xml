@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Rpgstats"
         tools:targetApi="31">
         <activity
-            android:name=".GameSystemListActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Rpgstats.NoActionBar">
             <intent-filter>
