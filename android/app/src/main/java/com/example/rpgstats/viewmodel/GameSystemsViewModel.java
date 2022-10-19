@@ -1,4 +1,4 @@
-package com.example.rpgstats;
+package com.example.rpgstats.viewmodel;
 
 import android.util.Log;
 

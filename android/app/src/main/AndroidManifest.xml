@@ -26,14 +26,14 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".AddGameSystemActivity"/>
+        <activity android:name=".ui.AddGameSystemActivity"/>
 
-        <activity android:name=".GameSystemInfoActivity"/>
-        <activity android:name=".ItemsActivity"/>
-        <activity android:name=".NpcActivity"/>
-        <activity android:name=".ParametersActivity"/>
-        <activity android:name=".PropertiesActivity"/>
-        <activity android:name=".TagsActivity"/>
+        <activity android:name=".ui.GameSystemInfoActivity"/>
+        <activity android:name=".ui.ItemsActivity"/>
+        <activity android:name=".ui.NpcActivity"/>
+        <activity android:name=".ui.ParametersActivity"/>
+        <activity android:name=".ui.PropertiesActivity"/>
+        <activity android:name=".ui.TagsActivity"/>
 
     </application>
 

@@ -1,4 +1,4 @@
-package com.example.rpgstats;
+package com.example.rpgstats.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,12 +8,17 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.example.rpgstats.entities.GameSystem;
+import com.example.rpgstats.R;
 
 public class GameSystemInfoActivity extends Activity {
 
+
+
     private void setOnClickCreateActivity(View button, Class<?> activityClass) {
         button.setOnClickListener(view -> startActivity(activityClass));
+    }
+
+    public GameSystemInfoActivity() {
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.rpgstats;
+package com.example.rpgstats.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
+
+import com.example.rpgstats.R;
 
 public class AddGameSystemActivity extends Activity {
     @Override

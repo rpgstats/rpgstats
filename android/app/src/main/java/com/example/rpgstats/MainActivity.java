@@ -2,33 +2,33 @@ package com.example.rpgstats;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.example.rpgstats.entities.GameSystem;
-import com.example.rpgstats.gamesystems.GameSystemsAdapter;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rpgstats.databinding.ActivityMainBinding;
-import com.example.rpgstats.gamesystems.OnGameSystemClickListener;
+import com.example.rpgstats.entities.GameSystem;
+import com.example.rpgstats.ui.GameSystemsAdapter;
+import com.example.rpgstats.ui.AddGameActivityResultCallback;
+import com.example.rpgstats.ui.AddGameSystemActivity;
+import com.example.rpgstats.ui.GameSystemInfoActivity;
+import com.example.rpgstats.viewmodel.GameSystemsViewModel;
 
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnGameSystemClickListener {
+public class MainActivity extends AppCompatActivity implements GameSystemsAdapter.OnGameSystemClickListener {
 
     private ActivityMainBinding binding;
     protected ActivityResultLauncher<Intent> activityLauncher;
     private List<GameSystem> mGameSystems;
+
     private GameSystemsAdapter mGameSystemsAdapter;
 
     @Override

@@ -1,9 +1,11 @@
-package com.example.rpgstats;
+package com.example.rpgstats.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+
+import com.example.rpgstats.R;
 
 public class ParametersActivity extends Activity {
     @Override

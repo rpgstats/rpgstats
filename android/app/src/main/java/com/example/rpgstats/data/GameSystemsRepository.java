@@ -7,4 +7,6 @@ import java.util.List;
 public interface GameSystemsRepository {
 
     List<GameSystem> getGameSystems();
+
+    GameSystem getGameSystem(int id);
 }
