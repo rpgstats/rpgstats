@@ -1,11 +1,15 @@
 package com.example.rpgstats.viewmodel;
 
+import android.app.Application;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.rpgstats.RpgstatsApplication;
 import com.example.rpgstats.data.GameSystemsRepository;
 import com.example.rpgstats.data.PlugGameSystemsRepository;
 import com.example.rpgstats.entities.GameSystem;
@@ -13,8 +17,16 @@ import com.example.rpgstats.entities.GameSystem;
 import java.util.List;
 
 // A ViewModel usually shouldn't reference a view, Lifecycle, or any class that may hold a reference to the activity context.
-public class GameSystemsViewModel extends ViewModel {
+public class GameSystemsViewModel extends AndroidViewModel {
     private MutableLiveData<List<GameSystem>> gameSystems;
+    private final GameSystemsRepository gameSystemsRepository;
+
+    public GameSystemsViewModel(@NonNull Application application) {
+        super(application);
+        gameSystemsRepository = ((RpgstatsApplication)getApplication()).appContainer.gameSystemsRepository;
+    }
+
+
     public LiveData<List<GameSystem>> getGameSystems() {
         if (gameSystems == null) {
             gameSystems = new MutableLiveData<>();
@@ -23,14 +35,17 @@ public class GameSystemsViewModel extends ViewModel {
         return gameSystems;
     }
 
-    public void addGameSystem(GameSystem gameSystem) {
+    public void addGameSystem(String gameSystemName) {
         if (gameSystems == null) {
             gameSystems = new MutableLiveData<>();
             loadGameSystems();
         }
         // todo: find better approach
+
+        int gsId = gameSystemsRepository.addGameSystem(gameSystemName);
+        GameSystem gameSystem = gameSystemsRepository.getGameSystem(gsId);
         gameSystems.getValue().add(gameSystem);
-        gameSystems.setValue(gameSystems.getValue());;
+        gameSystems.setValue(gameSystems.getValue());
         Log.e("ADD GAME SYSTEM", "successfully add gs");
     }
 

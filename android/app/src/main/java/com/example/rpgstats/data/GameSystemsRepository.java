@@ -10,5 +10,5 @@ public interface GameSystemsRepository {
 
     GameSystem getGameSystem(int id);
 
-    int addGameSystem(GameSystem gameSystem);
+    int addGameSystem(String gameSystemName);
 }

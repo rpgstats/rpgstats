@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.example.rpgstats.R;
+import com.example.rpgstats.RpgstatsApplication;
 import com.example.rpgstats.data.GameSystemsRepository;
 import com.example.rpgstats.data.PlugGameSystemsRepository;
 import com.example.rpgstats.databinding.ActivityGameSystemInfoBinding;
@@ -32,9 +33,9 @@ public class GameSystemInfoActivity extends Activity {
         setContentView(binding.getRoot());
 
         int id = Integer.parseInt(getIntent().getStringExtra("id"));
-        GameSystemInfoViewModel viewModel = new GameSystemInfoViewModel(id, new PlugGameSystemsRepository());
+        GameSystemsRepository repository = ((RpgstatsApplication) getApplication()).appContainer.gameSystemsRepository;
+        GameSystemInfoViewModel viewModel = new GameSystemInfoViewModel(id, repository);
         gameSystem = viewModel.getGameSystemInfo().getValue();
-
         setInfo();
         setListeners();
     }

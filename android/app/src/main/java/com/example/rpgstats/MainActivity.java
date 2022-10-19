@@ -1,5 +1,6 @@
 package com.example.rpgstats;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,12 +40,10 @@ public class MainActivity extends AppCompatActivity implements GameSystemsAdapte
 
         setSupportActionBar(binding.toolbar);
 
-        // Re-created activities receive the same MyViewModel instance created by the first activity.
+
         GameSystemsViewModel gameSystemsViewModel = new ViewModelProvider(this).get(GameSystemsViewModel.class);
         mGameSystems = gameSystemsViewModel.getGameSystems().getValue();
         gameSystemsViewModel.getGameSystems().observe(this, gameSystems -> {
-            Log.e("ADD GAME SYSTEM", "Game systems in view model are changed.");
-            Log.e("ADD GAME SYSTEM", String.valueOf(gameSystems.size()));
             mGameSystemsAdapter.notifyItemInserted(mGameSystems.size() - 1);
         });
 

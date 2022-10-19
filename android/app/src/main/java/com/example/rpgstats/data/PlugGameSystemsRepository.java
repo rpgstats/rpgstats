@@ -1,5 +1,7 @@
 package com.example.rpgstats.data;
 
+import android.util.Log;
+
 import com.example.rpgstats.entities.GameSystem;
 
 import java.text.SimpleDateFormat;
@@ -39,8 +41,9 @@ public class PlugGameSystemsRepository implements GameSystemsRepository{
     }
 
     @Override
-    public int addGameSystem(GameSystem gameSystem) {
-        gameSystems.put(currentId, gameSystem);
+    public int addGameSystem(String gameSystemName) {
+        gameSystems.put(currentId,  new GameSystem(currentId, gameSystemName, "1.2.3",
+                "", 1, 1, 1, 1));
         return currentId++;
     }
 }

@@ -9,6 +9,7 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 
 import com.example.rpgstats.R;
+import com.example.rpgstats.RpgstatsApplication;
 
 public class AddGameSystemActivity extends Activity {
     @Override
