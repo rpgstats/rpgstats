@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:text="@string/game_system_name_header"/>
     <EditText
+        android:id="@+id/new_game_system_name_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/enter_name_hint"/>
@@ -50,6 +51,7 @@
 
 
     <Button
+        android:id="@+id/add_game_system_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add_button"

@@ -9,7 +9,7 @@ public class PlugGameSystemsRepository implements GameSystemsRepository{
     @Override
     public List<GameSystem> getGameSystems() {
         List<GameSystem> gameSystems = new ArrayList<>();
-        for (int i = 35000; i < 40000; i++) {
+        for (int i = 35000; i < 35005; i++) {
             gameSystems.add(new GameSystem(i, "warhammer " + i, "1.1.2001"));
         }
         return gameSystems;

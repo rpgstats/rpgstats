@@ -14,8 +14,8 @@ import com.example.rpgstats.entities.GameSystem;
 import java.util.List;
 
 public class GameSystemsAdapter extends RecyclerView.Adapter<GameSystemsAdapter.GameSystemHolder> {
-    private List<GameSystem> mGameSystem;
-    private OnGameSystemClickListener mOnGameSystemClickListener;
+    private final List<GameSystem> mGameSystem;
+    private final OnGameSystemClickListener mOnGameSystemClickListener;
 
     public GameSystemsAdapter(List<GameSystem> mGameSystem, OnGameSystemClickListener mOnGameSystemClickListener) {
         this.mGameSystem = mGameSystem;

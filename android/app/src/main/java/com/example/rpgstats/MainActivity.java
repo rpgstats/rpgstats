@@ -3,14 +3,14 @@ package com.example.rpgstats;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.rpgstats.data.GameSystemsRepository;
-import com.example.rpgstats.data.PlugGameSystemsRepository;
-
 import com.example.rpgstats.entities.GameSystem;
 import com.example.rpgstats.gamesystems.GameSystemsAdapter;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,9 +27,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements OnGameSystemClickListener {
 
     private ActivityMainBinding binding;
-
-    // data
+    protected ActivityResultLauncher<Intent> activityLauncher;
     private List<GameSystem> mGameSystems;
+    private GameSystemsAdapter mGameSystemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,25 +39,36 @@ public class MainActivity extends AppCompatActivity implements OnGameSystemClick
 
         setSupportActionBar(binding.toolbar);
 
-        RecyclerView gameSystemsRecyclerView = findViewById(R.id.gameSystemsRecyclerView);
-        mGameSystems = new ArrayList<>();
-        fillGameSystems();
+        // Re-created activities receive the same MyViewModel instance created by the first activity.
+        GameSystemsViewModel gameSystemsViewModel = new ViewModelProvider(this).get(GameSystemsViewModel.class);
+        mGameSystems = gameSystemsViewModel.getGameSystems().getValue();
+        gameSystemsViewModel.getGameSystems().observe(this, gameSystems -> {
+            Log.e("ADD GAME SYSTEM", "Game systems in view model are changed.");
+            Log.e("ADD GAME SYSTEM", String.valueOf(gameSystems.size()));
+            mGameSystemsAdapter.notifyItemInserted(mGameSystems.size() - 1);
+        });
 
-        GameSystemsAdapter mAdapter = new GameSystemsAdapter(mGameSystems, this);
-        gameSystemsRecyclerView.setAdapter(mAdapter);
+        activityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new AddGameActivityResultCallback(gameSystemsViewModel)
+        );
+
+
+        RecyclerView gameSystemsRecyclerView = findViewById(R.id.gameSystemsRecyclerView);
+
+        mGameSystemsAdapter = new GameSystemsAdapter(mGameSystems, this);
+        gameSystemsRecyclerView.setAdapter(mGameSystemsAdapter);
         gameSystemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // setup add game system button
         findViewById(R.id.plus_button).setOnClickListener(view -> {
-            Intent intent = new Intent(this, AddGameSystemActivity.class);
-            startActivity(intent);
+            startAddGameSystemActivityForResult();
         });
     }
 
-    // suppose getting from server in future
-    private void fillGameSystems() {
-        GameSystemsRepository gameSystemsRepository = new PlugGameSystemsRepository();
-        mGameSystems = gameSystemsRepository.getGameSystems();
+    private void startAddGameSystemActivityForResult() {
+        Intent intent = new Intent(this, AddGameSystemActivity.class);
+        activityLauncher.launch(intent);
     }
 
     @Override
