@@ -12,10 +12,12 @@ import java.util.Locale;
 public class PlugGameSystemsRepository implements GameSystemsRepository{
 
     private final HashMap<Integer, GameSystem> gameSystems;
+    private int currentId;
 
     public PlugGameSystemsRepository() {
         gameSystems = new HashMap<>();
         generateGameSystemsList();
+        currentId = 35006;
     }
 
     private void generateGameSystemsList() {
@@ -34,5 +36,11 @@ public class PlugGameSystemsRepository implements GameSystemsRepository{
     @Override
     public GameSystem getGameSystem(int id) {
         return gameSystems.get(id);
+    }
+
+    @Override
+    public int addGameSystem(GameSystem gameSystem) {
+        gameSystems.put(currentId, gameSystem);
+        return currentId++;
     }
 }

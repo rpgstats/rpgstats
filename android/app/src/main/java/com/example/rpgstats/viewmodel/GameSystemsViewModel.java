@@ -11,7 +11,6 @@ import com.example.rpgstats.data.PlugGameSystemsRepository;
 import com.example.rpgstats.entities.GameSystem;
 
 import java.util.List;
-import java.util.Objects;
 
 // A ViewModel usually shouldn't reference a view, Lifecycle, or any class that may hold a reference to the activity context.
 public class GameSystemsViewModel extends ViewModel {

@@ -9,4 +9,6 @@ public interface GameSystemsRepository {
     List<GameSystem> getGameSystems();
 
     GameSystem getGameSystem(int id);
+
+    int addGameSystem(GameSystem gameSystem);
 }

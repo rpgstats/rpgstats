@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.GameSystemInfoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,51 +12,131 @@
         android:layout_margin="@dimen/activity_margin"
         android:orientation="vertical">
 
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/game_system_information"
             android:textAlignment="center" />
 
-        <TextView
+
+        <RelativeLayout
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/description" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:layout_alignParentStart="true"/>
 
-        <TextView
+            <TextView
+                android:id="@+id/description_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/owner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/owner" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/owner"
+                android:layout_alignParentStart="true"/>
 
-        <TextView
+            <TextView
+                android:id="@+id/owner_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/owner"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/game_sessions_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/game_sessions_number" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_sessions_number"
+                android:layout_alignParentStart="true"/>
 
-        <TextView
+            <TextView
+                android:id="@+id/game_sessions_number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_sessions_number"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/child_game_system_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/child_game_system_number" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/child_game_system_number"
+                android:layout_alignParentStart="true"/>
 
-        <TextView
+            <TextView
+                android:id="@+id/child_game_system_number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/child_game_system_number"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/items"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/items_number" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/items_number"
+                android:layout_alignParentStart="true"/>
 
-        <TextView
+            <TextView
+                android:id="@+id/items_number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/items_number"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/npc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/npc_number" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/npc_number"
+                android:layout_alignParentStart="true"/>
 
-        <TextView
-            android:id="@+id/gamesystemid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            <TextView
+                android:id="@+id/npc_number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/npc_number"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <include
         layout="@layout/game_system_info_control_panel"
+        android:id="@+id/buttonPanel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
