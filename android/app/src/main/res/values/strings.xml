@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">rpgstats</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Strings used for game system list activity-->
+    <string name="game_systems_header">Game Systems</string>
+
+    <!--    For game system info activity-->
+    <string name="game_system_information">Information</string>
+    <string name="description">Description</string>
+    <string name="owner">Owner</string>
+    <string name="game_sessions_number">Game sessions number</string>
+    <string name="child_game_system_number">Child game system number</string>
+    <string name="items_number">Items number</string>
+    <string name="npc_number">NPC number</string>
+
+    <!-- add game system activity -->
+    <string name="add_game_system_header">Add Game System</string>
+    <string name="game_system_name_header">Name</string>
+    <string name="enter_name_hint">Enter name</string>
+    <string name="game_system_header">Game System</string>
+    <string name="choose_game_system_hint">Choose game system</string>
+    <string name="game_system_icon_header">Icon</string>
+    <string name="choose_icon_hint">Choose icon</string>
+    <string name="game_system_background_header">Background</string>
+    <string name="choose_background_hint">Choose background</string>
+    <string name="add_button">Add</string>
+    <string name="cannot_create_game">Failed game creation. Empty name</string>
+</resources>
