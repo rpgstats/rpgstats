@@ -6,11 +6,15 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.nsu.rpgstats.R;
+import com.nsu.rpgstats.databinding.ActivityItemsBinding;
+import com.nsu.rpgstats.databinding.ActivityTagsBinding;
 
 public class TagsActivity extends Activity {
+    ActivityTagsBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tags);
+        binding = ActivityTagsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 }
