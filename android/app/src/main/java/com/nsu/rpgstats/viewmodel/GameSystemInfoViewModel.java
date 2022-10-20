@@ -1,11 +1,11 @@
-package com.example.rpgstats.viewmodel;
+package com.nsu.rpgstats.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.rpgstats.data.GameSystemsRepository;
-import com.example.rpgstats.entities.GameSystem;
+import com.nsu.rpgstats.data.GameSystemsRepository;
+import com.nsu.rpgstats.entities.GameSystem;
 
 public class GameSystemInfoViewModel extends ViewModel {
     private final int gameId;

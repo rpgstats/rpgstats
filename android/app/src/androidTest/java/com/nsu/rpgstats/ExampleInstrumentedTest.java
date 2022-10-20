@@ -1,4 +1,4 @@
-package com.example.rpgstats;
+package com.nsu.rpgstats;
 
 import android.content.Context;
 

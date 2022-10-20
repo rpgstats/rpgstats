@@ -1,8 +1,6 @@
-package com.example.rpgstats.data;
+package com.nsu.rpgstats.data;
 
-import android.util.Log;
-
-import com.example.rpgstats.entities.GameSystem;
+import com.nsu.rpgstats.entities.GameSystem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,7 +40,8 @@ public class PlugGameSystemsRepository implements GameSystemsRepository{
 
     @Override
     public int addGameSystem(String gameSystemName) {
-        gameSystems.put(currentId,  new GameSystem(currentId, gameSystemName, "1.2.3",
+        gameSystems.put(currentId,  new GameSystem(currentId, gameSystemName,
+                new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(new Date()),
                 "", 1, 1, 1, 1));
         return currentId++;
     }

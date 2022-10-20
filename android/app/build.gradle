@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.rpgstats'
+    namespace 'com.nsu.rpgstats'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.rpgstats"
+        applicationId "com.nsu.rpgstats"
         minSdk 21
         targetSdk 32
         versionCode 1
@@ -30,6 +30,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 

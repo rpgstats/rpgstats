@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:id="@+id/main_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -33,11 +35,13 @@
         android:layout_margin="@dimen/activity_margin">
 
         <include
+            android:id="@+id/game_systems_tab"
             layout="@layout/game_systems_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <include
+            android:id="@+id/game_list"
             layout="@layout/game_systems_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

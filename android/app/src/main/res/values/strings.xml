@@ -25,4 +25,5 @@
     <string name="game_system_background_header">Background</string>
     <string name="choose_background_hint">Choose background</string>
     <string name="add_button">Add</string>
+    <string name="cannot_create_game">Failed game creation. Empty name</string>
 </resources>

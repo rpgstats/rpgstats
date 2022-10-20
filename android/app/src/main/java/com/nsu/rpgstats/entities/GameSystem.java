@@ -1,5 +1,7 @@
-package com.example.rpgstats.entities;
+package com.nsu.rpgstats.entities;
 
+
+import java.util.Objects;
 
 public class GameSystem {
     private final Integer id;
@@ -22,12 +24,6 @@ public class GameSystem {
         this.childGameSystemNumber = childGameSystemNumber;
         this.itemsNumber = itemsNumber;
         this.npcNumber = npcNumber;
-    }
-
-    public GameSystem(int id, String gameSystemName, String creationDate) {
-        this.id = id;
-        this.creationDate = creationDate;
-        this.systemName = gameSystemName;
     }
 
     public String getSystemName() {
@@ -60,5 +56,22 @@ public class GameSystem {
 
     public String getOwner() {
         return owner;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GameSystem that = (GameSystem) o;
+        return gameSessionNumber == that.gameSessionNumber &&
+                childGameSystemNumber == that.childGameSystemNumber &&
+                itemsNumber == that.itemsNumber && npcNumber == that.npcNumber &&
+                Objects.equals(id, that.id) && Objects.equals(systemName, that.systemName) &&
+                Objects.equals(creationDate, that.creationDate) && Objects.equals(owner, that.owner);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, systemName, creationDate, owner, gameSessionNumber, childGameSystemNumber, itemsNumber, npcNumber);
     }
 }

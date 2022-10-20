@@ -1,21 +1,18 @@
-package com.example.rpgstats.ui;
+package com.nsu.rpgstats.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.example.rpgstats.R;
-import com.example.rpgstats.RpgstatsApplication;
-import com.example.rpgstats.data.GameSystemsRepository;
-import com.example.rpgstats.data.PlugGameSystemsRepository;
-import com.example.rpgstats.databinding.ActivityGameSystemInfoBinding;
-import com.example.rpgstats.entities.GameSystem;
-import com.example.rpgstats.viewmodel.GameSystemInfoViewModel;
+import com.nsu.rpgstats.R;
+import com.nsu.rpgstats.RpgstatsApplication;
+import com.nsu.rpgstats.data.GameSystemsRepository;
+import com.nsu.rpgstats.databinding.ActivityGameSystemInfoBinding;
+import com.nsu.rpgstats.entities.GameSystem;
+import com.nsu.rpgstats.viewmodel.GameSystemInfoViewModel;
 
 public class GameSystemInfoActivity extends Activity {
     private ActivityGameSystemInfoBinding binding;

@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/item_vertical_margin"
-    android:gravity="center_vertical"
-    android:orientation="vertical"
-    android:background="@drawable/rounded_card">
+<layout>
 
-    <TextView
-        android:id="@+id/systemNameTextView"
-        android:layout_width="wrap_content"
+    <data>
+        <variable
+            name="game_system"
+            type="com.nsu.rpgstats.entities.GameSystem" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Game System 1"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_marginStart="@dimen/text_margin"
-        android:layout_marginTop="@dimen/text_margin"/>
+        android:layout_marginBottom="@dimen/item_vertical_margin"
+        android:background="@drawable/rounded_card"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/creationDateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="10.10.2010"
-        android:textColor="@color/white"
-        android:layout_marginBottom="@dimen/text_margin"
-        android:layout_marginLeft="@dimen/text_margin"/>
+        <TextView
+            android:id="@+id/systemNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginTop="@dimen/text_margin"
+            android:text="@{game_system.systemName}"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/creationDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:text="@{game_system.creationDate}"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+</layout>

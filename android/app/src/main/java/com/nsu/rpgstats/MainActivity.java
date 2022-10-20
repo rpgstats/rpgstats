@@ -1,6 +1,5 @@
-package com.example.rpgstats;
+package com.nsu.rpgstats;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,13 +13,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rpgstats.databinding.ActivityMainBinding;
-import com.example.rpgstats.entities.GameSystem;
-import com.example.rpgstats.ui.GameSystemsAdapter;
-import com.example.rpgstats.ui.AddGameActivityResultCallback;
-import com.example.rpgstats.ui.AddGameSystemActivity;
-import com.example.rpgstats.ui.GameSystemInfoActivity;
-import com.example.rpgstats.viewmodel.GameSystemsViewModel;
+import com.nsu.rpgstats.databinding.ActivityMainBinding;
+import com.nsu.rpgstats.entities.GameSystem;
+import com.nsu.rpgstats.ui.GameSystemsAdapter;
+import com.nsu.rpgstats.ui.AddGameActivityResultCallback;
+import com.nsu.rpgstats.ui.AddGameSystemActivity;
+import com.nsu.rpgstats.ui.GameSystemInfoActivity;
+import com.nsu.rpgstats.viewmodel.GameSystemsViewModel;
 
 import java.util.List;
 
@@ -44,23 +43,23 @@ public class MainActivity extends AppCompatActivity implements GameSystemsAdapte
         GameSystemsViewModel gameSystemsViewModel = new ViewModelProvider(this).get(GameSystemsViewModel.class);
         mGameSystems = gameSystemsViewModel.getGameSystems().getValue();
         gameSystemsViewModel.getGameSystems().observe(this, gameSystems -> {
-            mGameSystemsAdapter.notifyItemInserted(mGameSystems.size() - 1);
+            mGameSystemsAdapter.setGameSystemsList(mGameSystems);
         });
 
         activityLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
-                new AddGameActivityResultCallback(gameSystemsViewModel)
+                new AddGameActivityResultCallback(gameSystemsViewModel, this, binding)
         );
 
 
-        RecyclerView gameSystemsRecyclerView = findViewById(R.id.gameSystemsRecyclerView);
+        RecyclerView gameSystemsRecyclerView = binding.gameList.gameSystemsRecyclerView;
 
         mGameSystemsAdapter = new GameSystemsAdapter(mGameSystems, this);
         gameSystemsRecyclerView.setAdapter(mGameSystemsAdapter);
         gameSystemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // setup add game system button
-        findViewById(R.id.plus_button).setOnClickListener(view -> {
+        binding.gameSystemsTab.plusButton.setOnClickListener(view -> {
             startAddGameSystemActivityForResult();
         });
     }
