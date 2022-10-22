@@ -27,7 +27,7 @@
     <string name="add_button">Add</string>
     <string name="cannot_create_game">Failed game creation. Empty name</string>
 
-    <!-- items activity-->
+    <!-- item -->
     <string name="item_list_header">Item list</string>
     <string name="item_add_item_header">Add item</string>
     <string name="item_add_item_name">Name</string>
@@ -57,5 +57,26 @@
     <string name="item_modifier_text">Parametrs</string>
     <string name="item_modifier_back_text">Back</string>
     <string name="item_modifier_add_text">Add</string>
+
+    <!-- tags -->
+    <string name="tags_tags_list_header">Tag list</string>
+    <string name="tags_add_header">Add tag</string>
+    <string name="tags_add_tag_hint">TagName</string>
+    <string name="tags_add_tag_text">Name</string>
+    <string name="tags_add_back_text">Back</string>
+    <string name="tags_add_add_text">Add</string>
+    <string name="tag_edit_header">Edit tag</string>
+    <string name="tags_edit_tag_text">Name</string>
+    <string name="tags_edit_tag_hint">TagName</string>
+    <string name="tags_edit_back_text">Back</string>
+    <string name="tags_edit_edit_text">Edit</string>
+    <string name="tags_view_info_header">TagName</string>
+    <string name="tags_view_info_text">Created:</string>
+    <string name="tags_view_info_copy_text">Copy</string>
+    <string name="tags_view_info_delete_text">Delete</string>
+    <string name="tags_delete_error">Error</string>
+    <string name="tag_delete_error">Unable to delete tag:</string>
+    <string name="tag_create_error">Error</string>
+    <string name="tags_create_error_text">Unable to create tag</string>
 
 </resources>
