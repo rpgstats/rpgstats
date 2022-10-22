@@ -26,4 +26,24 @@
     <string name="choose_background_hint">Choose background</string>
     <string name="add_button">Add</string>
     <string name="cannot_create_game">Failed game creation. Empty name</string>
+
+    <!-- items activity-->
+    <string name="item_list_header">Item list</string>
+    <string name="item_add_item_header">Add item</string>
+    <string name="item_add_item_name">Name</string>
+    <string name="item_add_item_tag">Tags</string>
+    <string name="item_add_item_modifiers">Modifiers</string>
+    <string name="item_add_back_text">Back</string>
+    <string name="item_add_add_text">Add</string>
+    <string name="item_edit_header">Edit item</string>
+    <string name="item_edit_item_name">Name</string>
+    <string name="item_edit_item_tag">Tags</string>
+    <string name="item_edit_item_modifiers">Modifiers</string>
+    <string name="item_edit_back_text">Back</string>
+    <string name="item_edit_edit_text">Edit</string>
+    <string name="item_view_tags_text">Tags</string>
+    <string name="item_view_modifiers_text">Modifiers</string>
+    <string name="item_view_copy_text">Copy</string>
+    <string name="item_view_delete_text">Delete</string>
+
 </resources>
