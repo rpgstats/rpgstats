@@ -3,14 +3,13 @@
     android:shape="rectangle">
 
     <stroke
-        android:width="3dp"
+        android:width="2dp"
         android:color="@color/cardview_dark_background"
         />
 
-    <gradient
-        android:startColor="@color/white"
-        android:endColor="@color/white"
-        android:centerColor="@color/white" />
+    <solid
+        android:color="@color/white"
+        />
 
     <corners
         android:radius="25dp"

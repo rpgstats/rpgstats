@@ -45,5 +45,17 @@
     <string name="item_view_modifiers_text">Modifiers</string>
     <string name="item_view_copy_text">Copy</string>
     <string name="item_view_delete_text">Delete</string>
+    <string name="delete_warning_header">Delete</string>
+    <string name="delete_warning_text">Are you sure you want to delete this item?</string>
+    <string name="delete_warning_yes">Yes</string>
+    <string name="delete_warning_no">No</string>
+    <string name="item_tags_back">Back</string>
+    <string name="item_tags_add">Add</string>
+    <string name="item_tags_header">Add tags</string>
+    <string name="item_tags_tags_text">Tags</string>
+    <string name="item_modifiers_header">Add Modifier</string>
+    <string name="item_modifier_text">Parametrs</string>
+    <string name="item_modifier_back_text">Back</string>
+    <string name="item_modifier_add_text">Add</string>
 
 </resources>
