@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#80000000">
@@ -45,14 +46,14 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/rounded_border"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+            app:layout_constraintBottom_toTopOf="@+id/TagMenuBackButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TagsMenuTagsText" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
+            android:id="@+id/TagMenuBackButton"
             android:layout_width="80dp"
             android:layout_height="48dp"
             android:layout_marginStart="15dp"
@@ -83,6 +84,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/TagMenuAddButton"
             android:layout_width="80dp"
             android:layout_height="48dp"
             android:layout_marginEnd="15dp"

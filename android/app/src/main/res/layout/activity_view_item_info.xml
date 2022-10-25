@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background">
-
+    tools:context=".ui.ViewItemInfoActivity">
     <include
         android:id="@+id/Background"
         layout="@layout/items_background"
@@ -18,12 +17,13 @@
         android:layout_marginTop="@dimen/background_item_height"
         android:background="@drawable/rounded_menu"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/MenuBar"
+        app:layout_constraintBottom_toTopOf="@+id/BottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ViewItemInfoEditButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -97,8 +97,9 @@
             </androidx.recyclerview.widget.RecyclerView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ViewItemInfoCopyButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_margin="@dimen/item_default_margin"
                 android:background="@drawable/rounded_card">
 
@@ -127,9 +128,9 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
+                android:id="@+id/ViewItemInfoDeleteButtom"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_margin="@dimen/item_default_margin"
                 android:background="@drawable/rounded_card">
 
@@ -161,7 +162,7 @@
     </LinearLayout>
 
     <include
-        android:id="@+id/MenuBar"
+        android:id="@+id/BottomBar"
         layout="@layout/game_system_info_control_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -179,5 +180,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

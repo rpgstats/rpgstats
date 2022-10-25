@@ -37,7 +37,7 @@
             android:layout_weight="0">
 
             <TextView
-                android:id="@+id/ItemAddHeader"
+                android:id="@+id/ItemActivityHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
@@ -49,7 +49,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/AddItemButton"
+                android:id="@+id/ItemActivityAddItemButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

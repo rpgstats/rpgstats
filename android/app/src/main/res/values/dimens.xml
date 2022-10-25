@@ -7,6 +7,6 @@
     <dimen name="background_item_height_fill">175dp</dimen>
     <dimen name="background_tags_height">150dp</dimen>
     <dimen name="background_tags_height_fill">175dp</dimen>
-    <dimen name="item_default_margin">5dp</dimen>
+    <dimen name="item_default_margin">4dp</dimen>
 
 </resources>

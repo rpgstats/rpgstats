@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.ViewTagInfoActivity">
 
     <include
         android:id="@+id/ViewTagBackground"
@@ -19,7 +20,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/background_tags_height"
         android:background="@drawable/rounded_menu"
-        app:layout_constraintBottom_toTopOf="@+id/ViewTagMenuBar"
+        app:layout_constraintBottom_toTopOf="@+id/BottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -36,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/ViewTagInfoEditButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
@@ -79,7 +80,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout5"
+            android:id="@+id/ViewTagInfoCopyButton"
             android:layout_width="145dp"
             android:layout_height="80dp"
             android:background="@drawable/rounded_card"
@@ -114,13 +115,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ViewTagInfoDeleteButton"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:background="@drawable/rounded_card"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout5"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+            app:layout_constraintEnd_toEndOf="@+id/ViewTagInfoCopyButton"
+            app:layout_constraintStart_toStartOf="@+id/ViewTagInfoCopyButton"
+            app:layout_constraintTop_toBottomOf="@+id/ViewTagInfoCopyButton">
 
             <ImageView
                 android:id="@+id/imageView16"
@@ -149,7 +151,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
-        android:id="@+id/ViewTagMenuBar"
+        android:id="@+id/BottomBar"
         layout="@layout/game_system_info_control_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -158,7 +160,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <include
+        android:id="@+id/ViewTagDeleteWarning"
         layout="@layout/items_delete_warning"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/ViewTagDeleteError"
+        layout="@layout/tags_delete_error_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />

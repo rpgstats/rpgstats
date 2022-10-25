@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    tools:context=".ui.EditTagsActivity">
     <include
-        android:id="@+id/AddTagBackground"
+        android:id="@+id/EditTagBackground"
         layout="@layout/items_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,28 +19,28 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/background_tags_height"
         android:background="@drawable/rounded_menu"
-        app:layout_constraintBottom_toTopOf="@+id/AddTagBar"
+        app:layout_constraintBottom_toTopOf="@+id/BottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/AddTagBackground"
+        app:layout_constraintTop_toTopOf="@+id/EditTagBackground"
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/AddTagHeader"
+            android:id="@+id/EditTagHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/tags_add_header"
+            android:text="@string/tag_edit_header"
             android:textSize="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/AddTagText"
+            android:id="@+id/EditTagText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tags_add_tag_text"
+            android:text="@string/tags_edit_tag_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.07"
@@ -59,17 +59,17 @@
             app:boxStrokeWidthFocused="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/AddTagText">
+            app:layout_constraintTop_toBottomOf="@+id/EditTagText">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_border"
-                android:hint="@string/tags_add_tag_hint" />
+                android:hint="@string/tags_edit_tag_hint" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout4"
+            android:id="@+id/EditTagBackButton"
             android:layout_width="175dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
@@ -80,10 +80,10 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
             <TextView
-                android:id="@+id/AddTagBackButtonText"
+                android:id="@+id/EditTagBackButtonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tags_add_back_text"
+                android:text="@string/tags_edit_back_text"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -104,20 +104,20 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout3"
+            android:id="@+id/EditTagEditButton"
             android:layout_width="175dp"
             android:layout_height="0dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/rounded_card"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout4"
+            app:layout_constraintBottom_toBottomOf="@+id/EditTagBackButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout4">
+            app:layout_constraintTop_toTopOf="@+id/EditTagBackButton">
 
             <TextView
-                android:id="@+id/AddTagAddButtonText"
+                android:id="@+id/EditTagEditButtonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tags_add_add_text"
+                android:text="@string/tags_edit_edit_text"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -139,7 +139,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
-        android:id="@+id/AddTagBar"
+        android:id="@+id/BottomBar"
         layout="@layout/game_system_info_control_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

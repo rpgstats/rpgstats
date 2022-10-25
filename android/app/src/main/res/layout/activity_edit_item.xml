@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="0">
+    tools:context=".ui.EditItemActivity">
 
     <include
         android:id="@+id/Background"
@@ -38,11 +36,11 @@
             android:layout_weight="0">
 
             <TextView
-                android:id="@+id/ItemAddHeader"
+                android:id="@+id/ItemEditHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="@string/item_add_item_header"
+                android:text="@string/item_edit_header"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,11 +49,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/AddItemNameText"
+            android:id="@+id/EditItemNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_default_margin"
-            android:text="@string/item_add_item_name" />
+            android:layout_margin="5dp"
+            android:text="@string/item_edit_item_name" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -63,33 +61,33 @@
             android:layout_weight="0">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/item_default_margin"
+                android:layout_margin="5dp"
                 android:layout_weight="0"
-                android:background="@drawable/rounded_border"
                 app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/AddItemNameInput"
+                    android:id="@+id/EditItemNameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_border"
-                    android:hint="@string/item_add_item_name" />
+                    android:background="@drawable/rounded_border" />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/AddItemTagText"
+            android:id="@+id/EditItemTagText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_default_margin"
+            android:layout_margin="5dp"
             android:layout_weight="0"
-            android:text="@string/item_add_item_tag" />
+            android:text="@string/item_edit_item_tag" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -97,21 +95,21 @@
             android:layout_weight="0">
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spinner2"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_margin="@dimen/item_default_margin"
                 android:background="@drawable/rounded_border"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/AddItemTagsButton"
+                app:layout_constraintEnd_toStartOf="@+id/EditItemTagsButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/AddItemTagsButton"
+                android:id="@+id/EditItemTagsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/item_default_margin"
+                android:layout_margin="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -120,12 +118,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/AddItemModifiersText"
+            android:id="@+id/EditItemModifiersText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_default_margin"
+            android:layout_margin="5dp"
             android:layout_weight="0"
-            android:text="@string/item_add_item_modifiers" />
+            android:text="@string/item_edit_item_modifiers" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -133,22 +131,22 @@
             android:layout_weight="0">
 
             <Spinner
-                android:id="@+id/spinner4"
+                android:id="@+id/spinner3"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_margin="@dimen/item_default_margin"
                 android:background="@drawable/rounded_border"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/AddItemModifierButton"
+                app:layout_constraintEnd_toStartOf="@+id/EditItemModifierButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.615" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/AddItemModifierButton"
+                android:id="@+id/EditItemModifierButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/item_default_margin"
+                android:layout_margin="5dp"
+                android:layout_marginEnd="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -162,10 +160,11 @@
             android:layout_weight="0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/AddItemBackButton"
-                android:layout_width="175dp"
+                android:id="@+id/EditItemBackButton"
+                android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/item_default_margin"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_card"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -174,9 +173,9 @@
                     android:id="@+id/EditItemBackText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
+                    android:layout_margin="8dp"
                     android:layout_weight="0"
-                    android:text="@string/item_add_back_text"
+                    android:text="@string/item_edit_back_text"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -188,7 +187,7 @@
                     android:id="@+id/imageView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="25dp"
+                    android:layout_margin="8dp"
                     android:layout_weight="1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/EditItemBackText"
@@ -199,19 +198,20 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/AddItemAddButton"
-                android:layout_width="175dp"
+                android:id="@+id/EditItemEditButton"
+                android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/item_default_margin"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/rounded_card"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/imageView7"
-                    android:layout_width="32dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="25dp"
+                    android:layout_margin="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/EditItemAddText"
                     app:layout_constraintStart_toStartOf="parent"
@@ -222,8 +222,8 @@
                     android:id="@+id/EditItemAddText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:text="@string/item_add_add_text"
+                    android:layout_margin="8dp"
+                    android:text="@string/item_edit_edit_text"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -247,7 +247,7 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <include
-        android:id="@+id/AddItemTagMenu"
+        android:id="@+id/EditItemTagsMenu"
         layout="@layout/items_tag_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -258,7 +258,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/AddItemModifierMenu"
+        android:id="@+id/EditItemModifierMenu"
         layout="@layout/items_modifiers_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
