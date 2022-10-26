@@ -11,7 +11,7 @@ import java.time.Instant;
 @Table(name = "systems")
 @Getter
 @Setter
-public class System {
+public class GameSystem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -33,7 +33,7 @@ public class System {
     private User owner;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "parent_system_id", nullable = false)
-    private System parentSystem;
+    @JoinColumn(name = "parent_system_id")
+    private GameSystem parentGameSystem;
 
 }

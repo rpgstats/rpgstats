@@ -32,6 +32,6 @@ public class SystemParameter {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "system_id", nullable = false)
-    private System system;
+    private GameSystem gameSystem;
 
 }

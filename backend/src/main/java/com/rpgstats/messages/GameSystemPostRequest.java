@@ -1,4 +1,4 @@
-package com.rpgstats.model;
+package com.rpgstats.messages;
 
 
 import lombok.Data;

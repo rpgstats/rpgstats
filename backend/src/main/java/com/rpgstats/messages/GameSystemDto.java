@@ -1,4 +1,4 @@
-package com.rpgstats.model;
+package com.rpgstats.messages;
 
 import lombok.Data;
 
@@ -15,8 +15,8 @@ public class GameSystemDto {
 
     private Instant createdAt;
 
-    private Integer userId;
+    private Integer ownerId;
 
-    private Integer parentSystem;
+    private Integer parentGameSystemId;
 
 }

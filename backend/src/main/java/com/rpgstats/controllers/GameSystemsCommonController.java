@@ -1,6 +1,6 @@
 package com.rpgstats.controllers;
 
-import com.rpgstats.model.GameSystemDto;
+import com.rpgstats.messages.GameSystemDto;
 import com.rpgstats.services.GameSystemService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,16 +17,16 @@ public class GameSystemsCommonController {
 
     @GetMapping(params = {"name"})
     public List<GameSystemDto> getSystemsByName(@RequestParam String name) {
-        return null;
+        return gameSystemService.getSystemsByName(name);
     }
 
     @GetMapping(params = {"ownerId"})
-    public List<GameSystemDto> getSystemsByOwnerId(@PathVariable Integer ownerId) {
-        return null;
+    public List<GameSystemDto> getSystemsByOwnerId(@RequestParam Integer ownerId) {
+        return gameSystemService.getSystemsByOwnerId(ownerId);
     }
 
     @GetMapping("/{id}")
-    public List<GameSystemDto> getSystemById(@PathVariable Integer id) {
-        return null;
+    public GameSystemDto getSystemById(@PathVariable Integer id) {
+        return gameSystemService.getSystemById(id);
     }
 }

@@ -1,6 +1,12 @@
 spring:
   profiles:
     default: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
 server:
   servlet:
     context-path: /api/v1
+jwt:
+  private.key: classpath:app.key
+  public.key: classpath:app.pub
