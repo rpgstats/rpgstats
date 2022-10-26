@@ -6,16 +6,36 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.nsu.rpgstats.databinding.ActivityTagsBinding;
+import com.nsu.rpgstats.entities.Item;
+import com.nsu.rpgstats.entities.Tag;
 
-public class TagsActivity extends Activity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class TagsActivity extends Activity implements TagsAdapter.OnTagClickListener{
     private ActivityTagsBinding binding;
+    private List<Tag> mTagList;
+    private TagsAdapter mTagsAdapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityTagsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //TODO remove this code and get tags from outside
+        mTagList = new ArrayList<>();
+        for (int i = 0; i < 20; ++i) {
+            mTagList.add(new Tag(i, "tag " + i));
+        }
+
+        RecyclerView recyclerView = binding.TagsActivityTags;
+        mTagsAdapter = new TagsAdapter(mTagList, this);
+        recyclerView.setAdapter(mTagsAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         setListeners();
     }
@@ -35,6 +55,14 @@ public class TagsActivity extends Activity {
 
     public void startActivity(Class<?> activityClass) {
         Intent intent = new Intent(this, activityClass);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onTagClick(int position) {
+        Tag mTag = mTagList.get(position);
+        Intent intent = new Intent(this, ViewTagInfoActivity.class);
+        intent.putExtra("id", mTag.getId().toString());
         startActivity(intent);
     }
 }
