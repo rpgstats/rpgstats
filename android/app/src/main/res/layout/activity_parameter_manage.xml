@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_margin="16dp"
+    tools:context=".ui.parameters.ParameterManageActivity">
+
+
+    <TextView
+        android:id="@+id/paramHead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:text="@string/add_new_parameter" />
+
+    <EditText
+        android:id="@+id/newParamName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/parameter_name"
+        android:autofillHints="@string/parameter_name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/newParamMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/min_value"
+        android:autofillHints="@string/min_value"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/newParamMax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/max_value"
+        android:autofillHints="@string/max_value"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/confirmAddParameterButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm" />
+
+</LinearLayout>
