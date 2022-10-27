@@ -34,8 +34,8 @@
             android:name=".ui.ItemsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".ui.NpcActivity" />
-        <activity android:name=".ui.ParametersActivity" />
-        <activity android:name=".ui.PropertiesActivity" />
+        <activity android:name=".ui.parameters.ParametersActivity" />
+        <activity android:name=".ui.properties.PropertiesActivity" />
         <activity
             android:name=".ui.TagsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>

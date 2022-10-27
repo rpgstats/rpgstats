@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_margin"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    tools:context=".ui.parameters.ParameterDetailsActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:text="@string/parameter_details" />
+
+    <TextView
+        android:id="@+id/paramName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/parameter_name" />
+
+    <TextView
+        android:id="@+id/createdAt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/created_at" />
+
+    <TextView
+        android:id="@+id/minValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/min_value" />
+
+    <TextView
+        android:id="@+id/maxValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/max_value" />
+
+    <Button
+        android:id="@+id/paramEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit"
+        android:textSize="18sp"
+        />
+
+    <Button
+        android:id="@+id/paramDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:textSize="18sp"
+        />
+</LinearLayout>
