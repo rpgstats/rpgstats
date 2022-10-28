@@ -69,7 +69,7 @@ It should help team's android developers to navigate through images used in UI e
 	* [**Brew**](components/item-icons/brew.png)<br/>
   ![**Brew**](components/item-icons/brew.png)<br/><br/><br/>
 
-* _There are pictures used for icons:_ [**./components/icons**](components/icons)
+* _There are pictures used for icons:_ [**components/icons**](components/icons)
 
 	* [**Master icon**](components/icons/master_icon.png)<br/>
   ![**Master icon**](components/icons/master_icon.png)<br/><br/><br/>
@@ -78,7 +78,7 @@ It should help team's android developers to navigate through images used in UI e
 	* [**Camera**](components/icons/camera.png)<br/>
   ![**Camera**](components/icons/camera.png)<br/><br/><br/>
 
-* _There are pictures used for backgrounds:_ [**./components/backgrounds**](components/backgrounds)
+* _There are pictures used for backgrounds:_ [**components/backgrounds**](components/backgrounds)
 
 	* [**Game systems list**](components/backgrounds/game_systems_list_background.jpg)<br/>
   ![**Game systems list**](components/backgrounds/game_systems_list_background.jpg)<br/><br/><br/>
