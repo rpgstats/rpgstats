@@ -69,13 +69,13 @@
                 android:layout_margin="@dimen/item_default_margin"
                 android:text="@string/item_view_tags_text" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/TagsRecyclerView"
+            <ListView
+                android:id="@+id/Tags"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="@dimen/item_default_margin">
 
-            </androidx.recyclerview.widget.RecyclerView>
+            </ListView>
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -90,12 +90,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/item_view_modifiers_text" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <ListView
+                android:id="@+id/Modifiers"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_margin="@dimen/item_default_margin">
 
-            </androidx.recyclerview.widget.RecyclerView>
+            </ListView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ViewItemInfoCopyButton"

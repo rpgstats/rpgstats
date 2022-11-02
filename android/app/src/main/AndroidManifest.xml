@@ -30,17 +30,21 @@
         </activity>
         <activity android:name=".ui.AddGameSystemActivity" />
         <activity android:name=".ui.GameSystemInfoActivity" />
-        <activity android:name=".ui.ItemsActivity" />
+        <activity
+            android:name=".ui.ItemsActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".ui.NpcActivity" />
         <activity android:name=".ui.ParametersActivity" />
         <activity android:name=".ui.PropertiesActivity" />
-        <activity android:name=".ui.TagsActivity" />
         <activity
-        android:name=".ui.AddItemActivity"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:name=".ui.TagsActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
-        android:name=".ui.EditItemActivity"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:name=".ui.AddItemActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".ui.EditItemActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".ui.ViewTagInfoActivity"
             android:exported="false"

@@ -6,34 +6,42 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.databinding.ActivityItemsBinding;
-import com.nsu.rpgstats.entities.GameSystem;
 import com.nsu.rpgstats.entities.Item;
+import com.nsu.rpgstats.viewmodel.ItemViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemsActivity extends Activity implements ItemsAdapter.OnItemClickListener{
+public class ItemsActivity extends AppCompatActivity implements ItemsAdapter.OnItemClickListener{
     private ActivityItemsBinding binding;
 
     private List<Item> mItemList;
     private ItemsAdapter mItemsAdapter;
+    private Integer gameSystemId;
+    static public ViewModelProvider viewModelProvider;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityItemsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        //TODO remove this code and get items from outside
-        mItemList = new ArrayList<>();
-        for (int i = 0; i < 20; ++i) {
-            mItemList.add(new Item(i, 1337, "Item " + i, null, null));
+        gameSystemId = 0; // TODO get from intent
+        //GameSystemId = Integer.parseInt(getIntent().getStringExtra("id"));
+        if (viewModelProvider == null) {
+            viewModelProvider = new ViewModelProvider(this);
         }
+        ItemViewModel itemViewModel = viewModelProvider.get(ItemViewModel.class);
+        mItemList = itemViewModel.getItems(gameSystemId).getValue();
+        itemViewModel.getItems(gameSystemId).observe(this, items -> {
+            mItemsAdapter.setItemList(mItemList);
+        });
 
         RecyclerView recyclerView = binding.ItemList.recyclerVIew;
         mItemsAdapter = new ItemsAdapter(mItemList, this);
@@ -52,7 +60,11 @@ public class ItemsActivity extends Activity implements ItemsAdapter.OnItemClickL
         setOnClickCreateActivity(binding.BottomBar.npcButton, NpcActivity.class);
         setOnClickCreateActivity(binding.BottomBar.parametersButton, ParametersActivity.class);
         setOnClickCreateActivity(binding.BottomBar.propertiesButton, PropertiesActivity.class);
-        setOnClickCreateActivity(binding.ItemActivityAddItemButton, AddItemActivity.class);
+        binding.ItemActivityAddItemButton.setOnClickListener(view -> {
+            Intent intent = new Intent(this, AddItemActivity.class);
+            intent.putExtra("game_system_id", gameSystemId.toString());
+            startActivity(intent);
+        });
     }
 
     public void startActivity(Class<?> activityClass) {
@@ -65,6 +77,7 @@ public class ItemsActivity extends Activity implements ItemsAdapter.OnItemClickL
         Item mItem = mItemList.get(position);
         Intent intent = new Intent(this, ViewItemInfoActivity.class);
         intent.putExtra("id", mItem.getId().toString());
+        intent.putExtra("game_system_id", gameSystemId.toString());
         startActivity(intent);
     }
 }

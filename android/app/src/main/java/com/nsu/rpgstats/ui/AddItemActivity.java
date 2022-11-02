@@ -10,15 +10,23 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.nsu.rpgstats.databinding.ActivityAddItemBinding;
+import com.nsu.rpgstats.entities.Item;
+import com.nsu.rpgstats.viewmodel.ItemViewModel;
+
+import java.util.ArrayList;
+
+//TODO: tags and modifiers
 
 public class AddItemActivity extends AppCompatActivity {
     private ActivityAddItemBinding binding;
+    private Integer gameSystemId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAddItemBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
         setListeners();
     }
 
@@ -56,7 +64,10 @@ public class AddItemActivity extends AppCompatActivity {
             finish();
         });
         setOnClickListener(binding.AddItemAddButton, view -> {
-            //TODO return result
+            Item item = new Item(0, 1337, binding.AddItemNameInput.getText().toString(), new ArrayList<String>(), new ArrayList<String>(), false);
+            ItemViewModel itemViewModel = ItemsActivity.viewModelProvider.get(ItemViewModel.class);
+            itemViewModel.addItem(item, gameSystemId);
+
             Intent intent = new Intent();
             setResult(Activity.RESULT_OK, intent);
             finish();

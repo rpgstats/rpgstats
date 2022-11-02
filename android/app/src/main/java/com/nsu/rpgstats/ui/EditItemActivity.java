@@ -9,15 +9,33 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivityEditItemBinding;
+import com.nsu.rpgstats.entities.Item;
+import com.nsu.rpgstats.viewmodel.ItemInfoViewModel;
+import com.nsu.rpgstats.viewmodel.ItemViewModel;
+
+//TODO: fix editing and make modifiers and tags
 
 public class EditItemActivity extends AppCompatActivity {
     private ActivityEditItemBinding binding;
+    private int itemId;
+    private int gameSystemId;
+    private Item item;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityEditItemBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        itemId = Integer.parseInt(getIntent().getStringExtra("id"));
+        gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
+        ItemInfoViewModel itemInfoViewModel = new ItemInfoViewModel(itemId, ((RpgstatsApplication) getApplication()).appContainer.itemRepository);
+        item = itemInfoViewModel.getItemInfo().getValue();
+
+        assert item != null;
+        binding.EditItemNameInput.setText(item.getName());
+
         setListeners();
     }
 
@@ -56,7 +74,10 @@ public class EditItemActivity extends AppCompatActivity {
             finish();
         });
         setOnClickListener(binding.EditItemEditButton, view -> {
-            //TODO return result
+            ItemViewModel itemViewModel = ItemsActivity.viewModelProvider.get(ItemViewModel.class);
+            Item newItem = new Item(itemId, item.getPictureId(), binding.EditItemNameInput.getText().toString(), item.getTags(), item.getModifiers(), item.isDeleted());
+            itemViewModel.editItem(newItem, itemId, gameSystemId);
+
             Intent intent = new Intent();
             setResult(Activity.RESULT_OK, intent);
             finish();

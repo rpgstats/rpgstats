@@ -6,17 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nsu.rpgstats.databinding.ActivityTagsBinding;
-import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.entities.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TagsActivity extends Activity implements TagsAdapter.OnTagClickListener{
+public class TagsActivity extends AppCompatActivity implements TagsAdapter.OnTagClickListener{
     private ActivityTagsBinding binding;
     private List<Tag> mTagList;
     private TagsAdapter mTagsAdapter;
@@ -29,7 +29,7 @@ public class TagsActivity extends Activity implements TagsAdapter.OnTagClickList
         //TODO remove this code and get tags from outside
         mTagList = new ArrayList<>();
         for (int i = 0; i < 20; ++i) {
-            mTagList.add(new Tag(i, "tag " + i));
+            mTagList.add(new Tag(i, "tag " + i, false));
         }
 
         RecyclerView recyclerView = binding.TagsActivityTags;
