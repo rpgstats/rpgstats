@@ -7,11 +7,14 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nsu.rpgstats.databinding.ActivityTagsBinding;
 import com.nsu.rpgstats.entities.Tag;
+import com.nsu.rpgstats.viewmodel.ItemViewModel;
+import com.nsu.rpgstats.viewmodel.TagViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +23,24 @@ public class TagsActivity extends AppCompatActivity implements TagsAdapter.OnTag
     private ActivityTagsBinding binding;
     private List<Tag> mTagList;
     private TagsAdapter mTagsAdapter;
+    private Integer gameSystemId;
+    public static ViewModelProvider viewModelProvider;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityTagsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //TODO remove this code and get tags from outside
-        mTagList = new ArrayList<>();
-        for (int i = 0; i < 20; ++i) {
-            mTagList.add(new Tag(i, "tag " + i, false));
+        gameSystemId = 0; // TODO get from intent
+        //GameSystemId = Integer.parseInt(getIntent().getStringExtra("id"));
+        if (viewModelProvider == null) {
+            viewModelProvider = new ViewModelProvider(this);
         }
+        TagViewModel tagViewModel = viewModelProvider.get(TagViewModel.class);
+        mTagList = tagViewModel.getTags(gameSystemId).getValue();
+        tagViewModel.getTags(gameSystemId).observe(this, tags -> {
+            mTagsAdapter.setTagList(mTagList);
+        });
 
         RecyclerView recyclerView = binding.TagsActivityTags;
         mTagsAdapter = new TagsAdapter(mTagList, this);
@@ -49,8 +59,11 @@ public class TagsActivity extends AppCompatActivity implements TagsAdapter.OnTag
         setOnClickCreateActivity(binding.BottomBar.npcButton, NpcActivity.class);
         setOnClickCreateActivity(binding.BottomBar.parametersButton, ParametersActivity.class);
         setOnClickCreateActivity(binding.BottomBar.propertiesButton, PropertiesActivity.class);
-        setOnClickCreateActivity(binding.TagsActivityAddButton, AddTagsActivity.class);
-        //TODO recycler item listener
+        binding.TagsActivityAddButton.setOnClickListener(view -> {
+            Intent intent = new Intent(this, AddTagsActivity.class);
+            intent.putExtra("game_system_id", gameSystemId.toString());
+            startActivity(intent);
+        });
     }
 
     public void startActivity(Class<?> activityClass) {
@@ -63,6 +76,7 @@ public class TagsActivity extends AppCompatActivity implements TagsAdapter.OnTag
         Tag mTag = mTagList.get(position);
         Intent intent = new Intent(this, ViewTagInfoActivity.class);
         intent.putExtra("id", mTag.getId().toString());
+        intent.putExtra("game_system_id", gameSystemId.toString());
         startActivity(intent);
     }
 }

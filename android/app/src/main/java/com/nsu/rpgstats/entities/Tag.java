@@ -5,12 +5,18 @@ import java.util.Objects;
 public class Tag {
     private final Integer id;
     private String name;
+    private String creationDate;
     private boolean isDeleted;
 
-    public Tag(Integer id, String name, boolean isDeleted) {
+    public Tag(Integer id, String name, String creationDate, boolean isDeleted) {
         this.id = id;
         this.name = name;
+        this.creationDate = creationDate;
         this.isDeleted = isDeleted;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
     }
 
     public Integer getId() {
@@ -34,11 +40,11 @@ public class Tag {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tag tag = (Tag) o;
-        return isDeleted == tag.isDeleted && Objects.equals(id, tag.id) && Objects.equals(name, tag.name);
+        return isDeleted == tag.isDeleted && Objects.equals(id, tag.id) && Objects.equals(name, tag.name) && Objects.equals(creationDate, tag.creationDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, isDeleted);
+        return Objects.hash(id, name, creationDate, isDeleted);
     }
 }

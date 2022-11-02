@@ -52,6 +52,7 @@ public class PlugItemRepository implements ItemRepository{
     @Override
     public void editItem(int id, Item item) {
         Item newItem = new Item(id, item.getPictureId(), item.getName(), item.getTags(), item.getModifiers(), item.isDeleted());
-        items.put(currentId, newItem);
+        items.remove(id);
+        items.put(id, newItem);
     }
 }

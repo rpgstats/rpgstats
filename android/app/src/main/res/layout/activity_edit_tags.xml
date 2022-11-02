@@ -62,6 +62,7 @@
             app:layout_constraintTop_toBottomOf="@+id/EditTagText">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/EditTagInputName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_border"

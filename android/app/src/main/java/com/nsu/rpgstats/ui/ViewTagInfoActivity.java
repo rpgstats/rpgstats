@@ -9,17 +9,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivityAddTagsBinding;
 import com.nsu.rpgstats.databinding.ActivityViewTagInfoBinding;
+import com.nsu.rpgstats.entities.Tag;
+import com.nsu.rpgstats.viewmodel.TagInfoViewModel;
+import com.nsu.rpgstats.viewmodel.TagViewModel;
 
 public class ViewTagInfoActivity extends AppCompatActivity {
     private ActivityViewTagInfoBinding binding;
+    private Integer gameSystemId;
+    private Integer tagId;
+    private Tag tag;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityViewTagInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
+        tagId = Integer.parseInt(getIntent().getStringExtra("id"));
+        TagInfoViewModel tagInfoViewModel = new TagInfoViewModel(tagId, ((RpgstatsApplication)getApplication()).appContainer.tagRepository);
+        tag = tagInfoViewModel.getItemInfo().getValue();
+        binding.ViewTagHeader.setText(tag.getName());
+        binding.CreationTagDate.setText(tag.getCreationDate());
+
         setListeners();
     }
 
@@ -50,12 +64,19 @@ public class ViewTagInfoActivity extends AppCompatActivity {
             setResult(Activity.RESULT_CANCELED, intent);
             finish();
         });
-        setOnClickCreateActivity(binding.ViewTagInfoEditButton, EditTagsActivity.class);
+        setOnClickListener(binding.ViewTagInfoEditButton, view -> {
+            Intent intent = new Intent(this, EditTagsActivity.class);
+            intent.putExtra("id", tagId.toString());
+            intent.putExtra("game_system_id", gameSystemId.toString());
+            startActivity(intent);
+        });
         setOnClickListener(binding.ViewTagInfoCopyButton, view -> {
             //TODO copy tag
         });
         setOnClickListener(binding.ViewTagDeleteWarning.DeleteYesButton, view -> {
-            //TODO delete tag
+            //TODO check tag entry
+            TagsActivity.viewModelProvider.get(TagViewModel.class).deleteTag(tagId, gameSystemId);
+
             Intent intent = new Intent();
             setResult(Activity.RESULT_OK, intent);
             finish();

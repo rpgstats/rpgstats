@@ -2,24 +2,31 @@ package com.nsu.rpgstats.ui;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.nsu.rpgstats.databinding.ActivityAddItemBinding;
 import com.nsu.rpgstats.databinding.ActivityAddTagsBinding;
+import com.nsu.rpgstats.entities.Tag;
+import com.nsu.rpgstats.viewmodel.TagViewModel;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class AddTagsActivity extends AppCompatActivity {
     private ActivityAddTagsBinding binding;
+    private Integer gameSystemId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAddTagsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
+
         setListeners();
     }
 
@@ -47,7 +54,9 @@ public class AddTagsActivity extends AppCompatActivity {
             finish();
         });
         setOnClickListener(binding.AddTagAddButton, view -> {
-            //TODO return result
+            Tag newTag = new Tag(0, binding.AddTagInputName.getText().toString(), new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(new Date()), false);
+            TagsActivity.viewModelProvider.get(TagViewModel.class).addTag(newTag, gameSystemId);
+
             Intent intent = new Intent();
             setResult(Activity.RESULT_OK, intent);
             finish();
