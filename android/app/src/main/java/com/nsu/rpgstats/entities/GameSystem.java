@@ -4,15 +4,19 @@ package com.nsu.rpgstats.entities;
 import java.util.Objects;
 
 public class GameSystem {
-    private final Integer id;
-    private final String systemName;
-    private final String creationDate;
+    private Integer id;
+    private String systemName;
+    private String creationDate;
 
     private String owner;
     private int gameSessionNumber;
     private int childGameSystemNumber;
     private int itemsNumber;
     private int npcNumber;
+
+    public GameSystem(String systemName) {
+        this.systemName = systemName;
+    }
 
     public GameSystem(Integer id, String systemName, String creationDate, String owner,
                       int gameSessionNumber, int childGameSystemNumber, int itemsNumber, int npcNumber) {
