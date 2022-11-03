@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout tools:context=".ui.PropertiesActivity"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_margin="@dimen/activity_margin"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    tools:context=".ui.properties.PropertiesActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/manage_properties"
+        android:textSize="32sp" />
+
+    <ListView
+        android:id="@+id/propListView"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center_vertical" />
+
+    <ImageButton
+        android:id="@+id/addPropertyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_margin"
+        android:src="@drawable/plus_sign"
+        android:contentDescription="@string/add" />
+</LinearLayout>

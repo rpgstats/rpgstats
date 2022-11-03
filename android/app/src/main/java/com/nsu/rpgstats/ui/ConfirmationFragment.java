@@ -18,6 +18,7 @@ public class ConfirmationFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        // TODO: send deletion to server
         builder.setMessage("Are you sure?")
                 .setPositiveButton("Yes", (dialog, id) ->
                         Toast.makeText(getContext(), "Deleted (no)", Toast.LENGTH_SHORT).show())

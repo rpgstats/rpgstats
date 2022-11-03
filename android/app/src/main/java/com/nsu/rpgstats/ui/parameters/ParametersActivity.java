@@ -47,7 +47,7 @@ public class ParametersActivity extends Activity {
     }
 
     private void fillParamList(Parameter[] params) {
-        ListView listView = findViewById(R.id.listView);
+        ListView listView = findViewById(R.id.paramListView);
         final ArrayList<HashMap<String, String>> paramNameDate = new ArrayList<>();
         HashMap<String, String> map;
         for (Parameter param : params) {

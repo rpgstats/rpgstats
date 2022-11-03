@@ -33,9 +33,8 @@ public class ParameterManageActivity extends AppCompatActivity {
         Integer mode = b.getInt("Mode");
 
         if (mode.equals(ParameterManageActivity.MODE_EDIT)) {
-            // TODO: send parameter as the changed one
             TextView head = findViewById(R.id.paramHead);
-            head.setText(R.string.edit_parameter_head   );
+            head.setText(R.string.edit_parameter_head);
             nameInput.setText(b.getString("name"));
             minInput.setText(String.valueOf(b.getInt("min")));
             maxInput.setText(String.valueOf(b.getInt("max")));

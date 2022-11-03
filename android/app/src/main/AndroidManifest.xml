@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Rpgstats"
         tools:targetApi="31" >
         <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Rpgstats.NoActionBar">
         android:name=".MainActivity"
         android:exported="true"
         android:theme="@style/Theme.Rpgstats.NoActionBar" >
@@ -77,6 +80,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name=".ui.parameters.ParameterManageActivity" />
+        <activity android:name=".ui.parameters.ParameterDetailsActivity" />
+        <activity android:name=".ui.properties.PropertiesActivity" />
+        <activity android:name=".ui.properties.PropertyDetailsActivity" />
+        <activity android:name=".ui.properties.PropertyManageActivity" />
+        <activity android:name=".ui.TagsActivity" />
     </application>
 
 </manifest>
