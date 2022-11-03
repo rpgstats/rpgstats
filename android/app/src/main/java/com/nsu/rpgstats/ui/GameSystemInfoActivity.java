@@ -33,6 +33,7 @@ public class GameSystemInfoActivity extends Activity {
         GameSystemsRepository repository = ((RpgstatsApplication) getApplication()).appContainer.gameSystemsRepository;
         GameSystemInfoViewModel viewModel = new GameSystemInfoViewModel(id, repository);
         gameSystem = viewModel.getGameSystemInfo().getValue();
+        ((RpgstatsApplication) getApplication()).appContainer.currentGameSystem = gameSystem;
         setInfo();
         setListeners();
     }
