@@ -1,9 +1,12 @@
 package com.nsu.rpgstats.ui;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -21,10 +24,12 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
 
     private List<Item> mItemList;
     private final OnItemClickListener mOnItemClickListener;
+    private Context context;
 
 
-    public ItemsAdapter(List<Item> itemList, ItemsAdapter.OnItemClickListener mOnItemClickListener) {
+    public ItemsAdapter(List<Item> itemList, ItemsAdapter.OnItemClickListener mOnItemClickListener, Context context) {
         setItemList(itemList);
+        this.context = context;
         // for getItemId -- to get unique id of any element in the list
         setHasStableIds(true);
         this.mOnItemClickListener = mOnItemClickListener;
@@ -38,7 +43,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
             DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
                 @Override
                 public int getOldListSize() {
-                    return itemList.size();
+                    return mItemList.size();
                 }
 
                 @Override
@@ -48,12 +53,12 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    return itemList.get(oldItemPosition) == itemList.get(newItemPosition);
+                    return mItemList.get(oldItemPosition) == itemList.get(newItemPosition);
                 }
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    return Objects.equals(itemList.get(oldItemPosition).getId(), itemList.get(newItemPosition).getId());
+                    return Objects.equals(mItemList.get(oldItemPosition).getId(), itemList.get(newItemPosition).getId());
                 }
 
             });
@@ -61,7 +66,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
             Log.e("result", String.valueOf(result));
             result.dispatchUpdatesTo(this);
             // todo: dispatching not working, need to explicity notify adapter
-            notifyItemInserted(mItemList.size() - 1);
+            notifyDataSetChanged();
         }
     }
 
@@ -77,6 +82,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
     @Override
     public void onBindViewHolder(@NonNull ItemsHolder holder, int position) {
         holder.binding.setItem(mItemList.get(position));
+        if (mItemList.get(position).isDeleted()){
+            holder.binding.Background.setBackground(context.getDrawable(R.drawable.deleted_rounded_card));
+            holder.binding.DeletedLabel.setVisibility(TextView.VISIBLE);
+        }
     }
 
     @Override

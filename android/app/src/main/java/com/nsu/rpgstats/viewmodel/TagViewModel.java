@@ -53,11 +53,15 @@ public class TagViewModel extends AndroidViewModel {
             loadTags(gameSystemId);
         }
         // todo: find better approach
-        Tag oldTag = tagRepository.getTag(tagId);
         tagRepository.editTag(tagId, tag);
         Tag addedTag = tagRepository.getTag(tagId);
-        tags.getValue().remove(oldTag);
-        tags.getValue().add(addedTag);
+        for (int i = 0; i < tags.getValue().size(); ++i) {
+            if (tags.getValue().get(i).getId() == tagId) {
+                tags.getValue().remove(i);
+                tags.getValue().add(i, addedTag);
+                break;
+            }
+        }
         tags.setValue(tags.getValue());
         Log.e("EDIT TAG", "successfully edit tag");
     }
@@ -69,11 +73,16 @@ public class TagViewModel extends AndroidViewModel {
         }
         // todo: find better approach
         Tag oldTag = tagRepository.getTag(tagId);
-        tags.getValue().remove(oldTag);
-        oldTag.setDeleted(true);
-        tagRepository.editTag(tagId, oldTag);
-        Tag addedTag = tagRepository.getTag(tagId);
-        tags.getValue().add(addedTag);
+        tagRepository.editTag(tagId, new Tag(tagId, oldTag.getName(), oldTag.getCreationDate(), true));
+        Tag editedTag = tagRepository.getTag(tagId);
+
+        for (int i = 0; i < tags.getValue().size(); ++i) {
+            if (tags.getValue().get(i).getId() == tagId) {
+                tags.getValue().remove(i);
+                tags.getValue().add(i, editedTag);
+                break;
+            }
+        }
         tags.setValue(tags.getValue());
         Log.e("DELETE TAG", "successfully deleted tag");
     }

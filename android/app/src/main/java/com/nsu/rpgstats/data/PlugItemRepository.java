@@ -54,5 +54,6 @@ public class PlugItemRepository implements ItemRepository{
         Item newItem = new Item(id, item.getPictureId(), item.getName(), item.getTags(), item.getModifiers(), item.isDeleted());
         items.remove(id);
         items.put(id, newItem);
+
     }
 }

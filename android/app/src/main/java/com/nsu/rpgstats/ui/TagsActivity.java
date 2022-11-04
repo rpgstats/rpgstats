@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivityTagsBinding;
 import com.nsu.rpgstats.entities.Tag;
 import com.nsu.rpgstats.viewmodel.ItemViewModel;
@@ -31,8 +32,7 @@ public class TagsActivity extends AppCompatActivity implements TagsAdapter.OnTag
         binding = ActivityTagsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        gameSystemId = 0; // TODO get from intent
-        //GameSystemId = Integer.parseInt(getIntent().getStringExtra("id"));
+        gameSystemId = ((RpgstatsApplication)getApplication()).appContainer.currentGameSystem.getId();
         if (viewModelProvider == null) {
             viewModelProvider = new ViewModelProvider(this);
         }
@@ -43,7 +43,7 @@ public class TagsActivity extends AppCompatActivity implements TagsAdapter.OnTag
         });
 
         RecyclerView recyclerView = binding.TagsActivityTags;
-        mTagsAdapter = new TagsAdapter(mTagList, this);
+        mTagsAdapter = new TagsAdapter(mTagList, this, this);
         recyclerView.setAdapter(mTagsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

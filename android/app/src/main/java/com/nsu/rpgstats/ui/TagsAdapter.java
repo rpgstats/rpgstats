@@ -1,9 +1,13 @@
 package com.nsu.rpgstats.ui;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -11,6 +15,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nsu.rpgstats.R;
+import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.TagsTagBinding;
 import com.nsu.rpgstats.entities.Tag;
 
@@ -21,10 +26,12 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsHolder> {
 
     private List<Tag> mTagList;
     private final OnTagClickListener mOnTagClickListener;
+    private Context context;
 
 
-    public TagsAdapter(List<Tag> tagList, TagsAdapter.OnTagClickListener mOnTagClickListener) {
+    public TagsAdapter(List<Tag> tagList, TagsAdapter.OnTagClickListener mOnTagClickListener, Context context) {
         setTagList(tagList);
+        this.context = context;
         // for getTagId -- to get unique id of any element in the list
         setHasStableIds(true);
         this.mOnTagClickListener = mOnTagClickListener;
@@ -38,7 +45,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsHolder> {
             DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
                 @Override
                 public int getOldListSize() {
-                    return tagList.size();
+                    return mTagList.size();
                 }
 
                 @Override
@@ -48,12 +55,12 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsHolder> {
 
                 @Override
                 public boolean areItemsTheSame(int oldTagPosition, int newTagPosition) {
-                    return tagList.get(oldTagPosition) == tagList.get(newTagPosition);
+                    return mTagList.get(oldTagPosition) == tagList.get(newTagPosition);
                 }
 
                 @Override
                 public boolean areContentsTheSame(int oldTagPosition, int newTagPosition) {
-                    return Objects.equals(tagList.get(oldTagPosition).getId(), tagList.get(newTagPosition).getId());
+                    return Objects.equals(mTagList.get(oldTagPosition).getId(), tagList.get(newTagPosition).getId());
                 }
 
             });
@@ -61,7 +68,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsHolder> {
             Log.e("result", String.valueOf(result));
             result.dispatchUpdatesTo(this);
             // todo: dispatching not working, need to explicity notify adapter
-            notifyItemInserted(mTagList.size() - 1);
+            notifyDataSetChanged();
         }
     }
 
@@ -77,6 +84,10 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsHolder> {
     @Override
     public void onBindViewHolder(@NonNull TagsHolder holder, int position) {
         holder.binding.setTag(mTagList.get(position));
+        if (mTagList.get(position).isDeleted()){
+            holder.binding.Background.setBackground(context.getDrawable(R.drawable.deleted_rounded_card));
+            holder.binding.DeletedLabel.setVisibility(TextView.VISIBLE);
+        }
     }
 
     @Override

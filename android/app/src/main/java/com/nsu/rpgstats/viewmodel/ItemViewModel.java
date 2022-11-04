@@ -52,11 +52,15 @@ public class ItemViewModel extends AndroidViewModel {
             loadItems(gameSystemId);
         }
         // todo: find better approach
-        Item oldItem = itemRepository.getItem(itemId);
         itemRepository.editItem(itemId, item);
         Item addedItem = itemRepository.getItem(itemId);
-        items.getValue().remove(oldItem);
-        items.getValue().add(addedItem);
+        for (int i = 0; i < items.getValue().size(); ++i) {
+            if (items.getValue().get(i).getId() == itemId) {
+                items.getValue().remove(i);
+                items.getValue().add(i, addedItem);
+                break;
+            }
+        }
         items.setValue(items.getValue());
         Log.e("EDIT ITEM", "successfully edit item");
     }
@@ -68,11 +72,16 @@ public class ItemViewModel extends AndroidViewModel {
         }
         // todo: find better approach
         Item oldItem = itemRepository.getItem(itemId);
-        items.getValue().remove(oldItem);
-        oldItem.setDeleted(true);
-        itemRepository.editItem(itemId, oldItem);
-        Item addedItem = itemRepository.getItem(itemId);
-        items.getValue().add(addedItem);
+        itemRepository.editItem(itemId, new Item(oldItem.getId(), oldItem.getPictureId(), oldItem.getName(), oldItem.getTags(), oldItem.getModifiers(), true));
+        Item editedItem = itemRepository.getItem(itemId);
+
+        for (int i = 0; i < items.getValue().size(); ++i) {
+            if (items.getValue().get(i).getId() == itemId) {
+                items.getValue().remove(i);
+                items.getValue().add(i, editedItem);
+                break;
+            }
+        }
         items.setValue(items.getValue());
         Log.e("DELETE ITEM", "successfully deleted item");
     }

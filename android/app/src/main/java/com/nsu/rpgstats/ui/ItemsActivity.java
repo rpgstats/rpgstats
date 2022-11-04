@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivityItemsBinding;
 import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.viewmodel.ItemViewModel;
@@ -32,7 +33,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemsAdapter.OnI
         super.onCreate(savedInstanceState);
         binding = ActivityItemsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        gameSystemId = 0; // TODO get from intent
+        gameSystemId = ((RpgstatsApplication)getApplication()).appContainer.currentGameSystem.getId();
         //GameSystemId = Integer.parseInt(getIntent().getStringExtra("id"));
         if (viewModelProvider == null) {
             viewModelProvider = new ViewModelProvider(this);
@@ -44,7 +45,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemsAdapter.OnI
         });
 
         RecyclerView recyclerView = binding.ItemList.recyclerVIew;
-        mItemsAdapter = new ItemsAdapter(mItemList, this);
+        mItemsAdapter = new ItemsAdapter(mItemList, this, this);
         recyclerView.setAdapter(mItemsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
