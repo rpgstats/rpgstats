@@ -32,14 +32,16 @@ public class RestGameSystemsRepository implements GameSystemsRepository {
                     @Override
                     public void onResponse(Call<List<GameSystem>> call, Response<List<GameSystem>> response) {
                         Log.d(TAG, "Response: " + response);
-                        if (response.body() != null) {
+                        if (response.isSuccessful()) {
                             gameSystems.setValue(response.body());
+                        } else {
+                            Log.e(TAG, String.format("Code response from server: %s", response.code()));
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<GameSystem>> call, Throwable t) {
-                        gameSystems.setValue(null);
+                        Log.e(TAG, "Network error while getting game systems");
                     }
                 });
         return gameSystems.getValue();
@@ -53,13 +55,16 @@ public class RestGameSystemsRepository implements GameSystemsRepository {
                     @Override
                     public void onResponse(Call<GameSystem> call, Response<GameSystem> response) {
                         Log.d(TAG, "Response: " + response);
-                        if (response.body() != null) {
+                        if (response.isSuccessful()) {
                             gameSystem.setValue(response.body());
+                        } else {
+                            Log.e(TAG, String.format("Code response from server: %s", response.code()));
                         }
                     }
 
                     @Override
                     public void onFailure(Call<GameSystem> call, Throwable t) {
+                        Log.e(TAG, "Network error while getting game system");
                         gameSystem.setValue(null);
                     }
                 });
@@ -74,10 +79,16 @@ public class RestGameSystemsRepository implements GameSystemsRepository {
                     @Override
                     public void onResponse(Call<GameSystem> call, Response<GameSystem> response) {
                         Log.d(TAG, "Response: " + response);
+                        if (response.isSuccessful()) {
+                            gameSystem.setValue(response.body());
+                        } else {
+                            Log.e(TAG, String.format("Code response from server: %s", response.code()));
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<GameSystem> call, Throwable t) {
+                        Log.e(TAG, "Network error while adding game systems");
                         gameSystem.setValue(null);
                     }
                 });
