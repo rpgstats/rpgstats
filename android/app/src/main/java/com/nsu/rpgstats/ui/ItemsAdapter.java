@@ -9,14 +9,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.constraintlayout.helper.widget.Flow;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nsu.rpgstats.R;
+import com.nsu.rpgstats.databinding.ItemsBadgeBinding;
 import com.nsu.rpgstats.databinding.ItemsItemBinding;
 import com.nsu.rpgstats.entities.Item;
+import com.nsu.rpgstats.entities.Tag;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -83,8 +89,36 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
     public void onBindViewHolder(@NonNull ItemsHolder holder, int position) {
         holder.binding.setItem(mItemList.get(position));
         if (mItemList.get(position).isDeleted()){
-            holder.binding.Background.setBackground(context.getDrawable(R.drawable.deleted_rounded_card));
+            holder.binding.Background.setBackground(AppCompatResources.getDrawable(context, R.drawable.deleted_rounded_card));
             holder.binding.DeletedLabel.setVisibility(TextView.VISIBLE);
+        }
+
+        for (View view: holder.tags) {
+            holder.binding.Constraint.removeView(view);
+            holder.binding.flowTags.removeView(view);
+        }
+
+        for(Tag tag: mItemList.get(position).getTags()) {
+            View newTagView = LayoutInflater.from(holder.binding.getRoot().getContext()).inflate(R.layout.items_badge, holder.binding.Constraint, false);
+            newTagView.setId(View.generateViewId());
+            holder.binding.Constraint.addView(newTagView);
+            holder.binding.flowTags.addView(newTagView);
+            holder.tags.add(newTagView);
+            ItemsBadgeBinding binding = ItemsBadgeBinding.bind(newTagView);
+            binding.Background.setBackground(AppCompatResources.getDrawable(context, R.drawable.rounded_white_card));
+            binding.Text.setTextColor(Color.DKGRAY);
+            binding.Text.setTextSize(12);
+            ConstraintSet constraintSet = new ConstraintSet();
+            constraintSet.setMargin(newTagView.getId(), ConstraintSet.START, 0);
+            constraintSet.setMargin(newTagView.getId(), ConstraintSet.END, 0);
+            constraintSet.setMargin(newTagView.getId(), ConstraintSet.TOP, 0);
+            constraintSet.setMargin(newTagView.getId(), ConstraintSet.BOTTOM, 0);
+            binding.Background.setConstraintSet(constraintSet);
+            binding.DeleteImage.setVisibility(View.GONE);
+            binding.Text.setText(tag.getName());
+            if (mItemList.get(position).isDeleted()){
+                binding.Text.setTextColor(Color.GRAY);
+            }
         }
     }
 
@@ -103,11 +137,14 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
     public static class ItemsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ItemsItemBinding binding;
         OnItemClickListener onItemClickListener;
+        List<View> tags;
+
 
         public ItemsHolder(@NonNull ItemsItemBinding binding, ItemsAdapter.OnItemClickListener onItemClickListener) {
             super(binding.getRoot());
             this.binding = binding;
             this.onItemClickListener = onItemClickListener;
+            this.tags = new ArrayList<>();
 
             binding.getRoot().setOnClickListener(this);
         }

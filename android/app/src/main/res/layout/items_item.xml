@@ -12,10 +12,11 @@
     <LinearLayout
         android:id="@+id/Background"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/item_vertical_margin"
         android:background="@drawable/rounded_card"
         android:gravity="center_vertical"
+        android:minHeight="80dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -26,34 +27,55 @@
             app:srcCompat="@drawable/control_items" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/Constraint"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/EditItemNameInput"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
                 android:text="@{item.name}"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/DeletedLabel"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flowTags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:foregroundGravity="left"
+                android:orientation="horizontal"
+                app:flow_horizontalAlign="start"
+                app:flow_horizontalGap="4dp"
+                app:flow_horizontalStyle="packed"
+                app:flow_verticalAlign="baseline"
+                app:flow_verticalGap="4dp"
+                app:flow_wrapMode="aligned"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/DeletedLabel"
+                app:layout_constraintStart_toStartOf="@+id/EditItemNameInput"
+                app:layout_constraintTop_toBottomOf="@+id/EditItemNameInput" />
 
             <TextView
                 android:id="@+id/DeletedLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:layout_marginBottom="16dp"
                 android:text="@string/deleted"
                 android:textColor="@color/white"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="invisible" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
