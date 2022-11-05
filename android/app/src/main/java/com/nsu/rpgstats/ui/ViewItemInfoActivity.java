@@ -1,5 +1,7 @@
 package com.nsu.rpgstats.ui;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -8,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
@@ -17,6 +20,8 @@ import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivityViewItemInfoBinding;
 import com.nsu.rpgstats.entities.Item;
+import com.nsu.rpgstats.entities.Modifier;
+import com.nsu.rpgstats.entities.Tag;
 import com.nsu.rpgstats.viewmodel.ItemInfoViewModel;
 import com.nsu.rpgstats.viewmodel.ItemViewModel;
 
@@ -26,17 +31,28 @@ public class ViewItemInfoActivity extends AppCompatActivity {
     private Integer itemId;
     private Integer gameSystemId;
     private Item item;
+    ArrayAdapter<Tag> tagAdapter;
+    ArrayAdapter<Modifier> modifierAdapter;
+    protected ActivityResultLauncher<Intent> activityLauncher;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK) {
+                ItemInfoViewModel viewModel = new ItemInfoViewModel(gameSystemId ,itemId, ((RpgstatsApplication) getApplication()).appContainer.itemRepository);
+                item = viewModel.getItemInfo().getValue();
+                setInfo();
+            }
+        });
         binding = ActivityViewItemInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         itemId = Integer.parseInt(getIntent().getStringExtra("id"));
         gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
 
-        ItemInfoViewModel viewModel = new ItemInfoViewModel(itemId, ((RpgstatsApplication) getApplication()).appContainer.itemRepository);
+        ItemInfoViewModel viewModel = new ItemInfoViewModel(gameSystemId ,itemId, ((RpgstatsApplication) getApplication()).appContainer.itemRepository);
         item = viewModel.getItemInfo().getValue();
+
 
         setInfo();
         setListeners();
@@ -44,8 +60,9 @@ public class ViewItemInfoActivity extends AppCompatActivity {
 
     private void setInfo() {
         binding.ItemInfoHeader.setText(item.getName());
-        ArrayAdapter<String> tagAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, item.getTags());
-        ArrayAdapter<String> modifierAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, item.getModifiers());
+
+        tagAdapter = new ArrayAdapter<Tag>(this, android.R.layout.simple_list_item_1, item.getTags());
+        modifierAdapter = new ArrayAdapter<Modifier>(this, android.R.layout.simple_list_item_1, item.getModifiers());
         binding.Tags.setAdapter(tagAdapter);
         binding.Modifiers.setAdapter(modifierAdapter);
     }
@@ -84,7 +101,7 @@ public class ViewItemInfoActivity extends AppCompatActivity {
             Intent intent = new Intent(this, EditItemActivity.class);
             intent.putExtra("id", itemId.toString());
             intent.putExtra("game_system_id", gameSystemId.toString());
-            startActivity(intent);
+            activityLauncher.launch(intent);
         });
 
         setOnClickListener(binding.ViewItemInfoCopyButton, view -> {

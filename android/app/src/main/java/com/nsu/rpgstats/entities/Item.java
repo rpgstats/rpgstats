@@ -8,12 +8,12 @@ public class Item {
 
     private Integer pictureId;
     private String name;
-    private List<String> tags;
-    private List<String> modifiers;
+    private List<Tag> tags;
+    private List<Modifier> modifiers;
 
     private boolean isDeleted;
 
-    public Item(Integer id, Integer pictureId, String name, List<String> tags, List<String> modifiers, boolean isDeleted) {
+    public Item(Integer id, Integer pictureId, String name, List<Tag> tags, List<Modifier> modifiers, boolean isDeleted) {
         this.id = id;
         this.pictureId = pictureId;
         this.name = name;
@@ -34,11 +34,11 @@ public class Item {
         return name;
     }
 
-    public List<String> getTags() {
+    public List<Tag> getTags() {
         return tags;
     }
 
-    public List<String> getModifiers() {
+    public List<Modifier> getModifiers() {
         return modifiers;
     }
 

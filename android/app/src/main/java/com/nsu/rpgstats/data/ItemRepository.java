@@ -6,11 +6,11 @@ import com.nsu.rpgstats.entities.Item;
 import java.util.List;
 
 public interface ItemRepository {
-    List<Item> getItems();
+    List<Item> getItems(int gameSystem);
 
-    Item getItem(int id);
+    Item getItem(int gameSystemId, int id);
 
-    int addItem(Item item);
+    int addItem(int gameSystem, Item item);
 
-    void editItem(int id, Item item);
+    void editItem(int gameSystem, int id, Item item);
 }

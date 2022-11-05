@@ -14,47 +14,56 @@ import com.nsu.rpgstats.data.TagRepository;
 import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.entities.Tag;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TagViewModel extends AndroidViewModel {
-    private MutableLiveData<List<Tag>> tags;
+    private final Map<Integer, MutableLiveData<List<Tag>>> systemTags;
     private final TagRepository tagRepository;
 
     public TagViewModel(@NonNull Application application) {
         super(application);
+        systemTags = new HashMap<>();
         tagRepository = ((RpgstatsApplication) getApplication()).appContainer.tagRepository;
     }
 
     public LiveData<List<Tag>> getTags(int gameSystemId) {
-        if (tags == null) {
-            tags = new MutableLiveData<>();
+        if (systemTags.containsKey(gameSystemId)) {
+            MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
+            systemTags.put(gameSystemId, tags);
             loadTags(gameSystemId);
         }
-        return tags;
+        return systemTags.get(gameSystemId);
     }
 
     public void addTag(Tag tag, int gameSystemId) {
-        if (tags == null) {
-            tags = new MutableLiveData<>();
+        if (systemTags.containsKey(gameSystemId)) {
+            MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
+            systemTags.put(gameSystemId, tags);
             loadTags(gameSystemId);
         }
+        MutableLiveData<List<Tag>> tags = systemTags.get(systemTags);
         // todo: find better approach
 
-        int gsId = tagRepository.addTag(tag);
-        Tag addedTag = tagRepository.getTag(gsId);
+
+        int tagId = tagRepository.addTag(gameSystemId, tag);
+        Tag addedTag = tagRepository.getTag(gameSystemId, tagId);
         tags.getValue().add(addedTag);
         tags.setValue(tags.getValue());
         Log.e("ADD TAG", "successfully add tag");
     }
 
     public void editTag(Tag tag, int tagId, int gameSystemId) {
-        if (tags == null) {
-            tags = new MutableLiveData<>();
+        if (systemTags.containsKey(gameSystemId)) {
+            MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
+            systemTags.put(gameSystemId, tags);
             loadTags(gameSystemId);
         }
+        MutableLiveData<List<Tag>> tags = systemTags.get(systemTags);
         // todo: find better approach
-        tagRepository.editTag(tagId, tag);
-        Tag addedTag = tagRepository.getTag(tagId);
+        tagRepository.editTag(gameSystemId, tagId, tag);
+        Tag addedTag = tagRepository.getTag(gameSystemId, tagId);
         for (int i = 0; i < tags.getValue().size(); ++i) {
             if (tags.getValue().get(i).getId() == tagId) {
                 tags.getValue().remove(i);
@@ -67,14 +76,16 @@ public class TagViewModel extends AndroidViewModel {
     }
 
     public void deleteTag(int tagId, int gameSystemId) {
-        if (tags == null) {
-            tags = new MutableLiveData<>();
+        if (systemTags.containsKey(gameSystemId)) {
+            MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
+            systemTags.put(gameSystemId, tags);
             loadTags(gameSystemId);
         }
+        MutableLiveData<List<Tag>> tags = systemTags.get(systemTags);
         // todo: find better approach
-        Tag oldTag = tagRepository.getTag(tagId);
-        tagRepository.editTag(tagId, new Tag(tagId, oldTag.getName(), oldTag.getCreationDate(), true));
-        Tag editedTag = tagRepository.getTag(tagId);
+        Tag oldTag = tagRepository.getTag(gameSystemId, tagId);
+        tagRepository.editTag(gameSystemId, tagId, new Tag(tagId, oldTag.getName(), oldTag.getCreationDate(), true));
+        Tag editedTag = tagRepository.getTag(gameSystemId, tagId);
 
         for (int i = 0; i < tags.getValue().size(); ++i) {
             if (tags.getValue().get(i).getId() == tagId) {
@@ -90,6 +101,6 @@ public class TagViewModel extends AndroidViewModel {
     private void loadTags(int gameSystemId) {
         // suppose getting from server in future
         TagRepository tagRepository = new PlugTagRepository();
-        tags.setValue(tagRepository.getTags());
+        systemTags.get(gameSystemId).setValue(tagRepository.getTags());
     }
 }

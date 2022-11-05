@@ -11,8 +11,10 @@ public class ItemInfoViewModel extends ViewModel {
     private final int itemId;
     private final ItemRepository repository;
     private MutableLiveData<Item> item;
+    private int gameSystemId;
 
-    public ItemInfoViewModel(int itemId, ItemRepository repository) {
+    public ItemInfoViewModel(int gameSystemId, int itemId, ItemRepository repository) {
+        this.gameSystemId = gameSystemId;
         this.itemId = itemId;
         this.repository = repository;
     }
@@ -26,7 +28,7 @@ public class ItemInfoViewModel extends ViewModel {
     }
 
     private void loadItem() {
-        item.setValue(repository.getItem(itemId));
+        item.setValue(repository.getItem(gameSystemId, itemId));
     }
 
 }

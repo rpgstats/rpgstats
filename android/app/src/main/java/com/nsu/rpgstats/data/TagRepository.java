@@ -8,9 +8,9 @@ import java.util.List;
 public interface TagRepository {
     List<Tag> getTags();
 
-    Tag getTag(int id);
+    Tag getTag(int gameSystemId ,int id);
 
-    int addTag(Tag tag);
+    int addTag(int gameSystemId, Tag tag);
 
-    void editTag(int id, Tag tag);
+    void editTag(int gameSystemId, int id, Tag tag);
 }

@@ -2,18 +2,26 @@ package com.nsu.rpgstats.ui;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivityEditItemBinding;
 import com.nsu.rpgstats.entities.Item;
+import com.nsu.rpgstats.entities.Modifier;
+import com.nsu.rpgstats.entities.Tag;
 import com.nsu.rpgstats.viewmodel.ItemInfoViewModel;
 import com.nsu.rpgstats.viewmodel.ItemViewModel;
+
+import java.util.List;
 
 //TODO: fix editing and make modifiers and tags
 
@@ -22,6 +30,10 @@ public class EditItemActivity extends AppCompatActivity {
     private int itemId;
     private int gameSystemId;
     private Item item;
+    private List<Tag> tags;
+    private List<Modifier> modifiers;
+    BadgeAdapter<Tag> tagBadgeAdapter;
+    BadgeAdapter<Modifier> modifierBadgeAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,11 +42,29 @@ public class EditItemActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         itemId = Integer.parseInt(getIntent().getStringExtra("id"));
         gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
-        ItemInfoViewModel itemInfoViewModel = new ItemInfoViewModel(itemId, ((RpgstatsApplication) getApplication()).appContainer.itemRepository);
+        ItemInfoViewModel itemInfoViewModel = new ItemInfoViewModel(gameSystemId ,itemId, ((RpgstatsApplication) getApplication()).appContainer.itemRepository);
         item = itemInfoViewModel.getItemInfo().getValue();
 
         assert item != null;
         binding.EditItemNameInput.setText(item.getName());
+
+        tags = item.getTags();
+        modifiers = item.getModifiers();
+
+        tagBadgeAdapter = new BadgeAdapter<>(tags, position -> {
+            tags.remove(position);
+            tagBadgeAdapter.setBadgesList(tags);
+        }, true, AppCompatResources.getDrawable(this, R.drawable.rounded_card));
+
+        modifierBadgeAdapter = new BadgeAdapter<>(modifiers, position -> {
+            modifiers.remove(position);
+            modifierBadgeAdapter.setBadgesList(modifiers);
+        }, true, AppCompatResources.getDrawable(this, R.drawable.rounded_card));
+
+        binding.Tags.setAdapter(tagBadgeAdapter);
+        binding.Modifiers.setAdapter(modifierBadgeAdapter);
+        binding.Tags.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        binding.Modifiers.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
         setListeners();
     }

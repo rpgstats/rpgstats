@@ -13,8 +13,10 @@ public class TagInfoViewModel extends ViewModel {
     private final int tagId;
     private final TagRepository repository;
     private MutableLiveData<Tag> tag;
+    private int gameSystemId;
 
-    public TagInfoViewModel(int tagId, TagRepository repository) {
+    public TagInfoViewModel(int gameSystemId, int tagId, TagRepository repository) {
+        this.gameSystemId = gameSystemId;
         this.tagId = tagId;
         this.repository = repository;
     }
@@ -28,6 +30,6 @@ public class TagInfoViewModel extends ViewModel {
     }
 
     private void loadItem() {
-        tag.setValue(repository.getTag(tagId));
+        tag.setValue(repository.getTag(gameSystemId, tagId));
     }
 }

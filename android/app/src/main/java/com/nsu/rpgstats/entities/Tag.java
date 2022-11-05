@@ -2,7 +2,7 @@ package com.nsu.rpgstats.entities;
 
 import java.util.Objects;
 
-public class Tag {
+public class Tag implements Identifiable{
     private final Integer id;
     private String name;
     private String creationDate;
@@ -41,6 +41,11 @@ public class Tag {
         if (o == null || getClass() != o.getClass()) return false;
         Tag tag = (Tag) o;
         return isDeleted == tag.isDeleted && Objects.equals(id, tag.id) && Objects.equals(name, tag.name) && Objects.equals(creationDate, tag.creationDate);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.nsu.rpgstats.ui;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -13,6 +15,7 @@ import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivityAddTagsBinding;
 import com.nsu.rpgstats.databinding.ActivityViewTagInfoBinding;
 import com.nsu.rpgstats.entities.Tag;
+import com.nsu.rpgstats.viewmodel.ItemInfoViewModel;
 import com.nsu.rpgstats.viewmodel.TagInfoViewModel;
 import com.nsu.rpgstats.viewmodel.TagViewModel;
 
@@ -21,15 +24,24 @@ public class ViewTagInfoActivity extends AppCompatActivity {
     private Integer gameSystemId;
     private Integer tagId;
     private Tag tag;
+    protected ActivityResultLauncher<Intent> activityLauncher;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK) {
+                TagInfoViewModel tagInfoViewModel = new TagInfoViewModel(gameSystemId, tagId, ((RpgstatsApplication)getApplication()).appContainer.tagRepository);
+                tag = tagInfoViewModel.getItemInfo().getValue();
+                binding.ViewTagHeader.setText(tag.getName());
+                binding.CreationTagDate.setText(tag.getCreationDate());
+            }
+        });
         binding = ActivityViewTagInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
         tagId = Integer.parseInt(getIntent().getStringExtra("id"));
-        TagInfoViewModel tagInfoViewModel = new TagInfoViewModel(tagId, ((RpgstatsApplication)getApplication()).appContainer.tagRepository);
+        TagInfoViewModel tagInfoViewModel = new TagInfoViewModel(gameSystemId, tagId, ((RpgstatsApplication)getApplication()).appContainer.tagRepository);
         tag = tagInfoViewModel.getItemInfo().getValue();
         binding.ViewTagHeader.setText(tag.getName());
         binding.CreationTagDate.setText(tag.getCreationDate());
@@ -68,7 +80,7 @@ public class ViewTagInfoActivity extends AppCompatActivity {
             Intent intent = new Intent(this, EditTagsActivity.class);
             intent.putExtra("id", tagId.toString());
             intent.putExtra("game_system_id", gameSystemId.toString());
-            startActivity(intent);
+            activityLauncher.launch(intent);
         });
         setOnClickListener(binding.ViewTagInfoCopyButton, view -> {
             //TODO copy tag

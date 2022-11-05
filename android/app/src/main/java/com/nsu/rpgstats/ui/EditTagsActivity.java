@@ -32,7 +32,7 @@ public class EditTagsActivity extends AppCompatActivity {
         gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
         tagId = Integer.parseInt(getIntent().getStringExtra("id"));
 
-        TagInfoViewModel tagInfoViewModel = new TagInfoViewModel(tagId, ((RpgstatsApplication)getApplication()).appContainer.tagRepository);
+        TagInfoViewModel tagInfoViewModel = new TagInfoViewModel(gameSystemId, tagId, ((RpgstatsApplication)getApplication()).appContainer.tagRepository);
         tag = tagInfoViewModel.getItemInfo().getValue();
 
         binding.EditTagInputName.setText(tag.getName());
