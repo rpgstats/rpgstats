@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.nsu.rpgstats.R;
+import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivityAddItemBinding;
 import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.entities.Modifier;
@@ -20,6 +22,7 @@ import com.nsu.rpgstats.entities.Tag;
 import com.nsu.rpgstats.viewmodel.ItemViewModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 //TODO: tags and modifiers
@@ -29,6 +32,14 @@ public class AddItemActivity extends AppCompatActivity {
     private Integer gameSystemId;
     private List<Tag> tags;
     private List<Modifier> modifiers;
+    private List<Tag> menuTags;
+    private List<Tag> menuAllTags;
+    private List<Modifier> menuModifiers;
+    private List<Modifier> menuAllModifiers;
+    BadgeAdapter<Tag> menuTagBadgeAdapter;
+    BadgeAdapter<Modifier> menuModifierBadgeAdapter;
+    BadgeAdapter<Tag> menuAllTagBadgeAdapter;
+    BadgeAdapter<Modifier> menuAllModifierBadgeAdapter;
     BadgeAdapter<Tag> tagBadgeAdapter;
     BadgeAdapter<Modifier> modifierBadgeAdapter;
 
@@ -36,11 +47,15 @@ public class AddItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
         tags = new ArrayList<>();
         modifiers = new ArrayList<>();
+        menuAllTags = ((RpgstatsApplication)getApplication()).appContainer.tagRepository.getTags(gameSystemId);
+        menuAllModifiers = ((RpgstatsApplication)getApplication()).appContainer.modifierRepository.getModifiers(gameSystemId);
         binding = ActivityAddItemBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
+        menuTags = new ArrayList<>();
+        menuModifiers = new ArrayList<>();
 
         tagBadgeAdapter = new BadgeAdapter<>(tags, position -> {
             tags.remove(position);
@@ -51,12 +66,52 @@ public class AddItemActivity extends AppCompatActivity {
             modifiers.remove(position);
             modifierBadgeAdapter.setBadgesList(modifiers);
         }, true, AppCompatResources.getDrawable(this, R.drawable.rounded_card));
-
         binding.Tags.setAdapter(tagBadgeAdapter);
         binding.Modifiers.setAdapter(modifierBadgeAdapter);
         binding.Tags.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         binding.Modifiers.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 
+
+        menuTagBadgeAdapter = new BadgeAdapter<>(menuTags, position -> {
+            menuTags.remove(position);
+            menuTagBadgeAdapter.setBadgesList(menuTags);
+        }, true, AppCompatResources.getDrawable(this, R.drawable.rounded_card));
+
+        menuModifierBadgeAdapter = new BadgeAdapter<>(menuModifiers, position -> {
+            menuModifiers.remove(position);
+            menuModifierBadgeAdapter.setBadgesList(menuModifiers);
+        }, true, AppCompatResources.getDrawable(this, R.drawable.rounded_card));
+
+        menuAllTagBadgeAdapter = new BadgeAdapter<>(menuAllTags, position -> {
+            Tag tag = menuAllTags.get(position);
+            if (!menuTags.contains(tag)) {
+                menuTags.add(tag);
+            }
+            menuTagBadgeAdapter.setBadgesList(menuTags);
+            binding.AddItemTagMenu.BackgroundViewTags.setVisibility(View.GONE);
+        }, false, AppCompatResources.getDrawable(this, R.drawable.rounded_card));
+
+        menuAllModifierBadgeAdapter = new BadgeAdapter<>(menuAllModifiers, position -> {
+            Modifier modifier = menuAllModifiers.get(position);
+            if (!menuModifiers.contains(modifier)) {
+                menuModifiers.add(modifier);
+            }
+            menuModifierBadgeAdapter.setBadgesList(menuModifiers);
+            binding.AddItemModifierMenu.BackgroundViewModifiers.setVisibility(View.GONE);
+        }, false, AppCompatResources.getDrawable(this, R.drawable.rounded_card));
+        unsetBackgroundListeners();
+
+        binding.AddItemTagMenu.AddedTags.setAdapter(menuTagBadgeAdapter);
+        binding.AddItemTagMenu.AddedTags.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+
+        binding.AddItemModifierMenu.AddedModifiers.setAdapter(menuModifierBadgeAdapter);
+        binding.AddItemModifierMenu.AddedModifiers.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+
+        binding.AddItemTagMenu.ViewTags.setAdapter(menuAllTagBadgeAdapter);
+        binding.AddItemTagMenu.ViewTags.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+
+        binding.AddItemModifierMenu.ViewModifiers.setAdapter(menuAllModifierBadgeAdapter);
+        binding.AddItemModifierMenu.ViewModifiers.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         setListeners();
     }
 
@@ -106,18 +161,54 @@ public class AddItemActivity extends AppCompatActivity {
             binding.AddItemTagMenu.getRoot().setVisibility(ConstraintLayout.GONE);
             setListeners();
         });
+
+
         setOnClickListener(binding.AddItemTagMenu.TagMenuAddButton, viewAddButton -> {
             binding.AddItemTagMenu.getRoot().setVisibility(ConstraintLayout.GONE);
+            HashMap<Integer, Tag> tagHashMap = new HashMap<>();
+            for (Tag tag : tags) {
+                tagHashMap.put(tag.getId(), tag);
+            }
+            for (Tag tag : menuTags) {
+                tagHashMap.put(tag.getId(), tag);
+            }
+            tags = new ArrayList<Tag>(tagHashMap.values());
+            tagBadgeAdapter.setBadgesList(tags);
+            tagBadgeAdapter.notifyDataSetChanged();
             setListeners();
-            //TODO some action with add tag
         });
+
+
         setOnClickListener(binding.AddItemTagMenu.Background, viewBackground -> {
             binding.AddItemTagMenu.getRoot().setVisibility(ConstraintLayout.GONE);
             setListeners();
         });
 
+        setOnClickListener(binding.AddItemTagMenu.ShowList, viewBackground -> {
+            if (binding.AddItemTagMenu.BackgroundViewTags.getVisibility() == View.GONE) {
+                binding.AddItemTagMenu.BackgroundViewTags.setVisibility(View.VISIBLE);
+                menuAllTagBadgeAdapter.setBadgesList(menuAllTags);
+                menuAllTagBadgeAdapter.notifyDataSetChanged();
+                return;
+            }
+            binding.AddItemTagMenu.BackgroundViewTags.setVisibility(View.GONE);
+        });
+
+        setOnClickListener(binding.AddItemModifierMenu.ShowList, viewBackground -> {
+            if (binding.AddItemModifierMenu.BackgroundViewModifiers.getVisibility() == View.GONE) {
+                binding.AddItemModifierMenu.BackgroundViewModifiers.setVisibility(View.VISIBLE);
+                menuAllModifierBadgeAdapter.setBadgesList(menuAllModifiers);
+                menuAllModifierBadgeAdapter.notifyDataSetChanged();
+                return;
+            }
+            binding.AddItemModifierMenu.BackgroundViewModifiers.setVisibility(View.GONE);
+        });
+
         setOnClickListener(binding.AddItemTagsButton, view -> {
             binding.AddItemTagMenu.getRoot().setVisibility(ConstraintLayout.VISIBLE);
+            menuTags = new ArrayList<>();
+            menuTagBadgeAdapter.setBadgesList(menuTags);
+            menuTagBadgeAdapter.notifyDataSetChanged();
             unsetBackgroundListeners();
         });
 
@@ -127,8 +218,17 @@ public class AddItemActivity extends AppCompatActivity {
         });
         setOnClickListener(binding.AddItemModifierMenu.ModifierMenuAddButton, viewAddButton -> {
             binding.AddItemModifierMenu.getRoot().setVisibility(ConstraintLayout.GONE);
+            HashMap<Integer, Modifier> modifierHashMap = new HashMap<>();
+            for (Modifier modifier : modifiers) {
+                modifierHashMap.put(modifier.getId(), modifier);
+            }
+            for (Modifier modifier : menuModifiers) {
+                modifierHashMap.put(modifier.getId(), modifier);
+            }
+            modifiers = new ArrayList<Modifier>(modifierHashMap.values());
+            modifierBadgeAdapter.setBadgesList(modifiers);
+            modifierBadgeAdapter.notifyDataSetChanged();
             setListeners();
-            //TODO some action with add tag
         });
         setOnClickListener(binding.AddItemModifierMenu.Background, viewBackground -> {
             binding.AddItemModifierMenu.getRoot().setVisibility(ConstraintLayout.GONE);
@@ -137,6 +237,9 @@ public class AddItemActivity extends AppCompatActivity {
 
         setOnClickListener(binding.AddItemModifierButton, view -> {
             binding.AddItemModifierMenu.getRoot().setVisibility(ConstraintLayout.VISIBLE);
+            menuModifiers = new ArrayList<>();
+            menuModifierBadgeAdapter.setBadgesList(menuModifiers);
+            menuModifierBadgeAdapter.notifyDataSetChanged();
             unsetBackgroundListeners();
         });
 

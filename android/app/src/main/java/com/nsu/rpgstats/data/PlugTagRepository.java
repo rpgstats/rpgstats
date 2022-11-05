@@ -26,7 +26,7 @@ public class PlugTagRepository implements TagRepository{
     }
 
     @Override
-    public List<Tag> getTags() {
+    public List<Tag> getTags(int gameSystemId) {
         return new ArrayList<>(tags.values());
     }
 

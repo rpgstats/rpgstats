@@ -6,7 +6,7 @@ import com.nsu.rpgstats.entities.Tag;
 import java.util.List;
 
 public interface TagRepository {
-    List<Tag> getTags();
+    List<Tag> getTags(int gameSystemId);
 
     Tag getTag(int gameSystemId ,int id);
 

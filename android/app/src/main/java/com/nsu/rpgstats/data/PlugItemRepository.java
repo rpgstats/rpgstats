@@ -21,15 +21,15 @@ public class PlugItemRepository implements ItemRepository{
     private void generateItemList() {
         for (int i = 117; i < 123; i++) {
             List<Tag> tags = new ArrayList<>();
-            tags.add(new Tag(i, "tag 1" + i, "Date", false));
-            tags.add(new Tag(i, "tag 2" + i, "Date", false));
-            tags.add(new Tag(i, "tag 3" + i, "Date", false));
-            tags.add(new Tag(i, "tag 4" + i, "Date", false));
+            tags.add(new Tag(0, "tag 1" + i, "Date", false));
+            tags.add(new Tag(1, "tag 2" + i, "Date", false));
+            tags.add(new Tag(2, "tag 3" + i, "Date", false));
+            tags.add(new Tag(3, "tag 4" + i, "Date", false));
             List<Modifier> modifiers = new ArrayList<>();
-            modifiers.add(new Modifier(i, "modifier 1 " + i, "+15 к хп"));
-            modifiers.add(new Modifier(i, "modifier 2 " + i, "+15 к хп"));
-            modifiers.add(new Modifier(i, "modifier 3 " + i, "+15 к хп"));
-            modifiers.add(new Modifier(i, "modifier 4 " + i, "+15 к хп"));
+            modifiers.add(new Modifier(0, "modifier 1 " + i, "+15 к хп"));
+            modifiers.add(new Modifier(1, "modifier 2 " + i, "+15 к хп"));
+            modifiers.add(new Modifier(2, "modifier 3 " + i, "+15 к хп"));
+            modifiers.add(new Modifier(3, "modifier 4 " + i, "+15 к хп"));
             items.put(i, new Item(i, 1337, "item " + i, tags, modifiers, false));
         }
     }

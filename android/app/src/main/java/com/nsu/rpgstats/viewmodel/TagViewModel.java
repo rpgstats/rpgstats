@@ -29,7 +29,7 @@ public class TagViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Tag>> getTags(int gameSystemId) {
-        if (systemTags.containsKey(gameSystemId)) {
+        if (!systemTags.containsKey(gameSystemId)) {
             MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
             systemTags.put(gameSystemId, tags);
             loadTags(gameSystemId);
@@ -38,12 +38,12 @@ public class TagViewModel extends AndroidViewModel {
     }
 
     public void addTag(Tag tag, int gameSystemId) {
-        if (systemTags.containsKey(gameSystemId)) {
+        if (!systemTags.containsKey(gameSystemId)) {
             MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
             systemTags.put(gameSystemId, tags);
             loadTags(gameSystemId);
         }
-        MutableLiveData<List<Tag>> tags = systemTags.get(systemTags);
+        MutableLiveData<List<Tag>> tags = systemTags.get(gameSystemId);
         // todo: find better approach
 
 
@@ -55,12 +55,12 @@ public class TagViewModel extends AndroidViewModel {
     }
 
     public void editTag(Tag tag, int tagId, int gameSystemId) {
-        if (systemTags.containsKey(gameSystemId)) {
+        if (!systemTags.containsKey(gameSystemId)) {
             MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
             systemTags.put(gameSystemId, tags);
             loadTags(gameSystemId);
         }
-        MutableLiveData<List<Tag>> tags = systemTags.get(systemTags);
+        MutableLiveData<List<Tag>> tags = systemTags.get(gameSystemId);
         // todo: find better approach
         tagRepository.editTag(gameSystemId, tagId, tag);
         Tag addedTag = tagRepository.getTag(gameSystemId, tagId);
@@ -76,12 +76,12 @@ public class TagViewModel extends AndroidViewModel {
     }
 
     public void deleteTag(int tagId, int gameSystemId) {
-        if (systemTags.containsKey(gameSystemId)) {
+        if (!systemTags.containsKey(gameSystemId)) {
             MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
             systemTags.put(gameSystemId, tags);
             loadTags(gameSystemId);
         }
-        MutableLiveData<List<Tag>> tags = systemTags.get(systemTags);
+        MutableLiveData<List<Tag>> tags = systemTags.get(gameSystemId);
         // todo: find better approach
         Tag oldTag = tagRepository.getTag(gameSystemId, tagId);
         tagRepository.editTag(gameSystemId, tagId, new Tag(tagId, oldTag.getName(), oldTag.getCreationDate(), true));
@@ -101,6 +101,6 @@ public class TagViewModel extends AndroidViewModel {
     private void loadTags(int gameSystemId) {
         // suppose getting from server in future
         TagRepository tagRepository = new PlugTagRepository();
-        systemTags.get(gameSystemId).setValue(tagRepository.getTags());
+        systemTags.get(gameSystemId).setValue(tagRepository.getTags(gameSystemId));
     }
 }
