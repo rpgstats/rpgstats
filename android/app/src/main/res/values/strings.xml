@@ -26,4 +26,67 @@
     <string name="choose_background_hint">Choose background</string>
     <string name="add_button">Add</string>
     <string name="cannot_create_game">Failed game creation. Empty name</string>
+
+    <!-- item -->
+    <string name="item_list_header">Item list</string>
+    <string name="item_add_item_header">Add item</string>
+    <string name="item_add_item_name">Name</string>
+    <string name="item_add_item_tag">Tags</string>
+    <string name="item_add_item_modifiers">Modifiers</string>
+    <string name="item_add_back_text">Back</string>
+    <string name="item_add_add_text">Add</string>
+    <string name="item_edit_header">Edit item</string>
+    <string name="item_edit_item_name">Name</string>
+    <string name="item_edit_item_tag">Tags</string>
+    <string name="item_edit_item_modifiers">Modifiers</string>
+    <string name="item_edit_back_text">Back</string>
+    <string name="item_edit_edit_text">Edit</string>
+    <string name="item_view_tags_text">Tags</string>
+    <string name="item_view_modifiers_text">Modifiers</string>
+    <string name="item_view_copy_text">Copy</string>
+    <string name="item_view_delete_text">Delete</string>
+    <string name="delete_warning_header">Delete</string>
+    <string name="delete_warning_text">Are you sure you want to delete this item?</string>
+    <string name="delete_warning_yes">Yes</string>
+    <string name="delete_warning_no">No</string>
+    <string name="item_tags_back">Back</string>
+    <string name="item_tags_add">Add</string>
+    <string name="item_tags_header">Add tags</string>
+    <string name="item_tags_tags_text">Tags</string>
+    <string name="item_modifiers_header">Add Modifier</string>
+    <string name="item_modifier_text">Parametrs</string>
+    <string name="item_modifier_back_text">Back</string>
+    <string name="item_modifier_add_text">Add</string>
+
+    <!-- tags -->
+    <string name="tags_tags_list_header">Tag list</string>
+    <string name="tags_add_header">Add tag</string>
+    <string name="tags_add_tag_hint">TagName</string>
+    <string name="tags_add_tag_text">Name</string>
+    <string name="tags_add_back_text">Back</string>
+    <string name="tags_add_add_text">Add</string>
+    <string name="tag_edit_header">Edit tag</string>
+    <string name="tags_edit_tag_text">Name</string>
+    <string name="tags_edit_tag_hint">TagName</string>
+    <string name="tags_edit_back_text">Back</string>
+    <string name="tags_edit_edit_text">Edit</string>
+    <string name="tags_view_info_header">TagName</string>
+    <string name="tags_view_info_text">Created:</string>
+    <string name="tags_view_info_copy_text">Copy</string>
+    <string name="tags_view_info_delete_text">Delete</string>
+    <string name="tags_delete_error">Error</string>
+    <string name="tag_delete_error">Unable to delete tag:</string>
+    <string name="tag_create_error">Error</string>
+    <string name="tags_create_error_text">Unable to create tag</string>
+    <string name="title_activity_add_item">AddItemActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="deleted">deleted</string>
+
 </resources>
