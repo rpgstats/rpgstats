@@ -42,8 +42,9 @@ public class PlugTagRepository implements TagRepository{
     }
 
     @Override
-    public void editTag(int gameSystemId, int id, Tag tag) {
+    public int editTag(int gameSystemId, int id, Tag tag) {
         tags.remove(id);
         tags.put(id, new Tag(id, tag.getName(), tag.getCreationDate(), tag.isDeleted()));
+        return id;
     }
 }

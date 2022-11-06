@@ -1,5 +1,7 @@
 package com.nsu.rpgstats.entities;
 
+import com.nsu.rpgstats.network.DTO.TagDTO;
+
 import java.util.Objects;
 
 public class Tag implements Identifiable{
@@ -13,6 +15,13 @@ public class Tag implements Identifiable{
         this.name = name;
         this.creationDate = creationDate;
         this.isDeleted = isDeleted;
+    }
+
+    public Tag(TagDTO tagDTO) {
+        this.id = tagDTO.getId();
+        this.name = tagDTO.getName();
+        this.creationDate = ""; //уточнить
+        this.isDeleted = false;
     }
 
     public String getCreationDate() {

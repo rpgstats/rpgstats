@@ -12,5 +12,5 @@ public interface TagRepository {
 
     int addTag(int gameSystemId, Tag tag);
 
-    void editTag(int gameSystemId, int id, Tag tag);
+    int editTag(int gameSystemId, int id, Tag tag);
 }

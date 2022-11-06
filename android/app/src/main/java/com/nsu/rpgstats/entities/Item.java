@@ -1,5 +1,9 @@
 package com.nsu.rpgstats.entities;
 
+import com.nsu.rpgstats.data.RestItemRepository;
+import com.nsu.rpgstats.network.DTO.ItemDTO;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,6 +24,23 @@ public class Item {
         this.tags = tags;
         this.modifiers = modifiers;
         this.isDeleted = isDeleted;
+    }
+
+    public Item(ItemDTO itemDTO) {
+        this.id = itemDTO.getId();
+        this.name = itemDTO.getName();
+        this.isDeleted = !itemDTO.getIsPresent();
+        RestItemRepository repository = new RestItemRepository();
+        this.tags = repository.getItemTags(itemDTO.getSystemId(), id);
+        this.modifiers = repository.getItemModifiers(itemDTO.getSystemId(), id);
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public void setModifiers(List<Modifier> modifiers) {
+        this.modifiers = modifiers;
     }
 
     public Integer getId() {
