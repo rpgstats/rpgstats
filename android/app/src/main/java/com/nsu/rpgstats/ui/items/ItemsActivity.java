@@ -35,7 +35,6 @@ public class ItemsActivity extends AppCompatActivity implements ItemsAdapter.OnI
         binding = ActivityItemsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         gameSystemId = ((RpgstatsApplication)getApplication()).appContainer.currentGameSystem.getId();
-        //GameSystemId = Integer.parseInt(getIntent().getStringExtra("id"));
         if (viewModelProvider == null) {
             viewModelProvider = new ViewModelProvider(this);
         }
