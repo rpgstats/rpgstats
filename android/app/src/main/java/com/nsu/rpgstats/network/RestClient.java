@@ -30,6 +30,11 @@ public class RestClient {
     // Если тестируется на телефоне и он подключен к той же сети, что и комп, то
     // нужно здесь указать адрес компа в локалке (его можно найти в ipconfig)
     // подробнее -- https://stackoverflow.com/questions/4779963/how-can-i-access-my-localhost-from-my-android-device
+    private final String BASE_URL = "localhost:8080/";
+    private final RpgstatsService rpgstatsService;
+    private final ItemService itemService;
+    private final TagService tagService;
+    private final ModifierService modifierService;
 
     private final GamesystemsService gamesystemsService;
     private final AuthService authService;
@@ -45,6 +50,18 @@ public class RestClient {
 
     public GamesystemsService getRpgstatsService() {
         return gamesystemsService;
+    }
+
+    public ItemService getItemService() {
+        return itemService;
+    }
+
+    public TagService getTagService() {
+        return tagService;
+    }
+
+    public ModifierService getModifierService() {
+        return modifierService;
     }
 
     private RestClient(String serverAddress) {
@@ -102,6 +119,10 @@ public class RestClient {
                     }
                 });
 
+        rpgstatsService = retrofit.create(RpgstatsService.class);
+        itemService = retrofit.create(ItemService.class);
+        tagService = retrofit.create(TagService.class);
+        modifierService = retrofit.create(ModifierService.class);
     }
 
     private OkHttpClient createOkHttpClient() {

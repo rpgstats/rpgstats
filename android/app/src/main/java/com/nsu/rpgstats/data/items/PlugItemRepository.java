@@ -8,6 +8,7 @@ import com.nsu.rpgstats.entities.Tag;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class PlugItemRepository implements ItemRepository{
@@ -58,10 +59,54 @@ public class PlugItemRepository implements ItemRepository{
     }
 
     @Override
-    public void editItem(int gameSystem, int id, Item item) {
+    public int editItem(int gameSystem, int id, Item item) {
         Item newItem = new Item(id, item.getPictureId(), item.getName(), item.getTags(), item.getModifiers(), item.isDeleted());
         items.remove(id);
         items.put(id, newItem);
+        return id;
+    }
 
+    @Override
+    public List<Tag> getItemTags(int gameSystemId, int itemId) {
+        return items.get(itemId).getTags();
+    }
+
+    @Override
+    public List<Tag> addItemTags(int gameSystemId, int itemId, List<Tag> tags) {
+        Item item = items.get(itemId);
+        List<Tag> tagList = item.getTags();
+        tagList.addAll(tags);
+        HashSet<Tag> set = new HashSet<Tag>(tags);
+        List<Tag> tagSet = new ArrayList<>(set);
+        item.setTags(tagSet);
+        return tagSet;
+    }
+
+    @Override
+    public Tag deleteItemTag(int gameSystemId, int itemId, Tag tag) {
+        items.get(itemId).getTags().remove(tag);
+        return tag;
+    }
+
+    @Override
+    public List<Modifier> getItemModifiers(int gameSystemId, int itemId) {
+        return items.get(itemId).getModifiers();
+    }
+
+    @Override
+    public List<Modifier> addItemModifiers(int gameSystemId, int itemId, List<Modifier> modifiers) {
+        Item item = items.get(itemId);
+        List<Modifier> modifierList = item.getModifiers();
+        modifierList.addAll(modifiers);
+        HashSet<Modifier> set = new HashSet<Modifier>(modifiers);
+        List<Modifier> modifierSet = new ArrayList<>(set);
+        item.setModifiers(modifierSet);
+        return modifierSet;
+    }
+
+    @Override
+    public Modifier deleteItemModifier(int gameSystemId, int itemId, Modifier modifier) {
+        items.get(itemId).getModifiers().remove(modifier);
+        return modifier;
     }
 }

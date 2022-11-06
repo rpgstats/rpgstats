@@ -1,5 +1,7 @@
 package com.nsu.rpgstats.entities;
 
+import com.nsu.rpgstats.network.DTO.ModifierDTO;
+
 import java.util.Objects;
 
 public class Modifier implements Identifiable{
@@ -13,6 +15,13 @@ public class Modifier implements Identifiable{
         this.name = name;
         this.value = value;
         this.parameter = parameter;
+    }
+
+    public  Modifier(ModifierDTO modifierDTO) {
+        this.id = modifierDTO.getId();
+        this.name = modifierDTO.getName();
+        this.value = modifierDTO.getValue().toString();//Todo change
+        //todo parameters
     }
 
     public Integer getId() {

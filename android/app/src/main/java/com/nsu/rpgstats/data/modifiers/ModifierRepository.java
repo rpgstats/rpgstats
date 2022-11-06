@@ -14,5 +14,5 @@ public interface ModifierRepository {
 
     int addModifier(int gameSystem, Modifier modifier);
 
-    void editModifier(int gameSystem, int id, Modifier modifier);
+    int editModifier(int gameSystem, int id, Modifier modifier);
 }
