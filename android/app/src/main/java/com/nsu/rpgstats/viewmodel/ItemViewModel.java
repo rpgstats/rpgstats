@@ -12,7 +12,10 @@ import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.data.ItemRepository;
 import com.nsu.rpgstats.data.PlugItemRepository;
 import com.nsu.rpgstats.entities.Item;
+import com.nsu.rpgstats.entities.Modifier;
+import com.nsu.rpgstats.entities.Tag;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +49,8 @@ public class ItemViewModel extends AndroidViewModel {
         // todo: find better approach
 
         int itemId = itemRepository.addItem(gameSystemId, item);
+        itemRepository.addItemTags(gameSystemId, item.getId(), item.getTags());
+        itemRepository.addItemModifiers(gameSystemId, item.getId(),item.getModifiers());
         Item addedItem = itemRepository.getItem(gameSystemId, itemId);
         items.getValue().add(addedItem);
         items.setValue(items.getValue());
@@ -60,7 +65,26 @@ public class ItemViewModel extends AndroidViewModel {
         }
         MutableLiveData<List<Item>> items = systemItems.get(gameSystemId);
         // todo: find better approach
+
+        Item oldItem = itemRepository.getItem(gameSystemId ,itemId);
+        List<Tag> addedTags = new ArrayList<>(item.getTags());
+        addedTags.removeAll(oldItem.getTags());
+        List<Tag> deletedTags = new ArrayList<>(oldItem.getTags());
+        deletedTags.retainAll(item.getTags());
+        List<Modifier> addedModifier = new ArrayList<>(item.getModifiers());
+        addedTags.removeAll(oldItem.getTags());
+        List<Modifier> deletedModifier = new ArrayList<>(oldItem.getModifiers());
+        deletedTags.retainAll(item.getTags());
         itemRepository.editItem(gameSystemId, itemId, item);
+        itemRepository.addItemTags(gameSystemId, itemId, addedTags);
+        for (Tag tag: deletedTags) {
+            itemRepository.deleteItemTag(gameSystemId, itemId, tag);
+        }
+        itemRepository.addItemModifiers(gameSystemId, itemId, addedModifier);
+        for (Modifier modifier: deletedModifier) {
+            itemRepository.deleteItemModifier(gameSystemId, itemId, modifier);
+        }
+
         Item addedItem = itemRepository.getItem(gameSystemId ,itemId);
         for (int i = 0; i < items.getValue().size(); ++i) {
             if (items.getValue().get(i).getId() == itemId) {
