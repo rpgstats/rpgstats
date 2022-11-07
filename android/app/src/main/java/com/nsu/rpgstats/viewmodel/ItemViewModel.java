@@ -21,36 +21,40 @@ import java.util.List;
 import java.util.Map;
 
 public class ItemViewModel extends AndroidViewModel {
-    private Map<Integer, MutableLiveData<List<Item>>> systemItems;
+    private MutableLiveData<List<Item>> systemItems;
     private final ItemRepository itemRepository;
 
     public ItemViewModel(@NonNull Application application) {
         super(application);
-        systemItems = new HashMap<>();
-        itemRepository = ((RpgstatsApplication)getApplication()).appContainer.itemRepository;
+        systemItems = new MutableLiveData<>();
+        itemRepository = ((RpgstatsApplication)getApplication()).appContainer.itemRepository;        // suppose getting from server in future
+        Log.e("ItemViewModel", "new instance");
     }
 
     public LiveData<List<Item>> getItems(int gameSystemId) {
-        if (!systemItems.containsKey(gameSystemId)) {
-            MutableLiveData<List<Item>> items = new MutableLiveData<>();
-            systemItems.put(gameSystemId, items);
+        if (systemItems.getValue() == null) {
+            systemItems.setValue(new ArrayList<>());
             loadItems(gameSystemId);
         }
-        return systemItems.get(gameSystemId);
+        return systemItems;
+    }
+
+    public LiveData<List<Item>> getLiveDataItems() {
+        systemItems.setValue(new ArrayList<>());
+        return systemItems;
     }
 
     public void addItem(Item item, int gameSystemId) {
-        if (!systemItems.containsKey(gameSystemId)) {
-            MutableLiveData<List<Item>> items = new MutableLiveData<>();
-            systemItems.put(gameSystemId, items);
+        if (systemItems.getValue() == null) {
+            systemItems.setValue(new ArrayList<>());
             loadItems(gameSystemId);
         }
-        MutableLiveData<List<Item>> items = systemItems.get(gameSystemId);
+        MutableLiveData<List<Item>> items = systemItems;
         // todo: find better approach
 
         int itemId = itemRepository.addItem(gameSystemId, item);
-        itemRepository.addItemTags(gameSystemId, item.getId(), item.getTags());
-        itemRepository.addItemModifiers(gameSystemId, item.getId(),item.getModifiers());
+        itemRepository.addItemTags(gameSystemId, itemId, item.getTags());
+        itemRepository.addItemModifiers(gameSystemId, itemId,item.getModifiers());
         Item addedItem = itemRepository.getItem(gameSystemId, itemId);
         items.getValue().add(addedItem);
         items.setValue(items.getValue());
@@ -58,34 +62,39 @@ public class ItemViewModel extends AndroidViewModel {
     }
 
     public void editItem(Item item, int itemId, int gameSystemId) {
-        if (!systemItems.containsKey(gameSystemId)) {
-            MutableLiveData<List<Item>> items = new MutableLiveData<>();
-            systemItems.put(gameSystemId, items);
+        if (systemItems.getValue() == null) {
+            systemItems.setValue(new ArrayList<>());
             loadItems(gameSystemId);
         }
-        MutableLiveData<List<Item>> items = systemItems.get(gameSystemId);
+        MutableLiveData<List<Item>> items = systemItems;
         // todo: find better approach
 
         Item oldItem = itemRepository.getItem(gameSystemId ,itemId);
         List<Tag> addedTags = new ArrayList<>(item.getTags());
         addedTags.removeAll(oldItem.getTags());
+
         List<Tag> deletedTags = new ArrayList<>(oldItem.getTags());
-        deletedTags.retainAll(item.getTags());
+        deletedTags.removeAll(item.getTags());
+
+
         List<Modifier> addedModifier = new ArrayList<>(item.getModifiers());
-        addedTags.removeAll(oldItem.getTags());
+        addedModifier.removeAll(oldItem.getModifiers());
         List<Modifier> deletedModifier = new ArrayList<>(oldItem.getModifiers());
-        deletedTags.retainAll(item.getTags());
+        deletedModifier.retainAll(item.getModifiers());
         itemRepository.editItem(gameSystemId, itemId, item);
+
         itemRepository.addItemTags(gameSystemId, itemId, addedTags);
         for (Tag tag: deletedTags) {
             itemRepository.deleteItemTag(gameSystemId, itemId, tag);
         }
+
         itemRepository.addItemModifiers(gameSystemId, itemId, addedModifier);
         for (Modifier modifier: deletedModifier) {
             itemRepository.deleteItemModifier(gameSystemId, itemId, modifier);
         }
 
         Item addedItem = itemRepository.getItem(gameSystemId ,itemId);
+
         for (int i = 0; i < items.getValue().size(); ++i) {
             if (items.getValue().get(i).getId() == itemId) {
                 items.getValue().remove(i);
@@ -98,12 +107,11 @@ public class ItemViewModel extends AndroidViewModel {
     }
 
     public void deleteItem(int itemId, int gameSystemId) {
-        if (!systemItems.containsKey(gameSystemId)) {
-            MutableLiveData<List<Item>> items = new MutableLiveData<>();
-            systemItems.put(gameSystemId, items);
+        if (systemItems.getValue() == null) {
+            systemItems.setValue(new ArrayList<>());
             loadItems(gameSystemId);
         }
-        MutableLiveData<List<Item>> items = systemItems.get(gameSystemId);
+        MutableLiveData<List<Item>> items = systemItems;
         // todo: find better approach
         Item oldItem = itemRepository.getItem(gameSystemId ,itemId);
         itemRepository.editItem(gameSystemId, itemId, new Item(oldItem.getId(), oldItem.getPictureId(), oldItem.getName(), oldItem.getTags(), oldItem.getModifiers(), true));
@@ -122,9 +130,8 @@ public class ItemViewModel extends AndroidViewModel {
 
 
 
-    private void loadItems(int gameSystemId) {
-        // suppose getting from server in future
-        ItemRepository itemRepository = new PlugItemRepository();
-        systemItems.get(gameSystemId).setValue(itemRepository.getItems(gameSystemId));
+    public void loadItems(int gameSystemId) {
+        Log.e("ItemViewModel", "loading data");
+        systemItems.setValue(itemRepository.getItems(gameSystemId));
     }
 }

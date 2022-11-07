@@ -29,7 +29,7 @@ public class TagInfoViewModel extends ViewModel {
         return tag;
     }
 
-    private void loadItem() {
+    public void loadItem() {
         tag.setValue(repository.getTag(gameSystemId, tagId));
     }
 }

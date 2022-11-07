@@ -14,36 +14,40 @@ import com.nsu.rpgstats.data.TagRepository;
 import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.entities.Tag;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TagViewModel extends AndroidViewModel {
-    private final Map<Integer, MutableLiveData<List<Tag>>> systemTags;
+    private final MutableLiveData<List<Tag>> systemTags;
     private final TagRepository tagRepository;
 
     public TagViewModel(@NonNull Application application) {
         super(application);
-        systemTags = new HashMap<>();
-        tagRepository = ((RpgstatsApplication) getApplication()).appContainer.tagRepository;
+        systemTags = new MutableLiveData<>();
+        tagRepository = ((RpgstatsApplication) getApplication()).appContainer.tagRepository;        // suppose getting from server in future
     }
 
     public LiveData<List<Tag>> getTags(int gameSystemId) {
-        if (!systemTags.containsKey(gameSystemId)) {
-            MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
-            systemTags.put(gameSystemId, tags);
+        if (systemTags.getValue() == null) {
+            systemTags.setValue(new ArrayList<>());
             loadTags(gameSystemId);
         }
-        return systemTags.get(gameSystemId);
+        return systemTags;
+    }
+
+    public LiveData<List<Tag>> getLiveDataTags() {
+        systemTags.setValue(new ArrayList<>());
+        return systemTags;
     }
 
     public void addTag(Tag tag, int gameSystemId) {
-        if (!systemTags.containsKey(gameSystemId)) {
-            MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
-            systemTags.put(gameSystemId, tags);
+        if (systemTags.getValue() == null) {
+            systemTags.setValue(new ArrayList<>());
             loadTags(gameSystemId);
         }
-        MutableLiveData<List<Tag>> tags = systemTags.get(gameSystemId);
+        MutableLiveData<List<Tag>> tags = systemTags;
         // todo: find better approach
 
 
@@ -55,12 +59,11 @@ public class TagViewModel extends AndroidViewModel {
     }
 
     public void editTag(Tag tag, int tagId, int gameSystemId) {
-        if (!systemTags.containsKey(gameSystemId)) {
-            MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
-            systemTags.put(gameSystemId, tags);
+        if (systemTags.getValue() == null) {
+            systemTags.setValue(new ArrayList<>());
             loadTags(gameSystemId);
         }
-        MutableLiveData<List<Tag>> tags = systemTags.get(gameSystemId);
+        MutableLiveData<List<Tag>> tags = systemTags;
         // todo: find better approach
         tagRepository.editTag(gameSystemId, tagId, tag);
         Tag addedTag = tagRepository.getTag(gameSystemId, tagId);
@@ -76,12 +79,11 @@ public class TagViewModel extends AndroidViewModel {
     }
 
     public void deleteTag(int tagId, int gameSystemId) {
-        if (!systemTags.containsKey(gameSystemId)) {
-            MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
-            systemTags.put(gameSystemId, tags);
+        if (systemTags.getValue() == null) {
+            systemTags.setValue(new ArrayList<>());
             loadTags(gameSystemId);
         }
-        MutableLiveData<List<Tag>> tags = systemTags.get(gameSystemId);
+        MutableLiveData<List<Tag>> tags = systemTags;
         // todo: find better approach
         Tag oldTag = tagRepository.getTag(gameSystemId, tagId);
         tagRepository.editTag(gameSystemId, tagId, new Tag(tagId, oldTag.getName(), oldTag.getCreationDate(), true));
@@ -98,9 +100,8 @@ public class TagViewModel extends AndroidViewModel {
         Log.e("DELETE TAG", "successfully deleted tag");
     }
 
-    private void loadTags(int gameSystemId) {
-        // suppose getting from server in future
-        TagRepository tagRepository = new PlugTagRepository();
-        systemTags.get(gameSystemId).setValue(tagRepository.getTags(gameSystemId));
+    public void loadTags(int gameSystemId) {
+
+        systemTags.setValue(tagRepository.getTags(gameSystemId));
     }
 }

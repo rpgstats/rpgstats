@@ -3,6 +3,7 @@ package com.nsu.rpgstats.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -26,7 +27,7 @@ public class TagsActivity extends AppCompatActivity implements TagsAdapter.OnTag
     private List<Tag> mTagList;
     private TagsAdapter mTagsAdapter;
     private Integer gameSystemId;
-    public static ViewModelProvider viewModelProvider;
+    private TagViewModel tagViewModel;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +35,12 @@ public class TagsActivity extends AppCompatActivity implements TagsAdapter.OnTag
         setContentView(binding.getRoot());
 
         gameSystemId = ((RpgstatsApplication)getApplication()).appContainer.currentGameSystem.getId();
-        if (viewModelProvider == null) {
-            viewModelProvider = new ViewModelProvider(this);
+        if (savedInstanceState == null) {
+            tagViewModel = new ViewModelProvider(this).get(TagViewModel.class);
         }
-        TagViewModel tagViewModel = viewModelProvider.get(TagViewModel.class);
         mTagList = tagViewModel.getTags(gameSystemId).getValue();
         tagViewModel.getTags(gameSystemId).observe(this, tags -> {
-            mTagsAdapter.setTagList(mTagList);
+            mTagsAdapter.setTagList(tags);
         });
 
         RecyclerView recyclerView = binding.TagsActivityTags;
@@ -49,6 +49,12 @@ public class TagsActivity extends AppCompatActivity implements TagsAdapter.OnTag
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         setListeners();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        tagViewModel.loadTags(gameSystemId);
     }
 
     private void setOnClickCreateActivity(View button, Class<?> activityClass) {

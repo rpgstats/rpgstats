@@ -1,5 +1,7 @@
 package com.nsu.rpgstats.data;
 
+import android.util.Log;
+
 import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.entities.Modifier;
 import com.nsu.rpgstats.entities.Tag;
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 public class PlugItemRepository implements ItemRepository{
     private final HashMap<Integer, Item> items;
@@ -78,7 +81,12 @@ public class PlugItemRepository implements ItemRepository{
 
     @Override
     public Tag deleteItemTag(int gameSystemId, int itemId, Tag tag) {
-        items.get(itemId).getTags().remove(tag);
+        List<Tag> itemTags = items.get(itemId).getTags();
+        for (Tag tagIterator : itemTags) {
+            if (Objects.equals(tagIterator.getId(), tag.getId())) {
+                itemTags.remove(tagIterator);
+            }
+        }
         return tag;
     }
 
@@ -100,7 +108,12 @@ public class PlugItemRepository implements ItemRepository{
 
     @Override
     public Modifier deleteItemModifier(int gameSystemId, int itemId, Modifier modifier) {
-        items.get(itemId).getModifiers().remove(modifier);
+        List<Modifier> itemModifiers = items.get(itemId).getModifiers();
+        for (Modifier tagIterator : itemModifiers) {
+            if (Objects.equals(tagIterator.getId(), modifier.getId())) {
+                itemModifiers.remove(tagIterator);
+            }
+        }
         return modifier;
     }
 }

@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -64,8 +65,8 @@ public class EditItemActivity extends AppCompatActivity {
         assert item != null;
         binding.EditItemNameInput.setText(item.getName());
 
-        tags = item.getTags();
-        modifiers = item.getModifiers();
+        tags = new ArrayList<>(item.getTags());
+        modifiers = new ArrayList<>(item.getModifiers());
 
         tagBadgeAdapter = new BadgeAdapter<>(tags, position -> {
             tags.remove(position);
@@ -182,7 +183,7 @@ public class EditItemActivity extends AppCompatActivity {
             finish();
         });
         setOnClickListener(binding.EditItemEditButton, view -> {
-            ItemViewModel itemViewModel = ItemsActivity.viewModelProvider.get(ItemViewModel.class);
+            ItemViewModel itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
             Item newItem = new Item(itemId, item.getPictureId(), binding.EditItemNameInput.getText().toString(), tags, modifiers, item.isDeleted());
             itemViewModel.editItem(newItem, itemId, gameSystemId);
 

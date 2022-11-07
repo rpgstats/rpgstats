@@ -3,6 +3,7 @@ package com.nsu.rpgstats.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -26,21 +27,22 @@ public class ItemsActivity extends AppCompatActivity implements ItemsAdapter.OnI
     private List<Item> mItemList;
     private ItemsAdapter mItemsAdapter;
     private Integer gameSystemId;
-    static public ViewModelProvider viewModelProvider;
+    private ItemViewModel itemViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.e("ItemActivity", "onCreate");
         super.onCreate(savedInstanceState);
         binding = ActivityItemsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         gameSystemId = ((RpgstatsApplication)getApplication()).appContainer.currentGameSystem.getId();
-        if (viewModelProvider == null) {
-            viewModelProvider = new ViewModelProvider(this);
+        if (savedInstanceState == null) {
+            itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
         }
-        ItemViewModel itemViewModel = viewModelProvider.get(ItemViewModel.class);
         mItemList = itemViewModel.getItems(gameSystemId).getValue();
         itemViewModel.getItems(gameSystemId).observe(this, items -> {
-            mItemsAdapter.setItemList(mItemList);
+            Log.e("observer", "set list " + items.toString());
+            mItemsAdapter.setItemList(items);
         });
 
         RecyclerView recyclerView = binding.ItemList.recyclerVIew;
@@ -49,6 +51,15 @@ public class ItemsActivity extends AppCompatActivity implements ItemsAdapter.OnI
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         setListeners();
+    }
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("ItemActivity", "onStart");
+        itemViewModel.loadItems(gameSystemId);
     }
 
     private void setOnClickCreateActivity(View button, Class<?> activityClass) {

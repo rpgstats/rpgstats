@@ -5,6 +5,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,29 +25,37 @@ public class ViewTagInfoActivity extends AppCompatActivity {
     private Integer gameSystemId;
     private Integer tagId;
     private Tag tag;
+    private TagInfoViewModel tagInfoViewModel;
     protected ActivityResultLauncher<Intent> activityLauncher;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode() == RESULT_OK) {
-                TagInfoViewModel tagInfoViewModel = new TagInfoViewModel(gameSystemId, tagId, ((RpgstatsApplication)getApplication()).appContainer.tagRepository);
-                tag = tagInfoViewModel.getItemInfo().getValue();
-                binding.ViewTagHeader.setText(tag.getName());
-                binding.CreationTagDate.setText(tag.getCreationDate());
-            }
-        });
         binding = ActivityViewTagInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
         tagId = Integer.parseInt(getIntent().getStringExtra("id"));
-        TagInfoViewModel tagInfoViewModel = new TagInfoViewModel(gameSystemId, tagId, ((RpgstatsApplication)getApplication()).appContainer.tagRepository);
+        tagInfoViewModel = new TagInfoViewModel(gameSystemId, tagId, ((RpgstatsApplication)getApplication()).appContainer.tagRepository);
         tag = tagInfoViewModel.getItemInfo().getValue();
+        tagInfoViewModel.getItemInfo().observe(this, result -> {
+            binding.ViewTagHeader.setText(result.getName());
+            binding.CreationTagDate.setText(result.getCreationDate());
+        });
         binding.ViewTagHeader.setText(tag.getName());
         binding.CreationTagDate.setText(tag.getCreationDate());
 
+        activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK) {
+                tagInfoViewModel.loadItem();
+            }
+        });
         setListeners();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        tagInfoViewModel.loadItem();
     }
 
     private void setOnClickCreateActivity(View button, Class<?> activityClass) {
@@ -87,7 +96,7 @@ public class ViewTagInfoActivity extends AppCompatActivity {
         });
         setOnClickListener(binding.ViewTagDeleteWarning.DeleteYesButton, view -> {
             //TODO check tag entry
-            TagsActivity.viewModelProvider.get(TagViewModel.class).deleteTag(tagId, gameSystemId);
+            new ViewModelProvider(this).get(TagViewModel.class).deleteTag(tagId, gameSystemId);
 
             Intent intent = new Intent();
             setResult(Activity.RESULT_OK, intent);

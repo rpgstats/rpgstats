@@ -2,6 +2,7 @@ package com.nsu.rpgstats.ui;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -66,7 +67,7 @@ public class EditTagsActivity extends AppCompatActivity {
         });
         setOnClickListener(binding.EditTagEditButton, view -> {
             Tag newTag = new Tag(tagId, binding.EditTagInputName.getText().toString(), tag.getCreationDate(), tag.isDeleted());
-            TagsActivity.viewModelProvider.get(TagViewModel.class).editTag(newTag, tagId, gameSystemId);
+            new ViewModelProvider(this).get(TagViewModel.class).editTag(newTag, tagId, gameSystemId);
 
             Intent intent = new Intent();
             setResult(Activity.RESULT_OK, intent);

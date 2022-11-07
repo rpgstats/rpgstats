@@ -5,6 +5,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
@@ -31,6 +32,7 @@ public class ViewItemInfoActivity extends AppCompatActivity {
     private Integer itemId;
     private Integer gameSystemId;
     private Item item;
+    private ItemInfoViewModel viewModel;
     ArrayAdapter<Tag> tagAdapter;
     ArrayAdapter<Modifier> modifierAdapter;
     protected ActivityResultLauncher<Intent> activityLauncher;
@@ -38,24 +40,31 @@ public class ViewItemInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if (result.getResultCode() == RESULT_OK) {
-                ItemInfoViewModel viewModel = new ItemInfoViewModel(gameSystemId ,itemId, ((RpgstatsApplication) getApplication()).appContainer.itemRepository);
-                item = viewModel.getItemInfo().getValue();
-                setInfo();
-            }
-        });
         binding = ActivityViewItemInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         itemId = Integer.parseInt(getIntent().getStringExtra("id"));
         gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
 
-        ItemInfoViewModel viewModel = new ItemInfoViewModel(gameSystemId ,itemId, ((RpgstatsApplication) getApplication()).appContainer.itemRepository);
+        viewModel = new ItemInfoViewModel(gameSystemId ,itemId, ((RpgstatsApplication) getApplication()).appContainer.itemRepository);
+        viewModel.getItemInfo().observe(this, result -> {
+            tagAdapter.notifyDataSetChanged();
+            modifierAdapter.notifyDataSetChanged();
+        });
         item = viewModel.getItemInfo().getValue();
-
+        activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK) {
+                viewModel.loadItem();
+            }
+        });
 
         setInfo();
         setListeners();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        viewModel.loadItem();
     }
 
     private void setInfo() {
@@ -114,7 +123,7 @@ public class ViewItemInfoActivity extends AppCompatActivity {
         });
 
         setOnClickListener(binding.DeleteOverlay.DeleteYesButton, view -> {
-            ItemViewModel itemViewModel = ItemsActivity.viewModelProvider.get(ItemViewModel.class);
+            ItemViewModel itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
             itemViewModel.deleteItem(itemId, gameSystemId);
             Intent intent = new Intent();
             setResult(Activity.RESULT_OK, intent);
