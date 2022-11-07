@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -152,7 +153,7 @@ public class AddItemActivity extends AppCompatActivity {
         });
         setOnClickListener(binding.AddItemAddButton, view -> {
             Item item = new Item(0, 1337, binding.AddItemNameInput.getText().toString(), tags, modifiers, false);
-            ItemViewModel itemViewModel = ItemsActivity.viewModelProvider.get(ItemViewModel.class);
+            ItemViewModel itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
             itemViewModel.addItem(item, gameSystemId);
 
             Intent intent = new Intent();

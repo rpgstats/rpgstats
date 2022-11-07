@@ -2,6 +2,7 @@ package com.nsu.rpgstats.ui.tags;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -59,7 +60,7 @@ public class AddTagsActivity extends AppCompatActivity {
         });
         setOnClickListener(binding.AddTagAddButton, view -> {
             Tag newTag = new Tag(0, binding.AddTagInputName.getText().toString(), new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(new Date()), false);
-            TagsActivity.viewModelProvider.get(TagViewModel.class).addTag(newTag, gameSystemId);
+            new ViewModelProvider(this).get(TagViewModel.class).addTag(newTag, gameSystemId);
 
             Intent intent = new Intent();
             setResult(Activity.RESULT_OK, intent);

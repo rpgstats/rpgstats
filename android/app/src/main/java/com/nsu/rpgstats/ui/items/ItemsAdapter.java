@@ -67,6 +67,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsHolder>
                 }
 
             });
+            Log.e("adapter",mItemList.toString());
+            Log.e("adapter",itemList.toString());
             mItemList = itemList;
             Log.e("result", String.valueOf(result));
             result.dispatchUpdatesTo(this);

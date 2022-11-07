@@ -27,7 +27,7 @@ public class ItemInfoViewModel extends ViewModel {
         return item;
     }
 
-    private void loadItem() {
+    public void loadItem() {
         item.setValue(repository.getItem(gameSystemId, itemId));
     }
 
