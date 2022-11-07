@@ -1,7 +1,17 @@
 services:
+  db:
+    image: 'postgres:14-alpine'
+    container_name: db-container
+    ports:
+      - 5432:5432/tcp
+    environment:
+      POSTGRES_USER: compose-postgres
+      POSTGRES_PASSWORD: compose-postgres
+      POSTGRES_DB: rpgstats
   backend:
-    image: 'rpgstats/backend:latest'
-    build: ./backend/
+    build:
+      context: ./backend/
+    entrypoint: "java -jar /usr/local/lib/rpgstats.jar"
     depends_on:
       - db
     ports :
@@ -13,12 +23,3 @@ services:
       SPRING_DATASOURCE_USERNAME: compose-postgres
       SPRING_DATASOURCE_PASSWORD: compose-postgres
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
-  db:
-    image: 'postgres:14-alpine'
-    container_name: db-container
-    ports:
-      - 5432:5432/tcp
-    environment:
-      POSTGRES_USER: compose-postgres
-      POSTGRES_PASSWORD: compose-postgres
-      POSTGRES_DB: rpgstats
