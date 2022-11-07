@@ -80,8 +80,7 @@ public class ItemViewModel extends AndroidViewModel {
         List<Modifier> addedModifier = new ArrayList<>(item.getModifiers());
         addedModifier.removeAll(oldItem.getModifiers());
         List<Modifier> deletedModifier = new ArrayList<>(oldItem.getModifiers());
-        deletedModifier.retainAll(item.getModifiers());
-        itemRepository.editItem(gameSystemId, itemId, item);
+        deletedModifier.removeAll(item.getModifiers());
 
         itemRepository.addItemTags(gameSystemId, itemId, addedTags);
         for (Tag tag: deletedTags) {
@@ -92,6 +91,8 @@ public class ItemViewModel extends AndroidViewModel {
         for (Modifier modifier: deletedModifier) {
             itemRepository.deleteItemModifier(gameSystemId, itemId, modifier);
         }
+
+        itemRepository.editItem(gameSystemId, itemId, item);
 
         Item addedItem = itemRepository.getItem(gameSystemId ,itemId);
 

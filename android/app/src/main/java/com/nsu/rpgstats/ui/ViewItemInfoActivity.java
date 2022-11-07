@@ -47,8 +47,8 @@ public class ViewItemInfoActivity extends AppCompatActivity {
 
         viewModel = new ItemInfoViewModel(gameSystemId ,itemId, ((RpgstatsApplication) getApplication()).appContainer.itemRepository);
         viewModel.getItemInfo().observe(this, result -> {
-            tagAdapter.notifyDataSetChanged();
-            modifierAdapter.notifyDataSetChanged();
+            item = result;
+            setInfo();//todo do with love and result
         });
         item = viewModel.getItemInfo().getValue();
         activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
