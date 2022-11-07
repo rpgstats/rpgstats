@@ -49,6 +49,8 @@ public class EditItemActivity extends AppCompatActivity {
     BadgeAdapter<Tag> menuAllTagBadgeAdapter;
     BadgeAdapter<Modifier> menuAllModifierBadgeAdapter;
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

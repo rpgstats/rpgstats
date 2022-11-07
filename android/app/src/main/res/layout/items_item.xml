@@ -46,22 +46,25 @@
 
             <androidx.constraintlayout.helper.widget.Flow
                 android:id="@+id/flowTags"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:foregroundGravity="left"
                 android:orientation="horizontal"
+                app:flow_firstHorizontalBias="0"
+                app:flow_firstVerticalBias="0"
                 app:flow_horizontalAlign="start"
                 app:flow_horizontalGap="4dp"
                 app:flow_horizontalStyle="packed"
-                app:flow_verticalAlign="baseline"
+                app:flow_verticalAlign="center"
                 app:flow_verticalGap="4dp"
                 app:flow_wrapMode="aligned"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/DeletedLabel"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/EditItemNameInput"
-                app:layout_constraintTop_toBottomOf="@+id/EditItemNameInput" />
+                app:layout_constraintTop_toBottomOf="@+id/EditItemNameInput"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/DeletedLabel"

@@ -63,8 +63,7 @@ public class PlugItemRepository implements ItemRepository{
 
     @Override
     public int editItem(int gameSystem, int id, Item item) {
-        Item newItem = new Item(id, item.getPictureId(), item.getName(), item.getTags(), item.getModifiers(), item.isDeleted());
-        items.remove(id);
+        Item newItem = new Item(id, item.getPictureId(), item.getName(), items.get(id).getTags(), items.get(id).getModifiers(), item.isDeleted());
         items.put(id, newItem);
         return id;
     }
@@ -79,20 +78,18 @@ public class PlugItemRepository implements ItemRepository{
         Item item = items.get(itemId);
         List<Tag> tagList = item.getTags();
         tagList.addAll(tags);
-        HashSet<Tag> set = new HashSet<Tag>(tags);
-        List<Tag> tagSet = new ArrayList<>(set);
-        item.setTags(tagSet);
+        HashMap<Integer, Tag> set = new HashMap<>();
+        for (Tag tag : tagList) {
+            set.put(tag.getId(), tag);
+        }
+        List<Tag> tagSet = new ArrayList<>(set.values());
+        items.get(itemId).setTags(tagSet);
         return tagSet;
     }
 
     @Override
     public Tag deleteItemTag(int gameSystemId, int itemId, Tag tag) {
-        List<Tag> itemTags = items.get(itemId).getTags();
-        for (Tag tagIterator : itemTags) {
-            if (Objects.equals(tagIterator.getId(), tag.getId())) {
-                itemTags.remove(tagIterator);
-            }
-        }
+        items.get(itemId).getTags().remove(tag);
         return tag;
     }
 
@@ -106,20 +103,18 @@ public class PlugItemRepository implements ItemRepository{
         Item item = items.get(itemId);
         List<Modifier> modifierList = item.getModifiers();
         modifierList.addAll(modifiers);
-        HashSet<Modifier> set = new HashSet<Modifier>(modifiers);
-        List<Modifier> modifierSet = new ArrayList<>(set);
-        item.setModifiers(modifierSet);
+        HashMap<Integer, Modifier> set = new HashMap<>();
+        for (Modifier modifier : modifierList) {
+            set.put(modifier.getId(), modifier);
+        }
+        List<Modifier> modifierSet = new ArrayList<>(set.values());
+        items.get(itemId).setModifiers(modifierSet);
         return modifierSet;
     }
 
     @Override
     public Modifier deleteItemModifier(int gameSystemId, int itemId, Modifier modifier) {
-        List<Modifier> itemModifiers = items.get(itemId).getModifiers();
-        for (Modifier tagIterator : itemModifiers) {
-            if (Objects.equals(tagIterator.getId(), modifier.getId())) {
-                itemModifiers.remove(tagIterator);
-            }
-        }
+        items.get(itemId).getModifiers().remove(modifier);
         return modifier;
     }
 }
