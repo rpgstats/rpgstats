@@ -45,7 +45,7 @@ public class ParameterManageActivity extends AppCompatActivity {
             Integer min = Integer.valueOf(minInput.getText().toString());
             Integer max = Integer.valueOf(maxInput.getText().toString());
 
-            //Parameter newParam = new Parameter(name, new Date(), min, max);
+            Parameter newParam = new Parameter(name, new Date(), min, max);
 
             if (mode.equals(ParameterManageActivity.MODE_ADD)) {
                 // TODO: send parameter as a new one

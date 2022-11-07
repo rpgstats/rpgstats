@@ -1,23 +1,15 @@
 package com.nsu.rpgstats.entities;
 
-import java.util.List;
-
-public class Property implements Identifiable {
-    private Integer id;
+public class Property {
     private String name;
     private Boolean isDeleted;
-    private List<Modifier> modifiers;
-    private List<Constraint> constraints;
 
     public Property() {
     }
 
-    public Property(Integer id, String name, Boolean isDeleted, List<Modifier> modifiers, List<Constraint> constraints) {
-        this.id = id;
+    public Property(String name, Boolean isDeleted) {
         this.name = name;
         this.isDeleted = isDeleted;
-        this.modifiers = modifiers;
-        this.constraints = constraints;
     }
 
     public String getName() {
@@ -34,30 +26,5 @@ public class Property implements Identifiable {
 
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
-    }
-
-    public List<Modifier> getModifiers() {
-        return modifiers;
-    }
-
-    public void setModifiers(List<Modifier> modifiers) {
-        this.modifiers = modifiers;
-    }
-
-    public List<Constraint> getConstraints() {
-        return constraints;
-    }
-
-    public void setConstraints(List<Constraint> constraints) {
-        this.constraints = constraints;
-    }
-
-    @Override
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 }

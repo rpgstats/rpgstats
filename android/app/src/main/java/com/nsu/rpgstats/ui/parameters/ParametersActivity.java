@@ -10,14 +10,12 @@ import android.widget.SimpleAdapter;
 import androidx.annotation.Nullable;
 
 import com.nsu.rpgstats.R;
-import com.nsu.rpgstats.RpgstatsApplication;
-import com.nsu.rpgstats.data.ParameterRepository;
 import com.nsu.rpgstats.databinding.ActivityParametersBinding;
 import com.nsu.rpgstats.entities.Parameter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class ParametersActivity extends Activity {
     ActivityParametersBinding binding;
@@ -27,9 +25,18 @@ public class ParametersActivity extends Activity {
         binding = ActivityParametersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        ParameterRepository parameterRepository = ((RpgstatsApplication) getApplication()).appContainer.parameterRepository;
+        // TODO: get these values from server
+        final Parameter[] params = new Parameter[] {
+                new Parameter("Attack", new Date(), 0, 993),
+                new Parameter("Health points", new Date(), 1, 994),
+                new Parameter("Mana points", new Date(), 2, 995),
+                new Parameter("Defense", new Date(), 3, 996),
+                new Parameter("Strength", new Date(), 4, 997),
+                new Parameter("Agility", new Date(), 5, 998),
+                new Parameter("Intelligence", new Date(), 6, 999)
+        };
 
-        fillParamList(parameterRepository.getParameters(0));
+        fillParamList(params);
 
         ImageButton addParameter = findViewById(R.id.addParameterButton);
         addParameter.setOnClickListener(view -> {
@@ -39,7 +46,7 @@ public class ParametersActivity extends Activity {
         });
     }
 
-    private void fillParamList(List<Parameter> params) {
+    private void fillParamList(Parameter[] params) {
         ListView listView = findViewById(R.id.paramListView);
         final ArrayList<HashMap<String, String>> paramNameDate = new ArrayList<>();
         HashMap<String, String> map;
@@ -60,10 +67,10 @@ public class ParametersActivity extends Activity {
         listView.setOnItemClickListener((parent, itemClicked, position, id) -> {
             Intent i = new Intent(ParametersActivity.this, ParameterDetailsActivity.class);
             Bundle b = new Bundle();
-            b.putString("name", params.get((int) id).getName());
-            b.putString("date", params.get((int) id).getCreatedAt().toString());
-            b.putInt("min", params.get((int) id).getMin());
-            b.putInt("max", params.get((int) id).getMax());
+            b.putString("name", params[(int) id].getName());
+            b.putString("date", params[(int) id].getCreatedAt().toString());
+            b.putInt("min", params[(int) id].getMin());
+            b.putInt("max", params[(int) id].getMax());
             i.putExtras(b);
             startActivity(i);
         });

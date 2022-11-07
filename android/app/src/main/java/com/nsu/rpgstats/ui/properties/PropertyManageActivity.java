@@ -39,7 +39,7 @@ public class PropertyManageActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(view -> {
             String name = nameInput.getText().toString();
 
-            //Property newProp = new Property(name, false);
+            Property newProp = new Property(name, false);
 
             if (mode.equals(PropertyManageActivity.MODE_ADD)) {
                 // TODO: send Property as a new one

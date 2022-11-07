@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivityItemsBinding;
 import com.nsu.rpgstats.entities.Item;
-import com.nsu.rpgstats.ui.parameters.ParametersActivity;
-import com.nsu.rpgstats.ui.properties.PropertiesActivity;
 import com.nsu.rpgstats.viewmodel.ItemViewModel;
 
 import java.util.ArrayList;
