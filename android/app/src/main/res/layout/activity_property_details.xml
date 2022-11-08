@@ -17,6 +17,7 @@
         android:text="@string/property_name" />
 
     <LinearLayout
+        android:id="@+id/property_details_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:text="@string/modifiers"
-            android:clickable="true"
+            android:clickable="false"
             android:focusable="true" />
 
         <ListView
@@ -40,10 +41,10 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:text="@string/constraints"
-            android:clickable="true"
+            android:clickable="false"
             android:focusable="true" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <ListView
             android:id="@+id/property_constraints_list"
             android:layout_width="wrap_content"
             android:layout_height="150dp"/>

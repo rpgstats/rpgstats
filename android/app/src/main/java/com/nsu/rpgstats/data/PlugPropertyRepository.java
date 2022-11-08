@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class PlugPropertyRepository implements PropertyRepository {
-    private HashMap<Integer, Property> properties;
+    private final HashMap<Integer, Property> properties;
     private Integer currentId;
 
     public PlugPropertyRepository() {
@@ -28,13 +28,13 @@ public class PlugPropertyRepository implements PropertyRepository {
             List<Constraint> constraints = new ArrayList<>();
             for (int j = 0; j < 4; ++j) {
                 List<Tag> tags = new ArrayList<>();
-                tags.add(new Tag(i + 1000 * j, "tag " + (i + 1000 * j),
+                tags.add(new Tag(i+1000*j, "tag " + (i+1000*j),
                         new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(new Date()), false));
-                tags.add(new Tag(i + 1000 * j + 1, "tag " + (i + 1000 * j + 1),
+                tags.add(new Tag(i+1000*j+1, "tag " + (i+1000*j+1),
                         new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(new Date()), false));
-                tags.add(new Tag(i + 1000 * j + 2, "tag " + (i + 1000 * j + 2),
+                tags.add(new Tag(i+1000*j+2, "tag " + (i+1000*j+2),
                         new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(new Date()), false));
-                constraints.add(new Constraint(i * 10 + j, (i%2==0), tags));
+                constraints.add(new Constraint(i*10+j, "Constraint " + i*10+j, (i%2==0), tags));
             }
             List<Modifier> modifiers = new ArrayList<>();
             modifiers.add(new Modifier(1, "Attack up 1_" + i, i,

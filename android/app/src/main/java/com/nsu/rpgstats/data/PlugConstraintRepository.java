@@ -24,7 +24,7 @@ public class PlugConstraintRepository implements ConstraintRepository{
             tags.add(new Tag(1, "tag 2" + i, "Date", false));
             tags.add(new Tag(2, "tag 3" + i, "Date", false));
             tags.add(new Tag(3, "tag 4" + i, "Date", false));
-            constraints.put(i, new Constraint(i, (i%2==0), tags));
+            constraints.put(i, new Constraint(i, "Constraint " + i, (i%2==0), tags));
         }
     }
 
@@ -40,14 +40,14 @@ public class PlugConstraintRepository implements ConstraintRepository{
 
     @Override
     public int addConstraint(int gameSystem, Constraint constraint) {
-        Constraint c = new Constraint(constraint.getId(), constraint.getBlackList(), constraint.getTags());
+        Constraint c = new Constraint(constraint.getId(), constraint.getName(), constraint.getBlackList(), constraint.getTags());
         constraints.put(currentId, c);
         return currentId++;
     }
 
     @Override
     public void editConstraint(int gameSystem, int id, Constraint constraint) {
-        Constraint c = new Constraint(constraint.getId(), constraint.getBlackList(), constraint.getTags());
+        Constraint c = new Constraint(constraint.getId(), constraint.getName(), constraint.getBlackList(), constraint.getTags());
         constraints.remove(id);
         constraints.put(id, c);
     }
