@@ -15,6 +15,8 @@ import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivityAddTagsBinding;
 import com.nsu.rpgstats.databinding.ActivityViewTagInfoBinding;
 import com.nsu.rpgstats.entities.Tag;
+import com.nsu.rpgstats.ui.parameters.ParametersActivity;
+import com.nsu.rpgstats.ui.properties.PropertiesActivity;
 import com.nsu.rpgstats.viewmodel.ItemInfoViewModel;
 import com.nsu.rpgstats.viewmodel.TagInfoViewModel;
 import com.nsu.rpgstats.viewmodel.TagViewModel;

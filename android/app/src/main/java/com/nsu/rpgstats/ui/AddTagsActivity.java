@@ -10,6 +10,8 @@ import android.view.View;
 
 import com.nsu.rpgstats.databinding.ActivityAddTagsBinding;
 import com.nsu.rpgstats.entities.Tag;
+import com.nsu.rpgstats.ui.parameters.ParametersActivity;
+import com.nsu.rpgstats.ui.properties.PropertiesActivity;
 import com.nsu.rpgstats.viewmodel.TagViewModel;
 
 import java.text.SimpleDateFormat;

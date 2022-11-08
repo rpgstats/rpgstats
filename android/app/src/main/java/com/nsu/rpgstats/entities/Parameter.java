@@ -2,13 +2,15 @@ package com.nsu.rpgstats.entities;
 
 import java.util.Date;
 
-public class Parameter {
+public class Parameter implements Identifiable {
+    private Integer id;
     private String name;
     private Date createdAt;
     private Integer min;
     private Integer max;
 
-    public Parameter(String name, Date createdAt, Integer min, Integer max) {
+    public Parameter(Integer id, String name, Date createdAt, Integer min, Integer max) {
+        this.id = id;
         this.name = name;
         this.createdAt = createdAt;
         this.min = min;
@@ -45,5 +47,10 @@ public class Parameter {
 
     public void setMax(Integer max) {
         this.max = max;
+    }
+
+    @Override
+    public Integer getId() {
+        return null;
     }
 }

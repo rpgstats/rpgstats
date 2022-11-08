@@ -5,12 +5,14 @@ import java.util.Objects;
 public class Modifier implements Identifiable{
     private Integer id;
     private String name;
-    private String value;
+    private Integer value;
+    private Parameter parameter;
 
-    public Modifier(Integer id, String name, String value) {
+    public Modifier(Integer id, String name, Integer value, Parameter parameter) {
         this.id = id;
         this.name = name;
         this.value = value;
+        this.parameter = parameter;
     }
 
     public Integer getId() {
@@ -21,8 +23,28 @@ public class Modifier implements Identifiable{
         return name;
     }
 
-    public String getValue() {
+    public Integer getValue() {
         return value;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+
+    public Parameter getParameter() {
+        return parameter;
+    }
+
+    public void setParameter(Parameter parameter) {
+        this.parameter = parameter;
     }
 
     @Override
