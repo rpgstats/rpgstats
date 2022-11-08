@@ -40,6 +40,7 @@ public class TagsActivity extends AppCompatActivity implements TagsAdapter.OnTag
         }
         mTagList = tagViewModel.getTags(gameSystemId).getValue();
         tagViewModel.getTags(gameSystemId).observe(this, tags -> {
+            mTagList = tags;
             mTagsAdapter.setTagList(tags);
         });
 

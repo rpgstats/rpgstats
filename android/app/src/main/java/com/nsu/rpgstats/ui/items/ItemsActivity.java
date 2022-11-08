@@ -43,6 +43,7 @@ public class ItemsActivity extends AppCompatActivity implements ItemsAdapter.OnI
         mItemList = itemViewModel.getItems(gameSystemId).getValue();
         itemViewModel.getItems(gameSystemId).observe(this, items -> {
             Log.e("observer", "set list " + items.toString());
+            mItemList = items;
             mItemsAdapter.setItemList(items);
         });
 
