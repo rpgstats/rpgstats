@@ -11,7 +11,6 @@ services:
   backend:
     build:
       context: ./backend/
-    entrypoint: "java -jar /usr/local/lib/rpgstats.jar"
     depends_on:
       - db
     ports :
