@@ -1,5 +1,6 @@
 package com.nsu.rpgstats.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Property implements Identifiable {
@@ -10,6 +11,16 @@ public class Property implements Identifiable {
     private List<Constraint> constraints;
 
     public Property() {
+    }
+
+    public Property(Property p) {
+        id = p.id;
+        name = p.name;
+        isDeleted = p.isDeleted;
+        modifiers = new ArrayList<>();
+        modifiers.addAll(p.modifiers);
+        constraints = new ArrayList<>();
+        constraints.addAll(p.constraints);
     }
 
     public Property(Integer id, String name, Boolean isDeleted, List<Modifier> modifiers, List<Constraint> constraints) {

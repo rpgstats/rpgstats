@@ -24,6 +24,28 @@
         android:autofillHints="@string/property_name"
         android:inputType="text" />
 
+    <ListView
+        android:id="@+id/property_manage_modifiers_list"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
+    <Button
+        android:id="@+id/add_modifier_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_modifier" />
+
+    <ListView
+        android:id="@+id/property_manage_constraints_list"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
+    <Button
+        android:id="@+id/add_constraint_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_constraint" />
+
     <Button
         android:id="@+id/confirmAddPropertyButton"
         android:layout_width="match_parent"

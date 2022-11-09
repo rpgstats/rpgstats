@@ -112,5 +112,7 @@
     <string name="modifiers">Modifiers</string>
     <string name="constraints">Constraints</string>
     <string name="constraint_name">Constraint name</string>
+    <string name="add_modifier">Add modifier</string>
+    <string name="add_constraint">Add constraint</string>
 
 </resources>
