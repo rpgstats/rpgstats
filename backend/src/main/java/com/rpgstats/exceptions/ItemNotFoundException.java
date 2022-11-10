@@ -1,6 +1,4 @@
-package com.rpgstats.messages;
-
-import com.rpgstats.exceptions.ModelException;
+package com.rpgstats.exceptions;
 
 public class ItemNotFoundException extends ModelException {
     public ItemNotFoundException(String message) {

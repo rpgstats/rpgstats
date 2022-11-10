@@ -1,10 +1,10 @@
 package com.rpgstats.services;
 
 import com.rpgstats.entity.GameSystem;
-import com.rpgstats.messages.GameSystemDto;
+import com.rpgstats.messages.DTO.GameSystemDto;
 import com.rpgstats.messages.GameSystemPostRequest;
 import com.rpgstats.messages.GameSystemPutRequest;
-import com.rpgstats.messages.ItemNotFoundException;
+import com.rpgstats.exceptions.ItemNotFoundException;
 import com.rpgstats.repositories.SystemRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -39,14 +39,16 @@ public class GameSystemService {
 
     @Transactional
     public GameSystemDto getSystemById(Integer id) {
-        return modelMapper.map(systemRepository.findById(id).orElseThrow(), GameSystemDto.class);
+        return modelMapper.map(systemRepository.findById(id).orElseThrow(() -> new ItemNotFoundException("System not found by id - " + id)), GameSystemDto.class);
     }
 
     @Transactional
     public GameSystemDto createSystem(Integer userId, GameSystemPostRequest postRequest) {
         GameSystem gameSystem = modelMapper.map(postRequest, GameSystem.class);
         gameSystem.setCreatedAt(Instant.now());
-        gameSystem.setParentGameSystem(systemRepository.findById(postRequest.getParentSystem()).orElseThrow(() -> new ItemNotFoundException("Parent system not found with id - " + postRequest.getParentSystem())));
+        if (postRequest.getParentSystem() != null) {
+            gameSystem.setParentGameSystem(systemRepository.findById(postRequest.getParentSystem()).orElseThrow(() -> new ItemNotFoundException("Parent system not found with id - " + postRequest.getParentSystem())));
+        }
         gameSystem.setOwner(userService.getUserById(userId));
         systemRepository.save(gameSystem);
         return modelMapper.map(gameSystem, GameSystemDto.class);
@@ -69,6 +71,10 @@ public class GameSystemService {
     public void deleteSystem(Integer userId, Integer systemId) {
         GameSystem gameSystem = systemRepository.findByIdAndOwner_Id(systemId, userId).orElseThrow(() -> new ItemNotFoundException("System not found by id - " + systemId));
         systemRepository.delete(gameSystem);
+    }
 
+    protected GameSystem findByIdAndOwnerId(Integer id, Integer ownerId) {
+        return systemRepository.findByIdAndOwner_Id(id, ownerId).
+                orElseThrow(() -> new ItemNotFoundException(String.format("No system with id - %d for user with id - %d", id, ownerId)));
     }
 }

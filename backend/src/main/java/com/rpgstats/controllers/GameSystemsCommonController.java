@@ -1,7 +1,10 @@
 package com.rpgstats.controllers;
 
-import com.rpgstats.messages.GameSystemDto;
+import com.rpgstats.messages.DTO.GameSystemDto;
 import com.rpgstats.services.GameSystemService;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +23,7 @@ public class GameSystemsCommonController {
         return gameSystemService.getSystemsByName(name);
     }
 
+    @Parameters(@Parameter(name = "ownerId",required = true,in = ParameterIn.QUERY))
     @GetMapping(params = {"ownerId"})
     public List<GameSystemDto> getSystemsByOwnerId(@RequestParam Integer ownerId) {
         return gameSystemService.getSystemsByOwnerId(ownerId);

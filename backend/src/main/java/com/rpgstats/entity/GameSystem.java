@@ -32,7 +32,7 @@ public class GameSystem {
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_system_id")
     private GameSystem parentGameSystem;
 

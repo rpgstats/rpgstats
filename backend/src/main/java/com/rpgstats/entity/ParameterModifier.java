@@ -26,9 +26,4 @@ public class ParameterModifier {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "parameter_id", nullable = false)
     private SystemParameter parameter;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "system_id", nullable = false)
-    private GameSystem gameSystem;
-
 }

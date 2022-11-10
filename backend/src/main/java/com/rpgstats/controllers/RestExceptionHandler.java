@@ -5,7 +5,7 @@ import com.rpgstats.exceptions.ModelException;
 
 import com.rpgstats.exceptions.ConflictDataException;
 import com.rpgstats.messages.ErrorResponse;
-import com.rpgstats.messages.ItemNotFoundException;
+import com.rpgstats.exceptions.ItemNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
