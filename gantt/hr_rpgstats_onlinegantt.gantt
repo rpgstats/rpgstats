@@ -96,8 +96,8 @@
       "TaskID": 2,
       "TaskName": "Iteration 1: System",
       "StartDate": "2022-10-06T01:00:00.000Z",
-      "EndDate": "2022-11-06T10:00:00.000Z",
-      "Duration": 32,
+      "EndDate": "2022-11-12T10:00:00.000Z",
+      "Duration": 38,
       "Progress": 0,
       "Predecessor": null,
       "resources": [
@@ -168,8 +168,8 @@
           "TaskID": 14,
           "TaskName": "Мокапы: управление предметами тегами",
           "StartDate": "2022-10-14T01:00:00.000Z",
-          "EndDate": "2022-10-21T10:00:00.000Z",
-          "Duration": 8,
+          "EndDate": "2022-10-27T10:00:00.000Z",
+          "Duration": 14,
           "Progress": 0,
           "Predecessor": "13FS",
           "resources": [
@@ -186,8 +186,8 @@
           "TaskID": 22,
           "TaskName": "Мокапы: управление параметрами и свойствами",
           "StartDate": "2022-10-14T01:00:00.000Z",
-          "EndDate": "2022-10-21T10:00:00.000Z",
-          "Duration": 8,
+          "EndDate": "2022-10-27T10:00:00.000Z",
+          "Duration": 14,
           "Progress": 0,
           "Predecessor": "13FS",
           "resources": [
@@ -222,8 +222,8 @@
         {
           "TaskID": 15,
           "TaskName": "Callbacks: управление предметами и тегами",
-          "StartDate": "2022-10-24T01:00:00.000Z",
-          "EndDate": "2022-10-31T10:00:00.000Z",
+          "StartDate": "2022-10-30T01:00:00.000Z",
+          "EndDate": "2022-11-06T10:00:00.000Z",
           "Duration": 8,
           "Progress": 0,
           "Predecessor": "11FS+2 days,14FS+2 days",
@@ -240,8 +240,8 @@
         {
           "TaskID": 27,
           "TaskName": "Callbacks: управление параметрами и свойствами",
-          "StartDate": "2022-10-24T01:00:00.000Z",
-          "EndDate": "2022-10-31T10:00:00.000Z",
+          "StartDate": "2022-10-30T01:00:00.000Z",
+          "EndDate": "2022-11-06T10:00:00.000Z",
           "Duration": 8,
           "Progress": 0,
           "Predecessor": "22FS+2 days,11FS+2 days",
@@ -258,8 +258,8 @@
         {
           "TaskID": 29,
           "TaskName": "Интеграция сервера: система",
-          "StartDate": "2022-11-03T01:00:00.000Z",
-          "EndDate": "2022-11-06T10:00:00.000Z",
+          "StartDate": "2022-11-09T01:00:00.000Z",
+          "EndDate": "2022-11-12T10:00:00.000Z",
           "Duration": 4,
           "Progress": 0,
           "Predecessor": "16SS",
@@ -276,8 +276,8 @@
         {
           "TaskID": 16,
           "TaskName": "Интеграция фронта: система",
-          "StartDate": "2022-11-03T01:00:00.000Z",
-          "EndDate": "2022-11-06T10:00:00.000Z",
+          "StartDate": "2022-11-09T01:00:00.000Z",
+          "EndDate": "2022-11-12T10:00:00.000Z",
           "Duration": 4,
           "Progress": 0,
           "Predecessor": "20FS+2 days,15FS+2 days,26FS+2 days,27FS+2 days,21FS+2 days",
@@ -294,8 +294,8 @@
         {
           "TaskID": 17,
           "TaskName": "Интеграция: тестирование",
-          "StartDate": "2022-11-03T01:00:00.000Z",
-          "EndDate": "2022-11-06T10:00:00.000Z",
+          "StartDate": "2022-11-09T01:00:00.000Z",
+          "EndDate": "2022-11-12T10:00:00.000Z",
           "Duration": 4,
           "Progress": 0,
           "Predecessor": "16SS",
@@ -349,8 +349,8 @@
           "TaskID": 20,
           "TaskName": "Server: предметы и теги",
           "StartDate": "2022-10-19T01:00:00.000Z",
-          "EndDate": "2022-10-27T10:00:00.000Z",
-          "Duration": 9,
+          "EndDate": "2022-11-05T10:00:00.000Z",
+          "Duration": 18,
           "Progress": 0,
           "Predecessor": "19FS,11FS+2 days",
           "resources": [
@@ -367,8 +367,8 @@
           "TaskID": 21,
           "TaskName": "Server: системы и параметры",
           "StartDate": "2022-10-19T01:00:00.000Z",
-          "EndDate": "2022-10-27T10:00:00.000Z",
-          "Duration": 9,
+          "EndDate": "2022-11-05T10:00:00.000Z",
+          "Duration": 18,
           "Progress": 0,
           "Predecessor": "11FS+2 days",
           "resources": [
@@ -404,9 +404,9 @@
         {
           "TaskID": 30,
           "TaskName": "Описание API и Entities: Игрок",
-          "StartDate": "2022-10-27T01:00:00.000Z",
-          "EndDate": "2022-11-04T10:00:00.000Z",
-          "Duration": 9,
+          "StartDate": "2022-10-31T01:00:00.000Z",
+          "EndDate": "2022-11-12T10:00:00.000Z",
+          "Duration": 13,
           "Progress": 0,
           "Predecessor": "",
           "resources": [
@@ -423,10 +423,10 @@
           "TaskID": 32,
           "TaskName": "Доанализ требований: Игрок",
           "StartDate": "2022-10-27T01:00:00.000Z",
-          "EndDate": "2022-11-04T10:00:00.000Z",
-          "Duration": 9,
+          "EndDate": "2022-11-12T10:00:00.000Z",
+          "Duration": 17,
           "Progress": 0,
-          "Predecessor": "30SS",
+          "Predecessor": "",
           "resources": [
             {
               "resourceId": "Analyst+Devops",
@@ -440,9 +440,9 @@
         {
           "TaskID": 33,
           "TaskName": "Проектирование мокапов для управления персонажем",
-          "StartDate": "2022-11-03T01:00:00.000Z",
-          "EndDate": "2022-11-08T10:00:00.000Z",
-          "Duration": 6,
+          "StartDate": "2022-10-29T01:00:00.000Z",
+          "EndDate": "2022-11-06T10:00:00.000Z",
+          "Duration": 9,
           "Progress": 0,
           "Predecessor": "",
           "resources": [
@@ -458,9 +458,9 @@
         {
           "TaskID": 34,
           "TaskName": "Мокапы: персонаж",
-          "StartDate": "2022-11-11T01:00:00.000Z",
-          "EndDate": "2022-11-15T10:00:00.000Z",
-          "Duration": 5,
+          "StartDate": "2022-11-13T01:00:00.000Z",
+          "EndDate": "2022-11-19T10:00:00.000Z",
+          "Duration": 7,
           "Progress": 0,
           "Predecessor": "33FS+2 days,16FS",
           "resources": [
@@ -476,9 +476,9 @@
         {
           "TaskID": 36,
           "TaskName": "Мокапы: снаряжение",
-          "StartDate": "2022-11-11T01:00:00.000Z",
-          "EndDate": "2022-11-15T10:00:00.000Z",
-          "Duration": 5,
+          "StartDate": "2022-11-13T01:00:00.000Z",
+          "EndDate": "2022-11-19T10:00:00.000Z",
+          "Duration": 7,
           "Progress": 0,
           "Predecessor": "33FS+2 days,16FS",
           "resources": [
@@ -494,9 +494,9 @@
         {
           "TaskID": 35,
           "TaskName": "Мокапы: аккаунт",
-          "StartDate": "2022-11-11T01:00:00.000Z",
-          "EndDate": "2022-11-15T10:00:00.000Z",
-          "Duration": 5,
+          "StartDate": "2022-11-13T01:00:00.000Z",
+          "EndDate": "2022-11-19T10:00:00.000Z",
+          "Duration": 7,
           "Progress": 0,
           "Predecessor": "33FS+2 days,16FS",
           "resources": [
@@ -512,9 +512,9 @@
         {
           "TaskID": 40,
           "TaskName": "Callbacks: персонаж",
-          "StartDate": "2022-11-17T01:00:00.000Z",
-          "EndDate": "2022-11-22T10:00:00.000Z",
-          "Duration": 6,
+          "StartDate": "2022-11-21T01:00:00.000Z",
+          "EndDate": "2022-11-24T10:00:00.000Z",
+          "Duration": 4,
           "Progress": 0,
           "Predecessor": "34FS+1 day",
           "resources": [
@@ -530,9 +530,9 @@
         {
           "TaskID": 39,
           "TaskName": "Callbacks: снаряжение",
-          "StartDate": "2022-11-17T01:00:00.000Z",
-          "EndDate": "2022-11-22T10:00:00.000Z",
-          "Duration": 6,
+          "StartDate": "2022-11-21T01:00:00.000Z",
+          "EndDate": "2022-11-24T10:00:00.000Z",
+          "Duration": 4,
           "Progress": 0,
           "Predecessor": "36FS+1 day",
           "resources": [
@@ -548,9 +548,9 @@
         {
           "TaskID": 38,
           "TaskName": "Calbacks: аккаунт",
-          "StartDate": "2022-11-17T01:00:00.000Z",
-          "EndDate": "2022-11-22T10:00:00.000Z",
-          "Duration": 6,
+          "StartDate": "2022-11-21T01:00:00.000Z",
+          "EndDate": "2022-11-24T10:00:00.000Z",
+          "Duration": 4,
           "Progress": 0,
           "Predecessor": "35FS+1 day",
           "resources": [
@@ -566,8 +566,8 @@
         {
           "TaskID": 43,
           "TaskName": "Интеграция сервера: игрок",
-          "StartDate": "2022-11-25T01:00:00.000Z",
-          "EndDate": "2022-11-28T10:00:00.000Z",
+          "StartDate": "2022-11-27T01:00:00.000Z",
+          "EndDate": "2022-11-30T10:00:00.000Z",
           "Duration": 4,
           "Progress": 0,
           "Predecessor": "42SS",
@@ -584,8 +584,8 @@
         {
           "TaskID": 42,
           "TaskName": "Интеграция фронта: игрок",
-          "StartDate": "2022-11-25T01:00:00.000Z",
-          "EndDate": "2022-11-28T10:00:00.000Z",
+          "StartDate": "2022-11-27T01:00:00.000Z",
+          "EndDate": "2022-11-30T10:00:00.000Z",
           "Duration": 4,
           "Progress": 0,
           "Predecessor": "40FS+2 days,39FS+2 days,38FS+2 days,45FS,44FS",
@@ -602,8 +602,8 @@
         {
           "TaskID": 41,
           "TaskName": "Интеграция: тестирование",
-          "StartDate": "2022-11-25T01:00:00.000Z",
-          "EndDate": "2022-11-28T10:00:00.000Z",
+          "StartDate": "2022-11-27T01:00:00.000Z",
+          "EndDate": "2022-11-30T10:00:00.000Z",
           "Duration": 4,
           "Progress": 0,
           "Predecessor": "42SS",
@@ -620,8 +620,8 @@
         {
           "TaskID": 45,
           "TaskName": "Server: Игрок и снаряжение",
-          "StartDate": "2022-11-05T01:00:00.000Z",
-          "EndDate": "2022-11-18T10:00:00.000Z",
+          "StartDate": "2022-11-13T01:00:00.000Z",
+          "EndDate": "2022-11-26T10:00:00.000Z",
           "Duration": 14,
           "Progress": 0,
           "Predecessor": "30FS",
@@ -638,8 +638,8 @@
         {
           "TaskID": 44,
           "TaskName": "Server: аккаунт и поиск",
-          "StartDate": "2022-11-05T01:00:00.000Z",
-          "EndDate": "2022-11-18T10:00:00.000Z",
+          "StartDate": "2022-11-13T01:00:00.000Z",
+          "EndDate": "2022-11-26T10:00:00.000Z",
           "Duration": 14,
           "Progress": 0,
           "Predecessor": "30FS",
