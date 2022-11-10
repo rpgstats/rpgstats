@@ -12,9 +12,9 @@
         android:id="@+id/propHead"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="@dimen/header_text_size"
         android:gravity="center"
-        android:text="@string/add_new_property" />
+        android:text="@string/property_add_new" />
 
     <EditText
         android:id="@+id/newPropName"
@@ -27,7 +27,7 @@
     <ListView
         android:id="@+id/property_manage_modifiers_list"
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="@dimen/details_list_height"/>
 
     <Button
         android:id="@+id/add_modifier_button"
@@ -38,7 +38,7 @@
     <ListView
         android:id="@+id/property_manage_constraints_list"
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="@dimen/details_list_height"/>
 
     <Button
         android:id="@+id/add_constraint_button"
@@ -50,6 +50,6 @@
         android:id="@+id/confirmAddPropertyButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/confirm" />
+        android:text="@string/parameter_confirm" />
 
 </LinearLayout>

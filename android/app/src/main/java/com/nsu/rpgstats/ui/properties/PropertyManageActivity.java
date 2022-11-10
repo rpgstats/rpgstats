@@ -2,8 +2,6 @@ package com.nsu.rpgstats.ui.properties;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,7 +55,7 @@ public class PropertyManageActivity extends AppCompatActivity {
             // Copy that will be changed in 'edit'
             property = new Property(p);
             TextView head = findViewById(R.id.propHead);
-            head.setText(R.string.edit_property);
+            head.setText(R.string.property_edit);
             nameInput.setText(property.getName());
         }
 

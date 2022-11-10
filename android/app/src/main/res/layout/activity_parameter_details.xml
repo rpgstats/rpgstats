@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="24sp"
+        android:textSize="@dimen/header_text_size"
         android:text="@string/parameter_details" />
 
     <TextView
@@ -25,33 +25,33 @@
         android:id="@+id/createdAt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/created_at" />
+        android:text="@string/parameter_created_at" />
 
     <TextView
         android:id="@+id/minValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/min_value" />
+        android:text="@string/parameter_min_value" />
 
     <TextView
         android:id="@+id/maxValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/max_value" />
+        android:text="@string/parameter_max_value" />
 
     <Button
         android:id="@+id/paramEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/edit"
-        android:textSize="18sp"
+        android:text="@string/parameter_edit_button_text"
+        android:textSize="@dimen/button_text_size"
         />
 
     <Button
         android:id="@+id/paramDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/delete"
-        android:textSize="18sp"
+        android:text="@string/parameter_delete_button_text"
+        android:textSize="@dimen/button_text_size"
         />
 </LinearLayout>

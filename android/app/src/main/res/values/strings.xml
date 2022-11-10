@@ -26,27 +26,29 @@
     <string name="choose_background_hint">Choose background</string>
     <string name="add_button">Add</string>
     <string name="cannot_create_game">Failed game creation. Empty name</string>
+
+    <!-- parameter -->
     <string name="title_activity_parameter_details">ParameterDetailsActivity</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="edit_parameter_head">Edit parameter</string>
-    <string name="add_new_parameter">Add new parameter</string>
+    <string name="parameter_edit_header">Edit parameter</string>
+    <string name="parameter_add_new">Add new parameter</string>
     <string name="parameter_name">Parameter name</string>
-    <string name="min_value">Min value</string>
-    <string name="max_value">Max value</string>
-    <string name="confirm">Confirm</string>
+    <string name="parameter_min_value">Min value</string>
+    <string name="parameter_max_value">Max value</string>
+    <string name="parameter_confirm">Confirm</string>
     <string name="parameter_details">Parameter details</string>
-    <string name="created_at">Created at</string>
-    <string name="edit">Edit</string>
-    <string name="delete">Delete</string>
-    <string name="manage_parameters">Manage parameters</string>
-    <string name="add">Add</string>
+    <string name="parameter_created_at">Created at</string>
+    <string name="parameter_edit_button_text">Edit</string>
+    <string name="parameter_delete_button_text">Delete</string>
+    <string name="parameter_manage">Manage parameters</string>
+    <string name="parameter_add_button_text">New parameter</string>
+
+    <!-- property -->
     <string name="property_details">Property details</string>
     <string name="property_name">Property name</string>
-    <string name="is_deleted">Is deleted</string>
-    <string name="add_new_property">Add new property</string>
-    <string name="edit_property">Edit property</string>
-    <string name="manage_properties">Manage properties</string>
+    <string name="property_is_deleted">Is deleted</string>
+    <string name="property_add_new">New property</string>
+    <string name="property_edit">Edit property</string>
+    <string name="property_manage">Manage properties</string>
 
     <!-- item -->
     <string name="item_list_header">Item list</string>

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="24sp"
+        android:textSize="@dimen/header_text_size"
         android:text="@string/property_name" />
 
     <LinearLayout
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="@dimen/subheader_text_size"
             android:text="@string/modifiers"
             android:clickable="false"
             android:focusable="true" />
@@ -34,12 +34,12 @@
         <ListView
             android:id="@+id/property_modifiers_list"
             android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+            android:layout_height="@dimen/details_list_height"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="@dimen/subheader_text_size"
             android:text="@string/constraints"
             android:clickable="false"
             android:focusable="true" />
@@ -47,14 +47,14 @@
         <ListView
             android:id="@+id/property_constraints_list"
             android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+            android:layout_height="@dimen/details_list_height"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/propEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/edit"
+        android:text="@string/parameter_edit_button_text"
         android:textSize="18sp"
         />
 
@@ -62,7 +62,7 @@
         android:id="@+id/propDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/delete"
+        android:text="@string/parameter_delete_button_text"
         android:textSize="18sp"
         />
 </LinearLayout>

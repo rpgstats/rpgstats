@@ -3,7 +3,7 @@ package com.nsu.rpgstats.ui.parameters;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -31,7 +31,7 @@ public class ParametersActivity extends Activity {
 
         fillParamList(parameterRepository.getParameters(0));
 
-        ImageButton addParameter = findViewById(R.id.addParameterButton);
+        Button addParameter = findViewById(R.id.addParameterButton);
         addParameter.setOnClickListener(view -> {
             Intent i = new Intent(this, ParameterManageActivity.class);
             i.putExtra("Mode", ParameterManageActivity.MODE_ADD);

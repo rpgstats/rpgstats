@@ -10,21 +10,19 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="@string/manage_parameters"
-        android:textSize="32sp" />
+        android:layout_height="wrap_content"
+        android:text="@string/parameter_manage"
+        android:textSize="@dimen/header_text_size" />
 
     <ListView
         android:id="@+id/paramListView"
-        android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/big_list_height"
         android:layout_gravity="center_vertical" />
 
-    <ImageButton
+    <Button
         android:id="@+id/addParameterButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/text_margin"
-        android:src="@drawable/plus_sign"
-        android:contentDescription="@string/add" />
+        android:text="@string/parameter_add_button_text" />
 </LinearLayout>

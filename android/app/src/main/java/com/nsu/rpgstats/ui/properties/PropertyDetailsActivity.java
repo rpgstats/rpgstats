@@ -38,7 +38,7 @@ public class PropertyDetailsActivity extends AppCompatActivity {
         // Get property from repository by id that is in extra of intent
         property = propRepo.getProperty(0, getIntent().getExtras().getInt("id"));
 
-        // Local function to do all work with content of activity
+        // Local function to do all work with contents of activity
         setAllContent();
     }
 
@@ -92,10 +92,5 @@ public class PropertyDetailsActivity extends AppCompatActivity {
     private void setConstraintsList() {
         ListView constrs = findViewById(R.id.property_constraints_list);
         constrs.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, property.getConstraints()));
-
-        // Useless piece of shit
-//        RecyclerView constraintsRecView = findViewById(R.id.property_constraints_list);
-//        PropertyConstraintsAdapter adapter = new PropertyConstraintsAdapter(property.getConstraints());
-//        constraintsRecView.setAdapter(adapter);
     }
 }
