@@ -9,11 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.databinding.ActivityParameterManageBinding;
+import com.nsu.rpgstats.ui.ManageFormMode;
 
 public class ParameterManageActivity extends AppCompatActivity {
-    public static Integer MODE_ADD = 1;
-    public static Integer MODE_EDIT = 2;
-
     ActivityParameterManageBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +25,9 @@ public class ParameterManageActivity extends AppCompatActivity {
         EditText maxInput = findViewById(R.id.newParamMax);
 
         Bundle b = getIntent().getExtras();
-        Integer mode = b.getInt("Mode");
+        String mode = b.getString("Mode");
 
-        if (mode.equals(ParameterManageActivity.MODE_EDIT)) {
+        if (mode.equals(ManageFormMode.EDIT.name())) {
             TextView head = findViewById(R.id.paramHead);
             head.setText(R.string.parameter_edit_header);
             nameInput.setText(b.getString("name"));
@@ -44,10 +42,10 @@ public class ParameterManageActivity extends AppCompatActivity {
 
             //Parameter newParam = new Parameter(name, new Date(), min, max);
 
-            if (mode.equals(ParameterManageActivity.MODE_ADD)) {
+            if (mode.equals(ManageFormMode.ADD.name())) {
                 // TODO: send parameter as a new one
             }
-            if (mode.equals(ParameterManageActivity.MODE_EDIT)) {
+            if (mode.equals(ManageFormMode.EDIT.name())) {
                 // TODO: send parameter as the changed one
             }
         });

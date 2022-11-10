@@ -20,13 +20,12 @@ import com.nsu.rpgstats.databinding.ActivityPropertyManageBinding;
 import com.nsu.rpgstats.entities.Constraint;
 import com.nsu.rpgstats.entities.Modifier;
 import com.nsu.rpgstats.entities.Property;
+import com.nsu.rpgstats.ui.ManageFormMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PropertyManageActivity extends AppCompatActivity {
-    public static Integer MODE_ADD = 1;
-    public static Integer MODE_EDIT = 2;
     private ActivityPropertyManageBinding binding;
     private PropertyRepository repo;
     // Property that will be sent to server if submitted
@@ -44,12 +43,12 @@ public class PropertyManageActivity extends AppCompatActivity {
     private void setAllContent() {
         repo = ((RpgstatsApplication) getApplication()).appContainer.propertyRepository;
         Bundle b = getIntent().getExtras();
-        Integer mode = b.getInt("Mode");
+        String mode = b.getString("Mode");
 
         Button confirmButton = findViewById(R.id.confirmAddPropertyButton);
         EditText nameInput = findViewById(R.id.newPropName);
 
-        if (MODE_EDIT.equals(mode)) {
+        if (ManageFormMode.EDIT.name().equals(mode)) {
             // Real property
             Property p = repo.getProperty(b.getInt("gsId"), b.getInt("id"));
             // Copy that will be changed in 'edit'
@@ -59,7 +58,7 @@ public class PropertyManageActivity extends AppCompatActivity {
             nameInput.setText(property.getName());
         }
 
-        if (MODE_ADD.equals(mode)) {
+        if (ManageFormMode.ADD.name().equals(mode)) {
             property = new Property(-1, "", false, new ArrayList<>(), new ArrayList<>());
             TextView head = findViewById(R.id.propHead);
             head.setText(R.string.add_property);
@@ -72,10 +71,10 @@ public class PropertyManageActivity extends AppCompatActivity {
         setAddConstraintsButton();
 
         confirmButton.setOnClickListener(view -> {
-            if (mode.equals(PropertyManageActivity.MODE_ADD)) {
+            if (mode.equals(ManageFormMode.ADD.name())) {
                 // TODO: send Property as a new one (callback)
             }
-            if (mode.equals(PropertyManageActivity.MODE_EDIT)) {
+            if (mode.equals(ManageFormMode.EDIT.name())) {
                 // TODO: send Property as the changed one (callback)
             }
         });

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.databinding.ActivityParameterDetailsBinding;
 import com.nsu.rpgstats.ui.ConfirmationFragment;
+import com.nsu.rpgstats.ui.ManageFormMode;
 
 public class ParameterDetailsActivity extends AppCompatActivity {
     private ActivityParameterDetailsBinding binding;
@@ -42,7 +43,7 @@ public class ParameterDetailsActivity extends AppCompatActivity {
 
         edit.setOnClickListener(view -> {
             Intent i = new Intent(this, ParameterManageActivity.class);
-            i.putExtra("Mode", ParameterManageActivity.MODE_EDIT);
+            i.putExtra("Mode", ManageFormMode.EDIT.name());
             i.putExtras(b);
             startActivity(i);
         });

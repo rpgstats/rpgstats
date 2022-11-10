@@ -22,6 +22,7 @@ import com.nsu.rpgstats.data.PropertyRepository;
 import com.nsu.rpgstats.databinding.ActivityPropertyDetailsBinding;
 import com.nsu.rpgstats.entities.Property;
 import com.nsu.rpgstats.ui.ConfirmationFragment;
+import com.nsu.rpgstats.ui.ManageFormMode;
 
 public class PropertyDetailsActivity extends AppCompatActivity {
     private ActivityPropertyDetailsBinding binding;
@@ -61,7 +62,7 @@ public class PropertyDetailsActivity extends AppCompatActivity {
         edit.setOnClickListener(view -> {
             Intent i = new Intent(this, PropertyManageActivity.class);
             i.putExtra("id", property.getId());
-            i.putExtra("Mode", PropertyManageActivity.MODE_EDIT);
+            i.putExtra("Mode", ManageFormMode.EDIT.name());
             startActivity(i);
         });
     }

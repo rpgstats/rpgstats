@@ -14,6 +14,7 @@ import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.data.PropertyRepository;
 import com.nsu.rpgstats.databinding.ActivityPropertiesBinding;
 import com.nsu.rpgstats.entities.Property;
+import com.nsu.rpgstats.ui.ManageFormMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public class PropertiesActivity extends AppCompatActivity {
         binding.addPropertyButton.setOnClickListener(view -> {
             Intent intent = new Intent(this, PropertyManageActivity.class);
             intent.putExtra("gsId", gsId.toString());
-            intent.putExtra("Mode", PropertyManageActivity.MODE_ADD);
+            intent.putExtra("Mode", ManageFormMode.ADD.name());
             startActivity(intent);
         });
     }

@@ -14,6 +14,7 @@ import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.data.ParameterRepository;
 import com.nsu.rpgstats.databinding.ActivityParametersBinding;
 import com.nsu.rpgstats.entities.Parameter;
+import com.nsu.rpgstats.ui.ManageFormMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class ParametersActivity extends Activity {
         Button addParameter = findViewById(R.id.addParameterButton);
         addParameter.setOnClickListener(view -> {
             Intent i = new Intent(this, ParameterManageActivity.class);
-            i.putExtra("Mode", ParameterManageActivity.MODE_ADD);
+            i.putExtra("Mode", ManageFormMode.ADD.name());
             startActivity(i);
         });
     }
