@@ -4,6 +4,8 @@ import com.rpgstats.messages.AuthOkResponse;
 import com.rpgstats.security.messages.SigninRequest;
 import com.rpgstats.security.messages.SignupRequest;
 import com.rpgstats.services.AuthService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,7 @@ import javax.validation.Valid;
 @RestController
 public class AuthController {
 
+    Logger logger = LoggerFactory.getLogger(AuthController.class);
     AuthService authService;
 
     public AuthController(AuthService authService) {

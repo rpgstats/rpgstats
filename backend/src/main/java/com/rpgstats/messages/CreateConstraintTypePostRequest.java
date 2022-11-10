@@ -1,11 +1,11 @@
 package com.rpgstats.messages;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+
 @Data
-public class GameSystemPutRequest {
+public class CreateConstraintTypePostRequest {
+    @NotNull
     private String name;
-    private String description;
 }

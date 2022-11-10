@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/rpgstats}
-    username: ${SPRING_DATASOURCE_USERNAME:compose-postgres}
-    password: ${SPRING_DATASOURCE_USERNAME:compose-postgres}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_USERNAME:Wednesday}
     driver-class-name: org.postgresql.Driver
   jpa:
     database: postgresql

@@ -9,5 +9,4 @@ public class RpgstatsBackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(RpgstatsBackendApplication.class, args);
     }
-
 }

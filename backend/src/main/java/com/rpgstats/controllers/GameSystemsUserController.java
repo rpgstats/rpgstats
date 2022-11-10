@@ -3,17 +3,13 @@ package com.rpgstats.controllers;
 import com.rpgstats.messages.GameSystemDto;
 import com.rpgstats.messages.GameSystemPostRequest;
 import com.rpgstats.messages.GameSystemPutRequest;
-import com.rpgstats.security.RpgStatsUserDetail;
-import com.rpgstats.security.RpgStatsUserDetailsService;
 import com.rpgstats.services.AuthService;
 import com.rpgstats.services.GameSystemService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 @RestController
 @RequestMapping("user/game-systems")
