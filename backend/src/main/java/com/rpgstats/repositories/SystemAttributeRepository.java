@@ -10,7 +10,7 @@ public interface SystemAttributeRepository extends JpaRepository<SystemAttribute
 
     List<SystemAttribute> findByGameSystem_Id(Integer id);
 
-    SystemAttribute findByGameSystem_IdAndId(Integer id, Integer id1);
+    Optional<SystemAttribute> findByGameSystem_IdAndId(Integer id, Integer id1);
 
     Optional<SystemAttribute> findByIdAndGameSystem_IdAndGameSystem_Owner_Id(Integer id, Integer id1, Integer id2);
 

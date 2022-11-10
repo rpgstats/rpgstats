@@ -3,6 +3,7 @@ package com.rpgstats.services;
 import com.rpgstats.entity.*;
 import com.rpgstats.entity.Character;
 import com.rpgstats.messages.*;
+import com.rpgstats.messages.DTO.CharacterDto;
 import com.rpgstats.repositories.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.transaction.annotation.Transactional;

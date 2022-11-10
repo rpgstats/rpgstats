@@ -1,4 +1,4 @@
-package com.rpgstats.messages;
+package com.rpgstats.messages.DTO;
 
 import com.rpgstats.entity.GameSystem;
 import lombok.Data;
@@ -8,5 +8,4 @@ public class SystemAttributeDto {
     private Integer id;
     private String name;
     private Boolean isPresent;
-    private GameSystem gameSystem;
 }

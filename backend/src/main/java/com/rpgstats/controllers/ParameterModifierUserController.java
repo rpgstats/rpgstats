@@ -2,8 +2,10 @@ package com.rpgstats.controllers;
 
 import com.rpgstats.entity.ParameterModifier;
 import com.rpgstats.messages.*;
+import com.rpgstats.messages.DTO.SystemParameterModifierDto;
 import com.rpgstats.services.AuthService;
 import com.rpgstats.services.ParameterModifierService;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,18 +28,18 @@ public class ParameterModifierUserController {
     }
 
     @PostMapping("/{systemId}/modifiers")
-    public SystemParameterModifierDto createParameterModifier(@AuthenticationPrincipal Jwt jwt, @PathVariable Integer systemId, @Valid @RequestBody CreateParameterModifierPostRequest request) {
+    public SystemParameterModifierDto createParameterModifier(@Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt, @PathVariable Integer systemId, @Valid @RequestBody CreateParameterModifierPostRequest request) {
         return parameterModifierService.createParameterModifier(authService.getIdFromJwt(jwt), systemId, request);
 
     }
 
     @PutMapping("/{systemId}/modifiers/{modifierId}")
-    public SystemParameterModifierDto changeParameterModifier(@AuthenticationPrincipal Jwt jwt, @PathVariable Integer systemId, @PathVariable Integer parameterModifierId, @Valid @RequestBody ChangeParameterModifierPutRequest request) {
+    public SystemParameterModifierDto changeParameterModifier(@Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt, @PathVariable Integer systemId, @PathVariable Integer parameterModifierId, @Valid @RequestBody ChangeParameterModifierPutRequest request) {
         return parameterModifierService.changeParameterModifier(authService.getIdFromJwt(jwt), parameterModifierId, systemId, request);
     }
 
     @DeleteMapping("/{systemId}/modifiers/{modifierId}")
-    public SystemParameterModifierDto deleteParameterModifier(@AuthenticationPrincipal Jwt jwt, @PathVariable Integer systemId, @PathVariable Integer parameterModifierId) {
+    public SystemParameterModifierDto deleteParameterModifier(@Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt, @PathVariable Integer systemId, @PathVariable Integer parameterModifierId) {
         return parameterModifierService.deleteParameterModifier(authService.getIdFromJwt(jwt), parameterModifierId, systemId);
     }
 }

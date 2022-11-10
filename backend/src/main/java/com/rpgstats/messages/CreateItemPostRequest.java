@@ -10,6 +10,4 @@ public class CreateItemPostRequest {
     private String name;
     @NotNull
     private Boolean isPresent;
-    @NotNull
-    private Integer systemId;
 }

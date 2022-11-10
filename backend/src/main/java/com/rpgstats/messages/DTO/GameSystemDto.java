@@ -1,4 +1,4 @@
-package com.rpgstats.messages;
+package com.rpgstats.messages.DTO;
 
 import lombok.Data;
 

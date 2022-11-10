@@ -4,6 +4,7 @@ import com.rpgstats.entity.GameSystem;
 import com.rpgstats.entity.SystemParameter;
 
 import lombok.Data;
+
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -13,7 +14,5 @@ public class CreateParameterModifierPostRequest {
     @NotNull
     private Integer value;
     @NotNull
-    private SystemParameter parameter;
-    @NotNull
-    private GameSystem gameSystem;
+    private Integer parameterId;
 }

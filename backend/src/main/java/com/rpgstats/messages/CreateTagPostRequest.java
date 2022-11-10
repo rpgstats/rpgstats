@@ -10,6 +10,4 @@ import javax.validation.constraints.NotNull;
 public class CreateTagPostRequest {
     @NotNull
     private String name;
-    @NotNull
-    private GameSystem gameSystem;
 }

@@ -1,11 +1,11 @@
 package com.rpgstats.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rpgstats.entity.GameSystem;
 import com.rpgstats.entity.SystemItem;
 import com.rpgstats.messages.ChangeItemPutRequest;
 import com.rpgstats.messages.CreateItemPostRequest;
-import com.rpgstats.messages.SystemItemDto;
+import com.rpgstats.exceptions.ItemNotFoundException;
+import com.rpgstats.messages.DTO.SystemItemDto;
 import com.rpgstats.repositories.SystemItemRepository;
 import com.rpgstats.repositories.SystemRepository;
 import org.modelmapper.ModelMapper;
@@ -39,12 +39,14 @@ public class ItemService {// TODO: добавить exception
 
     @Transactional
     public SystemItemDto getItem(Integer systemId, Integer itemId) {
-        return mapper.map(itemRepository.findByGameSystem_IdAndId(systemId, itemId), SystemItemDto.class);
+        return mapper.map(itemRepository.findByGameSystem_IdAndId(systemId, itemId).
+                orElseThrow(()->new ItemNotFoundException(String.format("Item with id - %d not found in system with id - %d", itemId, systemId))), SystemItemDto.class);
     }
 
     @Transactional
-    public SystemItemDto createItem(Integer userId, Integer systemId, CreateItemPostRequest request){
-        GameSystem system = systemRepository.findByIdAndOwner_Id(systemId, userId).orElseThrow();
+    public SystemItemDto createItem(Integer userId, Integer systemId, CreateItemPostRequest request) {
+        GameSystem system = systemRepository.findByIdAndOwner_Id(systemId, userId).
+                orElseThrow(() -> new ItemNotFoundException(String.format("System not found by id - %d", systemId)));
         SystemItem item = new SystemItem();
         item.setName(request.getName());
         item.setIsPresent(request.getIsPresent());
@@ -54,9 +56,10 @@ public class ItemService {// TODO: добавить exception
     }
 
     @Transactional
-    public SystemItemDto changeItem(Integer userId, Integer itemId, Integer systemId,  ChangeItemPutRequest request){
+    public SystemItemDto changeItem(Integer userId, Integer itemId, Integer systemId, ChangeItemPutRequest request) {
         GameSystem system = systemRepository.findByIdAndOwner_Id(systemId, userId).orElseThrow();
-        SystemItem item = itemRepository.findByIdAndGameSystem_IdAndGameSystem_Owner_Id(itemId, systemId, userId).orElseThrow();
+        SystemItem item = itemRepository.findByIdAndGameSystem_IdAndGameSystem_Owner_Id(itemId, systemId, userId).
+                orElseThrow(() -> new ItemNotFoundException(String.format("Item with id - %d not found in system with id - %d", itemId, systemId)));
         item.setName(request.getName());
         item.setIsPresent(request.getIsPresent());
         item.setGameSystem(system);
@@ -65,7 +68,7 @@ public class ItemService {// TODO: добавить exception
     }
 
     @Transactional
-    public SystemItemDto deleteItem(Integer userId, Integer itemId, Integer systemId){
+    public SystemItemDto deleteItem(Integer userId, Integer itemId, Integer systemId) {
         SystemItem item = itemRepository.findByIdAndGameSystem_IdAndGameSystem_Owner_Id(itemId, systemId, userId).orElseThrow();
         itemRepository.delete(item);
         return mapper.map(item, SystemItemDto.class);

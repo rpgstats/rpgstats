@@ -14,6 +14,4 @@ public class CreateParameterPostRequest {
     private Integer minValue;
     @NotNull
     private Integer maxValue;
-    @NotNull
-    private GameSystem gameSystem;
 }

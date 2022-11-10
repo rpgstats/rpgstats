@@ -1,4 +1,4 @@
-package com.rpgstats;
+package com.rpgstats.configs;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

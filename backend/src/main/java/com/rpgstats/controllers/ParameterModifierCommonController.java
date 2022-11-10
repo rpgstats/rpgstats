@@ -1,10 +1,7 @@
 package com.rpgstats.controllers;
 
-import com.rpgstats.messages.GameSystemDto;
-import com.rpgstats.messages.SystemParameterModifierDto;
-import com.rpgstats.services.GameSystemService;
+import com.rpgstats.messages.DTO.SystemParameterModifierDto;
 import com.rpgstats.services.ParameterModifierService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

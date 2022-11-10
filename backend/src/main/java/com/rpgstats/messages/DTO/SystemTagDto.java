@@ -1,4 +1,4 @@
-package com.rpgstats.messages;
+package com.rpgstats.messages.DTO;
 
 import com.rpgstats.entity.GameSystem;
 import lombok.Data;
@@ -7,5 +7,4 @@ import lombok.Data;
 public class SystemTagDto {
     private Integer id;
     private String name;
-    private GameSystem gameSystem;
 }

@@ -10,6 +10,4 @@ public class CreateAttributePostRequest {
     private String name;
     @NotNull
     private Boolean isPresent;
-    @NotNull
-    private GameSystem gameSystem;
 }
