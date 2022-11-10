@@ -1,9 +1,11 @@
 package com.nsu.rpgstats.ui.properties;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
@@ -66,8 +69,18 @@ public class PropertyDetailsActivity extends AppCompatActivity {
     private void setDeleteButton() {
         Button delete = findViewById(R.id.propDelete);
         delete.setOnClickListener(view -> {
-            DialogFragment confirmation = new ConfirmationFragment();
-            confirmation.show(getSupportFragmentManager(), "Delete property confirmation");
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Are you sure you want to delete this?");
+
+            builder.setPositiveButton("Yes", (dialogInterface, i) -> {
+                // TODO: delete property on server (callback)
+            });
+
+            builder.setNegativeButton("No", (dialogInterface, i) -> {
+                Toast.makeText(this, "Net tak net", Toast.LENGTH_SHORT).show();
+            });
+
+            builder.create().show();
         });
     }
 

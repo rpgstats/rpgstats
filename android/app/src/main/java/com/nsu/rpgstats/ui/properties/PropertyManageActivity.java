@@ -30,8 +30,8 @@ public class PropertyManageActivity extends AppCompatActivity {
     public static Integer MODE_ADD = 1;
     public static Integer MODE_EDIT = 2;
     private ActivityPropertyManageBinding binding;
-    // Property that will be sent to server if submitted
     private PropertyRepository repo;
+    // Property that will be sent to server if submitted
     private Property property;
 
     @Override
@@ -51,28 +51,34 @@ public class PropertyManageActivity extends AppCompatActivity {
         Button confirmButton = findViewById(R.id.confirmAddPropertyButton);
         EditText nameInput = findViewById(R.id.newPropName);
 
-        Property p = repo.getProperty(0, b.getInt("id"));
-        property = new Property(p);
+        if (MODE_EDIT.equals(mode)) {
+            // Real property
+            Property p = repo.getProperty(b.getInt("gsId"), b.getInt("id"));
+            // Copy that will be changed in 'edit'
+            property = new Property(p);
+            TextView head = findViewById(R.id.propHead);
+            head.setText(R.string.edit_property);
+            nameInput.setText(property.getName());
+        }
+
+        if (MODE_ADD.equals(mode)) {
+            property = new Property(-1, "", false, new ArrayList<>(), new ArrayList<>());
+            TextView head = findViewById(R.id.propHead);
+            head.setText(R.string.add_property);
+            nameInput.setText(property.getName());
+        }
 
         setModifiersList();
         setAddModifiersButton();
         setConstraintsList();
         setAddConstraintsButton();
 
-        if (MODE_EDIT.equals(mode)) {
-            TextView head = findViewById(R.id.propHead);
-            head.setText(R.string.edit_property);
-            nameInput.setText(property.getName());
-        }
-
         confirmButton.setOnClickListener(view -> {
-            String name = nameInput.getText().toString();
-            //Property newProp = new Property(name, false);
             if (mode.equals(PropertyManageActivity.MODE_ADD)) {
-                // TODO: send Property as a new one
+                // TODO: send Property as a new one (callback)
             }
             if (mode.equals(PropertyManageActivity.MODE_EDIT)) {
-                // TODO: send Property as the changed one
+                // TODO: send Property as the changed one (callback)
             }
         });
     }

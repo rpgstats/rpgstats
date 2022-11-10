@@ -94,8 +94,8 @@ public class PropertiesActivity extends AppCompatActivity implements PropertiesA
         setOnClickCreateActivity(binding.BottomBar.propertiesButton, PropertiesActivity.class);
         binding.addPropertyButton.setOnClickListener(view -> {
             Intent intent = new Intent(this, PropertyManageActivity.class);
-            intent.putExtra("game_system_id", gsId.toString());
-            intent.putExtra("mode", PropertyManageActivity.MODE_ADD);
+            intent.putExtra("gsId", gsId.toString());
+            intent.putExtra("Mode", PropertyManageActivity.MODE_ADD);
             startActivity(intent);
         });
     }

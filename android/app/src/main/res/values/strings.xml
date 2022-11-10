@@ -114,5 +114,6 @@
     <string name="constraint_name">Constraint name</string>
     <string name="add_modifier">Add modifier</string>
     <string name="add_constraint">Add constraint</string>
+    <string name="add_property">Add property</string>
 
 </resources>
