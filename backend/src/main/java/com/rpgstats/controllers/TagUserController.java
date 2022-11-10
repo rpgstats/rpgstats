@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-@RequestMapping("/game-systems")
+@RequestMapping("user/game-systems")
 @RestController
 public class TagUserController {
     TagService tagService;
