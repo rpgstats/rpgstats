@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_margin"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.properties.PropertyDetailsActivity">
+
+    <TextView
+        android:id="@+id/propName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/header_text_size"
+        android:text="@string/property_name" />
+
+    <LinearLayout
+        android:id="@+id/property_details_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="start">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/subheader_text_size"
+            android:text="@string/modifiers"
+            android:clickable="false"
+            android:focusable="true" />
+
+        <ListView
+            android:id="@+id/property_modifiers_list"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/details_list_height"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/subheader_text_size"
+            android:text="@string/constraints"
+            android:clickable="false"
+            android:focusable="true" />
+
+        <ListView
+            android:id="@+id/property_constraints_list"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/details_list_height"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/propEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/parameter_edit_button_text"
+        />
+
+    <Button
+        android:id="@+id/propDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/parameter_delete_button_text"
+        />
+</LinearLayout>

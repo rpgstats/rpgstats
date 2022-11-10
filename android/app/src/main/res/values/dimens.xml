@@ -3,10 +3,15 @@
     <dimen name="item_vertical_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="header_text_size">32sp</dimen>
+    <dimen name="subheader_text_size">24sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
     <dimen name="background_item_height">150dp</dimen>
     <dimen name="background_item_height_fill">175dp</dimen>
     <dimen name="background_tags_height">150dp</dimen>
     <dimen name="background_tags_height_fill">175dp</dimen>
     <dimen name="item_default_margin">4dp</dimen>
+    <dimen name="button_text_size">18sp</dimen>
+    <dimen name="details_list_height">150dp</dimen>
+    <dimen name="big_list_height">400dp</dimen>
 
 </resources>

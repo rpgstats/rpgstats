@@ -7,11 +7,12 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.data.GameSystemsRepository;
 import com.nsu.rpgstats.databinding.ActivityGameSystemInfoBinding;
 import com.nsu.rpgstats.entities.GameSystem;
+import com.nsu.rpgstats.ui.parameters.ParametersActivity;
+import com.nsu.rpgstats.ui.properties.PropertiesActivity;
 import com.nsu.rpgstats.viewmodel.GameSystemInfoViewModel;
 
 public class GameSystemInfoActivity extends Activity {

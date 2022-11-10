@@ -18,6 +18,8 @@ import com.nsu.rpgstats.databinding.ActivityEditItemBinding;
 import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.entities.Modifier;
 import com.nsu.rpgstats.entities.Tag;
+import com.nsu.rpgstats.ui.parameters.ParametersActivity;
+import com.nsu.rpgstats.ui.properties.PropertiesActivity;
 import com.nsu.rpgstats.viewmodel.ItemInfoViewModel;
 import com.nsu.rpgstats.viewmodel.ItemViewModel;
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:layout_margin="16dp"
+    tools:context=".ui.properties.PropertyManageActivity">
+
+    <TextView
+        android:id="@+id/propHead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/header_text_size"
+        android:gravity="center"
+        android:text="@string/property_add_new" />
+
+    <EditText
+        android:id="@+id/newPropName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/property_name"
+        android:autofillHints="@string/property_name"
+        android:inputType="text" />
+
+    <ListView
+        android:id="@+id/property_manage_modifiers_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/details_list_height"/>
+
+    <Button
+        android:id="@+id/add_modifier_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_modifier" />
+
+    <ListView
+        android:id="@+id/property_manage_constraints_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/details_list_height"/>
+
+    <Button
+        android:id="@+id/add_constraint_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_constraint" />
+
+    <Button
+        android:id="@+id/confirmAddPropertyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/parameter_confirm" />
+
+</LinearLayout>
