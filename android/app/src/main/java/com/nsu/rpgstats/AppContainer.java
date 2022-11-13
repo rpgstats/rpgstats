@@ -11,13 +11,14 @@ import com.nsu.rpgstats.data.PlugModifierRepository;
 import com.nsu.rpgstats.data.PlugParameterRepository;
 import com.nsu.rpgstats.data.PlugPropertyRepository;
 import com.nsu.rpgstats.data.PropertyRepository;
+import com.nsu.rpgstats.data.RestGameSystemsRepository;
 import com.nsu.rpgstats.entities.GameSystem;
 import com.nsu.rpgstats.data.PlugItemRepository;
 import com.nsu.rpgstats.data.PlugTagRepository;
 import com.nsu.rpgstats.data.TagRepository;
 
 public class AppContainer {
-    public GameSystemsRepository gameSystemsRepository = new PlugGameSystemsRepository();
+    public GameSystemsRepository gameSystemsRepository = new RestGameSystemsRepository();
     public GameSystem currentGameSystem = null;
     public ItemRepository itemRepository = new PlugItemRepository();
     public TagRepository tagRepository = new PlugTagRepository();

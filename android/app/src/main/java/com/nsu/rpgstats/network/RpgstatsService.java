@@ -10,12 +10,12 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface RpgstatsService {
-    @GET("/game-systems")
+    @GET("api/v1//game-systems")
     Call<List<GameSystem>> getGameSystems();
 
-    @GET("/game-systems/{id}")
+    @GET("api/v1/game-systems/{id}")
     Call<GameSystem> getGameSystem(@Path("id") int id);
 
-    @POST("/game-systems")
+    @POST("api/v1/game-systems")
     Call<GameSystem> addGameSystem(@Body GameSystem GameSystem);
 }

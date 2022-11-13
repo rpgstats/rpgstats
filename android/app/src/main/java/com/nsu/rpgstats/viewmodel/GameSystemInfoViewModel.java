@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.nsu.rpgstats.data.GameSystemsRepository;
+import com.nsu.rpgstats.data.RepositoryCallback;
+import com.nsu.rpgstats.data.Result;
 import com.nsu.rpgstats.entities.GameSystem;
 
 public class GameSystemInfoViewModel extends ViewModel {
@@ -26,7 +28,14 @@ public class GameSystemInfoViewModel extends ViewModel {
     }
 
     private void loadGameSystem() {
-        gameSystem.setValue(repository.getGameSystem(gameId));
+        repository.getGameSystem(gameId, new RepositoryCallback<GameSystem>() {
+            @Override
+            public void onComplete(Result<GameSystem> result) {
+                if (result instanceof Result.Success) {
+                    gameSystem.setValue(((Result.Success<GameSystem>) result).data);
+                }
+            }
+        });
     }
 
 }

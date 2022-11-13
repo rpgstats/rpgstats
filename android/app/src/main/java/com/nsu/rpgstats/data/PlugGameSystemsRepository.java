@@ -24,25 +24,26 @@ public class PlugGameSystemsRepository implements GameSystemsRepository{
         for (int i = 35000; i < 35005; i++) {
             gameSystems.put(i, new GameSystem(i, "warhammer " + i,
                     new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(new Date()),
-                    "username" + i, 666 , 1337, 228, i));
+                    "username" + i, 666 , 1337, 228, i, ownerId));
         }
     }
 
     @Override
-    public List<GameSystem> getGameSystems() {
-        return  new ArrayList<>(gameSystems.values());
+    public void getGameSystems(RepositoryCallback<List<GameSystem>> callback) {
+        callback.onComplete(new Result.Success<>(new ArrayList<>(gameSystems.values())));
     }
 
     @Override
-    public GameSystem getGameSystem(int id) {
-        return gameSystems.get(id);
+    public void getGameSystem(int id, RepositoryCallback<GameSystem> callback) {
+        callback.onComplete(new Result.Success<>(gameSystems.get(id)));
     }
 
     @Override
-    public int addGameSystem(String gameSystemName) {
+    public void addGameSystem(String gameSystemName, RepositoryCallback<GameSystem> callback) {
         gameSystems.put(currentId,  new GameSystem(currentId, gameSystemName,
                 new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(new Date()),
-                "", 1, 1, 1, 1));
-        return currentId++;
+                "", 1, 1, 1, 1, ownerId));
+        callback.onComplete(new Result.Success<>(gameSystems.get(currentId)));
+        currentId++;
     }
 }

@@ -7,19 +7,19 @@ public class GameSystem {
     private Integer id;
     private String systemName;
     private String creationDate;
-
     private String owner;
     private int gameSessionNumber;
     private int childGameSystemNumber;
     private int itemsNumber;
     private int npcNumber;
+    private int ownerId;
 
     public GameSystem(String systemName) {
         this.systemName = systemName;
     }
 
     public GameSystem(Integer id, String systemName, String creationDate, String owner,
-                      int gameSessionNumber, int childGameSystemNumber, int itemsNumber, int npcNumber) {
+                      int gameSessionNumber, int childGameSystemNumber, int itemsNumber, int npcNumber, int ownerId) {
         this.id = id;
         this.creationDate = creationDate;
         this.systemName = systemName;
@@ -28,6 +28,7 @@ public class GameSystem {
         this.childGameSystemNumber = childGameSystemNumber;
         this.itemsNumber = itemsNumber;
         this.npcNumber = npcNumber;
+        this.ownerId = ownerId;
     }
 
     public String getSystemName() {

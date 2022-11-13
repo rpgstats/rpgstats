@@ -6,7 +6,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestClient {
 
     private static RestClient restClient;
-    private final String BASE_URL = "localhost:8080/";
+
+    // Если тестируется на телефоне и он подключен к той же сети, что и комп, то
+    // нужно здесь указать адрес компа в локалке (его можно найти в ipconfig)
+    // подробнее -- https://stackoverflow.com/questions/4779963/how-can-i-access-my-localhost-from-my-android-device
+    private final String SERVER_ADDRESS = "localhost";
+
+    private final String BASE_URL = "http://" + SERVER_ADDRESS + ":8080/";
     private final RpgstatsService rpgstatsService;
 
     public static RestClient getInstance() {

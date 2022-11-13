@@ -21,66 +21,74 @@ public class RestGameSystemsRepository implements GameSystemsRepository {
 
     public RestGameSystemsRepository() {
         service = RestClient.getInstance().getRpgstatsService();
+        addGameSystem("testrest", new RepositoryCallback<GameSystem>() {
+            @Override
+            public void onComplete(Result<GameSystem> result) {
+                if (result instanceof Result.Success) {
+                    Log.i(TAG, ((Result.Success<GameSystem>) result).data.getSystemName());
+                } else if (result instanceof Result.Error){
+                    Log.e(TAG, ((Result.Error<GameSystem>) result).throwable.getMessage());
+                }
+            }
+        });
     }
 
 
     @Override
-    public List<GameSystem> getGameSystems() {
-        final MutableLiveData<List<GameSystem>> gameSystems = new MutableLiveData<>();
+    public void getGameSystems(RepositoryCallback<List<GameSystem>> callback) {
+
         service.getGameSystems()
                 .enqueue(new Callback<List<GameSystem>>() {
                     @Override
                     public void onResponse(Call<List<GameSystem>> call, Response<List<GameSystem>> response) {
                         Log.d(TAG, "Response: " + response);
                         if (response.body() != null) {
-                            gameSystems.setValue(response.body());
+                            callback.onComplete(new Result.Success<>(response.body()));
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<GameSystem>> call, Throwable t) {
-                        gameSystems.setValue(null);
+                        callback.onComplete(new Result.Error<>(t));
                     }
                 });
-        return gameSystems.getValue();
     }
 
     @Override
-    public GameSystem getGameSystem(int id) {
-        final MutableLiveData<GameSystem> gameSystem = new MutableLiveData<>();
+    public void getGameSystem(int id, RepositoryCallback<GameSystem> callback) {
         service.getGameSystem(id)
                 .enqueue(new Callback<GameSystem>() {
                     @Override
                     public void onResponse(Call<GameSystem> call, Response<GameSystem> response) {
                         Log.d(TAG, "Response: " + response);
                         if (response.body() != null) {
-                            gameSystem.setValue(response.body());
+                            callback.onComplete(new Result.Success<>(response.body()));
                         }
                     }
 
                     @Override
                     public void onFailure(Call<GameSystem> call, Throwable t) {
-                        gameSystem.setValue(null);
+                        callback.onComplete(new Result.Error<>(null));
                     }
                 });
-        return gameSystem.getValue();
     }
 
     @Override
-    public int addGameSystem(String gameSystemName) {
-        final MutableLiveData<GameSystem> gameSystem = new MutableLiveData<>();
+    public void addGameSystem(String gameSystemName, RepositoryCallback<GameSystem> callback) {
         service.addGameSystem(new GameSystem(gameSystemName))
                 .enqueue(new Callback<GameSystem>() {
                     @Override
                     public void onResponse(Call<GameSystem> call, Response<GameSystem> response) {
                         Log.d(TAG, "Response: " + response);
+                        if (response.body() != null) {
+                            callback.onComplete(new Result.Success<>(response.body()));
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<GameSystem> call, Throwable t) {
-                        gameSystem.setValue(null);
+                        callback.onComplete(new Result.Error<>(t));
                     }
                 });
-        return gameSystem.getValue().getId();
     }
 }

@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface GameSystemsRepository {
 
-    List<GameSystem> getGameSystems();
+    void getGameSystems(RepositoryCallback<List<GameSystem>> callback);
 
-    GameSystem getGameSystem(int id);
+    void getGameSystem(int id, RepositoryCallback<GameSystem> callback);
 
-    int addGameSystem(String gameSystemName);
+    void addGameSystem(String gameSystemName, RepositoryCallback<GameSystem> callback);
 }
