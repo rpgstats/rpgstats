@@ -2271,6 +2271,7 @@ components:
         description:
           type: string
         sessionId:
+          type: integer
     CreateCharacterPostRequest:
       type: object
       required:
