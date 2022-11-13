@@ -3,7 +3,9 @@ package com.rpgstats.services;
 import com.rpgstats.entity.ConstraintType;
 import com.rpgstats.exceptions.ItemNotFoundException;
 import com.rpgstats.repositories.ConstraintTypeRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ConstraintTypeService {
     ConstraintTypeRepository constraintTypeRepository;
 

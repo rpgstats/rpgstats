@@ -7,8 +7,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CreateConstraintPostRequest {
     @NotNull
-    private Integer id;
-    @NotNull
     private Integer constraintTypeId;
     @NotNull
     private Integer tagId;
