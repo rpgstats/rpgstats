@@ -26,9 +26,13 @@ public class ConstraintService {
     TagService tagService;
     UserService userService;
 
-    public ConstraintService(ModelMapper modelMapper, AttributeConstraintRepository attributeConstraintRepository, UserService userService) {
+    public ConstraintService(ModelMapper modelMapper, AttributeConstraintRepository attributeConstraintRepository, AttributeService attributeService, GameSystemService gameSystemService, ConstraintTypeService constraintTypeService, TagService tagService, UserService userService) {
         this.modelMapper = modelMapper;
         this.attributeConstraintRepository = attributeConstraintRepository;
+        this.attributeService = attributeService;
+        this.gameSystemService = gameSystemService;
+        this.constraintTypeService = constraintTypeService;
+        this.tagService = tagService;
         this.userService = userService;
     }
 
@@ -56,6 +60,7 @@ public class ConstraintService {
             attributeConstraint.setConstraintType(constraintType);
             attributeConstraint.setAttribute(systemAttribute);
             attributeConstraint.setTag(systemTag);
+            attributeConstraintRepository.save(attributeConstraint);
         } else {
             throw new ConflictDataException(String.format("Wrong system -> attribute and system -> tag relation"));
         }

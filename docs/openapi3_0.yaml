@@ -707,7 +707,7 @@ paths:
         schema:
           type: integer
           format: int32
-      - name: parameterModifierId
+      - name: modifierId
         in: path
         required: true
         schema:
@@ -749,7 +749,7 @@ paths:
         schema:
           type: integer
           format: int32
-      - name: parameterModifierId
+      - name: modifierId
         in: path
         required: true
         schema:
