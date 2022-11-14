@@ -4,9 +4,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  main:
+    allow-circular-references: true
 server:
   servlet:
     context-path: /api/v1
+  error:
+    include-message: always
 jwt:
   private.key: classpath:app.key
   public.key: classpath:app.pub
+springdoc:
+  override-with-generic-response: false

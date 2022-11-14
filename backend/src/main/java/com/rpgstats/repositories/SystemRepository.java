@@ -7,11 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SystemRepository extends JpaRepository<GameSystem, Integer> {
-    List<GameSystem> findByNameLikeIgnoreCase(String name);
+  List<GameSystem> findByNameLikeIgnoreCase(String name);
 
-    List<GameSystem> findByOwner_Id(Integer id);
+  Optional<GameSystem> findByIdAndOwner_Id(Integer id, Integer id1);
 
-    Optional<GameSystem> findByIdAndOwner_Id(Integer id, Integer id1);
-
-
+  boolean existsByName(String name);
 }

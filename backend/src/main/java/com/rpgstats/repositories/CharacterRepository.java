@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CharacterRepository extends JpaRepository<Character, Integer> {
-    List<Character> findByOwner_Id(Integer id);
+  List<Character> findByOwner_Id(Integer id);
 
-    Optional<Character> findByOwner_IdAndId(Integer id, Integer id1);
+  Optional<Character> findByOwner_IdAndId(Integer id, Integer id1);
 
-    @Override
-    Optional<Character> findById(Integer integer);
+  @Override
+  Optional<Character> findById(Integer integer);
 }

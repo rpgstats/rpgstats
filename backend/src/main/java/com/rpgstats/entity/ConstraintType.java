@@ -11,13 +11,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class ConstraintType {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
+  private Integer id;
 
-    @Column(name = "name", nullable = false)
-    @Type(type = "org.hibernate.type.TextType")
-    private String name;
-
+  @Column(name = "name", nullable = false)
+  @Type(type = "org.hibernate.type.TextType")
+  private String name;
 }

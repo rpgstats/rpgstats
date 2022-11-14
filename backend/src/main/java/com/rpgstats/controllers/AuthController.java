@@ -4,8 +4,6 @@ import com.rpgstats.messages.AuthOkResponse;
 import com.rpgstats.security.messages.SigninRequest;
 import com.rpgstats.security.messages.SignupRequest;
 import com.rpgstats.services.AuthService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,22 +14,19 @@ import javax.validation.Valid;
 @RestController
 public class AuthController {
 
-    Logger logger = LoggerFactory.getLogger(AuthController.class);
-    AuthService authService;
+  AuthService authService;
 
-    public AuthController(AuthService authService) {
-        this.authService = authService;
-    }
+  public AuthController(AuthService authService) {
+    this.authService = authService;
+  }
 
-    @PostMapping("/auth")
-    public AuthOkResponse authPost(@Valid @RequestBody SigninRequest signinRequest) {
-        return authService.login(signinRequest);
-    }
+  @PostMapping("/auth")
+  public AuthOkResponse authPost(@Valid @RequestBody SigninRequest signinRequest) {
+    return authService.login(signinRequest);
+  }
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        return authService.register(signUpRequest);
-    }
-
-
+  @PostMapping("/signup")
+  public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    return authService.register(signUpRequest);
+  }
 }

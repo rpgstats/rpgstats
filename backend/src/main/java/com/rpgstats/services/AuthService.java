@@ -1,11 +1,13 @@
 package com.rpgstats.services;
 
-import com.rpgstats.messages.*;
+import com.rpgstats.messages.AuthOkResponse;
+import com.rpgstats.messages.MessageResponse;
 import com.rpgstats.security.JwtTokenUtil;
 import com.rpgstats.security.RpgStatsUserDetail;
 import com.rpgstats.security.RpgStatsUserDetailsService;
 import com.rpgstats.security.messages.SigninRequest;
 import com.rpgstats.security.messages.SignupRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,45 +20,80 @@ import javax.transaction.Transactional;
 
 @Service
 public class AuthService {
-    JwtTokenUtil jwtTokenUtil;
+  JwtTokenUtil jwtTokenUtil;
 
-    AuthenticationManager authenticationManager;
-    RpgStatsUserDetailsService userDetailsService;
+  AuthenticationManager authenticationManager;
+  RpgStatsUserDetailsService userDetailsService;
 
-    UserService userService;
+  GameSystemService gameSystemService;
 
-    PasswordEncoder passwordEncoder;
+  UserService userService;
 
-    public AuthService(JwtTokenUtil jwtTokenUtil, AuthenticationManager authenticationManager, RpgStatsUserDetailsService userDetailsService, UserService userService, PasswordEncoder passwordEncoder) {
-        this.jwtTokenUtil = jwtTokenUtil;
-        this.authenticationManager = authenticationManager;
-        this.userDetailsService = userDetailsService;
-        this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
-    }
+  PasswordEncoder passwordEncoder;
 
-    public RpgStatsUserDetail getUserDetailsFromJwt(Jwt jwt) {
-        String token = jwt.getTokenValue();
-        return userDetailsService.loadUserByUsername(jwtTokenUtil.getUserNameFromJwtToken(token));
-    }
+  @Autowired
+  public void setGameSystemService(GameSystemService gameSystemService) {
+    this.gameSystemService = gameSystemService;
+  }
 
-    public Integer getIdFromJwt(Jwt jwt) {
-        return userDetailsService.loadUserByUsername(jwtTokenUtil.getUserNameFromJwtToken(jwt.getTokenValue())).getUserId();
-    }
+  @Autowired
+  public void setJwtTokenUtil(JwtTokenUtil jwtTokenUtil) {
+    this.jwtTokenUtil = jwtTokenUtil;
+  }
 
+  @Autowired
+  public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+    this.authenticationManager = authenticationManager;
+  }
 
-    public AuthOkResponse login(SigninRequest signinRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(signinRequest.getUsername(), signinRequest.getPassword()));
-        String token = jwtTokenUtil.generateToken(authentication);
-        AuthOkResponse authOkResponse = new AuthOkResponse();
-        authOkResponse.setAuthToken(token);
-        return authOkResponse;
-    }
+  @Autowired
+  public void setUserDetailsService(RpgStatsUserDetailsService userDetailsService) {
+    this.userDetailsService = userDetailsService;
+  }
 
-    @Transactional
-    public ResponseEntity<?> register(SignupRequest signUpRequest) {
-        userService.register(signUpRequest);
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-    }
+  @Autowired
+  public void setUserService(UserService userService) {
+    this.userService = userService;
+  }
+
+  @Autowired
+  public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+    this.passwordEncoder = passwordEncoder;
+  }
+
+  public RpgStatsUserDetail getUserDetailsFromJwt(Jwt jwt) {
+    String token = jwt.getTokenValue();
+    return userDetailsService.loadUserByUsername(jwtTokenUtil.getUserNameFromJwtToken(token));
+  }
+
+  public boolean checkUserAccessToSystem(int userId, int systemId) {
+    return !gameSystemService.existById(systemId) || gameSystemService.findByIdAndOwnerId(systemId, userId).isPresent();
+  }
+
+  public boolean checkUserAccessToSystem(Jwt authenticationToken, int systemId) {
+    return checkUserAccessToSystem(getIdFromJwt(authenticationToken), systemId);
+  }
+
+  public Integer getIdFromJwt(Jwt jwt) {
+    return userDetailsService
+        .loadUserByUsername(jwtTokenUtil.getUserNameFromJwtToken(jwt.getTokenValue()))
+        .getUserId();
+  }
+
+  public AuthOkResponse login(SigninRequest signinRequest) {
+    Authentication authentication =
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                signinRequest.getUsername(), signinRequest.getPassword()));
+    String token = jwtTokenUtil.generateToken(authentication);
+    AuthOkResponse authOkResponse = new AuthOkResponse();
+    authOkResponse.setAuthToken(token);
+    return authOkResponse;
+  }
+
+  @Transactional
+  public ResponseEntity<?> register(SignupRequest signUpRequest) {
+    userService.register(signUpRequest);
+    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+  }
 }
