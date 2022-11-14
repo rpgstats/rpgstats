@@ -1,7 +1,6 @@
-package com.nsu.rpgstats.network;
+package com.nsu.rpgstats.network.services;
 
 import com.nsu.rpgstats.entities.Tag;
-import com.nsu.rpgstats.network.DTO.TagDTO;
 
 import java.util.List;
 
@@ -13,17 +12,17 @@ import retrofit2.http.Path;
 
 public interface TagService {
     @GET("/game-systems/{game-system-id}/tags/")
-    Call<List<TagDTO>> getTags(@Path("game-system-id") int systemId);
+    Call<List<Tag>> getTags(@Path("game-system-id") int systemId);
 
     @GET("/game-systems/{game-system-id}/tags/{tag-id}")
-    Call<TagDTO> getTag(@Path("game-system-id") int systemId, @Path("tag-id") int tagId);
+    Call<Tag> getTag(@Path("game-system-id") int systemId, @Path("tag-id") int tagId);
 
     @POST("/game-systems/{game-system-id}/tags")
-    Call<TagDTO> addTag(@Path("game-system-id") int systemId, TagDTO tag);
+    Call<Tag> addTag(@Path("game-system-id") int systemId, Tag tag);
 
     @POST("/game-systems/{game-system-id}/tags/{tag-id}")
-    Call<TagDTO> editTag(@Path("game-system-id") int systemId, @Path("tag-id") int tagId, TagDTO tag);
+    Call<Tag> editTag(@Path("game-system-id") int systemId, @Path("tag-id") int tagId, Tag tag);
 
     @DELETE("/game-systems/{game-system-id}/tags/{tag-id}")
-    Call<TagDTO> deleteTag(@Path("game-system-id") int systemId, @Path("tag-id") int tagId);
+    Call<Tag> deleteTag(@Path("game-system-id") int systemId, @Path("tag-id") int tagId);
 }

@@ -1,16 +1,17 @@
 package com.nsu.rpgstats.data.tags;
 
+import com.nsu.rpgstats.data.RepositoryCallback;
 import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.entities.Tag;
 
 import java.util.List;
 
 public interface TagRepository {
-    List<Tag> getTags(int gameSystemId);
+    void getTags(int gameSystemId, RepositoryCallback<List<Tag>> callback);
 
-    Tag getTag(int gameSystemId ,int id);
+    void getTag(int gameSystemId ,int id, RepositoryCallback<Tag> callback);
 
-    int addTag(int gameSystemId, Tag tag);
+    void addTag(int gameSystemId, Tag tag, RepositoryCallback<Tag> callback);
 
-    int editTag(int gameSystemId, int id, Tag tag);
+    void editTag(int gameSystemId, int id, Tag tag, RepositoryCallback<Tag> callback);
 }

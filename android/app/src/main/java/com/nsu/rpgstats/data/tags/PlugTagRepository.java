@@ -1,5 +1,8 @@
 package com.nsu.rpgstats.data.tags;
 
+import com.nsu.rpgstats.data.RepositoryCallback;
+import com.nsu.rpgstats.data.Result;
+import com.nsu.rpgstats.entities.Tag;
 import com.nsu.rpgstats.entities.Tag;
 
 import java.text.SimpleDateFormat;
@@ -26,25 +29,26 @@ public class PlugTagRepository implements TagRepository{
     }
 
     @Override
-    public List<Tag> getTags(int gameSystemId) {
-        return new ArrayList<>(tags.values());
+    public void getTags(int gameSystem, RepositoryCallback<List<Tag>> callback) {
+        callback.onComplete(new Result.Success<>(new ArrayList<>(tags.values())));
     }
 
     @Override
-    public Tag getTag(int gameSystemId, int id) {
-        return tags.get(id);
+    public void getTag(int gameSystemId, int id, RepositoryCallback<Tag> callback) {
+        callback.onComplete(new Result.Success<>(tags.get(id)));
     }
 
     @Override
-    public int addTag(int gameSystemId, Tag tag) {
+    public void addTag(int gameSystem, Tag tag, RepositoryCallback<Tag> callback) {
         tags.put(currentId, new Tag(currentId, tag.getName(), tag.getCreationDate(), tag.isDeleted()));
-        return currentId++;
+        callback.onComplete(new Result.Success<>(tags.get(currentId++)));
     }
 
     @Override
-    public int editTag(int gameSystemId, int id, Tag tag) {
+    public void editTag(int gameSystem, int id, Tag tag, RepositoryCallback<Tag> callback) {
+        Tag newTag = new Tag(id, tag.getName(), tag.getCreationDate(), tag.isDeleted());
         tags.remove(id);
-        tags.put(id, new Tag(id, tag.getName(), tag.getCreationDate(), tag.isDeleted()));
-        return id;
+        tags.put(id, newTag);
+        callback.onComplete(new Result.Success<>(tags.get(id)));
     }
 }

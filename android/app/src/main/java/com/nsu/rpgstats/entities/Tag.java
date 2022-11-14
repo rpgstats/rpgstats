@@ -1,27 +1,32 @@
 package com.nsu.rpgstats.entities;
 
-import com.nsu.rpgstats.network.DTO.TagDTO;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
 public class Tag implements Identifiable{
-    private final Integer id;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
     private String name;
+
     private String creationDate;
     private boolean isDeleted;
+
+    public Tag(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+        this.isDeleted = false;
+    }
 
     public Tag(Integer id, String name, String creationDate, boolean isDeleted) {
         this.id = id;
         this.name = name;
         this.creationDate = creationDate;
         this.isDeleted = isDeleted;
-    }
-
-    public Tag(TagDTO tagDTO) {
-        this.id = tagDTO.getId();
-        this.name = tagDTO.getName();
-        this.creationDate = ""; //уточнить
-        this.isDeleted = false;
     }
 
     public String getCreationDate() {

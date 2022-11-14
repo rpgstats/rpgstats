@@ -9,6 +9,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.nsu.rpgstats.RpgstatsApplication;
+import com.nsu.rpgstats.data.RepositoryCallback;
+import com.nsu.rpgstats.data.Result;
 import com.nsu.rpgstats.data.items.ItemRepository;
 import com.nsu.rpgstats.data.items.PlugItemRepository;
 import com.nsu.rpgstats.entities.Item;
@@ -49,16 +51,15 @@ public class ItemViewModel extends AndroidViewModel {
             systemItems.setValue(new ArrayList<>());
             loadItems(gameSystemId);
         }
-        MutableLiveData<List<Item>> items = systemItems;
-        // todo: find better approach
 
-        int itemId = itemRepository.addItem(gameSystemId, item);
-        itemRepository.addItemTags(gameSystemId, itemId, item.getTags());
-        itemRepository.addItemModifiers(gameSystemId, itemId,item.getModifiers());
-        Item addedItem = itemRepository.getItem(gameSystemId, itemId);
-        items.getValue().add(addedItem);
-        items.setValue(items.getValue());
-        Log.e("ADD ITEM", "successfully add item");
+        itemRepository.addItem(gameSystemId, item, result ->  {
+            if (result instanceof Result.Success) {
+                systemItems.getValue().add(((Result.Success<Item>) result).data);
+                systemItems.setValue(systemItems.getValue());
+                Log.e("ADD ITEM", "successfully add item");
+            }
+            //todo handle error
+        });
     }
 
     public void editItem(Item item, int itemId, int gameSystemId) {
@@ -66,10 +67,8 @@ public class ItemViewModel extends AndroidViewModel {
             systemItems.setValue(new ArrayList<>());
             loadItems(gameSystemId);
         }
-        MutableLiveData<List<Item>> items = systemItems;
-        // todo: find better approach
 
-        Item oldItem = itemRepository.getItem(gameSystemId ,itemId);
+        /*Item oldItem = itemRepository.getItem(gameSystemId ,itemId);
         List<Tag> addedTags = new ArrayList<>(item.getTags());
         addedTags.removeAll(oldItem.getTags());
 
@@ -82,6 +81,8 @@ public class ItemViewModel extends AndroidViewModel {
         List<Modifier> deletedModifier = new ArrayList<>(oldItem.getModifiers());
         deletedModifier.removeAll(item.getModifiers());
 
+
+
         itemRepository.addItemTags(gameSystemId, itemId, addedTags);
         for (Tag tag: deletedTags) {
             itemRepository.deleteItemTag(gameSystemId, itemId, tag);
@@ -90,21 +91,23 @@ public class ItemViewModel extends AndroidViewModel {
         itemRepository.addItemModifiers(gameSystemId, itemId, addedModifier);
         for (Modifier modifier: deletedModifier) {
             itemRepository.deleteItemModifier(gameSystemId, itemId, modifier);
-        }
+        }*/
 
-        itemRepository.editItem(gameSystemId, itemId, item);
-
-        Item addedItem = itemRepository.getItem(gameSystemId ,itemId);
-
-        for (int i = 0; i < items.getValue().size(); ++i) {
-            if (items.getValue().get(i).getId() == itemId) {
-                items.getValue().remove(i);
-                items.getValue().add(i, addedItem);
-                break;
+        itemRepository.editItem(gameSystemId, itemId, item, result -> {
+            if (result instanceof Result.Success) {
+                for (int i = 0; i < systemItems.getValue().size(); ++i) {
+                    if (systemItems.getValue().get(i).getId() == itemId) {
+                        systemItems.getValue().remove(i);
+                        systemItems.getValue().add(i, ((Result.Success<Item>) result).data);
+                        break;
+                    }
+                }
+                systemItems.setValue(systemItems.getValue());
+                Log.e("EDIT ITEM", "successfully edit item");
             }
-        }
-        items.setValue(items.getValue());
-        Log.e("EDIT ITEM", "successfully edit item");
+        });
+
+
     }
 
     public void deleteItem(int itemId, int gameSystemId) {
@@ -114,25 +117,34 @@ public class ItemViewModel extends AndroidViewModel {
         }
         MutableLiveData<List<Item>> items = systemItems;
         // todo: find better approach
-        Item oldItem = itemRepository.getItem(gameSystemId ,itemId);
-        itemRepository.editItem(gameSystemId, itemId, new Item(oldItem.getId(), oldItem.getPictureId(), oldItem.getName(), oldItem.getTags(), oldItem.getModifiers(), true));
-        Item editedItem = itemRepository.getItem(gameSystemId, itemId);
 
-        for (int i = 0; i < items.getValue().size(); ++i) {
-            if (items.getValue().get(i).getId() == itemId) {
-                items.getValue().remove(i);
-                items.getValue().add(i, editedItem);
-                break;
+        Item oldItem = systemItems.getValue().get(itemId);
+
+        itemRepository.editItem(gameSystemId, itemId, new Item(oldItem.getId(), oldItem.getPictureId(),
+                oldItem.getName(), oldItem.getTags(), oldItem.getModifiers(), true), result -> {
+            if (result instanceof Result.Success) {
+                for (int i = 0; i < systemItems.getValue().size(); ++i) {
+                    if (systemItems.getValue().get(i).getId() == itemId) {
+                        systemItems.getValue().remove(i);
+                        systemItems.getValue().add(i, ((Result.Success<Item>) result).data);
+                        break;
+                    }
+                }
+                systemItems.setValue(systemItems.getValue());
+                Log.e("DELETE ITEM", "successfully deleted item");
             }
-        }
-        items.setValue(items.getValue());
-        Log.e("DELETE ITEM", "successfully deleted item");
+        });
     }
 
 
 
     public void loadItems(int gameSystemId) {
         Log.e("ItemViewModel", "loading data");
-        systemItems.setValue(itemRepository.getItems(gameSystemId));
+        itemRepository.getItems(gameSystemId, result -> {
+            if (result instanceof Result.Success) {
+                systemItems.setValue(((Result.Success<List<Item>>) result).data);
+            }
+            //todo handle error;
+        });
     }
 }

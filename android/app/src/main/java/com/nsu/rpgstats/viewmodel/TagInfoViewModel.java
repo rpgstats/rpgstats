@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.nsu.rpgstats.data.Result;
 import com.nsu.rpgstats.data.tags.TagRepository;
 import com.nsu.rpgstats.entities.Tag;
 
@@ -28,6 +29,10 @@ public class TagInfoViewModel extends ViewModel {
     }
 
     public void loadItem() {
-        tag.setValue(repository.getTag(gameSystemId, tagId));
+        repository.getTag(gameSystemId, tagId, result -> {
+            if (result instanceof Result.Success) {
+                tag.setValue(((Result.Success<Tag>) result).data);
+            }
+        });
     }
 }

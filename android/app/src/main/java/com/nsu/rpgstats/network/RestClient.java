@@ -1,18 +1,16 @@
 package com.nsu.rpgstats.network;
 
-import android.app.Application;
-import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.loader.ResourcesProvider;
 import android.util.Log;
 
-import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.network.dto.LoginRequest;
 import com.nsu.rpgstats.network.dto.LoginResponse;
 import com.nsu.rpgstats.network.dto.MessageResponse;
 import com.nsu.rpgstats.network.dto.SignupRequest;
 import com.nsu.rpgstats.network.services.AuthService;
 import com.nsu.rpgstats.network.services.GamesystemsService;
+import com.nsu.rpgstats.network.services.ItemService;
+import com.nsu.rpgstats.network.services.ModifierService;
+import com.nsu.rpgstats.network.services.TagService;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -30,15 +28,13 @@ public class RestClient {
     // Если тестируется на телефоне и он подключен к той же сети, что и комп, то
     // нужно здесь указать адрес компа в локалке (его можно найти в ipconfig)
     // подробнее -- https://stackoverflow.com/questions/4779963/how-can-i-access-my-localhost-from-my-android-device
-    private final String BASE_URL = "localhost:8080/";
-    private final RpgstatsService rpgstatsService;
-    private final ItemService itemService;
-    private final TagService tagService;
-    private final ModifierService modifierService;
 
     private final GamesystemsService gamesystemsService;
     private final AuthService authService;
     private final AuthInterceptor authInterceptor;
+    private final ItemService itemService;
+    private final TagService tagService;
+    private final ModifierService modifierService;
 
     public static RestClient getInstance(String serverAddress) {
         if (restClient == null) {
@@ -74,6 +70,9 @@ public class RestClient {
                 .build();
         gamesystemsService = retrofit.create(GamesystemsService.class);
         authService = retrofit.create(AuthService.class);
+        itemService = retrofit.create(ItemService.class);
+        tagService = retrofit.create(TagService.class);
+        modifierService = retrofit.create(ModifierService.class);
 
         // todo: This setup exsists only while not realized login functionality
         testSetupAuth();
@@ -118,11 +117,6 @@ public class RestClient {
 
                     }
                 });
-
-        rpgstatsService = retrofit.create(RpgstatsService.class);
-        itemService = retrofit.create(ItemService.class);
-        tagService = retrofit.create(TagService.class);
-        modifierService = retrofit.create(ModifierService.class);
     }
 
     private OkHttpClient createOkHttpClient() {

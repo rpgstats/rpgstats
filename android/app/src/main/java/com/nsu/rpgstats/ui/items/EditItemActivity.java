@@ -15,6 +15,7 @@ import android.view.View;
 
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
+import com.nsu.rpgstats.data.Result;
 import com.nsu.rpgstats.databinding.ActivityEditItemBinding;
 import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.entities.Modifier;
@@ -61,8 +62,28 @@ public class EditItemActivity extends AppCompatActivity {
         ItemInfoViewModel itemInfoViewModel = new ItemInfoViewModel(gameSystemId ,itemId, ((RpgstatsApplication) getApplication()).appContainer.itemRepository);
         item = itemInfoViewModel.getItemInfo().getValue();
 
-        menuAllTags = ((RpgstatsApplication)getApplication()).appContainer.tagRepository.getTags(gameSystemId);
-        menuAllModifiers = ((RpgstatsApplication)getApplication()).appContainer.modifierRepository.getModifiers(gameSystemId);
+        menuAllTags = new ArrayList<>();
+        ((RpgstatsApplication)getApplication()).appContainer.tagRepository.getTags(gameSystemId, result ->  {
+            if (result instanceof Result.Success) {
+                menuAllTags = ((Result.Success<List<Tag>>) result).data;
+                menuAllTagBadgeAdapter.setBadgesList(menuAllTags);
+                menuAllTagBadgeAdapter.notifyDataSetChanged();
+                return;
+            }
+            //todo handle error
+        });
+        menuAllModifiers = new ArrayList<>();
+        ((RpgstatsApplication)getApplication()).appContainer.modifierRepository.getModifiers(gameSystemId, result ->  {
+            if (result instanceof Result.Success) {
+                menuAllModifiers = ((Result.Success<List<Modifier>>) result).data;
+                menuAllModifierBadgeAdapter.setBadgesList(menuAllModifiers);
+                menuAllModifierBadgeAdapter.notifyDataSetChanged();
+                return;
+            }
+            //todo handle error
+        });
+
+
         menuTags = new ArrayList<>();
         menuModifiers = new ArrayList<>();
 

@@ -130,7 +130,7 @@ public class ViewItemInfoActivity extends AppCompatActivity {
         });
 
         setOnClickListener(binding.DeleteOverlay.DeleteYesButton, view -> {
-            ItemViewModel itemViewModel = ItemsActivity.viewModelProvider.get(ItemViewModel.class);
+            ItemViewModel itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
             itemViewModel.deleteItem(itemId, gameSystemId);
             Intent intent = new Intent();
             setResult(Activity.RESULT_OK, intent);

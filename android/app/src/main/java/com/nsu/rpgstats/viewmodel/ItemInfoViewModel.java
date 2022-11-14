@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.nsu.rpgstats.data.Result;
 import com.nsu.rpgstats.data.items.ItemRepository;
 import com.nsu.rpgstats.entities.Item;
 
@@ -28,7 +29,11 @@ public class ItemInfoViewModel extends ViewModel {
     }
 
     public void loadItem() {
-        item.setValue(repository.getItem(gameSystemId, itemId));
+        repository.getItem(gameSystemId, itemId, result -> {
+            if (result instanceof Result.Success) {
+                item.setValue(((Result.Success<Item>) result).data);
+            }
+        });
     }
 
 }

@@ -2,6 +2,8 @@ package com.nsu.rpgstats.data.items;
 
 import android.util.Log;
 
+import com.nsu.rpgstats.data.RepositoryCallback;
+import com.nsu.rpgstats.data.Result;
 import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.entities.Modifier;
 import com.nsu.rpgstats.entities.Parameter;
@@ -32,49 +34,47 @@ public class PlugItemRepository implements ItemRepository{
             tags.add(new Tag(2, "tag 3" + i, "Date", false));
             tags.add(new Tag(3, "tag 4" + i, "Date", false));
             List<Modifier> modifiers = new ArrayList<>();
-            modifiers.add(new Modifier(1, "Attack up 1_" + i, i,
-                    new Parameter(i * 10 + 1, "Attack", new Date(), 0, 993)));
-            modifiers.add(new Modifier(2, "Attack up 2_" + i, i,
-                    new Parameter(i * 10 + 2,"Attack", new Date(), 0, 993)));
-            modifiers.add(new Modifier(3, "Attack up 3_" + i, i,
-                    new Parameter(i * 10 + 3,"Attack", new Date(), 0, 993)));
-            modifiers.add(new Modifier(4, "Attack up 4_" + i, i,
-                    new Parameter(i * 10 + 4,"Attack", new Date(), 0, 993)));
+            modifiers.add(new Modifier(1, "Attack up 1_" + i, i, i, "Attack"));
+            modifiers.add(new Modifier(2, "Attack up 2_" + i, i, i, "Attack"));
+            modifiers.add(new Modifier(3, "Attack up 3_" + i, i, i, "Attack"));
+            modifiers.add(new Modifier(4, "Attack up 4_" + i, i, i, "Attack"));
             items.put(i, new Item(i, 1337, "item " + i, tags, modifiers, false));
         }
     }
 
+
     @Override
-    public List<Item> getItems(int gameSystem) {
-        return  new ArrayList<>(items.values());
+    public void getItems(int gameSystemId, RepositoryCallback<List<Item>> callback) {
+        callback.onComplete(new Result.Success<>(new ArrayList<>(items.values())));
     }
 
     @Override
-    public Item getItem(int gameSystem, int id) {
-        return items.get(id);
+    public void getItem(int gameSystemId, int id, RepositoryCallback<Item> callback) {
+        callback.onComplete(new Result.Success<>(items.get(id)));
     }
 
     @Override
-    public int addItem(int gameSystem, Item item) {
+    public void addItem(int gameSystemId, Item item, RepositoryCallback<Item> callback) {
         Item newItem = new Item(currentId, item.getPictureId(), item.getName(), item.getTags(), item.getModifiers(), item.isDeleted());
         items.put(currentId, newItem);
-        return currentId++;
+        callback.onComplete(new Result.Success<>(items.get(currentId)));
+        currentId++;
     }
 
     @Override
-    public int editItem(int gameSystem, int id, Item item) {
+    public void editItem(int gameSystemId, int id, Item item, RepositoryCallback<Item> callback) {
         Item newItem = new Item(id, item.getPictureId(), item.getName(), items.get(id).getTags(), items.get(id).getModifiers(), item.isDeleted());
         items.put(id, newItem);
-        return id;
+        callback.onComplete(new Result.Success<>(items.get(id)));
     }
 
     @Override
-    public List<Tag> getItemTags(int gameSystemId, int itemId) {
-        return items.get(itemId).getTags();
+    public void getItemTags(int gameSystemId, int itemId, RepositoryCallback<List<Tag>> callback) {
+        callback.onComplete(new Result.Success<>(new ArrayList<>(items.get(itemId).getTags())));
     }
 
     @Override
-    public List<Tag> addItemTags(int gameSystemId, int itemId, List<Tag> tags) {
+    public void addItemTags(int gameSystemId, int itemId, List<Tag> tags, RepositoryCallback<List<Tag>> callback) {
         Item item = items.get(itemId);
         List<Tag> tagList = item.getTags();
         tagList.addAll(tags);
@@ -84,22 +84,23 @@ public class PlugItemRepository implements ItemRepository{
         }
         List<Tag> tagSet = new ArrayList<>(set.values());
         items.get(itemId).setTags(tagSet);
-        return tagSet;
+
+        callback.onComplete(new Result.Success<>(tagSet));
     }
 
     @Override
-    public Tag deleteItemTag(int gameSystemId, int itemId, Tag tag) {
+    public void deleteItemTag(int gameSystemId, int itemId, Tag tag, RepositoryCallback<Tag> callback) {
         items.get(itemId).getTags().remove(tag);
-        return tag;
+        callback.onComplete(new Result.Success<>(tag));
     }
 
     @Override
-    public List<Modifier> getItemModifiers(int gameSystemId, int itemId) {
-        return items.get(itemId).getModifiers();
+    public void getItemModifiers(int gameSystemId, int itemId, RepositoryCallback<List<Modifier>> callback) {
+        callback.onComplete(new Result.Success<>(new ArrayList<>(items.get(itemId).getModifiers())));
     }
 
     @Override
-    public List<Modifier> addItemModifiers(int gameSystemId, int itemId, List<Modifier> modifiers) {
+    public void addItemModifiers(int gameSystemId, int itemId, List<Modifier> modifiers, RepositoryCallback<List<Modifier>> callback) {
         Item item = items.get(itemId);
         List<Modifier> modifierList = item.getModifiers();
         modifierList.addAll(modifiers);
@@ -109,12 +110,13 @@ public class PlugItemRepository implements ItemRepository{
         }
         List<Modifier> modifierSet = new ArrayList<>(set.values());
         items.get(itemId).setModifiers(modifierSet);
-        return modifierSet;
+
+        callback.onComplete(new Result.Success<>(modifierSet));
     }
 
     @Override
-    public Modifier deleteItemModifier(int gameSystemId, int itemId, Modifier modifier) {
+    public void deleteItemModifier(int gameSystemId, int itemId, Modifier modifier, RepositoryCallback<Modifier> callback) {
         items.get(itemId).getModifiers().remove(modifier);
-        return modifier;
+        callback.onComplete(new Result.Success<>(modifier));
     }
 }

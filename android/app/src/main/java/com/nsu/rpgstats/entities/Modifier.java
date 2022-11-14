@@ -1,29 +1,33 @@
 package com.nsu.rpgstats.entities;
 
-import com.nsu.rpgstats.data.ParameterRepository;
-import com.nsu.rpgstats.network.DTO.ModifierDTO;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
 public class Modifier implements Identifiable{
+    @SerializedName("id")
+    @Expose
     private Integer id;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("value")
+    @Expose
     private Integer value;
-    private Parameter parameter;
+    @SerializedName("parameterId")
+    @Expose
+    private Integer parameterId;
+    @SerializedName("parameterName")
+    @Expose
+    private String parameterName;
 
-    public Modifier(Integer id, String name, Integer value, Parameter parameter) {
+    public Modifier(Integer id, String name, Integer value, Integer parameterId, String parameterName) {
         this.id = id;
         this.name = name;
         this.value = value;
-        this.parameter = parameter;
-    }
-
-    public Modifier(ModifierDTO modifierDTO, ParameterRepository repository) {
-        this.id = modifierDTO.getId();
-        this.name = modifierDTO.getName();
-        this.value = modifierDTO.getValue();//Todo change
-        this.parameter = repository.getParameter(modifierDTO.getSystemId(), modifierDTO.getParameterId());
-        //todo parameters
+        this.parameterId = parameterId;
+        this.parameterName = parameterName;
     }
 
     public Integer getId() {
@@ -50,12 +54,20 @@ public class Modifier implements Identifiable{
         this.value = value;
     }
 
-    public Parameter getParameter() {
-        return parameter;
+    public Integer getParameterId() {
+        return parameterId;
     }
 
-    public void setParameter(Parameter parameter) {
-        this.parameter = parameter;
+    public void setParameterId(Integer parameterId) {
+        this.parameterId = parameterId;
+    }
+
+    public String getParameterName() {
+        return parameterName;
+    }
+
+    public void setParameterName(String parameterName) {
+        this.parameterName = parameterName;
     }
 
     @Override

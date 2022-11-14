@@ -14,6 +14,7 @@ import com.nsu.rpgstats.data.parameters.PlugParameterRepository;
 import com.nsu.rpgstats.data.properties.PlugPropertyRepository;
 import com.nsu.rpgstats.data.properties.PropertyRepository;
 import com.nsu.rpgstats.data.gamesystems.RestGameSystemsRepository;
+import com.nsu.rpgstats.data.tags.RestTagRepository;
 import com.nsu.rpgstats.entities.GameSystem;
 import com.nsu.rpgstats.data.items.PlugItemRepository;
 import com.nsu.rpgstats.data.tags.PlugTagRepository;
@@ -43,6 +44,7 @@ public class AppContainer {
         Log.e(TAG, context.toString());
         RestClient restClient = RestClient.getInstance(getServerAddrFromConfig());
         gameSystemsRepository = new RestGameSystemsRepository(restClient.getRpgstatsService());
+        tagRepository = new RestTagRepository(restClient.getTagService());
     }
 
     private String getServerAddrFromConfig() {

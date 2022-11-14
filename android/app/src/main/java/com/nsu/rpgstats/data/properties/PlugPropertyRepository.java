@@ -38,14 +38,10 @@ public class PlugPropertyRepository implements PropertyRepository {
                 constraints.add(new Constraint(i*10+j, "Constraint " + i*10+j, (i%2==0), tags));
             }
             List<Modifier> modifiers = new ArrayList<>();
-            modifiers.add(new Modifier(1, "Attack up 1_" + i, i,
-                    new Parameter(i, "Attack", new Date(), 0, 993)));
-            modifiers.add(new Modifier(2, "Attack up 2_" + i, i,
-                    new Parameter(i, "Attack", new Date(), 0, 993)));
-            modifiers.add(new Modifier(3, "Attack up 3_" + i, i,
-                    new Parameter(i,"Attack", new Date(), 0, 993)));
-            modifiers.add(new Modifier(4, "Attack up 4_" + i, i,
-                    new Parameter(i,"Attack", new Date(), 0, 993)));
+            modifiers.add(new Modifier(1, "Attack up 1_" + i, i, i, "Attack"));
+            modifiers.add(new Modifier(2, "Attack up 2_" + i, i, i, "Attack"));
+            modifiers.add(new Modifier(3, "Attack up 3_" + i, i, i, "Attack"));
+            modifiers.add(new Modifier(4, "Attack up 4_" + i, i, i, "Attack"));
             properties.put(i, new Property(i, "Attack up prop", false, modifiers, constraints));
         }
     }

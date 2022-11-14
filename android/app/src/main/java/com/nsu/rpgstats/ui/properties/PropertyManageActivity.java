@@ -95,7 +95,8 @@ public class PropertyManageActivity extends AppCompatActivity {
         addModif.setOnClickListener(view -> {
             ModifierRepository rep = ((RpgstatsApplication) getApplication()).appContainer.modifierRepository;
             // All modifiers
-            List<Modifier> modifs = rep.getModifiers(0);
+            List<Modifier> modifs = new ArrayList<>();
+            rep.getModifiers(0, result -> {});
 
             // All modifiers that are not currently in property
             List<Modifier> absentModifs = new ArrayList<>();

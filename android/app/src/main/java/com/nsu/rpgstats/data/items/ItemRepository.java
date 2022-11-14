@@ -1,5 +1,6 @@
 package com.nsu.rpgstats.data.items;
 
+import com.nsu.rpgstats.data.RepositoryCallback;
 import com.nsu.rpgstats.entities.GameSystem;
 import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.entities.Modifier;
@@ -8,24 +9,24 @@ import com.nsu.rpgstats.entities.Tag;
 import java.util.List;
 
 public interface ItemRepository {
-    List<Item> getItems(int gameSystemId);
+    void getItems(int gameSystemId, RepositoryCallback<List<Item>> callback);
 
-    Item getItem(int gameSystemId, int id);
+    void getItem(int gameSystemId, int id, RepositoryCallback<Item> callback);
 
-    int addItem(int gameSystemId, Item item);
+    void addItem(int gameSystemId, Item item, RepositoryCallback<Item> callback);
 
-    int editItem(int gameSystemId, int id, Item item);
+    void editItem(int gameSystemId, int id, Item item, RepositoryCallback<Item> callback);
 
-    List<Tag> getItemTags(int gameSystemId, int itemId);
+    void getItemTags(int gameSystemId, int itemId, RepositoryCallback<List<Tag>> callback);
 
-    List<Tag> addItemTags(int gameSystemId, int itemId, List<Tag> tags);
+    void addItemTags(int gameSystemId, int itemId, List<Tag> tags, RepositoryCallback<List<Tag>> callback);
 
-    Tag deleteItemTag(int gameSystemId, int itemId, Tag tag);
+    void deleteItemTag(int gameSystemId, int itemId, Tag tag, RepositoryCallback<Tag> callback);
 
-    List<Modifier> getItemModifiers(int gameSystemId, int itemId);
+    void getItemModifiers(int gameSystemId, int itemId, RepositoryCallback<List<Modifier>> callback);
 
-    List<Modifier> addItemModifiers(int gameSystemId, int itemId, List<Modifier> modifiers);
+    void addItemModifiers(int gameSystemId, int itemId, List<Modifier> modifiers, RepositoryCallback<List<Modifier>> callback);
 
-    Modifier deleteItemModifier(int gameSystemId, int itemId, Modifier modifier);
+    void deleteItemModifier(int gameSystemId, int itemId, Modifier modifier, RepositoryCallback<Modifier> callback);
 
 }

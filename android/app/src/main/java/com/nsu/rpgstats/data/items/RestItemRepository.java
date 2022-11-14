@@ -1,39 +1,73 @@
-package com.nsu.rpgstats.data;
+package com.nsu.rpgstats.data.items;
 
-import android.util.Log;
-
-import androidx.lifecycle.MutableLiveData;
-
-import com.nsu.rpgstats.RpgstatsApplication;
-import com.nsu.rpgstats.entities.GameSystem;
+import com.nsu.rpgstats.data.RepositoryCallback;
 import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.entities.Modifier;
 import com.nsu.rpgstats.entities.Tag;
-import com.nsu.rpgstats.network.DTO.ItemDTO;
-import com.nsu.rpgstats.network.DTO.ModifierDTO;
-import com.nsu.rpgstats.network.DTO.TagDTO;
-import com.nsu.rpgstats.network.ItemService;
-import com.nsu.rpgstats.network.RestClient;
-import com.nsu.rpgstats.network.RpgstatsService;
+import com.nsu.rpgstats.network.services.ItemService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RestItemRepository implements ItemRepository{
     private static final String TAG = RestItemRepository.class.getSimpleName();
     private final ItemService service;
 
-    public RestItemRepository() {
-        service = RestClient.getInstance().getItemService();
+    public RestItemRepository(ItemService service) {
+        this.service = service;
     }
 
     @Override
-    public List<Item> getItems(int gameSystemId) {
+    public void getItems(int gameSystemId, RepositoryCallback<List<Item>> callback) {
+
+    }
+
+    @Override
+    public void getItem(int gameSystemId, int id, RepositoryCallback<Item> callback) {
+
+    }
+
+    @Override
+    public void addItem(int gameSystemId, Item item, RepositoryCallback<Item> callback) {
+
+    }
+
+    @Override
+    public void editItem(int gameSystemId, int id, Item item, RepositoryCallback<Item> callback) {
+
+    }
+
+    @Override
+    public void getItemTags(int gameSystemId, int itemId, RepositoryCallback<List<Tag>> callback) {
+
+    }
+
+    @Override
+    public void addItemTags(int gameSystemId, int itemId, List<Tag> tags, RepositoryCallback<List<Tag>> callback) {
+
+    }
+
+    @Override
+    public void deleteItemTag(int gameSystemId, int itemId, Tag tag, RepositoryCallback<Tag> callback) {
+
+    }
+
+    @Override
+    public void getItemModifiers(int gameSystemId, int itemId, RepositoryCallback<List<Modifier>> callback) {
+
+    }
+
+    @Override
+    public void addItemModifiers(int gameSystemId, int itemId, List<Modifier> modifiers, RepositoryCallback<List<Modifier>> callback) {
+
+    }
+
+    @Override
+    public void deleteItemModifier(int gameSystemId, int itemId, Modifier modifier, RepositoryCallback<Modifier> callback) {
+
+    }
+
+    /* @Override
+    public void getItems(int gameSystemId) {
         final MutableLiveData<List<Item>> items = new MutableLiveData<>();
         service.getItems(gameSystemId)
                 .enqueue(new Callback<List<ItemDTO>>() {
@@ -58,7 +92,7 @@ public class RestItemRepository implements ItemRepository{
     }
 
     @Override
-    public Item getItem(int gameSystemId, int id) {
+    public void getItem(int gameSystemId, int id) {
         final MutableLiveData<Item> items = new MutableLiveData<>();
         service.getItem(gameSystemId, id)
                 .enqueue(new Callback<ItemDTO>() {
@@ -79,7 +113,7 @@ public class RestItemRepository implements ItemRepository{
     }
 
     @Override
-    public int addItem(int gameSystemId, Item item) {
+    public void addItem(int gameSystemId, Item item) {
         final MutableLiveData<Item> items = new MutableLiveData<>();
         service.addItem(gameSystemId, new ItemDTO(item, gameSystemId))
                 .enqueue(new Callback<ItemDTO>() {
@@ -100,7 +134,7 @@ public class RestItemRepository implements ItemRepository{
     }
 
     @Override
-    public int editItem(int gameSystemId, int id, Item item) {
+    public void editItem(int gameSystemId, int id, Item item) {
         final MutableLiveData<Item> items = new MutableLiveData<>();
         service.editItem(gameSystemId, id, new ItemDTO(item, gameSystemId))
                 .enqueue(new Callback<ItemDTO>() {
@@ -120,7 +154,7 @@ public class RestItemRepository implements ItemRepository{
     }
 
     @Override
-    public List<Tag> getItemTags(int gameSystemId, int itemId) {
+    public void getItemTags(int gameSystemId, int itemId) {
         final MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
         service.getItemTags(gameSystemId, itemId)
                 .enqueue(new Callback<List<TagDTO>>() {
@@ -145,7 +179,7 @@ public class RestItemRepository implements ItemRepository{
     }
 
     @Override
-    public List<Tag> addItemTags(int gameSystemId, int itemId, List<Tag> addTags) {
+    public void addItemTags(int gameSystemId, int itemId, List<Tag> addTags) {
         final MutableLiveData<List<Tag>> tags = new MutableLiveData<>();
         List<TagDTO> tagDTOList = new ArrayList<>();
         for (Tag tag : addTags) {
@@ -174,7 +208,7 @@ public class RestItemRepository implements ItemRepository{
     }
 
     @Override
-    public Tag deleteItemTag(int gameSystemId, int itemId, Tag tag) {
+    public void deleteItemTag(int gameSystemId, int itemId, Tag tag) {
         final MutableLiveData<Tag> tags = new MutableLiveData<>();
         service.deleteItemTag(gameSystemId, itemId, tag.getId())
                 .enqueue(new Callback<TagDTO>() {
@@ -195,7 +229,7 @@ public class RestItemRepository implements ItemRepository{
     }
 
     @Override
-    public List<Modifier> getItemModifiers(int gameSystemId, int itemId) {
+    public void getItemModifiers(int gameSystemId, int itemId) {
         final MutableLiveData<List<Modifier>> modifiers = new MutableLiveData<>();
         service.getItemModifiers(gameSystemId, itemId)
                 .enqueue(new Callback<List<ModifierDTO>>() {
@@ -221,7 +255,7 @@ public class RestItemRepository implements ItemRepository{
     }
 
     @Override
-    public List<Modifier> addItemModifiers(int gameSystemId, int itemId, List<Modifier> addModifiers) {
+    public void addItemModifiers(int gameSystemId, int itemId, List<Modifier> addModifiers) {
         final MutableLiveData<List<Modifier>> modifiers = new MutableLiveData<>();
         List<ModifierDTO> modifierDTOList = new ArrayList<>();
         for (Modifier modifier : addModifiers) {
@@ -250,7 +284,7 @@ public class RestItemRepository implements ItemRepository{
     }
 
     @Override
-    public Modifier deleteItemModifier(int gameSystemId, int itemId, Modifier modifier) {
+    public void deleteItemModifier(int gameSystemId, int itemId, Modifier modifier) {
         final MutableLiveData<Modifier> modifiers = new MutableLiveData<>();
         service.deleteItemModifier(gameSystemId, itemId, modifier.getId())
                 .enqueue(new Callback<ModifierDTO>() {
@@ -267,5 +301,5 @@ public class RestItemRepository implements ItemRepository{
                     }
                 });
         return modifiers.getValue();
-    }
+    }*/
 }
