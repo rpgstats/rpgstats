@@ -9,8 +9,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.nsu.rpgstats.RpgstatsApplication;
-import com.nsu.rpgstats.data.ItemRepository;
-import com.nsu.rpgstats.data.PlugItemRepository;
+import com.nsu.rpgstats.data.items.ItemRepository;
+import com.nsu.rpgstats.data.items.PlugItemRepository;
 import com.nsu.rpgstats.entities.Item;
 
 import java.util.HashMap;

@@ -30,24 +30,24 @@
             android:value="" />
         </activity>
         <activity android:name=".ui.AddGameSystemActivity" />
-        <activity android:name=".ui.GameSystemInfoActivity" />
+        <activity android:name=".ui.gamesystems.GameSystemInfoActivity" />
         <activity
-            android:name=".ui.ItemsActivity"
+            android:name=".ui.items.ItemsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".ui.NpcActivity" />
         <activity android:name=".ui.parameters.ParametersActivity" />
         <activity android:name=".ui.properties.PropertiesActivity" />
         <activity
-            android:name=".ui.TagsActivity"
+            android:name=".ui.tags.TagsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
-            android:name=".ui.AddItemActivity"
+            android:name=".ui.items.AddItemActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".ui.EditItemActivity"
+            android:name=".ui.items.EditItemActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".ui.ViewTagInfoActivity"
+            android:name=".ui.tags.ViewTagInfoActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" >
             <meta-data
@@ -55,7 +55,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.EditTagsActivity"
+            android:name=".ui.tags.EditTagsActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <meta-data
@@ -63,15 +63,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".ui.AddTagsActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".ui.ViewItemInfoActivity"
+            android:name=".ui.items.ViewItemInfoActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <meta-data

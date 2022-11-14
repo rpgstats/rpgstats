@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
-import com.nsu.rpgstats.data.ConstraintRepository;
-import com.nsu.rpgstats.data.ModifierRepository;
-import com.nsu.rpgstats.data.PropertyRepository;
+import com.nsu.rpgstats.data.constraints.ConstraintRepository;
+import com.nsu.rpgstats.data.modifiers.ModifierRepository;
+import com.nsu.rpgstats.data.properties.PropertyRepository;
 import com.nsu.rpgstats.databinding.ActivityPropertyManageBinding;
 import com.nsu.rpgstats.entities.Constraint;
 import com.nsu.rpgstats.entities.Modifier;

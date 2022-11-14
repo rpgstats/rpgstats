@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rounded_border"
-    tools:context=".ui.AddItemActivity">
+    tools:context=".ui.items.AddItemActivity">
 
     <include
         android:id="@+id/Background"
@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".ui.ItemsActivity">
+        tools:context=".ui.items.ItemsActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

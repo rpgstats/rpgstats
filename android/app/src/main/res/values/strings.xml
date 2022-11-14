@@ -117,5 +117,6 @@
     <string name="add_modifier">Add modifier</string>
     <string name="add_constraint">Add constraint</string>
     <string name="add_property">Add property</string>
+    <string name="game_system_description_header">Description</string>
 
 </resources>

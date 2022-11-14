@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nsu.rpgstats.databinding.ActivityMainBinding;
 import com.nsu.rpgstats.entities.GameSystem;
-import com.nsu.rpgstats.ui.GameSystemsAdapter;
-import com.nsu.rpgstats.ui.AddGameActivityResultCallback;
+import com.nsu.rpgstats.ui.gamesystems.GameSystemsAdapter;
+import com.nsu.rpgstats.ui.gamesystems.AddGameActivityResultCallback;
 import com.nsu.rpgstats.ui.AddGameSystemActivity;
-import com.nsu.rpgstats.ui.GameSystemInfoActivity;
+import com.nsu.rpgstats.ui.gamesystems.GameSystemInfoActivity;
 import com.nsu.rpgstats.viewmodel.GameSystemsViewModel;
 
 import java.util.List;
@@ -94,9 +94,8 @@ public class MainActivity extends AppCompatActivity implements GameSystemsAdapte
 
     @Override
     public void onGameSystemClick(int position) {
-        GameSystem mGameSystem = mGameSystems.get(position);
+        ((RpgstatsApplication)getApplication()).appContainer.currentGameSystem = mGameSystems.get(position);
         Intent intent = new Intent(this, GameSystemInfoActivity.class);
-        intent.putExtra("id", mGameSystem.getId().toString());
         startActivity(intent);
     }
 }

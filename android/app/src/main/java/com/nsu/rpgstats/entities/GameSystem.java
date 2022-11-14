@@ -5,34 +5,35 @@ import java.util.Objects;
 
 public class GameSystem {
     private Integer id;
-    private String systemName;
+    private String name;
     private String creationDate;
     private String owner;
+    private String description;
     private int gameSessionNumber;
     private int childGameSystemNumber;
     private int itemsNumber;
     private int npcNumber;
-    private int ownerId;
 
-    public GameSystem(String systemName) {
-        this.systemName = systemName;
+    public GameSystem(String systemName, String description) {
+        this.name = systemName;
+        this.description = description;
     }
 
     public GameSystem(Integer id, String systemName, String creationDate, String owner,
-                      int gameSessionNumber, int childGameSystemNumber, int itemsNumber, int npcNumber, int ownerId) {
+                      String description, int gameSessionNumber, int childGameSystemNumber, int itemsNumber, int npcNumber) {
         this.id = id;
         this.creationDate = creationDate;
-        this.systemName = systemName;
+        this.name = systemName;
         this.owner = owner;
+        this.description = description;
         this.gameSessionNumber = gameSessionNumber;
         this.childGameSystemNumber = childGameSystemNumber;
         this.itemsNumber = itemsNumber;
         this.npcNumber = npcNumber;
-        this.ownerId = ownerId;
     }
 
-    public String getSystemName() {
-        return systemName;
+    public String getName() {
+        return name;
     }
 
     public String getCreationDate() {
@@ -63,6 +64,10 @@ public class GameSystem {
         return owner;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,12 +76,14 @@ public class GameSystem {
         return gameSessionNumber == that.gameSessionNumber &&
                 childGameSystemNumber == that.childGameSystemNumber &&
                 itemsNumber == that.itemsNumber && npcNumber == that.npcNumber &&
-                Objects.equals(id, that.id) && Objects.equals(systemName, that.systemName) &&
+                Objects.equals(id, that.id) && Objects.equals(name, that.name) &&
                 Objects.equals(creationDate, that.creationDate) && Objects.equals(owner, that.owner);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, systemName, creationDate, owner, gameSessionNumber, childGameSystemNumber, itemsNumber, npcNumber);
+        return Objects.hash(id, name, creationDate, owner, gameSessionNumber, childGameSystemNumber, itemsNumber, npcNumber);
     }
+
+
 }

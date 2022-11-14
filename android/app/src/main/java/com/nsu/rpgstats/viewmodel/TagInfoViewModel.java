@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.nsu.rpgstats.data.ItemRepository;
-import com.nsu.rpgstats.data.TagRepository;
-import com.nsu.rpgstats.entities.Item;
+import com.nsu.rpgstats.data.tags.TagRepository;
 import com.nsu.rpgstats.entities.Tag;
 
 public class TagInfoViewModel extends ViewModel {

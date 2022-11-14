@@ -2,14 +2,9 @@ package com.nsu.rpgstats.ui.properties;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -18,10 +13,9 @@ import android.widget.Toast;
 
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
-import com.nsu.rpgstats.data.PropertyRepository;
+import com.nsu.rpgstats.data.properties.PropertyRepository;
 import com.nsu.rpgstats.databinding.ActivityPropertyDetailsBinding;
 import com.nsu.rpgstats.entities.Property;
-import com.nsu.rpgstats.ui.ConfirmationFragment;
 import com.nsu.rpgstats.ui.ManageFormMode;
 
 public class PropertyDetailsActivity extends AppCompatActivity {

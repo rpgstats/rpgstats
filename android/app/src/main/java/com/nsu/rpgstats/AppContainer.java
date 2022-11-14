@@ -1,21 +1,20 @@
 package com.nsu.rpgstats;
 
-import com.nsu.rpgstats.data.ConstraintRepository;
-import com.nsu.rpgstats.data.GameSystemsRepository;
-import com.nsu.rpgstats.data.ItemRepository;
-import com.nsu.rpgstats.data.ModifierRepository;
-import com.nsu.rpgstats.data.ParameterRepository;
-import com.nsu.rpgstats.data.PlugConstraintRepository;
-import com.nsu.rpgstats.data.PlugGameSystemsRepository;
-import com.nsu.rpgstats.data.PlugModifierRepository;
-import com.nsu.rpgstats.data.PlugParameterRepository;
-import com.nsu.rpgstats.data.PlugPropertyRepository;
-import com.nsu.rpgstats.data.PropertyRepository;
-import com.nsu.rpgstats.data.RestGameSystemsRepository;
+import com.nsu.rpgstats.data.constraints.ConstraintRepository;
+import com.nsu.rpgstats.data.gamesystems.GameSystemsRepository;
+import com.nsu.rpgstats.data.items.ItemRepository;
+import com.nsu.rpgstats.data.modifiers.ModifierRepository;
+import com.nsu.rpgstats.data.parameters.ParameterRepository;
+import com.nsu.rpgstats.data.constraints.PlugConstraintRepository;
+import com.nsu.rpgstats.data.modifiers.PlugModifierRepository;
+import com.nsu.rpgstats.data.parameters.PlugParameterRepository;
+import com.nsu.rpgstats.data.properties.PlugPropertyRepository;
+import com.nsu.rpgstats.data.properties.PropertyRepository;
+import com.nsu.rpgstats.data.gamesystems.RestGameSystemsRepository;
 import com.nsu.rpgstats.entities.GameSystem;
-import com.nsu.rpgstats.data.PlugItemRepository;
-import com.nsu.rpgstats.data.PlugTagRepository;
-import com.nsu.rpgstats.data.TagRepository;
+import com.nsu.rpgstats.data.items.PlugItemRepository;
+import com.nsu.rpgstats.data.tags.PlugTagRepository;
+import com.nsu.rpgstats.data.tags.TagRepository;
 
 public class AppContainer {
     public GameSystemsRepository gameSystemsRepository = new RestGameSystemsRepository();

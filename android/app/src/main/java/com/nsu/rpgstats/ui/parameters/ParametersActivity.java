@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
-import com.nsu.rpgstats.data.ParameterRepository;
+import com.nsu.rpgstats.data.parameters.ParameterRepository;
 import com.nsu.rpgstats.databinding.ActivityParametersBinding;
 import com.nsu.rpgstats.entities.Parameter;
 import com.nsu.rpgstats.ui.ManageFormMode;

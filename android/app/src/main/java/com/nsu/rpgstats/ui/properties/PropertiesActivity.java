@@ -7,11 +7,10 @@ import android.widget.SimpleAdapter;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
-import com.nsu.rpgstats.data.PropertyRepository;
+import com.nsu.rpgstats.data.properties.PropertyRepository;
 import com.nsu.rpgstats.databinding.ActivityPropertiesBinding;
 import com.nsu.rpgstats.entities.Property;
 import com.nsu.rpgstats.ui.ManageFormMode;

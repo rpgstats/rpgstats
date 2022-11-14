@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.nsu.rpgstats.data.ItemRepository;
+import com.nsu.rpgstats.data.items.ItemRepository;
 import com.nsu.rpgstats.entities.Item;
 
 public class ItemInfoViewModel extends ViewModel {

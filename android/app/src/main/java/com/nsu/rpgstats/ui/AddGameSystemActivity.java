@@ -8,8 +8,8 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
-import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.databinding.ActivityAddGameSystemBinding;
+import com.nsu.rpgstats.ui.gamesystems.AddGameActivityResultCallback;
 
 public class AddGameSystemActivity extends Activity {
     private ActivityAddGameSystemBinding binding;
@@ -20,11 +20,14 @@ public class AddGameSystemActivity extends Activity {
         setContentView(binding.getRoot());
 
         EditText nameEdit = binding.newGameSystemNameEdit;
+        EditText descriptionEdit = binding.newGameSystemDescriptionEdit;
         Button addGameButton = binding.addGameSystemButton;
         addGameButton.setOnClickListener(view -> {
             String gameName = nameEdit.getText().toString();
+            String description = descriptionEdit.getText().toString();
             Intent intent = new Intent();
-            intent.putExtra(AddGameActivityResultCallback.GAME_SYSTEM_EXTRA, gameName);
+            intent.putExtra(AddGameActivityResultCallback.GAME_SYSTEM_NAME_EXTRA, gameName);
+            intent.putExtra(AddGameActivityResultCallback.GAME_SYSTEM_DESCRIPTION_EXTRA, description);
             setResult(Activity.RESULT_OK, intent);
             finish();
         });
