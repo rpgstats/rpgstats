@@ -1,0 +1,2407 @@
+openapi: 3.0.0
+info:
+  title: Swagger RPGStats - OpenAPI 3.0
+  description: |-
+    There are dozens of ways to have equipment and weapons in rpg setting, which have some stats, influencing a character. Moreover, character himself can have traits, doing the same. Sometimes, there is a need to emulate that stuff without usage of official ways, or even there are no ways - you just have imagined that for another pen&paper game with your friends.
+    
+    There is a chance, that this thingy can help you!
+ 
+  version: 1.0.0
+
+servers:
+  - url: http://localhost/api/v1
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Auth
+    description: Auth operations
+  - name: Game systems
+    description: Everything about game systems
+  - name: User game systems
+    description: Everything about user game systems
+  - name: User characters
+    description: Everything about user characters
+  - name: Sessions
+    description: Everything about sessions
+  - name: User sessions
+    description: Everything about user sessions
+
+paths:
+  /signup:
+    post:
+      tags:
+      - Auth
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupRequest'
+        required: true
+      responses:
+        "201":
+          description: Created
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /auth:
+    post:
+      tags:
+      - Auth
+      operationId: authPost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SigninRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthOkResponse'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /game-systems/search:
+    get:
+      tags:
+      - Game systems
+      operationId: getSystemsByOwnerId_1_1_1_1_1_1
+      parameters:
+      - name: name
+        in: query
+        schema:
+          type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameSystemDto'
+  /game-systems/{id}:
+    get:
+      tags:
+      - Game systems
+      operationId: getSystemById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameSystemDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          
+  /game-systems/{systemId}/tags:
+    get:
+      tags:
+      - Game systems
+      operationId: getTags
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SystemTagDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /game-systems/{systemId}/tags/{tagId}:
+    get:
+      tags:
+      - Game systems
+      parameters:
+        - name: systemId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: tagId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemTagDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /game-systems/{systemId}/parameters:
+    get:
+      tags:
+      - Game systems
+      operationId: getParameters
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SystemParameterDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /game-systems/{systemId}/parameters/{parameterId}:
+    get:
+      tags:
+      - Game systems
+      parameters:
+        - name: systemId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: parameterId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemParameterDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /game-systems/{systemId}/modifiers:
+    get:
+      tags:
+      - Game systems
+      operationId: getParameterModifiers
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SystemParameterModifierDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /game-systems/{systemId}/modifiers/{modifierId}:
+    get:
+      tags:
+      - Game systems
+      parameters:
+        - name: systemId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: modifierId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemParameterModifierDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /game-systems/{systemId}/items:
+    get:
+      tags:
+      - Game systems
+      operationId: getItems
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SystemItemDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /game-systems/{systemId}/items/{itemId}:
+    get:
+      tags:
+      - Game systems
+      parameters:
+        - name: systemId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemItemDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /game-systems/{systemId}/constraints:
+    get:
+      tags:
+      - Game systems
+      operationId: getTags_1
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AttributeConstraintDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /game-systems/{systemId}/constraints/{constraintId}:
+    get:
+      tags:
+      - Game systems
+      operationId: getTag
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: constraintId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeConstraintDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /game-systems/{systemId}/attributes:
+    get:
+      tags:
+      - Game systems
+      operationId: getAttributes
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SystemAttributeDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /game-systems/{systemId}/attributes/{attributeId}:
+    get:
+      tags:
+      - Game systems
+      parameters:
+        - name: systemId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: attributeId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAttributeDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /user/game-systems:
+    post:
+      tags:
+      - User game systems
+      operationId: createSystem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameSystemPostRequest'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameSystemDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/game-systems/{id}:
+    put:
+      tags:
+      - User game systems
+      operationId: changeSystem
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameSystemPutRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameSystemDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - User game systems
+      operationId: deleteSystem
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameSystemDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/game-systems/{systemId}/parameters:
+    post:
+      tags:
+      - User game systems
+      operationId: createParameter
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateParameterPostRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemParameterDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        
+  /user/game-systems/{systemId}/parameters/{parameterId}:
+    put:
+      tags:
+      - User game systems
+      operationId: changeParameter
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: parameterId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeParameterPutRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemParameterDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - User game systems
+      operationId: deleteParameter
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: parameterId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemParameterDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/game-systems/{systemId}/modifiers:
+    post:
+      tags:
+      - User game systems
+      operationId: createParameterModifier
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateParameterModifierPostRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemParameterModifierDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/game-systems/{systemId}/modifiers/{modifierId}:
+    put:
+      tags:
+      - User game systems
+      operationId: changeParameterModifier
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: modifierId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeParameterModifierPutRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemParameterModifierDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - User game systems
+      operationId: deleteParameterModifier
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: modifierId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemParameterModifierDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/game-systems/{systemId}/items:
+    post:
+      tags:
+      - User game systems
+      operationId: createItem
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateItemPostRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemItemDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/game-systems/{systemId}/items/{itemId}:
+    put:
+      tags:
+      - User game systems
+      operationId: changeItem
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeItemPutRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemItemDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - User game systems
+      operationId: deleteItem
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: itemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemItemDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/game-systems/{systemId}/constraints:
+    post:
+      tags:
+      - User game systems
+      operationId: createConstraint
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConstraintPostRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeConstraintDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/game-systems/{systemId}/constraints/{constraintId}:
+    put:
+      tags:
+      - User game systems
+      operationId: changeConstraint
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: constraintId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeConstraintPutRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeConstraintDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - User game systems
+      operationId: deleteConstraint
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: constraintId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeConstraintDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/game-systems/{systemId}/attributes:
+    post:
+      tags:
+      - User game systems
+      operationId: createAttribute
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAttributePostRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAttributeDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/game-systems/{systemId}/attributes/{attributeId}:
+    put:
+      tags:
+      - User game systems
+      operationId: changeAttribute
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: attributeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeAttributePutRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAttributeDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - User game systems
+      operationId: deleteAttribute
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: attributeId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAttributeDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /user/game-systems/{systemId}/tags:
+    post:
+      tags:
+      - User game systems
+      operationId: createTag
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTagPostRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemTagDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/game-systems/{systemId}/tags/{tagId}:
+    put:
+      tags:
+      - User game systems
+      operationId: changeTag
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: tagId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeTagPutRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemTagDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - User game systems
+      operationId: deleteTag
+      parameters:
+      - name: systemId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: tagId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemTagDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/characters:
+    get:
+      tags:
+        - User characters
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserCharacterDto'
+    post:
+      tags:
+        - User characters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCharacterPostRequest'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCharacterDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/characters/{characterId}:
+    get:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCharacterDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCharacterPutRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCharacterDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    
+    delete:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCharacterDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/characters/{characterId}/copy:
+    post:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCharacterDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /user/characters/{characterId}/slots:
+    get:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CharacterSlotDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCharacterSlotPostRequest'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterSlotDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /user/characters/{characterId}/slots/{slotId}:
+    get:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: slotId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterSlotDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: slotId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCharacterSlotPutRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterSlotDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: slotId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterSlotDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /user/characters/{characterId}/slots/{slotId}/tags:
+    get:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: slotId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SystemTagDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: slotId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddSlotTagPostRequest'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/characters/{characterId}/slots/{slotId}/tags/{tagId}:
+    delete:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: slotId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: tagId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemTagDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/characters/{characterId}/attributes:
+    get:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SystemAttributeDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCharacterAttributePostRequest'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAttributeDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/characters/{characterId}/attributes/{attributeId}:
+    delete:
+      tags:
+        - User characters
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: attributeId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemAttributeDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /sessions/search:
+    get:
+      tags:
+        - Sessions
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SessionDto'
+  /sessions/{sessionId}:
+    get:
+      tags:
+        - Sessions
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /sessions/{sessionId}/join:
+    post:
+      tags:
+        - Sessions
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /sessions/{sessionId}/leave:
+    delete:
+      tags:
+        - Sessions
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/sessions:
+    get:
+      tags:
+        - User sessions
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/SessionDto'
+    post:
+      tags:
+        - User sessions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionPostRequest'
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/sessions/{sessionId}:
+    put:
+      tags:
+        - User sessions
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSessionPutRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - User sessions
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/sessions/{sessionId}/characters:
+    get:
+      tags:
+        - User sessions
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SessionCharacterDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /user/sessions/{sessionId}/characters/{characterId}:
+    get:
+      tags:
+        - User sessions
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionCharacterDto'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - User sessions
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: characterId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionCharacterDto'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  
+components:
+  schemas:
+    ChangeParameterPutRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        minValue:
+          type: number
+          format: double
+        maxValue:
+          type: number
+          format: double
+    SystemParameterDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        minValue:
+          type: number
+          format: double
+        maxValue:
+          type: number
+          format: double
+        createdAt:
+          type: string
+          format: date-time
+    ChangeParameterModifierPutRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: number
+          format: double
+        parameterId:
+          type: integer
+          format: int32
+    SystemParameterModifierDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        value:
+          type: number
+          format: double
+        parameterId:
+          type: integer
+          format: int32
+    ChangeItemPutRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        isPresent:
+          type: boolean
+    SystemItemDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isPresent:
+          type: boolean
+    ChangeConstraintPutRequest:
+      type: object
+      properties:
+        constraintTypeId:
+          type: integer
+          format: int32
+        tagId:
+          type: integer
+          format: int32
+        attributeId:
+          type: integer
+          format: int32
+    AttributeConstraintDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        constraintTypeId:
+          type: integer
+          format: int32
+        constraintTypeName:
+          type: string
+        tagId:
+          type: integer
+          format: int32
+        tagName:
+          type: string
+        attributeId:
+          type: integer
+          format: int32
+        attributeName:
+          type: string
+    ChangeAttributePutRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        isPresent:
+          type: boolean
+    SystemAttributeDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isPresent:
+          type: boolean
+    GameSystemPutRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    GameSystemDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        ownerId:
+          type: integer
+          format: int32
+        parentGameSystemId:
+          type: integer
+          format: int32
+    ChangeTagPutRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+    SystemTagDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+    GameSystemPostRequest:
+      required:
+      - description
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        parentSystem:
+          type: integer
+          format: int32
+    CreateParameterPostRequest:
+      required:
+      - maxValue
+      - minValue
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        minValue:
+          type: integer
+          format: int32
+        maxValue:
+          type: integer
+          format: int32
+    CreateParameterModifierPostRequest:
+      required:
+      - name
+      - parameterId
+      - value
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: integer
+          format: int32
+        parameterId:
+          type: integer
+          format: int32
+    CreateItemPostRequest:
+      required:
+      - isPresent
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        isPresent:
+          type: boolean
+    CreateConstraintPostRequest:
+      required:
+      - attributeId
+      - constraintTypeId
+      - id
+      - tagId
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        constraintTypeId:
+          type: integer
+          format: int32
+        tagId:
+          type: integer
+          format: int32
+        attributeId:
+          type: integer
+          format: int32
+    CreateAttributePostRequest:
+      required:
+      - isPresent
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        isPresent:
+          type: boolean
+    SignupRequest:
+      required:
+      - email
+      - password
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+    CreateTagPostRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+    SigninRequest:
+      required:
+      - password
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    AuthOkResponse:
+      type: object
+      properties:
+        authToken:
+          type: string
+    ErrorResponse:
+      type: object
+      properties: 
+        error:
+          type: string
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        username: 
+          type: string
+        email: 
+          type: string
+      
+    UserCharacterDto:
+      type: object
+      properties:
+        id: 
+          type: integer
+        name: 
+          type: string
+        description:
+          type: string
+        sessionId:
+          type: integer
+    CreateCharacterPostRequest:
+      type: object
+      required:
+        - name
+        - description
+        - sessionId
+      properties:
+        name: 
+          type: string
+        description:
+          type: string
+        sessionId:
+          type: integer
+    UpdateCharacterPutRequest:
+      type: object
+      properties:
+        name: 
+          type: string
+        description:
+          type: string
+    CharacterSlotDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        iconUrl:
+          type: string
+        isWhitelisted:
+          type: boolean
+        characterId:
+          type: integer
+        itemId:
+          type: integer
+    CreateCharacterSlotPostRequest:
+      type: object
+      required:
+        - name
+        - isWhitelisted
+      properties:
+        name:
+          type: string
+        iconUrl:
+          type: string
+        isWhitelisted:
+          type: boolean
+        itemId:
+          type: integer
+    UpdateCharacterSlotPutRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        iconUrl:
+          type: string
+        isWhitelisted:
+          type: boolean
+        itemId:
+          type: integer
+    AddSlotTagPostRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+    SessionDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        name: 
+          type: string
+        description:
+          type: string
+        maxNumberOfPlayers:
+          type: integer
+        creatorAsPlayer:
+          type: boolean
+        connectionLink:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        systemId:
+          type: integer
+        creatorId:
+          type: integer
+    CreateSessionPostRequest:
+      type: object
+      properties:
+        name: 
+          type: string
+        description:
+          type: string
+        maxNumberOfPlayers:
+          type: integer
+        creatorAsPlayer:
+          type: boolean
+        systemId:
+          type: integer
+    UpdateSessionPutRequest:
+      type: object
+      properties:
+        name: 
+          type: string
+        description:
+          type: string
+        maxNumberOfPlayers:
+          type: integer
+        creatorAsPlayer:
+          type: boolean
+    SessionCharacterDto:
+      type: object
+      properties:
+        id: 
+          type: integer
+        name: 
+          type: string
+        description:
+          type: string
+        userId:
+          type: integer
+    AddCharacterAttributePostRequest:
+      type: object
+      properties:
+        id: 
+          type: integer
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
