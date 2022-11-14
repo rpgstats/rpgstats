@@ -40,7 +40,7 @@ public class RestModifierRepository implements ModifierRepository{
                             List<Modifier> modifierList = new ArrayList<>();
                             for (ModifierDTO modifier :
                                     response.body()) {
-                                modifierList.add(new Modifier(modifier));
+                                modifierList.add(new Modifier(modifier, new PlugParameterRepository())); // todo rest parameter repository
                             }
                             modifiers.setValue(modifierList);
                         }
@@ -63,7 +63,7 @@ public class RestModifierRepository implements ModifierRepository{
                     public void onResponse(Call<ModifierDTO> call, Response<ModifierDTO> response) {
                         Log.d(TAG, "Response: " + response);
                         if (response.body() != null) {
-                            modifiers.setValue(new Modifier(response.body()));
+                            modifiers.setValue(new Modifier(response.body(), new PlugParameterRepository())); // todo rest parameter repository
                         }
                     }
 
@@ -83,7 +83,7 @@ public class RestModifierRepository implements ModifierRepository{
                     @Override
                     public void onResponse(Call<ModifierDTO> call, Response<ModifierDTO> response) {
                         if (response.body() != null) {
-                            modifiers.setValue(new Modifier(response.body()));
+                            modifiers.setValue(new Modifier(response.body(), new PlugParameterRepository())); // todo rest parameter repository
                         }
                         Log.d(TAG, "Response: " + response);
                     }
@@ -104,7 +104,7 @@ public class RestModifierRepository implements ModifierRepository{
                     @Override
                     public void onResponse(Call<ModifierDTO> call, Response<ModifierDTO> response) {
                         if (response.body() != null) {
-                            modifiers.setValue(new Modifier(response.body()));
+                            modifiers.setValue(new Modifier(response.body(), new PlugParameterRepository())); // todo rest parameter repository
                         }
                         Log.d(TAG, "Response: " + response);
                     }

@@ -1,5 +1,6 @@
 package com.nsu.rpgstats.entities;
 
+import com.nsu.rpgstats.data.ParameterRepository;
 import com.nsu.rpgstats.network.DTO.ModifierDTO;
 
 import java.util.Objects;
@@ -17,10 +18,11 @@ public class Modifier implements Identifiable{
         this.parameter = parameter;
     }
 
-    public  Modifier(ModifierDTO modifierDTO) {
+    public Modifier(ModifierDTO modifierDTO, ParameterRepository repository) {
         this.id = modifierDTO.getId();
         this.name = modifierDTO.getName();
-        this.value = modifierDTO.getValue().toString();//Todo change
+        this.value = modifierDTO.getValue();//Todo change
+        this.parameter = repository.getParameter(modifierDTO.getSystemId(), modifierDTO.getParameterId());
         //todo parameters
     }
 

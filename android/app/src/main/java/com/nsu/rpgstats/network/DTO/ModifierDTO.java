@@ -10,6 +10,8 @@ public class ModifierDTO {
         this.id = modifier.getId();
         this.name = modifier.getName();
         this.systemId = systemId;
+        this.parameterId = modifier.getParameter().getId();
+        this.value = modifier.getValue();
     }
 
     @SerializedName("id")

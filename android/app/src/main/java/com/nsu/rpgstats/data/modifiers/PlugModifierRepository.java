@@ -43,10 +43,11 @@ public class PlugModifierRepository implements ModifierRepository{
     }
 
     @Override
-    public void editModifier(int gameSystem, int id, Modifier modifier) {
+    public int editModifier(int gameSystem, int id, Modifier modifier) {
         Modifier newModifier = new Modifier(id, modifier.getName(),
                 modifier.getValue(), modifier.getParameter());
         modifiers.remove(id);
         modifiers.put(id, newModifier);
+        return id;
     }
 }
