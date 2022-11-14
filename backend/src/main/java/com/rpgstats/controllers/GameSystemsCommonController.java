@@ -105,7 +105,7 @@ public class GameSystemsCommonController {
     return modifierService.getParameterModifiersBySystem(systemId);
   }
 
-  @GetMapping(params = {"/{systemId}/modifiers/{modifierId}"})
+  @GetMapping("/{systemId}/modifiers/{modifierId}")
   @ApiResponse(responseCode = "200")
   @ApiResponse(
       responseCode = "404",
@@ -125,7 +125,7 @@ public class GameSystemsCommonController {
     return itemService.getItemsBySystem(systemId);
   }
 
-  @GetMapping(params = {"/{systemId}/items/{itemId}"})
+  @GetMapping("/{systemId}/items/{itemId}")
   @ApiResponse(responseCode = "200")
   @ApiResponse(
       responseCode = "404",
@@ -164,7 +164,7 @@ public class GameSystemsCommonController {
     return attributeService.getAttributesBySystem(systemId);
   }
 
-  @GetMapping(params = {"/{systemId}/attributes/{attributeId}"})
+  @GetMapping("/{systemId}/attributes/{attributeId}")
   @ApiResponse(responseCode = "200")
   @ApiResponse(
       responseCode = "404",

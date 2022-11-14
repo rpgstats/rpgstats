@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class ChangeParameterModifierPutRequest {
   private String name;
-  private Integer value;
+  private Double value;
   private Integer parameterId;
 }
