@@ -7,6 +7,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CreateParameterPostRequest {
   @NotNull private String name;
-  @NotNull private Integer minValue;
-  @NotNull private Integer maxValue;
+  @NotNull private Double minValue;
+  @NotNull private Double maxValue;
 }

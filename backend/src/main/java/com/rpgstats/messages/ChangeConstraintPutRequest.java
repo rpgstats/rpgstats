@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ChangeConstraintPutRequest {
-  private Integer constraintTypeId;
+  private Boolean hasTag;
   private Integer tagId;
   private Integer attributeId;
 }

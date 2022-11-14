@@ -7,6 +7,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CreateParameterModifierPostRequest {
   @NotNull private String name;
-  @NotNull private Integer value;
+  @NotNull private Double value;
   @NotNull private Integer parameterId;
 }

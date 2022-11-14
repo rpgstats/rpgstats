@@ -80,7 +80,7 @@ public class TagService {
   }
 
   @Transactional
-  protected SystemTag getTagById(Integer id) {
+  public SystemTag getTagById(Integer id) {
     return tagRepository
         .findById(id)
         .orElseThrow(

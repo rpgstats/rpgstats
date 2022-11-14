@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class ChangeParameterPutRequest {
   private String name;
-  private Integer minValue;
-  private Integer maxValue;
+  private Double minValue;
+  private Double maxValue;
 }

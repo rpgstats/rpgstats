@@ -1,6 +1,9 @@
 package com.rpgstats.services;
 
-import com.rpgstats.entity.*;
+import com.rpgstats.entity.AttributeConstraint;
+import com.rpgstats.entity.GameSystem;
+import com.rpgstats.entity.SystemAttribute;
+import com.rpgstats.entity.SystemTag;
 import com.rpgstats.exceptions.ConflictDataException;
 import com.rpgstats.exceptions.ItemNotFoundException;
 import com.rpgstats.messages.ChangeConstraintPutRequest;
@@ -23,7 +26,6 @@ public class ConstraintService {
 
   GameSystemService gameSystemService;
 
-  ConstraintTypeService constraintTypeService;
   TagService tagService;
   UserService userService;
 
@@ -32,14 +34,12 @@ public class ConstraintService {
       AttributeConstraintRepository attributeConstraintRepository,
       AttributeService attributeService,
       GameSystemService gameSystemService,
-      ConstraintTypeService constraintTypeService,
       TagService tagService,
       UserService userService) {
     this.modelMapper = modelMapper;
     this.attributeConstraintRepository = attributeConstraintRepository;
     this.attributeService = attributeService;
     this.gameSystemService = gameSystemService;
-    this.constraintTypeService = constraintTypeService;
     this.tagService = tagService;
     this.userService = userService;
   }
@@ -71,12 +71,10 @@ public class ConstraintService {
     GameSystem system = gameSystemService.getSystemById(systemId);
     SystemAttribute systemAttribute = attributeService.getAttributeById(request.getAttributeId());
     SystemTag systemTag = tagService.getTagById(request.getTagId());
-    ConstraintType constraintType = constraintTypeService.getById(request.getConstraintTypeId());
     AttributeConstraint attributeConstraint;
     if (Objects.equals(system.getId(), systemAttribute.getGameSystem().getId())
         && Objects.equals(system.getId(), systemTag.getGameSystem().getId())) {
       attributeConstraint = new AttributeConstraint();
-      attributeConstraint.setConstraintType(constraintType);
       attributeConstraint.setAttribute(systemAttribute);
       attributeConstraint.setTag(systemTag);
       attributeConstraintRepository.save(attributeConstraint);
@@ -130,9 +128,8 @@ public class ConstraintService {
         throw new ConflictDataException("Wrong system -> attribute and system -> tag relation");
       }
     }
-    if (request.getConstraintTypeId() != null) {
-      ConstraintType constraintType = constraintTypeService.getById(request.getConstraintTypeId());
-      attributeConstraint.setConstraintType(constraintType);
+    if (request.getHasTag() != null) {
+      attributeConstraint.setHasTag(request.getHasTag());
     }
     attributeConstraintRepository.save(attributeConstraint);
     return modelMapper.map(attributeConstraint, AttributeConstraintDto.class);
