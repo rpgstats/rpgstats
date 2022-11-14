@@ -18,8 +18,8 @@ public class RestGameSystemsRepository implements GameSystemsRepository {
     private static final String TAG = RestGameSystemsRepository.class.getSimpleName();
     private final GamesystemsService service;
 
-    public RestGameSystemsRepository() {
-        service = RestClient.getInstance().getRpgstatsService();
+    public RestGameSystemsRepository(GamesystemsService gamesystemsService) {
+        service = gamesystemsService;
     }
 
 

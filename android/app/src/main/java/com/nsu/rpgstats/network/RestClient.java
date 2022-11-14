@@ -1,7 +1,12 @@
 package com.nsu.rpgstats.network;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.loader.ResourcesProvider;
 import android.util.Log;
 
+import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.network.dto.LoginRequest;
 import com.nsu.rpgstats.network.dto.LoginResponse;
 import com.nsu.rpgstats.network.dto.MessageResponse;
@@ -25,17 +30,16 @@ public class RestClient {
     // Если тестируется на телефоне и он подключен к той же сети, что и комп, то
     // нужно здесь указать адрес компа в локалке (его можно найти в ipconfig)
     // подробнее -- https://stackoverflow.com/questions/4779963/how-can-i-access-my-localhost-from-my-android-device
-    private final String SERVER_ADDRESS = "192.168.27.29";
 
-    private final String BASE_URL = "http://" + SERVER_ADDRESS + ":8080/api/v1/";
     private final GamesystemsService gamesystemsService;
     private final AuthService authService;
     private final AuthInterceptor authInterceptor;
 
-    public static RestClient getInstance() {
+    public static RestClient getInstance(String serverAddress) {
         if (restClient == null) {
-            restClient = new RestClient();
+            restClient = new RestClient(serverAddress);
         }
+
         return restClient;
     }
 
@@ -43,9 +47,9 @@ public class RestClient {
         return gamesystemsService;
     }
 
-    private RestClient() {
+    private RestClient(String serverAddress) {
         authInterceptor = new AuthInterceptor();
-
+        String BASE_URL = "http://" + serverAddress + ":8080/api/v1/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
