@@ -1,10 +1,11 @@
 package com.rpgstats.services;
 
 import com.rpgstats.entity.GameSystem;
+import com.rpgstats.exceptions.ConflictDataException;
+import com.rpgstats.exceptions.ItemNotFoundException;
 import com.rpgstats.messages.DTO.GameSystemDto;
 import com.rpgstats.messages.GameSystemPostRequest;
 import com.rpgstats.messages.GameSystemPutRequest;
-import com.rpgstats.exceptions.ItemNotFoundException;
 import com.rpgstats.repositories.SystemRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -12,69 +13,95 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class GameSystemService {
-    SystemRepository systemRepository;
+  SystemRepository systemRepository;
 
-    UserService userService;
-    ModelMapper modelMapper;
+  UserService userService;
+  ModelMapper modelMapper;
 
-    public GameSystemService(SystemRepository systemRepository, UserService userService, ModelMapper modelMapper) {
-        this.systemRepository = systemRepository;
-        this.userService = userService;
-        this.modelMapper = modelMapper;
+  public GameSystemService(
+      SystemRepository systemRepository, UserService userService, ModelMapper modelMapper) {
+    this.systemRepository = systemRepository;
+    this.userService = userService;
+    this.modelMapper = modelMapper;
+  }
+
+  @Transactional
+  public List<GameSystemDto> getSystemsByName(String name) {
+    return systemRepository.findByNameLikeIgnoreCase(name).stream()
+        .map(u -> modelMapper.map(u, GameSystemDto.class))
+        .collect(Collectors.toList());
+  }
+
+  @Transactional
+  public GameSystemDto getSystemDtoById(Integer id) {
+    return modelMapper.map(getSystemById(id), GameSystemDto.class);
+  }
+
+  @Transactional
+  public GameSystemDto createSystem(Integer userId, GameSystemPostRequest postRequest) {
+    if (systemRepository.existsByName(postRequest.getName())) {
+      throw new ConflictDataException("System with that name already exists");
     }
-
-    @Transactional
-    public List<GameSystemDto> getSystemsByName(String name) {
-        return systemRepository.findByNameLikeIgnoreCase(name).stream().map(u -> modelMapper.map(u, GameSystemDto.class)).collect(Collectors.toList());
+    GameSystem gameSystem = modelMapper.map(postRequest, GameSystem.class);
+    gameSystem.setCreatedAt(Instant.now());
+    if (postRequest.getParentSystem() != null) {
+      gameSystem.setParentGameSystem(
+          systemRepository
+              .findById(postRequest.getParentSystem())
+              .orElseThrow(
+                  () ->
+                      new ItemNotFoundException(
+                          "Parent system not found with id - " + postRequest.getParentSystem())));
     }
+    gameSystem.setOwner(userService.getUserById(userId));
+    systemRepository.save(gameSystem);
+    return modelMapper.map(gameSystem, GameSystemDto.class);
+  }
 
-    @Transactional
-    public List<GameSystemDto> getSystemsByOwnerId(Integer ownerId) {
-        return systemRepository.findByOwner_Id(ownerId).stream().map(u -> modelMapper.map(u, GameSystemDto.class)).collect(Collectors.toList());
+  @Transactional
+  public GameSystemDto changeSystem(Integer systemId, GameSystemPutRequest putRequest) {
+    GameSystem gameSystem =
+        systemRepository
+            .findById(systemId)
+            .orElseThrow(
+                () -> new ItemNotFoundException("System not found by id - %d".formatted(systemId)));
+    if (putRequest.getName() != null) {
+      gameSystem.setName(putRequest.getName());
     }
+    if (putRequest.getDescription() != null) {
+      gameSystem.setDescription(putRequest.getDescription());
+    }
+    systemRepository.save(gameSystem);
+    return modelMapper.map(gameSystem, GameSystemDto.class);
+  }
 
-    @Transactional
-    public GameSystemDto getSystemById(Integer id) {
-        return modelMapper.map(systemRepository.findById(id).orElseThrow(() -> new ItemNotFoundException("System not found by id - " + id)), GameSystemDto.class);
-    }
+  @Transactional
+  public void deleteSystem(Integer systemId) {
+    GameSystem gameSystem =
+        systemRepository
+            .findById(systemId)
+            .orElseThrow(() -> new ItemNotFoundException("System not found by id - " + systemId));
+    systemRepository.delete(gameSystem);
+  }
 
-    @Transactional
-    public GameSystemDto createSystem(Integer userId, GameSystemPostRequest postRequest) {
-        GameSystem gameSystem = modelMapper.map(postRequest, GameSystem.class);
-        gameSystem.setCreatedAt(Instant.now());
-        if (postRequest.getParentSystem() != null) {
-            gameSystem.setParentGameSystem(systemRepository.findById(postRequest.getParentSystem()).orElseThrow(() -> new ItemNotFoundException("Parent system not found with id - " + postRequest.getParentSystem())));
-        }
-        gameSystem.setOwner(userService.getUserById(userId));
-        systemRepository.save(gameSystem);
-        return modelMapper.map(gameSystem, GameSystemDto.class);
-    }
+  protected Optional<GameSystem> findByIdAndOwnerId(Integer id, Integer ownerId) {
+    return systemRepository.findByIdAndOwner_Id(id, ownerId);
+  }
 
-    @Transactional
-    public GameSystemDto changeSystem(Integer userId, Integer systemId, GameSystemPutRequest putRequest) {
-        GameSystem gameSystem = systemRepository.findByIdAndOwner_Id(systemId, userId).orElseThrow(() -> new ItemNotFoundException("System not found by id - " + systemId));
-        if (putRequest.getName() != null) {
-            gameSystem.setName(putRequest.getName());
-        }
-        if (putRequest.getDescription() != null) {
-            gameSystem.setDescription(putRequest.getDescription());
-        }
-        systemRepository.save(gameSystem);
-        return modelMapper.map(gameSystem, GameSystemDto.class);
-    }
+  @Transactional
+  protected GameSystem getSystemById(Integer id) {
+    return systemRepository
+        .findById(id)
+        .orElseThrow(() -> new ItemNotFoundException("System not found by id - " + id));
+  }
 
-    @Transactional
-    public void deleteSystem(Integer userId, Integer systemId) {
-        GameSystem gameSystem = systemRepository.findByIdAndOwner_Id(systemId, userId).orElseThrow(() -> new ItemNotFoundException("System not found by id - " + systemId));
-        systemRepository.delete(gameSystem);
-    }
-
-    protected GameSystem findByIdAndOwnerId(Integer id, Integer ownerId) {
-        return systemRepository.findByIdAndOwner_Id(id, ownerId).
-                orElseThrow(() -> new ItemNotFoundException(String.format("No system with id - %d for user with id - %d", id, ownerId)));
-    }
+  @Transactional
+  public boolean existById(int systemId) {
+    return systemRepository.existsById(systemId);
+  }
 }

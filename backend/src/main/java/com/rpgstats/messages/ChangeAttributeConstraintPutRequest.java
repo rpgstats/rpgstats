@@ -5,7 +5,7 @@ import com.rpgstats.entity.SystemAttribute;
 import com.rpgstats.entity.SystemTag;
 
 public class ChangeAttributeConstraintPutRequest {
-    private ConstraintType constraintType;
-    private SystemTag tag;
-    private SystemAttribute attribute;
+  private ConstraintType constraintType;
+  private SystemTag tag;
+  private SystemAttribute attribute;
 }

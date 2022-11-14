@@ -1,43 +1,38 @@
 package com.rpgstats.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rpgstats.exceptions.ModelException;
-
 import com.rpgstats.exceptions.ConflictDataException;
-import com.rpgstats.messages.ErrorResponse;
 import com.rpgstats.exceptions.ItemNotFoundException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import com.rpgstats.exceptions.ModelException;
+import com.rpgstats.messages.ErrorResponse;
+import io.swagger.v3.oas.annotations.Hidden;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-
-@ControllerAdvice
+@RestControllerAdvice
+@Hidden
 public class RestExceptionHandler {
 
-    @ExceptionHandler(ModelException.class)
-    void handleModelException(HttpServletResponse response, Exception exception) throws IOException {
-        sendResponse(response, HttpServletResponse.SC_BAD_REQUEST, exception.getMessage());
-    }
+  @ExceptionHandler(ModelException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ResponseEntity<ErrorResponse> handleModelException(Exception exception) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(new ErrorResponse(exception.getMessage()));
+  }
 
-    @ExceptionHandler(ConflictDataException.class)
-    void handleConflictData(HttpServletResponse response, Exception exception) throws IOException {
-        sendResponse(response, HttpServletResponse.SC_CONFLICT, exception.getMessage());
-    }
+  @ExceptionHandler(ConflictDataException.class)
+  @ResponseStatus(HttpStatus.CONFLICT)
+  public ResponseEntity<ErrorResponse> handleConflictData(Exception exception) {
+    return ResponseEntity.status(HttpStatus.CONFLICT)
+        .body(new ErrorResponse(exception.getMessage()));
+  }
 
-    @ExceptionHandler(ItemNotFoundException.class)
-    void handleNotFound(HttpServletResponse response, Exception exception)  throws IOException {
-        sendResponse(response, HttpServletResponse.SC_NOT_FOUND, exception.getMessage());
-    }
-
-    void sendResponse(HttpServletResponse response, int status, String errorMsg) throws IOException {
-        response.setStatus(status);
-        ObjectMapper mapper = new ObjectMapper();
-        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(response.getOutputStream()))) {
-            bw.write(mapper.writeValueAsString(new ErrorResponse(errorMsg)));
-        }
-    }
+  @ExceptionHandler(ItemNotFoundException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public ResponseEntity<ErrorResponse> handleNotFound(Exception exception) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        .body(new ErrorResponse(exception.getMessage()));
+  }
 }

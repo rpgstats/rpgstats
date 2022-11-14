@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class PingController {
-    @RequestMapping(method = RequestMethod.GET, path = "/api/ping")
-    public ResponseEntity<String> getPing() {
-        return ResponseEntity.ok("pong");
-    }
+  @RequestMapping(method = RequestMethod.GET, path = "/api/ping")
+  public ResponseEntity<String> getPing() {
+    return ResponseEntity.ok("pong");
+  }
 }

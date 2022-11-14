@@ -13,25 +13,25 @@ import java.util.Objects;
 @Getter
 @Setter
 public class SystemItemsParameterModifierId implements Serializable {
-    private static final long serialVersionUID = -3480611074432024847L;
-    @Column(name = "system_item_id", nullable = false)
-    private Integer systemItemId;
+  private static final long serialVersionUID = -3480611074432024847L;
 
-    @Column(name = "parameter_modifier_id", nullable = false)
-    private Integer parameterModifierId;
+  @Column(name = "system_item_id", nullable = false)
+  private Integer systemItemId;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        SystemItemsParameterModifierId entity = (SystemItemsParameterModifierId) o;
-        return Objects.equals(this.systemItemId, entity.systemItemId) &&
-                Objects.equals(this.parameterModifierId, entity.parameterModifierId);
-    }
+  @Column(name = "parameter_modifier_id", nullable = false)
+  private Integer parameterModifierId;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(systemItemId, parameterModifierId);
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+    SystemItemsParameterModifierId entity = (SystemItemsParameterModifierId) o;
+    return Objects.equals(this.systemItemId, entity.systemItemId)
+        && Objects.equals(this.parameterModifierId, entity.parameterModifierId);
+  }
 
+  @Override
+  public int hashCode() {
+    return Objects.hash(systemItemId, parameterModifierId);
+  }
 }

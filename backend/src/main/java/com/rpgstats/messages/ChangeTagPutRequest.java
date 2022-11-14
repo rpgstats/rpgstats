@@ -6,6 +6,5 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class ChangeTagPutRequest {
-    @NotNull
-    private String name;
+  @NotNull private String name;
 }

@@ -6,6 +6,5 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class CreateConstraintTypePostRequest {
-    @NotNull
-    private String name;
+  @NotNull private String name;
 }

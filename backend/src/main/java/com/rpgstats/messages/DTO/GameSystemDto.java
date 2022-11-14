@@ -7,16 +7,15 @@ import java.time.Instant;
 @Data
 public class GameSystemDto {
 
-    private Integer id;
+  private Integer id;
 
-    private String name;
+  private String name;
 
-    private String description;
+  private String description;
 
-    private Instant createdAt;
+  private Instant createdAt;
 
-    private Integer ownerId;
+  private Integer ownerId;
 
-    private Integer parentGameSystemId;
-
+  private Integer parentGameSystemId;
 }

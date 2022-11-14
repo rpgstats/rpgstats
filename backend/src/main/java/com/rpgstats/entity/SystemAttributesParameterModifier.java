@@ -10,17 +10,15 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class SystemAttributesParameterModifier {
-    @EmbeddedId
-    private SystemAttributesParameterModifierId id;
+  @EmbeddedId private SystemAttributesParameterModifierId id;
 
-    @MapsId("systemAttributeId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "system_attribute_id", nullable = false)
-    private SystemAttribute systemAttribute;
+  @MapsId("systemAttributeId")
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "system_attribute_id", nullable = false)
+  private SystemAttribute systemAttribute;
 
-    @MapsId("parameterModifierId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "parameter_modifier_id", nullable = false)
-    private ParameterModifier parameterModifier;
-
+  @MapsId("parameterModifierId")
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "parameter_modifier_id", nullable = false)
+  private ParameterModifier parameterModifier;
 }

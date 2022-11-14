@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class ChangeAttributePutRequest {
-    private String name;
-    private Boolean isPresent;
+  private String name;
+  private Boolean isPresent;
 }

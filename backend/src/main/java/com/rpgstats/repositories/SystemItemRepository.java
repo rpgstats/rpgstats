@@ -8,10 +8,7 @@ import java.util.Optional;
 
 public interface SystemItemRepository extends JpaRepository<SystemItem, Integer> {
 
-    List<SystemItem> findByGameSystem_Id(Integer id);
+  List<SystemItem> findByGameSystem_Id(Integer id);
 
-    Optional<SystemItem> findByGameSystem_IdAndId(Integer id, Integer id1);
-
-    Optional<SystemItem> findByIdAndGameSystem_IdAndGameSystem_Owner_Id(Integer id, Integer id1, Integer id2);
-
+  Optional<SystemItem> findByIdAndGameSystem_Id(Integer id, Integer id1);
 }

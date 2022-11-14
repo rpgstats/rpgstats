@@ -7,16 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AttributeConstraintRepository extends JpaRepository<AttributeConstraint, Integer> {
-    List<AttributeConstraint> findByAttribute_GameSystem_Id(Integer id);
+  List<AttributeConstraint> findByAttribute_GameSystem_Id(Integer id);
 
-    Optional<AttributeConstraint> findByAttribute_GameSystem_IdAndId(Integer id, Integer id1);
-
-    Optional<AttributeConstraint> findByIdAndAttributeGameSystemOwnerId(Integer id, Integer ownerId);
-
-
-
-
-
-
+  Optional<AttributeConstraint> findByAttribute_GameSystem_IdAndId(Integer id, Integer id1);
 
 }

@@ -11,17 +11,16 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class SystemTag {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
+  private Integer id;
 
-    @Column(name = "name", nullable = false)
-    @Type(type = "org.hibernate.type.TextType")
-    private String name;
+  @Column(name = "name", nullable = false)
+  @Type(type = "org.hibernate.type.TextType")
+  private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "system_id", nullable = false)
-    private GameSystem gameSystem;
-
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "system_id", nullable = false)
+  private GameSystem gameSystem;
 }

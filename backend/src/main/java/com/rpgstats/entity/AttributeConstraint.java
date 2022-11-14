@@ -10,22 +10,20 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class AttributeConstraint {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
+  private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "constraint_type_id", nullable = false)
-    private ConstraintType constraintType;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "constraint_type_id", nullable = false)
+  private ConstraintType constraintType;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tag_id", nullable = false)
-    private SystemTag tag;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "tag_id", nullable = false)
+  private SystemTag tag;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "attribute_id", nullable = false)
-    private SystemAttribute attribute;
-
-
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "attribute_id", nullable = false)
+  private SystemAttribute attribute;
 }
