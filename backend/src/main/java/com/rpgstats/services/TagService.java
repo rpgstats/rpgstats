@@ -35,7 +35,7 @@ public class TagService {
   }
 
   @Transactional
-  public SystemTagDto getTag(Integer systemId, Integer tagId) {
+  public SystemTagDto getTagDtoById(Integer systemId, Integer tagId) {
     return mapper.map(
         tagRepository
             .findByIdAndGameSystem_Id(tagId, systemId)

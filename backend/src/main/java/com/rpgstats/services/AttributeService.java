@@ -38,7 +38,7 @@ public class AttributeService {
   }
 
   @Transactional
-  public SystemAttributeDto getAttribute(Integer systemId, Integer attributeId) {
+  public SystemAttributeDto getAttributeDtoById(Integer systemId, Integer attributeId) {
     return mapper.map(
         attributeRepository
             .findByGameSystem_IdAndId(systemId, attributeId)

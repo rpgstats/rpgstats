@@ -42,7 +42,7 @@ public class GameSystemsCommonController {
     @GetMapping(
       value = "/search",
       params = {"name"})
-  public List<GameSystemDto> getSystemsByName(@RequestParam String name) {
+  public List<GameSystemDto> findSystemsByName(@RequestParam String name) {
     return gameSystemService.getSystemsByName(name);
   }
 
@@ -76,12 +76,12 @@ public class GameSystemsCommonController {
             schema = @Schema(implementation = ErrorResponse.class))
       })
   public SystemTagDto getTagById(@PathVariable Integer systemId, @PathVariable Integer tagId) {
-    return tagService.getTag(systemId, tagId);
+    return tagService.getTagDtoById(systemId, tagId);
   }
 
   @GetMapping("/{systemId}/parameters")
   public List<SystemParameterDto> getParameters(@PathVariable Integer systemId) {
-    return parameterService.getParametersBySystem(systemId);
+    return parameterService.getParametersDtoBySystem(systemId);
   }
 
   @GetMapping("/game-systems/{systemId}/parameters/{parameterId}")
@@ -96,13 +96,13 @@ public class GameSystemsCommonController {
       })
   public SystemParameterDto getParameter(
       @PathVariable Integer systemId, @PathVariable Integer parameterId) {
-    return parameterService.getParameter(systemId, parameterId);
+    return parameterService.getParameterDtoById(systemId, parameterId);
   }
 
   @GetMapping("/{systemId}/modifiers")
   @ApiResponse(responseCode = "200")
   public List<SystemParameterModifierDto> getParameterModifiers(@PathVariable Integer systemId) {
-    return modifierService.getParameterModifiersBySystem(systemId);
+    return modifierService.getParameterModifiersDtoBySystem(systemId);
   }
 
   @GetMapping("/{systemId}/modifiers/{modifierId}")
@@ -117,12 +117,12 @@ public class GameSystemsCommonController {
       })
   public SystemParameterModifierDto getParameterModifier(
       @PathVariable Integer systemId, @PathVariable Integer parameterModifierId) {
-    return modifierService.getParameterModifier(systemId, parameterModifierId);
+    return modifierService.getParameterModifierDtoById(systemId, parameterModifierId);
   }
 
   @GetMapping("/{systemId}/items")
   public List<SystemItemDto> getItems(@PathVariable Integer systemId) {
-    return itemService.getItemsBySystem(systemId);
+    return itemService.getItemsDtoBySystem(systemId);
   }
 
   @GetMapping("/{systemId}/items/{itemId}")
@@ -136,7 +136,7 @@ public class GameSystemsCommonController {
             schema = @Schema(implementation = ErrorResponse.class))
       })
   public SystemItemDto getItem(@PathVariable Integer systemId, @PathVariable Integer itemId) {
-    return itemService.getItem(systemId, itemId);
+    return itemService.getItemDtoById(systemId, itemId);
   }
 
   @GetMapping("/{systemId}/constraints")
@@ -156,7 +156,7 @@ public class GameSystemsCommonController {
       })
   public AttributeConstraintDto getConstraint(
       @PathVariable Integer systemId, @PathVariable Integer constraintId) {
-    return constraintService.getConstraint(systemId, constraintId);
+    return constraintService.getConstraintDtoById(systemId, constraintId);
   }
 
   @GetMapping("/{systemId}/attributes")
@@ -176,6 +176,6 @@ public class GameSystemsCommonController {
       })
   public SystemAttributeDto getAttribute(
       @PathVariable Integer systemId, @PathVariable Integer attributeId) {
-    return attributeService.getAttribute(systemId, attributeId);
+    return attributeService.getAttributeDtoById(systemId, attributeId);
   }
 }

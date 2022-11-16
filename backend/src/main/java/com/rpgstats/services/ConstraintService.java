@@ -52,7 +52,7 @@ public class ConstraintService {
   }
 
   @Transactional
-  public AttributeConstraintDto getConstraint(Integer systemId, Integer constraintId) {
+  public AttributeConstraintDto getConstraintDtoById(Integer systemId, Integer constraintId) {
     return modelMapper.map(
         attributeConstraintRepository
             .findByAttribute_GameSystem_IdAndId(systemId, constraintId)

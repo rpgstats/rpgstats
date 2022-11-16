@@ -1,5 +1,6 @@
 package com.rpgstats.services;
 
+import com.rpgstats.entity.User;
 import com.rpgstats.messages.AuthOkResponse;
 import com.rpgstats.messages.MessageResponse;
 import com.rpgstats.security.JwtTokenUtil;
@@ -27,9 +28,15 @@ public class AuthService {
 
   GameSystemService gameSystemService;
 
+  SessionService sessionService;
+
   UserService userService;
 
   PasswordEncoder passwordEncoder;
+
+  public void setSessionService(SessionService sessionService) {
+    this.sessionService = sessionService;
+  }
 
   @Autowired
   public void setGameSystemService(GameSystemService gameSystemService) {
@@ -67,11 +74,21 @@ public class AuthService {
   }
 
   public boolean checkUserAccessToSystem(int userId, int systemId) {
-    return !gameSystemService.existById(systemId) || gameSystemService.findByIdAndOwnerId(systemId, userId).isPresent();
+    return !gameSystemService.existById(systemId)
+        || gameSystemService.existByIdAndOwnerId(systemId, userId);
+  }
+
+  public boolean checkUserAccessToSession(int userId, int sessionId) {
+    return !sessionService.existById(sessionId)
+        || sessionService.existByIdAndOwnerId(sessionId, userId);
   }
 
   public boolean checkUserAccessToSystem(Jwt authenticationToken, int systemId) {
     return checkUserAccessToSystem(getIdFromJwt(authenticationToken), systemId);
+  }
+
+  public boolean checkUserAccessToSession(Jwt authenticationToken, int sessioniD) {
+    return checkUserAccessToSession(getIdFromJwt(authenticationToken), sessioniD);
   }
 
   public Integer getIdFromJwt(Jwt jwt) {
@@ -80,13 +97,21 @@ public class AuthService {
         .getUserId();
   }
 
+  public User getUserFromJwt(Jwt jwt) {
+    return userDetailsService
+        .loadUserByUsername(jwtTokenUtil.getUserNameFromJwtToken(jwt.getTokenValue()))
+        .getUser();
+  }
+
   public AuthOkResponse login(SigninRequest signinRequest) {
     Authentication authentication =
         authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
                 signinRequest.getUsername(), signinRequest.getPassword()));
     String token = jwtTokenUtil.generateToken(authentication);
+    RpgStatsUserDetail rpgStatsUserDetail = (RpgStatsUserDetail) authentication.getPrincipal();
     AuthOkResponse authOkResponse = new AuthOkResponse();
+    authOkResponse.setId(rpgStatsUserDetail.getUserId());
     authOkResponse.setAuthToken(token);
     return authOkResponse;
   }

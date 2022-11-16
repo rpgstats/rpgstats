@@ -31,14 +31,14 @@ public class ItemService {
   }
 
   @Transactional
-  public List<SystemItemDto> getItemsBySystem(Integer systemId) {
+  public List<SystemItemDto> getItemsDtoBySystem(Integer systemId) {
     return itemRepository.findByGameSystem_Id(systemId).stream()
         .map(item -> mapper.map(item, SystemItemDto.class))
         .collect(Collectors.toList());
   }
 
   @Transactional
-  public SystemItemDto getItem(Integer systemId, Integer itemId) {
+  public SystemItemDto getItemDtoById(Integer systemId, Integer itemId) {
     return mapper.map(
         itemRepository
             .findByIdAndGameSystem_Id(systemId, itemId)
