@@ -1,9 +1,10 @@
 package com.rpgstats.controllers;
 
-import com.rpgstats.messages.CreateCharacterPostRequest;
+import com.rpgstats.messages.*;
+import com.rpgstats.messages.DTO.CharacterSlotDto;
+import com.rpgstats.messages.DTO.SystemAttributeDto;
+import com.rpgstats.messages.DTO.SystemTagDto;
 import com.rpgstats.messages.DTO.UserCharacterDto;
-import com.rpgstats.messages.ErrorResponse;
-import com.rpgstats.messages.UpdateCharacterPutRequest;
 import com.rpgstats.services.AuthService;
 import com.rpgstats.services.CharacterService;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -108,5 +109,227 @@ public class UserCharacterController {
       @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
       @PathVariable Integer characterId) {
     characterService.deleteUserCharacter(authService.getUserFromJwt(jwt), characterId);
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(responseCode = "404", description = "Not found",content = {
+          @Content(
+                  mediaType = MediaType.APPLICATION_JSON_VALUE,
+                  schema = @Schema(implementation = ErrorResponse.class))
+  })
+  @PostMapping("/{characterId}/copy")
+  public UserCharacterDto copyUserCharacter(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @PathVariable Integer characterId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @GetMapping("/{characterId}/slots")
+  public List<CharacterSlotDto> getCharacterSlots(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt, @PathVariable Integer characterId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @PostMapping("/{characterId}/slots")
+  public CharacterSlotDto createCharacterSlot(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @RequestBody @Valid CreateCharacterSlotPostRequest createCharacterSlotPostRequest,
+          @PathVariable Integer characterId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @GetMapping("/{characterId}/slots/{slotId}")
+  public CharacterSlotDto getCharacterSlot(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @PathVariable Integer characterId,
+          @PathVariable Integer slotId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @ApiResponse(
+          responseCode = "409",
+          description = "Conflict",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @PutMapping("/{characterId}/slots/{slotId}")
+  public CharacterSlotDto updateCharacterSlot(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @RequestBody UpdateCharacterSlotPutRequest updateCharacterSlotPutRequest,
+          @PathVariable Integer characterId, @PathVariable Integer slotId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @DeleteMapping("/{characterId}/slots/{slotId}")
+  public CharacterSlotDto deleteCharacterSlot(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @PathVariable Integer characterId, @PathVariable Integer slotId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @GetMapping("/{characterId}/slots/{slotId}/tags")
+  public List<SystemTagDto> getCharacterSlotTags(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @PathVariable Integer characterId,
+          @PathVariable Integer slotId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @ApiResponse(
+          responseCode = "409",
+          description = "Conflict",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @PostMapping("/{characterId}/slots/{slotId}/tags")
+  public SystemTagDto addCharacterSlotTag(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @Valid @RequestBody AddSlotTagPostRequest addSlotTagPostRequest,
+          @PathVariable Integer characterId,
+          @PathVariable Integer slotId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @DeleteMapping("/{characterId}/slots/{slotId}/tags/{tagId}")
+  public SystemTagDto deleteCharacterSlotTag(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @PathVariable Integer characterId,
+          @PathVariable Integer slotId,
+          @PathVariable Integer tagId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @GetMapping("/{characterId}/attributes")
+  public List<SystemAttributeDto> getCharacterAttributes(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @PathVariable Integer characterId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @ApiResponse(
+          responseCode = "409",
+          description = "Conflict",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @PostMapping("/{characterId}/attributes")
+  public SystemAttributeDto addCharacterAttribute(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @Valid @RequestBody AddCharacterAttributePostRequest addCharacterAttributePostRequest,
+          @PathVariable Integer characterId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @DeleteMapping("/{characterId}/attributes/{attributeId}")
+  public SystemAttributeDto deleteCharacterAttribute(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @PathVariable Integer characterId,
+          @PathVariable Integer attributeId) {
+    return null;
   }
 }

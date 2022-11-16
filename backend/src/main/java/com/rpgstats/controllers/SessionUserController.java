@@ -2,6 +2,7 @@ package com.rpgstats.controllers;
 
 import com.rpgstats.entity.UpdateSessionPutRequest;
 import com.rpgstats.messages.CreateSessionPostRequest;
+import com.rpgstats.messages.DTO.CharacterDto;
 import com.rpgstats.messages.DTO.SessionDto;
 import com.rpgstats.messages.ErrorResponse;
 import com.rpgstats.services.AuthService;
@@ -90,5 +91,63 @@ public class SessionUserController {
   @DeleteMapping("/{sessionId}")
   public void deleteSession(@PathVariable Integer sessionId) {
     sessionService.deleteSession(sessionId);
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @GetMapping("/{sessionId}/characters")
+  public List<CharacterDto> findSessionCharacters(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @PathVariable Integer sessionId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @GetMapping("/{sessionId}/characters/{characterId}")
+  public CharacterDto findSessionCharacter(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @PathVariable Integer sessionId,
+          @PathVariable Integer characterId) {
+    return null;
+  }
+
+  @ApiResponse(responseCode = "200")
+  @ApiResponse(
+          responseCode = "404",
+          description = "Not found",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @ApiResponse(
+          responseCode = "409",
+          description = "Conflict",
+          content = {
+                  @Content(
+                          mediaType = MediaType.APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = ErrorResponse.class))
+          })
+  @DeleteMapping("/{sessionId}/characters/{characterId}")
+  public CharacterDto deleteSessionCharacter(
+          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+          @PathVariable Integer sessionId,
+          @PathVariable Integer characterId) {
+    return null;
   }
 }
