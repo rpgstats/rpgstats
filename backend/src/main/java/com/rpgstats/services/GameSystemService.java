@@ -104,4 +104,9 @@ public class GameSystemService {
   public boolean existById(int systemId) {
     return systemRepository.existsById(systemId);
   }
+
+  @Transactional
+  public boolean existByIdAndOwnerId(Integer id, Integer ownerId) {
+    return systemRepository.existsByIdAndOwner_Id(id, ownerId);
+  }
 }

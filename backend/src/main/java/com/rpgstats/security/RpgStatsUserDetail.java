@@ -9,8 +9,10 @@ import java.util.List;
 public class RpgStatsUserDetail extends User {
   private final Integer userId;
 
-  public RpgStatsUserDetail(String username, String password, Integer userId) {
+  private final com.rpgstats.entity.User user;
+  public RpgStatsUserDetail(String username, String password, Integer userId, com.rpgstats.entity.User user) {
     super(username, password, List.of());
     this.userId = userId;
+    this.user = user;
   }
 }
