@@ -10,5 +10,7 @@ public class UserCharacterDto {
 
   private String description;
 
+  private Integer systemId;
+
   private Integer sessionId;
 }
