@@ -23,7 +23,11 @@ public class Character {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "session_id", nullable = false)
+    @JoinColumn(name = "system_id", nullable = false)
+    private GameSystem system;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "session_id")
     private Session session;
 
     @NotNull
@@ -54,6 +58,10 @@ public class Character {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public GameSystem getSystem() {return system;}
+
+    public void setSystem(GameSystem system) {this.system = system;}
 
     public Session getSession() {
         return session;
