@@ -58,7 +58,7 @@ public class SessionUserController {
             schema = @Schema(implementation = ErrorResponse.class))
       })
   @PostMapping()
-  public SessionDto createSystem(
+  public SessionDto createSession(
       @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
       @RequestBody @Valid CreateSessionPostRequest createSessionPostRequest) {
     return sessionService.createSession(authService.getUserFromJwt(jwt), createSessionPostRequest);
