@@ -1,4 +1,6 @@
 package com.nsu.rpgstats.ui.user;
 
-public class WelcomeActivity {
+import android.app.Activity;
+
+public class WelcomeActivity extends Activity {
 }

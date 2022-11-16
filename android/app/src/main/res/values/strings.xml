@@ -118,5 +118,8 @@
     <string name="add_constraint">Add constraint</string>
     <string name="add_property">Add property</string>
     <string name="game_system_description_header">Description</string>
+    <string name="welcome">WELCOME</string>
+    <string name="sign_in">sign in</string>
+    <string name="sign_up">sign up</string>
 
 </resources>
