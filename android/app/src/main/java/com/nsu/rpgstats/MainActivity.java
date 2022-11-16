@@ -21,10 +21,12 @@ import com.nsu.rpgstats.ui.AddGameSystemActivity;
 import com.nsu.rpgstats.ui.gamesystems.GameSystemInfoActivity;
 import com.nsu.rpgstats.viewmodel.GameSystemsViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements GameSystemsAdapter.OnGameSystemClickListener {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private ActivityMainBinding binding;
     protected ActivityResultLauncher<Intent> activityLauncher;
     private List<GameSystem> mGameSystems;
@@ -39,11 +41,11 @@ public class MainActivity extends AppCompatActivity implements GameSystemsAdapte
 
         setSupportActionBar(binding.toolbar);
 
-
+        mGameSystems = new ArrayList<>();
         GameSystemsViewModel gameSystemsViewModel = new ViewModelProvider(this).get(GameSystemsViewModel.class);
-        mGameSystems = gameSystemsViewModel.getGameSystems().getValue();
         gameSystemsViewModel.getGameSystems().observe(this, gameSystems -> {
-            mGameSystemsAdapter.setGameSystemsList(mGameSystems);
+            mGameSystemsAdapter.setGameSystemsList(gameSystems);
+            mGameSystems = gameSystems;
         });
 
         activityLauncher = registerForActivityResult(
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements GameSystemsAdapte
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        Log.i("MENU", "creating menu...");
+        Log.i(TAG, "creating menu...");
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }

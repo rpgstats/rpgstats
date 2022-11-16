@@ -16,10 +16,12 @@ import com.nsu.rpgstats.entities.GameSystem;
 import com.nsu.rpgstats.ui.gamesystems.CreationGameResult;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 // A ViewModel usually shouldn't reference a view, Lifecycle, or any class that may hold a reference to the activity context.
 public class GameSystemsViewModel extends AndroidViewModel {
+    private static final String TAG = GameSystemsViewModel.class.getSimpleName();
     private MutableLiveData<List<GameSystem>> gameSystems;
     private MutableLiveData<CreationGameResult> creationGameResult;
     private final GameSystemsRepository gameSystemsRepository;
@@ -45,10 +47,6 @@ public class GameSystemsViewModel extends AndroidViewModel {
             return;
         }
 
-        if (gameSystems == null) {
-            gameSystems = new MutableLiveData<>();
-            loadGameSystems();
-        }
         gameSystemsRepository.addGameSystem(gameSystemName, description, new RepositoryCallback<GameSystem>() {
             @Override
             public void onComplete(Result<GameSystem> result) {
@@ -76,14 +74,14 @@ public class GameSystemsViewModel extends AndroidViewModel {
 
     private void loadGameSystems() {
         gameSystems.setValue(new ArrayList<>());
-        // suppose getting from server in future
-        gameSystemsRepository.getGameSystems(new RepositoryCallback<List<GameSystem>>() {
-
-            @Override
-            public void onComplete(Result<List<GameSystem>> result) {
-                if (result instanceof  Result.Success) {
-                    gameSystems.setValue(((Result.Success<List<GameSystem>>) result).data);
-                }
+        gameSystemsRepository.getGameSystems(2, result -> {
+            if (result instanceof  Result.Success) {
+                List<GameSystem> gs = ((Result.Success<List<GameSystem>>) result).data;
+                Log.d(TAG, "get game systems: " + Arrays.toString(gs.toArray()));
+                gameSystems.setValue(gs);
+            } else if (result instanceof Result.Error) {
+                Log.e(TAG, "can not load game systems, reason: " +
+                        ((Result.Error<List<GameSystem>>) result).throwable.getMessage());
             }
         });
     }
