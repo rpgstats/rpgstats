@@ -10,5 +10,6 @@ import javax.validation.constraints.NotNull;
 public class CreateCharacterPostRequest {
   @NotNull private String name;
   @NotNull private String description;
-  @NotNull private Integer sessionId;
+  @NotNull private Integer systemId;
+  private Integer sessionId;
 }

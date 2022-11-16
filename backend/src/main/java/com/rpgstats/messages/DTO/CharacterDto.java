@@ -7,6 +7,7 @@ public class CharacterDto {
   private Integer id;
   private String name;
   private String description;
+  private Integer systemId;
   private Integer sessionId;
   private Integer userId;
 }
