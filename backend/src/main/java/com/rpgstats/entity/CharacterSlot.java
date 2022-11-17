@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "character_slots")
 public class CharacterSlot {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 

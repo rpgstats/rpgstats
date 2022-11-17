@@ -70,7 +70,7 @@ public class ConstraintService {
       Integer systemId, CreateConstraintPostRequest request) {
     GameSystem system = gameSystemService.getSystemById(systemId);
     SystemAttribute systemAttribute = attributeService.getAttributeById(request.getAttributeId());
-    SystemTag systemTag = tagService.getTagById(request.getTagId());
+    SystemTag systemTag = tagService.getTagById(systemId, request.getTagId());
     AttributeConstraint attributeConstraint;
     if (Objects.equals(system.getId(), systemAttribute.getGameSystem().getId())
         && Objects.equals(system.getId(), systemTag.getGameSystem().getId())) {
@@ -101,7 +101,7 @@ public class ConstraintService {
     }
     if (request.getAttributeId() != null && request.getTagId() != null) {
       SystemAttribute systemAttribute = attributeService.getAttributeById(request.getAttributeId());
-      SystemTag systemTag = tagService.getTagById(request.getTagId());
+      SystemTag systemTag = tagService.getTagById(systemId, request.getTagId());
       if (Objects.equals(system.getId(), systemAttribute.getGameSystem().getId())
           && system.getId() == systemTag.getGameSystem().getId()) {
         attributeConstraint.setAttribute(systemAttribute);
@@ -120,7 +120,7 @@ public class ConstraintService {
       }
     } else if (request.getTagId() != null) {
       SystemAttribute systemAttribute = attributeConstraint.getAttribute();
-      SystemTag systemTag = tagService.getTagById(request.getTagId());
+      SystemTag systemTag = tagService.getTagById(systemId, request.getTagId());
       if (Objects.equals(
           systemTag.getGameSystem().getId(), systemAttribute.getGameSystem().getId())) {
         attributeConstraint.setTag(systemTag);

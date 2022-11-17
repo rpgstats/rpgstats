@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "system_tags")
 public class SystemTag {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
