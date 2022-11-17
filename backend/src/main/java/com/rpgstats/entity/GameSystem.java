@@ -1,6 +1,7 @@
 package com.rpgstats.entity;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,11 +11,12 @@ import java.time.Instant;
 @Table(name = "systems")
 public class GameSystem {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false,unique = true)
     @Type(type = "org.hibernate.type.TextType")
     private String name;
 

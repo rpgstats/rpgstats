@@ -10,6 +10,7 @@ import java.time.Instant;
 @Table(name = "system_parameters")
 public class SystemParameter {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 

@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "parameter_modifiers")
 public class ParameterModifier {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 

@@ -44,9 +44,7 @@ public class GameSystemService {
 
   @Transactional
   public GameSystemDto createSystem(Integer userId, GameSystemPostRequest postRequest) {
-    if (systemRepository.existsByName(postRequest.getName())) {
-      throw new ConflictDataException("System with that name already exists");
-    }
+
     GameSystem gameSystem = modelMapper.map(postRequest, GameSystem.class);
     gameSystem.setCreatedAt(Instant.now());
     if (postRequest.getParentSystem() != null) {
