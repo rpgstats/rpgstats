@@ -12,4 +12,10 @@ public interface CharacterRepository extends JpaRepository<Character, Integer> {
   Optional<Character> findByIdAndUser_Id(Integer id, Integer id1);
 
   boolean existsBySession_IdAndName(Integer id, String name);
+
+  Optional<Character> findByIdAndSession_Id(Integer id, Integer id1);
+
+  Optional<Character> findByIdAndSession_IdAndUser_Id(Integer id, Integer id1, Integer id2);
+
+  List<Character> findBySession_Id(Integer id);
 }

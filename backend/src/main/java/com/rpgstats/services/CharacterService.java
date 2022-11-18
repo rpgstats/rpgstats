@@ -6,8 +6,10 @@ import com.rpgstats.exceptions.ConflictDataException;
 import com.rpgstats.exceptions.ItemNotFoundException;
 import com.rpgstats.messages.*;
 import com.rpgstats.messages.DTO.CharacterSlotDto;
+import com.rpgstats.messages.DTO.SystemAttributeDto;
 import com.rpgstats.messages.DTO.SystemTagDto;
 import com.rpgstats.messages.DTO.UserCharacterDto;
+import com.rpgstats.repositories.CharacterAttributeRepository;
 import com.rpgstats.repositories.CharacterRepository;
 import com.rpgstats.repositories.CharacterSlotRepository;
 import com.rpgstats.repositories.CharacterSlotsTagRepository;
@@ -33,6 +35,10 @@ public class CharacterService {
   TagService tagService;
 
   CharacterSlotsTagRepository characterSlotsTagRepository;
+
+  CharacterAttributeRepository characterAttributeRepository;
+
+  AttributeService attributeService;
 
   public CharacterService(
       CharacterRepository characterRepository,
@@ -203,11 +209,75 @@ public class CharacterService {
     Character character = getUserCharacterById(user.getId(), characterId);
     CharacterSlot slot = getCharacterSlotById(character.getId(), slotId);
     SystemTag systemTag =
-        tagService.getTagById(character.getSystem().getId(), addSlotTagPostRequest.getId());
+        tagService.getTagById(addSlotTagPostRequest.getId(), character.getSystem().getId());
     CharacterSlotsTag characterSlotTag = new CharacterSlotsTag();
     characterSlotTag.setTag(systemTag);
     characterSlotTag.setSlot(slot);
     characterSlotsTagRepository.save(characterSlotTag);
     return modelMapper.map(systemTag, SystemTagDto.class);
+  }
+
+  @Transactional
+  public void deleteCharacterSlotTag(
+      User user, Integer characterId, Integer slotId, Integer tagId) {
+    Character character = getUserCharacterById(user.getId(), characterId);
+    CharacterSlot slot = getCharacterSlotById(character.getId(), slotId);
+    CharacterSlotsTag characterSlotsTag =
+        characterSlotsTagRepository.findById_SlotIdAndId_TagId(slot.getId(), tagId);
+    characterSlotsTagRepository.delete(characterSlotsTag);
+  }
+
+  @Transactional
+  public List<SystemAttributeDto> getCharacterAttributes(User user, Integer characterId) {
+    Character character = getUserCharacterById(user.getId(), characterId);
+    return characterAttributeRepository.findById_CharacterId(character.getId()).stream()
+        .map(x -> modelMapper.map(x.getAttribute(), SystemAttributeDto.class))
+        .collect(Collectors.toList());
+  }
+
+  @Transactional
+  public SystemAttributeDto addCharacterAttribute(
+      User user,
+      AddCharacterAttributePostRequest addCharacterAttributePostRequest,
+      Integer characterId) {
+    Character character = getUserCharacterById(user.getId(), characterId);
+    SystemAttribute attribute =
+        attributeService.getAttributeById(
+            addCharacterAttributePostRequest.getId(), character.getSystem().getId());
+    CharacterAttribute characterAttribute = new CharacterAttribute();
+    characterAttribute.setAttribute(attribute);
+    characterAttribute.setCharacter(character);
+    characterAttributeRepository.save(characterAttribute);
+    return modelMapper.map(attribute, SystemAttributeDto.class);
+  }
+
+  @Transactional
+  public void deleteCharacterAttribute(User user, Integer characterId, Integer attributeId) {
+    Character character = getUserCharacterById(user.getId(), characterId);
+    CharacterAttribute characterAttribute =
+        characterAttributeRepository.findById_CharacterIdAndId_AttributeId(
+            character.getId(), attributeId);
+    characterAttributeRepository.delete(characterAttribute);
+  }
+
+  @Transactional
+  public List<Character> findSessionCharacters(Integer sessionId) {
+    return characterRepository.findBySession_Id(sessionId);
+  }
+
+  @Transactional
+  public Character getSessionCharacter(Integer sessionId, Integer characterId) {
+    return characterRepository
+        .findByIdAndSession_Id(characterId, sessionId)
+        .orElseThrow(() -> new ItemNotFoundException("Not found"));
+  }
+
+  @Transactional
+  public void leaveSessionUserCharacter(User user, Integer sessionId, Integer characterId) {
+    Character character =
+        characterRepository
+            .findByIdAndSession_IdAndUser_Id(characterId, sessionId, user.getId())
+            .orElseThrow(() -> new ItemNotFoundException("Not found"));
+    character.setSession(null);
   }
 }

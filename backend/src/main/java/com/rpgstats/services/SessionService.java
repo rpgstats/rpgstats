@@ -4,6 +4,7 @@ import com.rpgstats.entity.*;
 import com.rpgstats.exceptions.ConflictDataException;
 import com.rpgstats.exceptions.ItemNotFoundException;
 import com.rpgstats.messages.CreateSessionPostRequest;
+import com.rpgstats.messages.DTO.CharacterDto;
 import com.rpgstats.messages.DTO.SessionDto;
 import com.rpgstats.repositories.SessionRepository;
 import com.rpgstats.repositories.UsersSessionRepository;
@@ -21,16 +22,20 @@ public class SessionService {
   SessionRepository sessionRepository;
   UsersSessionRepository usersSessionRepository;
 
+  CharacterService characterService;
+
   GameSystemService gameSystemService;
   ModelMapper modelMapper;
 
   public SessionService(
       SessionRepository sessionRepository,
       UsersSessionRepository usersSessionRepository,
+      CharacterService characterService,
       GameSystemService gameSystemService,
       ModelMapper modelMapper) {
     this.sessionRepository = sessionRepository;
     this.usersSessionRepository = usersSessionRepository;
+    this.characterService = characterService;
     this.gameSystemService = gameSystemService;
     this.modelMapper = modelMapper;
   }
@@ -140,5 +145,20 @@ public class SessionService {
         .findById_UserIdAndId_SessionId(ownerId, id)
         .orElseThrow(() -> new ItemNotFoundException("No such user session"))
         .getSession();
+  }
+
+  public List<CharacterDto> findSessionCharactersDto(Integer sessionId) {
+    return characterService.findSessionCharacters(sessionId).stream()
+        .map(x -> modelMapper.map(x, CharacterDto.class))
+        .collect(Collectors.toList());
+  }
+
+  public CharacterDto getSessionCharacterDto(Integer sessionId, Integer characterId) {
+    return modelMapper.map(
+        characterService.getSessionCharacter(sessionId, characterId), CharacterDto.class);
+  }
+
+  public void deleteSessionCharacter(User user, Integer sessionId, Integer characterId) {
+    characterService.leaveSessionUserCharacter(user, sessionId, characterId);
   }
 }
