@@ -288,12 +288,13 @@ public class UserCharacterController {
             schema = @Schema(implementation = ErrorResponse.class))
       })
   @DeleteMapping("/{characterId}/slots/{slotId}/tags/{tagId}")
-  public SystemTagDto deleteCharacterSlotTag(
+  public void deleteCharacterSlotTag(
       @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
       @PathVariable Integer characterId,
       @PathVariable Integer slotId,
       @PathVariable Integer tagId) {
-    return null;
+    characterService.deleteCharacterSlotTag(
+        authService.getUserFromJwt(jwt), characterId, slotId, tagId);
   }
 
   @ApiResponse(responseCode = "200")
@@ -309,7 +310,7 @@ public class UserCharacterController {
   public List<SystemAttributeDto> getCharacterAttributes(
       @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
       @PathVariable Integer characterId) {
-    return null;
+    return characterService.getCharacterAttributes(authService.getUserFromJwt(jwt), characterId);
   }
 
   @ApiResponse(responseCode = "200")
@@ -334,7 +335,8 @@ public class UserCharacterController {
       @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
       @Valid @RequestBody AddCharacterAttributePostRequest addCharacterAttributePostRequest,
       @PathVariable Integer characterId) {
-    return null;
+    return characterService.addCharacterAttribute(
+        authService.getUserFromJwt(jwt), addCharacterAttributePostRequest, characterId);
   }
 
   @ApiResponse(responseCode = "200")
@@ -347,10 +349,11 @@ public class UserCharacterController {
             schema = @Schema(implementation = ErrorResponse.class))
       })
   @DeleteMapping("/{characterId}/attributes/{attributeId}")
-  public SystemAttributeDto deleteCharacterAttribute(
+  public void deleteCharacterAttribute(
       @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
       @PathVariable Integer characterId,
       @PathVariable Integer attributeId) {
-    return null;
+    characterService.deleteCharacterAttribute(
+        authService.getUserFromJwt(jwt), characterId, attributeId);
   }
 }

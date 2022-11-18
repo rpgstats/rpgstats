@@ -95,59 +95,55 @@ public class SessionUserController {
 
   @ApiResponse(responseCode = "200")
   @ApiResponse(
-          responseCode = "404",
-          description = "Not found",
-          content = {
-                  @Content(
-                          mediaType = MediaType.APPLICATION_JSON_VALUE,
-                          schema = @Schema(implementation = ErrorResponse.class))
-          })
+      responseCode = "404",
+      description = "Not found",
+      content = {
+        @Content(
+            mediaType = MediaType.APPLICATION_JSON_VALUE,
+            schema = @Schema(implementation = ErrorResponse.class))
+      })
   @GetMapping("/{sessionId}/characters")
-  public List<CharacterDto> findSessionCharacters(
-          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
-          @PathVariable Integer sessionId) {
-    return null;
+  public List<CharacterDto> findSessionCharacters(@PathVariable Integer sessionId) {
+    return sessionService.findSessionCharactersDto(sessionId);
   }
 
   @ApiResponse(responseCode = "200")
   @ApiResponse(
-          responseCode = "404",
-          description = "Not found",
-          content = {
-                  @Content(
-                          mediaType = MediaType.APPLICATION_JSON_VALUE,
-                          schema = @Schema(implementation = ErrorResponse.class))
-          })
+      responseCode = "404",
+      description = "Not found",
+      content = {
+        @Content(
+            mediaType = MediaType.APPLICATION_JSON_VALUE,
+            schema = @Schema(implementation = ErrorResponse.class))
+      })
   @GetMapping("/{sessionId}/characters/{characterId}")
   public CharacterDto findSessionCharacter(
-          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
-          @PathVariable Integer sessionId,
-          @PathVariable Integer characterId) {
-    return null;
+      @PathVariable Integer sessionId, @PathVariable Integer characterId) {
+    return sessionService.getSessionCharacterDto(sessionId, characterId);
   }
 
   @ApiResponse(responseCode = "200")
   @ApiResponse(
-          responseCode = "404",
-          description = "Not found",
-          content = {
-                  @Content(
-                          mediaType = MediaType.APPLICATION_JSON_VALUE,
-                          schema = @Schema(implementation = ErrorResponse.class))
-          })
+      responseCode = "404",
+      description = "Not found",
+      content = {
+        @Content(
+            mediaType = MediaType.APPLICATION_JSON_VALUE,
+            schema = @Schema(implementation = ErrorResponse.class))
+      })
   @ApiResponse(
-          responseCode = "409",
-          description = "Conflict",
-          content = {
-                  @Content(
-                          mediaType = MediaType.APPLICATION_JSON_VALUE,
-                          schema = @Schema(implementation = ErrorResponse.class))
-          })
+      responseCode = "409",
+      description = "Conflict",
+      content = {
+        @Content(
+            mediaType = MediaType.APPLICATION_JSON_VALUE,
+            schema = @Schema(implementation = ErrorResponse.class))
+      })
   @DeleteMapping("/{sessionId}/characters/{characterId}")
-  public CharacterDto deleteSessionCharacter(
-          @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
-          @PathVariable Integer sessionId,
-          @PathVariable Integer characterId) {
-    return null;
+  public void deleteSessionCharacter(
+      @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
+      @PathVariable Integer sessionId,
+      @PathVariable Integer characterId) {
+    sessionService.deleteSessionCharacter(authService.getUserFromJwt(jwt), sessionId, characterId);
   }
 }

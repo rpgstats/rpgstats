@@ -36,7 +36,7 @@ public class TagService {
 
   @Transactional
   public SystemTagDto getTagDtoById(Integer systemId, Integer tagId) {
-    return mapper.map(getTagById(systemId, tagId), SystemTagDto.class);
+    return mapper.map(getTagById(tagId, systemId), SystemTagDto.class);
   }
 
   @Transactional
@@ -51,7 +51,7 @@ public class TagService {
 
   @Transactional
   public SystemTagDto changeTag(Integer tagId, Integer systemId, ChangeTagPutRequest request) {
-    SystemTag tag = getTagById(systemId, tagId);
+    SystemTag tag = getTagById(tagId, systemId);
     tag.setName(request.getName());
     tagRepository.save(tag);
     return mapper.map(tag, SystemTagDto.class);
@@ -59,16 +59,16 @@ public class TagService {
 
   @Transactional
   public SystemTagDto deleteTag(Integer tagId, Integer systemId) {
-    SystemTag tag = getTagById(systemId, tagId);
+    SystemTag tag = getTagById(tagId, systemId);
     tagRepository.delete(tag);
     return mapper.map(tag, SystemTagDto.class);
   }
 
   @Transactional
-  public SystemTag getTagById(Integer systemId, Integer id) {
+  public SystemTag getTagById(Integer tagId, Integer systemId) {
     return tagRepository
-        .findByIdAndGameSystem_Id(id, systemId)
+        .findByIdAndGameSystem_Id(tagId, systemId)
         .orElseThrow(
-            () -> new ItemNotFoundException(String.format("Tag by id - %d not found", id)));
+            () -> new ItemNotFoundException(String.format("Tag by id - %d not found", tagId)));
   }
 }

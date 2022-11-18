@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface CharacterSlotsTagRepository extends JpaRepository<CharacterSlotsTag, CharacterSlotsTagId> {
   List<CharacterSlotsTag> findById_SlotId(Integer slotId);
+
+  CharacterSlotsTag findById_SlotIdAndId_TagId(Integer slotId, Integer tagId);
 }
