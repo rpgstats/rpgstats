@@ -19,13 +19,13 @@ import java.util.stream.Collectors;
 @Service
 public class SessionService {
 
-  SessionRepository sessionRepository;
-  UsersSessionRepository usersSessionRepository;
+  final SessionRepository sessionRepository;
+  final UsersSessionRepository usersSessionRepository;
 
-  CharacterService characterService;
+  final CharacterService characterService;
 
-  GameSystemService gameSystemService;
-  ModelMapper modelMapper;
+  final GameSystemService gameSystemService;
+  final ModelMapper modelMapper;
 
   public SessionService(
       SessionRepository sessionRepository,
@@ -81,8 +81,8 @@ public class SessionService {
 
   @Transactional
   public List<SessionDto> findUserSessions(User user) {
-    return sessionRepository.findByCreator_Id(user.getId()).stream()
-        .map(x -> modelMapper.map(x, SessionDto.class))
+    return usersSessionRepository.findById_UserId(user.getId()).stream()
+        .map(x -> modelMapper.map(x.getSession(), SessionDto.class))
         .collect(Collectors.toList());
   }
 
@@ -111,11 +111,19 @@ public class SessionService {
     session.setCreatedAt(Instant.now());
     session.setGameSystem(gameSystem);
     sessionRepository.save(session);
+    if (createSessionPostRequest.getCreatorAsPlayer()) {
+      UsersSession usersSession = new UsersSession();
+      usersSession.setSession(session);
+      usersSession.setUser(user);
+      usersSessionRepository.save(usersSession);
+    }
     return modelMapper.map(session, SessionDto.class);
   }
 
-  public SessionDto updateSession(UpdateSessionPutRequest updateSessionPutRequest, Integer id) {
-    Session session = getSessionById(id);
+  @Transactional
+  public SessionDto updateSession(
+      User user, UpdateSessionPutRequest updateSessionPutRequest, Integer id) {
+    Session session = getUserSessionByIdAndUserId(id, user.getId());
     session.setName(updateSessionPutRequest.getName());
     session.setDescription(updateSessionPutRequest.getDescription());
     session.setCreatorAsPlayer(updateSessionPutRequest.getCreatorAsPlayer());
@@ -124,8 +132,8 @@ public class SessionService {
   }
 
   @Transactional
-  public void deleteSession(Integer id) {
-    Session session = getSessionById(id);
+  public void deleteSession(User user, Integer id) {
+    Session session = getUserSessionByIdAndUserId(id, user.getId());
     sessionRepository.delete(session);
   }
 
@@ -153,6 +161,7 @@ public class SessionService {
         .collect(Collectors.toList());
   }
 
+  @Transactional
   public CharacterDto getSessionCharacterDto(Integer sessionId, Integer characterId) {
     return modelMapper.map(
         characterService.getSessionCharacter(sessionId, characterId), CharacterDto.class);

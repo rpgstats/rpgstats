@@ -10,5 +10,4 @@ public interface SystemParameterRepository extends JpaRepository<SystemParameter
   List<SystemParameter> findByGameSystem_Id(Integer id);
 
   Optional<SystemParameter> findByIdAndGameSystem_Id(Integer id, Integer id1);
-
 }

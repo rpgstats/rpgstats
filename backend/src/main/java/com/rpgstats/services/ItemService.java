@@ -18,10 +18,10 @@ import java.util.stream.Collectors;
 @Service
 public class ItemService {
 
-  SystemItemRepository itemRepository;
+  final SystemItemRepository itemRepository;
 
-  GameSystemService gameSystemService;
-  ModelMapper mapper;
+  final GameSystemService gameSystemService;
+  final ModelMapper mapper;
 
   public ItemService(
       SystemItemRepository itemRepository,

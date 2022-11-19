@@ -27,8 +27,9 @@ public class RestExceptionHandler {
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ResponseEntity<ErrorResponse> handleConstraintViolatation(Exception exception) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            .body(new ErrorResponse(exception.getMessage()));
+        .body(new ErrorResponse(exception.getMessage()));
   }
+
   @ExceptionHandler(ConflictDataException.class)
   @ResponseStatus(HttpStatus.CONFLICT)
   public ResponseEntity<ErrorResponse> handleConflictData(Exception exception) {

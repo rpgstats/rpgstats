@@ -24,9 +24,9 @@ import java.util.List;
 @ApiResponse(responseCode = "401", description = "Unathorized", content = @Content)
 @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
 public class UserCharacterController {
-  CharacterService characterService;
+  final CharacterService characterService;
 
-  AuthService authService;
+  final AuthService authService;
 
   public UserCharacterController(CharacterService characterService, AuthService authService) {
     this.characterService = characterService;

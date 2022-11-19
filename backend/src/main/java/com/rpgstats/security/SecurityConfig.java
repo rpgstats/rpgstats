@@ -63,10 +63,6 @@ public class SecurityConfig {
     return authService.checkUserAccessToSystem(authentication.getToken(), systemId);
   }
 
-  public boolean checkSessionId(JwtAuthenticationToken authentication, int sessionId) {
-    return authService.checkUserAccessToSession(authentication.getToken(), sessionId);
-  }
-
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeRequests()
@@ -76,8 +72,6 @@ public class SecurityConfig {
         .permitAll()
         .antMatchers("/user/game-systems/{systemId}/**")
         .access("isAuthenticated() and @securityConfig.checkSystemId(authentication,#systemId)")
-        .antMatchers("/user/sessions/{sessionId}/**")
-        .access("isAuthenticated() and @securityConfig.checkSessionId(authentication,#sessionId)")
         .antMatchers("/swagger-ui/**", "/v3/api-docs/**")
         .permitAll()
         .anyRequest()

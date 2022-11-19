@@ -14,42 +14,40 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @Tag(name = "Sessions common controller")
 @RequestMapping("/sessions/")
 @ApiResponse(responseCode = "401", description = "Unathorized", content = @Content)
 public class SessionCommonController {
 
-  SessionService sessionService;
+  final SessionService sessionService;
 
-  AuthService authService;
+  final AuthService authService;
 
   public SessionCommonController(SessionService sessionService, AuthService authService) {
     this.sessionService = sessionService;
     this.authService = authService;
   }
 
-//  @ApiResponse(responseCode = "200")
-//  @GetMapping("/search")
-//  public List<SessionDto> findSessionsByName(@RequestParam String name) {
-//    return sessionService.findSessionsByName(name);
-//  }
-//
-//  @ApiResponse(responseCode = "200")
-//  @ApiResponse(
-//      responseCode = "404",
-//      description = "Session not found",
-//      content = {
-//        @Content(
-//            mediaType = MediaType.APPLICATION_JSON_VALUE,
-//            schema = @Schema(implementation = ErrorResponse.class))
-//      })
-//  @GetMapping("/search/{sessionId}")
-//  public SessionDto findSessionById(@PathVariable Integer sessionId) {
-//    return sessionService.getSessionDtoById(sessionId);
-//  }
+  //  @ApiResponse(responseCode = "200")
+  //  @GetMapping("/search")
+  //  public List<SessionDto> findSessionsByName(@RequestParam String name) {
+  //    return sessionService.findSessionsByName(name);
+  //  }
+  //
+  //  @ApiResponse(responseCode = "200")
+  //  @ApiResponse(
+  //      responseCode = "404",
+  //      description = "Session not found",
+  //      content = {
+  //        @Content(
+  //            mediaType = MediaType.APPLICATION_JSON_VALUE,
+  //            schema = @Schema(implementation = ErrorResponse.class))
+  //      })
+  //  @GetMapping("/search/{sessionId}")
+  //  public SessionDto findSessionById(@PathVariable Integer sessionId) {
+  //    return sessionService.getSessionDtoById(sessionId);
+  //  }
 
   @ApiResponse(responseCode = "200")
   @ApiResponse(

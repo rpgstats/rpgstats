@@ -14,32 +14,36 @@ import java.util.List;
 @RestController
 @RequestMapping("/game-systems")
 public class GameSystemsCommonController {
-  GameSystemService gameSystemService;
-  ParameterService parameterService;
+  final GameSystemService gameSystemService;
+  final ParameterService parameterService;
 
-  ModifierService modifierService;
+  final ModifierService modifierService;
 
-  ConstraintService constraintService;
+  final ConstraintService constraintService;
 
-  AttributeService attributeService;
+  final AttributeService attributeService;
 
-  TagService tagService;
-  ItemService itemService;
+  final TagService tagService;
+  final ItemService itemService;
 
-    public GameSystemsCommonController(GameSystemService gameSystemService, ParameterService parameterService,
-                                       ModifierService modifierService, ConstraintService constraintService,
-                                       AttributeService attributeService, TagService tagService,
-                                       ItemService itemService) {
-        this.gameSystemService = gameSystemService;
-        this.parameterService = parameterService;
-        this.modifierService = modifierService;
-        this.constraintService = constraintService;
-        this.attributeService = attributeService;
-        this.tagService = tagService;
-        this.itemService = itemService;
-    }
+  public GameSystemsCommonController(
+      GameSystemService gameSystemService,
+      ParameterService parameterService,
+      ModifierService modifierService,
+      ConstraintService constraintService,
+      AttributeService attributeService,
+      TagService tagService,
+      ItemService itemService) {
+    this.gameSystemService = gameSystemService;
+    this.parameterService = parameterService;
+    this.modifierService = modifierService;
+    this.constraintService = constraintService;
+    this.attributeService = attributeService;
+    this.tagService = tagService;
+    this.itemService = itemService;
+  }
 
-    @GetMapping(
+  @GetMapping(
       value = "/search",
       params = {"name"})
   public List<GameSystemDto> findSystemsByName(@RequestParam String name) {

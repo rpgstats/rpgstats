@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/characters")
 @ApiResponse(responseCode = "401", description = "Unathorized", content = @Content)
 public class CharacterController {
-  CharacterService characterService;
+  final CharacterService characterService;
 
-  AuthService authService;
+  final AuthService authService;
 
   public CharacterController(CharacterService characterService, AuthService authService) {
     this.characterService = characterService;
