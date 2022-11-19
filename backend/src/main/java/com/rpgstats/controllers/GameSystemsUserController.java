@@ -23,14 +23,14 @@ import javax.validation.Valid;
 @ApiResponse(responseCode = "401", description = "Unathorized", content = @Content)
 @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
 public class GameSystemsUserController {
-  GameSystemService gameSystemService;
-  TagService tagService;
-  ParameterService parameterService;
-  ModifierService modifierService;
-  ItemService itemService;
+  final GameSystemService gameSystemService;
+  final TagService tagService;
+  final ParameterService parameterService;
+  final ModifierService modifierService;
+  final ItemService itemService;
 
-  ConstraintService constraintService;
-  AttributeService attributeService;
+  final ConstraintService constraintService;
+  final AttributeService attributeService;
   AuthService authService;
 
   public GameSystemsUserController(

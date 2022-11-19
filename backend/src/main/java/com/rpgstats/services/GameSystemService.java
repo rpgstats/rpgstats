@@ -1,7 +1,6 @@
 package com.rpgstats.services;
 
 import com.rpgstats.entity.GameSystem;
-import com.rpgstats.exceptions.ConflictDataException;
 import com.rpgstats.exceptions.ItemNotFoundException;
 import com.rpgstats.messages.DTO.GameSystemDto;
 import com.rpgstats.messages.GameSystemPostRequest;
@@ -18,10 +17,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class GameSystemService {
-  SystemRepository systemRepository;
+  final SystemRepository systemRepository;
 
-  UserService userService;
-  ModelMapper modelMapper;
+  final UserService userService;
+  final ModelMapper modelMapper;
 
   public GameSystemService(
       SystemRepository systemRepository, UserService userService, ModelMapper modelMapper) {

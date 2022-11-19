@@ -18,14 +18,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class ConstraintService {
-  ModelMapper modelMapper;
-  AttributeConstraintRepository attributeConstraintRepository;
-  AttributeService attributeService;
+  final ModelMapper modelMapper;
+  final AttributeConstraintRepository attributeConstraintRepository;
+  final AttributeService attributeService;
 
-  GameSystemService gameSystemService;
+  final GameSystemService gameSystemService;
 
-  TagService tagService;
-  UserService userService;
+  final TagService tagService;
+  final UserService userService;
 
   public ConstraintService(
       ModelMapper modelMapper,

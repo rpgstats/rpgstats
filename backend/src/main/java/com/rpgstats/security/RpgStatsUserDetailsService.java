@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 public class RpgStatsUserDetailsService implements UserDetailsService {
-  UserRepository userRepository;
+  final UserRepository userRepository;
 
   public RpgStatsUserDetailsService(UserRepository userRepository) {
     this.userRepository = userRepository;
@@ -20,6 +20,6 @@ public class RpgStatsUserDetailsService implements UserDetailsService {
   public RpgStatsUserDetail loadUserByUsername(String username) throws UsernameNotFoundException {
     Optional<User> userOptional = userRepository.findByUsername(username);
     User user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
-    return new RpgStatsUserDetail(user.getUsername(), user.getPassword(), user.getId(),user);
+    return new RpgStatsUserDetail(user.getUsername(), user.getPassword(), user.getId(), user);
   }
 }

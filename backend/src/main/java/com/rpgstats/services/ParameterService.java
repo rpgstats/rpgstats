@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class ParameterService {
-  SystemParameterRepository parameterRepository;
-  GameSystemService gameSystemService;
-  ModelMapper mapper;
+  final SystemParameterRepository parameterRepository;
+  final GameSystemService gameSystemService;
+  final ModelMapper mapper;
 
   public ParameterService(
       SystemParameterRepository parameterRepository,

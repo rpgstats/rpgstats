@@ -23,22 +23,22 @@ import java.util.stream.Collectors;
 @Service
 public class CharacterService {
 
-  CharacterRepository characterRepository;
+  final CharacterRepository characterRepository;
 
-  CharacterSlotRepository characterSlotRepository;
+  final CharacterSlotRepository characterSlotRepository;
 
-  SessionService sessionService;
+  final SessionService sessionService;
 
-  ItemService itemService;
-  ModelMapper modelMapper;
+  final ItemService itemService;
+  final ModelMapper modelMapper;
 
-  TagService tagService;
+  final TagService tagService;
 
-  CharacterSlotsTagRepository characterSlotsTagRepository;
+  final CharacterSlotsTagRepository characterSlotsTagRepository;
 
-  CharacterAttributeRepository characterAttributeRepository;
+  final CharacterAttributeRepository characterAttributeRepository;
 
-  AttributeService attributeService;
+  final AttributeService attributeService;
 
   public CharacterService(
       CharacterRepository characterRepository,
@@ -47,7 +47,9 @@ public class CharacterService {
       ItemService itemService,
       ModelMapper modelMapper,
       TagService tagService,
-      CharacterSlotsTagRepository characterSlotsTagRepository) {
+      CharacterSlotsTagRepository characterSlotsTagRepository,
+      CharacterAttributeRepository characterAttributeRepository,
+      AttributeService attributeService) {
     this.characterRepository = characterRepository;
     this.characterSlotRepository = characterSlotRepository;
     this.sessionService = sessionService;
@@ -55,6 +57,8 @@ public class CharacterService {
     this.modelMapper = modelMapper;
     this.tagService = tagService;
     this.characterSlotsTagRepository = characterSlotsTagRepository;
+    this.characterAttributeRepository = characterAttributeRepository;
+    this.attributeService = attributeService;
   }
 
   @Transactional

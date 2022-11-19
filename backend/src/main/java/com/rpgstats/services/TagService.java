@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class TagService {
-  SystemTagRepository tagRepository;
-  GameSystemService gameSystemService;
-  ModelMapper mapper;
+  final SystemTagRepository tagRepository;
+  final GameSystemService gameSystemService;
+  final ModelMapper mapper;
 
   public TagService(
       SystemTagRepository tagRepository, GameSystemService gameSystemService, ModelMapper mapper) {

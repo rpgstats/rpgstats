@@ -6,5 +6,5 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class AddSlotTagPostRequest {
-    @NotNull private Integer id;
+  @NotNull private Integer id;
 }

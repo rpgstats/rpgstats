@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 @Service
 public class AttributeService {
 
-  SystemAttributeRepository attributeRepository;
-  GameSystemService gameSystemService;
-  ModelMapper mapper;
+  final SystemAttributeRepository attributeRepository;
+  final GameSystemService gameSystemService;
+  final ModelMapper mapper;
 
   public AttributeService(
       SystemAttributeRepository attributeRepository,
@@ -84,6 +84,8 @@ public class AttributeService {
     return attributeRepository
         .findByIdAndGameSystem_Id(attributeId, systemId)
         .orElseThrow(
-            () -> new ItemNotFoundException(String.format("Attribute not found by id - %d", attributeId)));
+            () ->
+                new ItemNotFoundException(
+                    String.format("Attribute not found by id - %d", attributeId)));
   }
 }

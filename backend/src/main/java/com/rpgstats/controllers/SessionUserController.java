@@ -26,8 +26,8 @@ import java.util.List;
 @ApiResponse(responseCode = "401", description = "Unathorized", content = @Content)
 @ApiResponse(responseCode = "403", description = "Forbidden", content = @Content)
 public class SessionUserController {
-  SessionService sessionService;
-  AuthService authService;
+  final SessionService sessionService;
+  final AuthService authService;
 
   public SessionUserController(SessionService sessionService, AuthService authService) {
     this.sessionService = sessionService;
@@ -83,14 +83,17 @@ public class SessionUserController {
       })
   @PutMapping("/{sessionId}")
   public SessionDto updateSession(
+      @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt,
       @RequestBody @Valid UpdateSessionPutRequest updateSessionPostRequest,
       @PathVariable Integer sessionId) {
-    return sessionService.updateSession(updateSessionPostRequest, sessionId);
+    return sessionService.updateSession(
+        authService.getUserFromJwt(jwt), updateSessionPostRequest, sessionId);
   }
 
   @DeleteMapping("/{sessionId}")
-  public void deleteSession(@PathVariable Integer sessionId) {
-    sessionService.deleteSession(sessionId);
+  public void deleteSession(
+      @Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt, @PathVariable Integer sessionId) {
+    sessionService.deleteSession(authService.getUserFromJwt(jwt), sessionId);
   }
 
   @ApiResponse(responseCode = "200")

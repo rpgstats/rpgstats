@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @RestController
 public class AuthController {
 
-  AuthService authService;
+  final AuthService authService;
 
   public AuthController(AuthService authService) {
     this.authService = authService;
