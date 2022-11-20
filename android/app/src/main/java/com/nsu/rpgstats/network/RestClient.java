@@ -76,7 +76,6 @@ public class RestClient {
 
         // todo: This setup exsists only while not realized login functionality
         testSetupAuth();
-
     }
 
     private void testSetupAuth() {
