@@ -14,6 +14,7 @@ import com.rpgstats.repositories.CharacterRepository;
 import com.rpgstats.repositories.CharacterSlotRepository;
 import com.rpgstats.repositories.CharacterSlotsTagRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,41 +24,67 @@ import java.util.stream.Collectors;
 @Service
 public class CharacterService {
 
-  final CharacterRepository characterRepository;
+  CharacterRepository characterRepository;
 
-  final CharacterSlotRepository characterSlotRepository;
+  CharacterSlotRepository characterSlotRepository;
 
-  final SessionService sessionService;
+  SessionService sessionService;
 
-  final ItemService itemService;
-  final ModelMapper modelMapper;
+  ItemService itemService;
+  ModelMapper modelMapper;
 
-  final TagService tagService;
+  TagService tagService;
 
-  final CharacterSlotsTagRepository characterSlotsTagRepository;
+  CharacterSlotsTagRepository characterSlotsTagRepository;
 
-  final CharacterAttributeRepository characterAttributeRepository;
+  CharacterAttributeRepository characterAttributeRepository;
 
-  final AttributeService attributeService;
+  AttributeService attributeService;
 
-  public CharacterService(
-      CharacterRepository characterRepository,
-      CharacterSlotRepository characterSlotRepository,
-      SessionService sessionService,
-      ItemService itemService,
-      ModelMapper modelMapper,
-      TagService tagService,
-      CharacterSlotsTagRepository characterSlotsTagRepository,
-      CharacterAttributeRepository characterAttributeRepository,
-      AttributeService attributeService) {
+  @Autowired
+  public void setCharacterRepository(CharacterRepository characterRepository) {
     this.characterRepository = characterRepository;
+  }
+
+  @Autowired
+  public void setCharacterSlotRepository(CharacterSlotRepository characterSlotRepository) {
     this.characterSlotRepository = characterSlotRepository;
+  }
+
+  @Autowired
+  public void setSessionService(SessionService sessionService) {
     this.sessionService = sessionService;
+  }
+
+  @Autowired
+  public void setItemService(ItemService itemService) {
     this.itemService = itemService;
+  }
+
+  @Autowired
+  public void setModelMapper(ModelMapper modelMapper) {
     this.modelMapper = modelMapper;
+  }
+
+  @Autowired
+  public void setTagService(TagService tagService) {
     this.tagService = tagService;
+  }
+
+  @Autowired
+  public void setCharacterSlotsTagRepository(
+      CharacterSlotsTagRepository characterSlotsTagRepository) {
     this.characterSlotsTagRepository = characterSlotsTagRepository;
+  }
+
+  @Autowired
+  public void setCharacterAttributeRepository(
+      CharacterAttributeRepository characterAttributeRepository) {
     this.characterAttributeRepository = characterAttributeRepository;
+  }
+
+  @Autowired
+  public void setAttributeService(AttributeService attributeService) {
     this.attributeService = attributeService;
   }
 

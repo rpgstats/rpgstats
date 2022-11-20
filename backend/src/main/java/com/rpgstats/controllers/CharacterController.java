@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -20,12 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/characters")
 @ApiResponse(responseCode = "401", description = "Unathorized", content = @Content)
 public class CharacterController {
-  final CharacterService characterService;
+  CharacterService characterService;
 
-  final AuthService authService;
+  AuthService authService;
 
-  public CharacterController(CharacterService characterService, AuthService authService) {
+  @Autowired
+  public void setCharacterService(CharacterService characterService) {
     this.characterService = characterService;
+  }
+
+  @Autowired
+  public void setAuthService(AuthService authService) {
     this.authService = authService;
   }
 
