@@ -20,12 +20,11 @@ import java.util.List;
 import java.util.Map;
 
 public class TagViewModel extends AndroidViewModel {
-    private final MutableLiveData<List<Tag>> systemTags;
+    private static MutableLiveData<List<Tag>> systemTags = new MutableLiveData<>();
     private final TagRepository tagRepository;
 
     public TagViewModel(@NonNull Application application) {
         super(application);
-        systemTags = new MutableLiveData<>();
         tagRepository = ((RpgstatsApplication) getApplication()).appContainer.tagRepository;        // suppose getting from server in future
     }
 
@@ -89,13 +88,19 @@ public class TagViewModel extends AndroidViewModel {
         }
         MutableLiveData<List<Tag>> tags = systemTags;
         // todo: find better approach
-        Tag oldTag = systemTags.getValue().get(tagId);
-        tagRepository.editTag(gameSystemId, tagId, new Tag(tagId, oldTag.getName(), oldTag.getCreationDate(), true), result -> {
+        Tag oldTag = null;
+        for (Tag tag: systemTags.getValue()) {
+            if (tag.getId() == tagId) {
+                oldTag = tag;
+            }
+        }
+        Tag deletedTag = new Tag(tagId, oldTag.getName(), oldTag.getCreationDate(), true);
+        tagRepository.editTag(gameSystemId, tagId, deletedTag, result -> {
            if (result instanceof Result.Success) {
                for (int i = 0; i < tags.getValue().size(); ++i) {
                    if (tags.getValue().get(i).getId() == tagId) {
                        tags.getValue().remove(i);
-                       tags.getValue().add(i, ((Result.Success<Tag>) result).data);
+                       tags.getValue().add(i,deletedTag);
                        break;
                    }
                }

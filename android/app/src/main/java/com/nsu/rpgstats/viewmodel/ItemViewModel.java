@@ -23,12 +23,11 @@ import java.util.List;
 import java.util.Map;
 
 public class ItemViewModel extends AndroidViewModel {
-    private MutableLiveData<List<Item>> systemItems;
+    private static MutableLiveData<List<Item>> systemItems = new MutableLiveData<>();
     private final ItemRepository itemRepository;
 
     public ItemViewModel(@NonNull Application application) {
         super(application);
-        systemItems = new MutableLiveData<>();
         itemRepository = ((RpgstatsApplication)getApplication()).appContainer.itemRepository;        // suppose getting from server in future
         Log.e("ItemViewModel", "new instance");
     }
@@ -118,15 +117,21 @@ public class ItemViewModel extends AndroidViewModel {
         MutableLiveData<List<Item>> items = systemItems;
         // todo: find better approach
 
-        Item oldItem = systemItems.getValue().get(itemId);
+        Item oldItem = null;
+        for (Item item: systemItems.getValue()) {
+            if (item.getId() == itemId) {
+                oldItem = item;
+            }
+        }
+        Item deletedItem = new Item(oldItem.getId(), oldItem.getPictureId(),
+                oldItem.getName(), oldItem.getTags(), oldItem.getModifiers(), true);
 
-        itemRepository.editItem(gameSystemId, itemId, new Item(oldItem.getId(), oldItem.getPictureId(),
-                oldItem.getName(), oldItem.getTags(), oldItem.getModifiers(), true), result -> {
+        itemRepository.editItem(gameSystemId, itemId, deletedItem, result -> {
             if (result instanceof Result.Success) {
                 for (int i = 0; i < systemItems.getValue().size(); ++i) {
                     if (systemItems.getValue().get(i).getId() == itemId) {
                         systemItems.getValue().remove(i);
-                        systemItems.getValue().add(i, ((Result.Success<Item>) result).data);
+                        systemItems.getValue().add(i, deletedItem);
                         break;
                     }
                 }

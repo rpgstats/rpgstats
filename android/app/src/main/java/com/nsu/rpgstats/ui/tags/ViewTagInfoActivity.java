@@ -29,7 +29,7 @@ public class ViewTagInfoActivity extends AppCompatActivity {
     private Integer gameSystemId;
     private Integer tagId;
     private Tag tag;
-    private TagInfoViewModel tagInfoViewModel;
+    public TagInfoViewModel tagInfoViewModel;
     protected ActivityResultLauncher<Intent> activityLauncher;
 
     @Override
@@ -42,15 +42,17 @@ public class ViewTagInfoActivity extends AppCompatActivity {
         tagInfoViewModel = new TagInfoViewModel(gameSystemId, tagId, ((RpgstatsApplication)getApplication()).appContainer.tagRepository);
         tag = tagInfoViewModel.getItemInfo().getValue();
         tagInfoViewModel.getItemInfo().observe(this, result -> {
+            tag = result;
             binding.ViewTagHeader.setText(result.getName());
             binding.CreationTagDate.setText(result.getCreationDate());
         });
-        binding.ViewTagHeader.setText(tag.getName());
-        binding.CreationTagDate.setText(tag.getCreationDate());
+        binding.ViewTagHeader.setText("tag name");
+        binding.CreationTagDate.setText("");
 
         activityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
-                tagInfoViewModel.loadItem();
+                binding.ViewTagHeader.setText(result.getData().getStringExtra("name"));
+                binding.CreationTagDate.setText(result.getData().getStringExtra("date"));
             }
         });
         setListeners();
@@ -59,7 +61,6 @@ public class ViewTagInfoActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        tagInfoViewModel.loadItem();
     }
 
     private void setOnClickCreateActivity(View button, Class<?> activityClass) {

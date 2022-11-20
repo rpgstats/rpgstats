@@ -71,7 +71,6 @@ public class RestTagRepository implements TagRepository{
                         if (response.body() != null) {
                             callback.onComplete(new Result.Success<>(response.body()));
                         }
-                        Log.d(TAG, "Response: " + response);
                     }
 
                     @Override
@@ -90,7 +89,6 @@ public class RestTagRepository implements TagRepository{
                         if (response.body() != null) {
                             callback.onComplete(new Result.Success<>(response.body()));
                         }
-                        Log.d(TAG, "Response: " + response);
                     }
 
                     @Override

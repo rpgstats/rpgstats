@@ -61,7 +61,6 @@ public class AddTagsActivity extends AppCompatActivity {
         setOnClickListener(binding.AddTagAddButton, view -> {
             Tag newTag = new Tag(0, binding.AddTagInputName.getText().toString(), new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(new Date()), false);
             new ViewModelProvider(this).get(TagViewModel.class).addTag(newTag, gameSystemId);
-
             Intent intent = new Intent();
             setResult(Activity.RESULT_OK, intent);
             finish();

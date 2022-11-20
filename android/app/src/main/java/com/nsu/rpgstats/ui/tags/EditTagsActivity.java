@@ -25,6 +25,7 @@ public class EditTagsActivity extends AppCompatActivity {
     private Integer gameSystemId;
     private Integer tagId;
     private Tag tag;
+    private ViewTagInfoActivity parent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,11 +35,14 @@ public class EditTagsActivity extends AppCompatActivity {
 
         gameSystemId = Integer.parseInt(getIntent().getStringExtra("game_system_id"));
         tagId = Integer.parseInt(getIntent().getStringExtra("id"));
-
         TagInfoViewModel tagInfoViewModel = new TagInfoViewModel(gameSystemId, tagId, ((RpgstatsApplication)getApplication()).appContainer.tagRepository);
         tag = tagInfoViewModel.getItemInfo().getValue();
+        tagInfoViewModel.getItemInfo().observe(this, tag -> {
+            this.tag = tag;
+            binding.EditTagInputName.setText(tag.getName());
+        });
 
-        binding.EditTagInputName.setText(tag.getName());
+        binding.EditTagInputName.setText("tag name");
 
         setListeners();
     }
@@ -70,9 +74,10 @@ public class EditTagsActivity extends AppCompatActivity {
         setOnClickListener(binding.EditTagEditButton, view -> {
             Tag newTag = new Tag(tagId, binding.EditTagInputName.getText().toString(), tag.getCreationDate(), tag.isDeleted());
             new ViewModelProvider(this).get(TagViewModel.class).editTag(newTag, tagId, gameSystemId);
-
             Intent intent = new Intent();
             setResult(Activity.RESULT_OK, intent);
+            intent.putExtra("name", newTag.getName());
+            intent.putExtra("date", newTag.getCreationDate());
             finish();
         });
     }

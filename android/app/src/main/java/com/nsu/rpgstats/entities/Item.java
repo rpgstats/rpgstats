@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.nsu.rpgstats.data.Result;
 import com.nsu.rpgstats.data.items.ItemRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,6 +29,9 @@ public class Item {
         this.id = id;
         this.name = name;
         this.isPresent = isPresent;
+        this.pictureId = 0;
+        this.tags = new ArrayList<>();
+        this.modifiers = new ArrayList<>();
     }
 
     public Item(Integer id, Integer pictureId, String name, List<Tag> tags, List<Modifier> modifiers, boolean isDeleted) {

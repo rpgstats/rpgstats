@@ -20,6 +20,7 @@ public class Tag implements Identifiable{
         this.id = id;
         this.name = name;
         this.isDeleted = false;
+        this.creationDate = "";
     }
 
     public Tag(Integer id, String name, String creationDate, boolean isDeleted) {

@@ -11,7 +11,7 @@ import com.nsu.rpgstats.entities.Item;
 public class ItemInfoViewModel extends ViewModel {
     private final int itemId;
     private final ItemRepository repository;
-    private MutableLiveData<Item> item;
+    private static MutableLiveData<Item> item;
     private int gameSystemId;
 
     public ItemInfoViewModel(int gameSystemId, int itemId, ItemRepository repository) {

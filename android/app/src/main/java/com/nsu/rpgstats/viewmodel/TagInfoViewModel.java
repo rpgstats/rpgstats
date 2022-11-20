@@ -11,7 +11,7 @@ import com.nsu.rpgstats.entities.Tag;
 public class TagInfoViewModel extends ViewModel {
     private final int tagId;
     private final TagRepository repository;
-    private MutableLiveData<Tag> tag;
+    private static MutableLiveData<Tag> tag;
     private int gameSystemId;
 
     public TagInfoViewModel(int gameSystemId, int tagId, TagRepository repository) {
@@ -26,6 +26,10 @@ public class TagInfoViewModel extends ViewModel {
             loadItem();
         }
         return tag;
+    }
+
+    public void setItemInfo(Tag newTag){
+        tag.setValue(newTag);
     }
 
     public void loadItem() {
