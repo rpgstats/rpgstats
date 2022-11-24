@@ -118,8 +118,31 @@
     <string name="add_constraint">Add constraint</string>
     <string name="add_property">Add property</string>
     <string name="game_system_description_header">Description</string>
+
+    <!-- Auth -->
     <string name="welcome">WELCOME</string>
     <string name="sign_in">sign in</string>
     <string name="sign_up">sign up</string>
+    <string name="enter_login">Enter login</string>
+    <string name="enter_email">Enter email</string>
+    <string name="enter_password">Enter password</string>
+    <string name="repeat_password">Repeat password</string>
+
+    <!-- Sessions -->
+    <string name="choose_icon">Choose icon</string>
+    <string name="add_session">Add Session</string>
+    <string name="is_creator_also_a_player">Is creator also a player?</string>
+    <string name="maximum_players">Maximum Players</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="session_name">session name</string>
+    <string name="user_name">\@user_name</string>
+    <string name="author">Author</string>
+    <string name="players_number">Players Number</string>
+    <string name="game_system">Game System</string>
+    <string name="open">open</string>
+    <string name="character_list">Character List</string>
+    <string name="delete">delete</string>
+    <string name="sessions">Sessions</string>
 
 </resources>
