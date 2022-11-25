@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background">
+    android:background="@drawable/login_background"
+    tools:context=".ui.user.SignInActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,6 +28,7 @@
             android:textSize="@dimen/subheader_text_size" />
 
         <EditText
+            android:id="@+id/signin_login_edit_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -34,6 +36,7 @@
             android:textSize="@dimen/subheader_text_size" />
 
         <EditText
+            android:id="@+id/signin_password_edit_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -41,6 +44,7 @@
             android:textSize="@dimen/subheader_text_size" />
 
         <Button
+            android:id="@+id/signin_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sign_in" />
