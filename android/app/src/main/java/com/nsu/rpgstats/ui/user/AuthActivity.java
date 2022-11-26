@@ -8,14 +8,14 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.viewbinding.ViewBinding;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.nsu.rpgstats.MainActivity;
+import com.nsu.rpgstats.ui.gamesystems.GameSystemsActivity;
 
 public class AuthActivity extends Activity implements AuthListener {
     private ViewBinding activityBinding;
 
     @Override
     public void onSuccessAuth() {
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, GameSystemsActivity.class);
         startActivity(i);
     }
 

@@ -48,6 +48,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="textPassword"
             android:hint="@string/enter_password"
             android:textSize="@dimen/subheader_text_size" />
 
@@ -56,6 +57,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:inputType="textPassword"
             android:hint="@string/repeat_password"
             android:textSize="@dimen/subheader_text_size" />
 

@@ -1,4 +1,4 @@
-package com.nsu.rpgstats;
+package com.nsu.rpgstats.ui.gamesystems;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,21 +13,20 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.nsu.rpgstats.databinding.ActivityMainBinding;
+import com.nsu.rpgstats.R;
+import com.nsu.rpgstats.RpgstatsApplication;
+import com.nsu.rpgstats.databinding.ActivityGameSystemsBinding;
 import com.nsu.rpgstats.entities.GameSystem;
-import com.nsu.rpgstats.ui.gamesystems.GameSystemsAdapter;
-import com.nsu.rpgstats.ui.gamesystems.AddGameActivityResultCallback;
 import com.nsu.rpgstats.ui.AddGameSystemActivity;
-import com.nsu.rpgstats.ui.gamesystems.GameSystemInfoActivity;
 import com.nsu.rpgstats.viewmodel.GameSystemsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements GameSystemsAdapter.OnGameSystemClickListener {
+public class GameSystemsActivity extends AppCompatActivity implements GameSystemsAdapter.OnGameSystemClickListener {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
-    private ActivityMainBinding binding;
+    private static final String TAG = GameSystemsActivity.class.getSimpleName();
+    private ActivityGameSystemsBinding binding;
     protected ActivityResultLauncher<Intent> activityLauncher;
     private List<GameSystem> mGameSystems;
 
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements GameSystemsAdapte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityGameSystemsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);

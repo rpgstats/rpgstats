@@ -5,6 +5,8 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
+import com.nsu.rpgstats.RpgstatsApplication;
+import com.nsu.rpgstats.data.user.UserRepository;
 import com.nsu.rpgstats.databinding.ActivitySigninBinding;
 import com.nsu.rpgstats.viewmodel.user.SignInModelView;
 
@@ -20,7 +22,8 @@ public class SignInActivity extends AuthActivity{
         binding = ActivitySigninBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        signInModelView = new SignInModelView(this);
+        UserRepository userRepository = ((RpgstatsApplication)getApplication()).appContainer.userRepository;
+        signInModelView = new SignInModelView(userRepository, this);
 
         EditText loginEdit = binding.signinLoginEditText;
         EditText passwordEdit = binding.signinPasswordEditText;

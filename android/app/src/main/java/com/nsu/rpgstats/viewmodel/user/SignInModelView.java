@@ -22,14 +22,21 @@ public class SignInModelView extends ViewModel {
     private final AuthListener mListener;
 
 
-    public SignInModelView(@NonNull AuthListener authListener) {
+    public SignInModelView(UserRepository userRepository, @NonNull AuthListener authListener) {
+        this.mUserRepository = userRepository;
         mListener = authListener;
     }
 
     public void onSignInClick() {
-        if (!isInputValid()) {
+        if (mLogin.length() <= 0) {
+            mListener.onMessage("Empty login!");
             return;
         }
+        if (mPassword.length() <= 0) {
+            mListener.onMessage("Empty password!");
+            return;
+        }
+
         mUserRepository.signInUser(new SignInUserInfo(mLogin, mPassword),
                 result -> {
                     if (result instanceof Result.Success) {
@@ -39,13 +46,9 @@ public class SignInModelView extends ViewModel {
                     } else if (result instanceof Result.Error) {
                         Log.d(TAG, "can not get token, reason: "
                                 + ((Result.Error<AuthToken>) result).throwable.getMessage());
-                        mListener.onMessage("Wrong password or no network? :0");
+                        mListener.onMessage("Error: " + ((Result.Error<AuthToken>) result).throwable.getMessage());
                     }
                 });
-    }
-
-    private boolean isInputValid() {
-        return false;
     }
 
     public void setLogin(String login) {
