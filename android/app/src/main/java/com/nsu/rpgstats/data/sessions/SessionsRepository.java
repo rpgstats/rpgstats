@@ -7,4 +7,5 @@ import java.util.List;
 public interface SessionsRepository {
     List<Session> getSessions();
     Session getSession(int sessionId);
+    Session addSession(String sessionName, int maximumPlayers, int gameSystemId);
 }

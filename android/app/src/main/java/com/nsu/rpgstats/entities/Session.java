@@ -32,6 +32,10 @@ public class Session {
         this.creationDate = creationDate;
     }
 
+    public Session() {
+
+    }
+
     public String getName() {
         return name;
     }
@@ -78,5 +82,29 @@ public class Session {
 
     public List<Character> getCharacters() {
         return characters;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPlayersNumber(int playersNumber) {
+        this.playersNumber = playersNumber;
+    }
+
+    public void setMaximumPlayers(int maximumPlayers) {
+        this.maximumPlayers = maximumPlayers;
+    }
+
+    public void setGameSystem(String gameSystem) {
+        this.gameSystem = gameSystem;
+    }
+
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
     }
 }

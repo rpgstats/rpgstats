@@ -144,5 +144,6 @@
     <string name="character_list">Character List</string>
     <string name="delete">delete</string>
     <string name="sessions">Sessions</string>
+    <string name="enter_players_number">Enter players number</string>
 
 </resources>

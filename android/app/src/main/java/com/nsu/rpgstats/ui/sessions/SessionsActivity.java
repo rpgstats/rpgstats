@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.mikepenz.fastadapter.FastAdapter;
@@ -14,6 +15,7 @@ import com.nsu.rpgstats.data.sessions.PlugSessionsRepository;
 import com.nsu.rpgstats.data.sessions.SessionsRepository;
 import com.nsu.rpgstats.databinding.ActivitySessionsBinding;
 import com.nsu.rpgstats.entities.Session;
+import com.nsu.rpgstats.viewmodel.sessions.SessionsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +25,9 @@ public class SessionsActivity extends AppCompatActivity {
     private ActivitySessionsBinding binding;
 
     private List<Session> sessions;
-    private SessionsRepository repository;
+    private SessionsViewModel viewModel;
 
-    public SessionsActivity() {
-        repository = new PlugSessionsRepository();
-    }
+    ItemAdapter<SessionItem> sessionItemAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,15 +37,16 @@ public class SessionsActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        sessions = repository.getSessions();
+        viewModel = new ViewModelProvider(this).get(SessionsViewModel.class);
+
+        sessions = new ArrayList<>();
 
         binding.sessionsList.sessionsRecyclerView.setLayoutManager
                 (new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        ItemAdapter<SessionItem> sessionItemAdapter = new ItemAdapter<>();
+        sessionItemAdapter = new ItemAdapter<>();
         FastAdapter<SessionItem> sessionsFastAdapter = FastAdapter.with(sessionItemAdapter);
         binding.sessionsList.sessionsRecyclerView.setAdapter(sessionsFastAdapter);
-        sessionItemAdapter.set(sessionsToSessionItems(sessions));
 
         sessionsFastAdapter.setOnClickListener((view, adapter, item, position) -> {
             ((RpgstatsApplication) getApplication()).appContainer.currentSession = sessions.get(position);
@@ -54,12 +55,29 @@ public class SessionsActivity extends AppCompatActivity {
             return false;
         });
 
+        viewModel.getSessions().observe(this, newSessions -> {
+            sessions = newSessions;
+            sessionItemAdapter.set(sessionsToSessionItems(sessions));
+        });
+
 //        FastAdapterDiffUtil.INSTANCE.calculateDiff(sessionItemAdapter, sessionsToSessionItems(sessions)).
 //                dispatchUpdatesTo(sessionsFastAdapter);
 
         //sessions = new ArrayList<>();
         //SessionsViewModel
 
+        binding.sessionsTab.plusButton.setOnClickListener(view ->
+        {
+            Intent i = new Intent(this, AddSessionActivity.class);
+            startActivity(i);
+        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sessionItemAdapter.set(sessionsToSessionItems(viewModel.getSessions().getValue()));
     }
 
     private ArrayList<SessionItem> sessionsToSessionItems(List<Session> sessions) {
@@ -70,7 +88,4 @@ public class SessionsActivity extends AppCompatActivity {
         return sessionItems;
     }
 
-    private void onSessionClick(int position) {
-
-    }
 }

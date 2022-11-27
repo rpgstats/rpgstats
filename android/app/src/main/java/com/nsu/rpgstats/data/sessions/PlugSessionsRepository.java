@@ -9,13 +9,20 @@ import java.util.List;
 import java.util.Locale;
 
 public class PlugSessionsRepository implements SessionsRepository {
+
+    private int i = 5;
+
+    private List<Session> sessions;
+    public PlugSessionsRepository() {
+        sessions = new ArrayList<>();
+        for (int j = 0; j < 5; j++) {
+            sessions.add(new Session(j, "session " + j, new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(new Date())));
+        }
+    }
+
     @Override
     public List<Session> getSessions() {
-        List<Session> sessions = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            sessions.add(new Session(i, "session " + i, new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(new Date())));
-        }
-        return sessions;
+       return sessions;
     }
 
     @Override
@@ -24,4 +31,14 @@ public class PlugSessionsRepository implements SessionsRepository {
                 "just fun", 10, 15, "meme police", new ArrayList<>(), "01.01.01");
     }
 
+    @Override
+    public Session addSession(String sessionName, int maximumPlayers, int gameSystemId) {
+        i += 1;
+        Session s = new Session();
+        s.setId(i);
+        s.setName(sessionName);
+        s.setMaximumPlayers(maximumPlayers);
+        sessions.add(s);
+        return s;
+    }
 }

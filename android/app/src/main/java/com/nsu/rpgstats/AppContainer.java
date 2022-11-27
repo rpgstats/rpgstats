@@ -14,6 +14,8 @@ import com.nsu.rpgstats.data.parameters.PlugParameterRepository;
 import com.nsu.rpgstats.data.properties.PlugPropertyRepository;
 import com.nsu.rpgstats.data.properties.PropertyRepository;
 import com.nsu.rpgstats.data.gamesystems.RestGameSystemsRepository;
+import com.nsu.rpgstats.data.sessions.PlugSessionsRepository;
+import com.nsu.rpgstats.data.sessions.SessionsRepository;
 import com.nsu.rpgstats.data.user.PlugUserRepository;
 import com.nsu.rpgstats.data.user.UserRepository;
 import com.nsu.rpgstats.entities.GameSystem;
@@ -38,6 +40,7 @@ public class AppContainer {
     public PropertyRepository propertyRepository = new PlugPropertyRepository();
     public ConstraintRepository constraintRepository = new PlugConstraintRepository();
     public UserRepository userRepository = new PlugUserRepository();
+    public SessionsRepository sessionsRepository = new PlugSessionsRepository();
 
     private final Context context;
     public GameSystemsRepository gameSystemsRepository;
