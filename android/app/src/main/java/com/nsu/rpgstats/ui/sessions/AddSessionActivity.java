@@ -1,4 +1,6 @@
 package com.nsu.rpgstats.ui.sessions;
 
-public class AddSessionActivity {
+import android.app.Activity;
+
+public class AddSessionActivity extends Activity {
 }

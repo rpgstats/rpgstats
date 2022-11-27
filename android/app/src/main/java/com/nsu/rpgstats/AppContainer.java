@@ -20,6 +20,7 @@ import com.nsu.rpgstats.entities.GameSystem;
 import com.nsu.rpgstats.data.items.PlugItemRepository;
 import com.nsu.rpgstats.data.tags.PlugTagRepository;
 import com.nsu.rpgstats.data.tags.TagRepository;
+import com.nsu.rpgstats.entities.Session;
 import com.nsu.rpgstats.network.RestClient;
 
 import java.io.IOException;
@@ -28,6 +29,8 @@ import java.util.Properties;
 
 public class AppContainer {
     public GameSystem currentGameSystem = null;
+    public Session currentSession = null;
+
     public ItemRepository itemRepository = new PlugItemRepository();
     public TagRepository tagRepository = new PlugTagRepository();
     public ModifierRepository modifierRepository = new PlugModifierRepository();
