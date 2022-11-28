@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
+import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.data.sessions.PlugSessionsRepository;
 import com.nsu.rpgstats.data.sessions.SessionsRepository;
@@ -35,18 +36,20 @@ public class SessionsActivity extends AppCompatActivity {
         binding = ActivitySessionsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.sessionsTab.tabName.setText(R.string.sessions);
+
         setSupportActionBar(binding.toolbar);
 
         viewModel = new ViewModelProvider(this).get(SessionsViewModel.class);
 
         sessions = new ArrayList<>();
 
-        binding.sessionsList.sessionsRecyclerView.setLayoutManager
+        binding.sessionsList.simpleRecyclerView.setLayoutManager
                 (new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         sessionItemAdapter = new ItemAdapter<>();
         FastAdapter<SessionItem> sessionsFastAdapter = FastAdapter.with(sessionItemAdapter);
-        binding.sessionsList.sessionsRecyclerView.setAdapter(sessionsFastAdapter);
+        binding.sessionsList.simpleRecyclerView.setAdapter(sessionsFastAdapter);
 
         sessionsFastAdapter.setOnClickListener((view, adapter, item, position) -> {
             ((RpgstatsApplication) getApplication()).appContainer.currentSession = sessions.get(position);

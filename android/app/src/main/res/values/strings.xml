@@ -145,5 +145,11 @@
     <string name="delete">delete</string>
     <string name="sessions">Sessions</string>
     <string name="enter_players_number">Enter players number</string>
+    <string name="tab_name">Tab name</string>
+    <string name="characters">Characters</string>
+    <string name="back">Back</string>
+    <string name="add_character">Add Character</string>
+    <string name="add">Add</string>
+    <string name="choose_character">Choose character</string>
 
 </resources>

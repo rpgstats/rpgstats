@@ -1,5 +1,6 @@
 package com.nsu.rpgstats.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Session {
@@ -10,7 +11,7 @@ public class Session {
     private int playersNumber;
     private int maximumPlayers;
     private String gameSystem;
-    private List<Character> characters;
+    private List<SessionCharacter> characters;
 
     private String creationDate;
 
@@ -20,7 +21,7 @@ public class Session {
         this.creationDate = creationDate;
     }
 
-    public Session(Integer id, String name, String author, String description, int playersNumber, int maximumPlayers, String gameSystem, List<Character> characters, String creationDate) {
+    public Session(Integer id, String name, String author, String description, int playersNumber, int maximumPlayers, String gameSystem, List<SessionCharacter> characters, String creationDate) {
         this.id = id;
         this.name = name;
         this.author = author;
@@ -80,7 +81,7 @@ public class Session {
         return gameSystem;
     }
 
-    public List<Character> getCharacters() {
+    public List<SessionCharacter> getCharacters() {
         return characters;
     }
 
@@ -104,7 +105,7 @@ public class Session {
         this.gameSystem = gameSystem;
     }
 
-    public void setCharacters(List<Character> characters) {
+    public void setCharacters(List<SessionCharacter> characters) {
         this.characters = characters;
     }
 }

@@ -34,13 +34,16 @@
 
         <activity
             android:name=".ui.sessions.SessionsActivity"
-            android:theme="@style/Theme.Rpgstats.NoActionBar"/>
+            android:theme="@style/Theme.Rpgstats.NoActionBar" />
         <activity
             android:name=".ui.sessions.SessionInfoActivity"
-            android:theme="@style/Theme.Rpgstats.NoActionBar"/>
+            android:theme="@style/Theme.Rpgstats.NoActionBar" />
         <activity
             android:name=".ui.sessions.AddSessionActivity"
-            android:theme="@style/Theme.Rpgstats.NoActionBar"/>
+            android:theme="@style/Theme.Rpgstats.NoActionBar" />
+        <activity
+            android:name=".ui.sessions.SessionCharactersListActivity"
+            android:theme="@style/Theme.Rpgstats.NoActionBar" />
 
 
         <activity

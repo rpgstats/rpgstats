@@ -1,6 +1,6 @@
 package com.nsu.rpgstats.ui.sessions;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -33,9 +33,19 @@ public class SessionInfoActivity extends AppCompatActivity {
 
         AppContainer appContainer = ((RpgstatsApplication) getApplication()).appContainer;
         session = viewModel.getSession(appContainer.currentSession.getId());
+        ((RpgstatsApplication) getApplication()).appContainer.currentSession = session;
         setInfo();
+        setCharacterListListener();
         //setSupportActionBar(binding.toolbar);
 
+    }
+
+    private void setCharacterListListener() {
+        binding.sessionCharacterListButton.setOnClickListener((view)-> {
+            Intent i = new Intent(this, SessionCharactersListActivity.class);
+            startActivity(i);
+        }
+        );
     }
 
     private void setInfo() {

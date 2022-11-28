@@ -1,6 +1,7 @@
 package com.nsu.rpgstats.data.sessions;
 
 import com.nsu.rpgstats.entities.Session;
+import com.nsu.rpgstats.entities.SessionCharacter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,8 +28,12 @@ public class PlugSessionsRepository implements SessionsRepository {
 
     @Override
     public Session getSession(int sessionId) {
+        List<SessionCharacter> sessionCharacters = new ArrayList<>();
+        for (int m = 0; m < 100; m++) {
+            sessionCharacters.add(new SessionCharacter("character " + m, "hikkari"));
+        }
         return new Session(sessionId, "19205 play after krpo", "natasha",
-                "just fun", 10, 15, "meme police", new ArrayList<>(), "01.01.01");
+                "just fun", 10, 15, "meme police", sessionCharacters, "01.01.01");
     }
 
     @Override

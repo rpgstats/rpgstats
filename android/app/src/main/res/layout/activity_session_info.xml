@@ -138,6 +138,7 @@
                 android:text="@string/character_list" />
 
             <Button
+                android:id="@+id/session_character_list_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

@@ -46,6 +46,6 @@ public class SessionItem extends AbstractBindingItem<SessionItemBinding> {
 
     @Override
     public int getType() {
-        return R.id.sessionsRecyclerView;
+        return R.id.simpleRecyclerView;
     }
 }

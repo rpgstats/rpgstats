@@ -58,6 +58,7 @@ dependencies {
     implementation "com.mikepenz:fastadapter-extensions-diff:5.5.1"
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
+
 }
 
 

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.sessions.SessionCharactersListActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -33,23 +34,17 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/sessions_tab"
+            android:id="@+id/session_characters_tab"
             layout="@layout/simple_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            android:id="@+id/sessions_list"
+            android:id="@+id/session_characters_list"
             layout="@layout/simple_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_margin" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sessions"
-            android:layout_gravity="center"/>
 
     </LinearLayout>
 
