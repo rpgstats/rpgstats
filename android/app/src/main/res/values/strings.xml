@@ -151,5 +151,11 @@
     <string name="add_character">Add Character</string>
     <string name="add">Add</string>
     <string name="choose_character">Choose character</string>
+    <string name="check_status">Check Status</string>
+    <string name="change_icon">Change Icon</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_login">Change Login</string>
+    <string name="back_with_arrow"><![CDATA[<- back]]></string>
+    <string name="profile_settings">Profile settings</string>
 
 </resources>

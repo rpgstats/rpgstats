@@ -16,6 +16,7 @@ import com.nsu.rpgstats.data.sessions.PlugSessionsRepository;
 import com.nsu.rpgstats.data.sessions.SessionsRepository;
 import com.nsu.rpgstats.databinding.ActivitySessionsBinding;
 import com.nsu.rpgstats.entities.Session;
+import com.nsu.rpgstats.ui.profile.ProfileSettingsPopup;
 import com.nsu.rpgstats.viewmodel.sessions.SessionsViewModel;
 
 import java.util.ArrayList;
@@ -39,6 +40,9 @@ public class SessionsActivity extends AppCompatActivity {
         binding.sessionsTab.tabName.setText(R.string.sessions);
 
         setSupportActionBar(binding.toolbar);
+        binding.userBar.user.setOnClickListener((v) -> {
+            new ProfileSettingsPopup().show(v);
+        });
 
         viewModel = new ViewModelProvider(this).get(SessionsViewModel.class);
 

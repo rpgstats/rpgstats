@@ -14,7 +14,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivitySessionCharacterListBinding;
-import com.nsu.rpgstats.databinding.AddCharacterToSessionPopupBinding;
+import com.nsu.rpgstats.databinding.PopupAddCharacterToSessionBinding;
 import com.nsu.rpgstats.entities.Session;
 import com.nsu.rpgstats.entities.SessionCharacter;
 import com.nsu.rpgstats.viewmodel.sessions.SessionsViewModel;
