@@ -6,18 +6,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.gamesystems.GameSystemInfoActivity">
 
+    <include android:id="@+id/app_bar" layout="@layout/toolbar_user_settings"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_margin"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar"
+        >
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/game_system_information"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            style="@style/Text.HeaderStyle"/>
 
 
         <RelativeLayout

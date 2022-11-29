@@ -3,12 +3,8 @@
     android:shape="rectangle">
 
     <stroke
-        android:width="2dp"
-        android:color="@color/cardview_dark_background"
-        />
-
-    <solid
-        android:color="@color/white"
+        android:width="4dp"
+        android:color="#FF777777"
         />
 
     <corners
@@ -18,4 +14,10 @@
     <size
         android:height="40dp"
         android:width="40dp" />
+    <padding
+        android:right="15dp"
+        android:left="15dp"
+        android:top="15dp"
+        android:bottom="15dp"
+        />
 </shape>

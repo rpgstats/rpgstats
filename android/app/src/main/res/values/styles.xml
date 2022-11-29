@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RoundedButton" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/cardview_dark_background</item>
+    </style>
+
+    <style name="Text.HeaderStyle">
+        <item name="android:textSize">@dimen/header_text_size</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+        <style name="Text.SubHeaderStyle">
+        <item name="android:textSize">@dimen/subheader_text_size</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="Text">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="EditLayoutStyle" parent="Theme.Rpgstats">
+        <item name="android:textViewStyle">@style/Text.SubHeaderStyle</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
+    </style>
+
+</resources>

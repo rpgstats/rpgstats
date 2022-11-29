@@ -6,14 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.sessions.SessionInfoActivity">
 
+    <include android:id="@+id/app_bar" layout="@layout/toolbar_user_settings"/>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_margin"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp">
+        app:layout_constraintTop_toBottomOf="@+id/app_bar"
+        tools:layout_editor_absoluteX="16dp">
 
 
         <TextView
@@ -21,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/session_name"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            style="@style/Text.HeaderStyle"/>
 
 
         <RelativeLayout
@@ -150,7 +153,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/delete"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/linearLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

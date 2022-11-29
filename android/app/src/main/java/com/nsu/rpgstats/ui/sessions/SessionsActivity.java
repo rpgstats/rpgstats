@@ -39,8 +39,8 @@ public class SessionsActivity extends AppCompatActivity {
 
         binding.sessionsTab.tabName.setText(R.string.sessions);
 
-        setSupportActionBar(binding.toolbar);
-        binding.userBar.user.setOnClickListener((v) -> {
+        setSupportActionBar(binding.appBar.toolbar);
+        binding.appBar.getRoot().setOnClickListener((v) -> {
             new ProfileSettingsPopup().show(v);
         });
 

@@ -17,8 +17,7 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.user.WelcomeActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Rpgstats.NoActionBar">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,28 +31,16 @@
         <activity android:name=".ui.user.SignInActivity" />
         <activity android:name=".ui.user.SignUpActivity" />
 
-        <activity
-            android:name=".ui.sessions.SessionsActivity"
-            android:theme="@style/Theme.Rpgstats.NoActionBar" />
-        <activity
-            android:name=".ui.sessions.SessionInfoActivity"
-            android:theme="@style/Theme.Rpgstats.NoActionBar" />
-        <activity
-            android:name=".ui.sessions.AddSessionActivity"
-            android:theme="@style/Theme.Rpgstats.NoActionBar" />
-        <activity
-            android:name=".ui.sessions.SessionCharactersListActivity"
-            android:theme="@style/Theme.Rpgstats.NoActionBar" />
+        <activity android:name=".ui.sessions.SessionsActivity" />
+        <activity android:name=".ui.sessions.SessionInfoActivity" />
+        <activity android:name=".ui.sessions.AddSessionActivity" />
+        <activity android:name=".ui.sessions.SessionCharactersListActivity" />
 
 
-        <activity
-            android:name=".ui.gamesystems.GameSystemsActivity"
-            android:theme="@style/Theme.Rpgstats.NoActionBar" />
+        <activity android:name=".ui.gamesystems.GameSystemsActivity" />
         <activity android:name=".ui.AddGameSystemActivity" />
         <activity android:name=".ui.gamesystems.GameSystemInfoActivity" />
-        <activity
-            android:name=".ui.items.ItemsActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".ui.items.ItemsActivity" />
         <activity android:name=".ui.NpcActivity" />
         <activity android:name=".ui.parameters.ParametersActivity" />
         <activity android:name=".ui.properties.PropertiesActivity" />

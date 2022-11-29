@@ -38,7 +38,7 @@ public class GameSystemsActivity extends AppCompatActivity implements GameSystem
         binding = ActivityGameSystemsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.toolbar);
+        setSupportActionBar(binding.appBar.toolbar);
 
         mGameSystems = new ArrayList<>();
         GameSystemsViewModel gameSystemsViewModel = new ViewModelProvider(this).get(GameSystemsViewModel.class);
