@@ -7,8 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.nsu.rpgstats.AppContainer;
-import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivitySessionInfoBinding;
 import com.nsu.rpgstats.entities.Session;
 import com.nsu.rpgstats.viewmodel.sessions.SessionInfoViewModel;
@@ -31,13 +29,32 @@ public class SessionInfoActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(SessionInfoViewModel.class);
 
-        AppContainer appContainer = ((RpgstatsApplication) getApplication()).appContainer;
-        session = viewModel.getSession(appContainer.currentSession.getId());
-        ((RpgstatsApplication) getApplication()).appContainer.currentSession = session;
-        setInfo();
+        viewModel.getCurrentSession().observe(this, s -> {
+            session = s;
+            // if was deleted
+            if (session == null) {
+                finish();
+            } else {
+                setInfo();
+            }
+        });
+//        ((RpgstatsApplication) getApplication()).appContainer.currentSession = session;
+//        setInfo();
         setCharacterListListener();
+        setDeleteListener();
         //setSupportActionBar(binding.toolbar);
+        viewModel.onActivityDidLoad();
 
+    }
+
+    private void setDeleteListener() {
+        binding.sessionDelete.setOnClickListener((view)->{
+            new DeleteSessionPopup(this::deleteSession).show(view);
+        });
+    }
+
+    private void deleteSession() {
+        viewModel.onDeleteCurrentSession();
     }
 
     private void setCharacterListListener() {

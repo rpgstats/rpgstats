@@ -32,6 +32,7 @@ public class AddSessionActivity extends AppCompatActivity {
             viewModel.onAddSessionButtonClick(name.getText().toString(),
                     maximumPlayers.getText().toString());
             finish();
+
         });
 
     }

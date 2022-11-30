@@ -13,7 +13,6 @@ import com.nsu.rpgstats.databinding.PopupAddCharacterToSessionBinding;
 
 public class AddCharacterToSessionPopup {
     public void show(final View view) {
-        view.getRootView().getBackground().setAlpha(128);
         //Create a View object yourself through inflater
         LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_add_character_to_session, null);

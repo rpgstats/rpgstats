@@ -20,7 +20,7 @@ public class SignUpModelView extends ViewModel {
     private String repeatPassword;
     private String email;
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     private final AuthListener mListener;
     private final LoginValidator loginValidator;

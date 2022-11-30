@@ -20,6 +20,9 @@ public class AddSessionViewModel extends AndroidViewModel {
     public void onAddSessionButtonClick(String sessionName, String maximumPlayers) {
         repository.addSession(sessionName,
                 Integer.parseInt(maximumPlayers),
-                0);
+                0,
+                (res)-> {
+
+                });
     }
 }

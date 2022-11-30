@@ -17,7 +17,7 @@ public class SignInModelView extends ViewModel {
     private String mLogin;
     private String mPassword;
 
-    private UserRepository mUserRepository;
+    private final UserRepository mUserRepository;
 
     private final AuthListener mListener;
 

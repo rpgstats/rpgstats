@@ -1,5 +1,7 @@
 package com.nsu.rpgstats.data.sessions;
 
+import com.nsu.rpgstats.data.RepositoryCallback;
+import com.nsu.rpgstats.data.Result;
 import com.nsu.rpgstats.entities.Session;
 import com.nsu.rpgstats.entities.SessionCharacter;
 
@@ -22,28 +24,40 @@ public class PlugSessionsRepository implements SessionsRepository {
     }
 
     @Override
-    public List<Session> getSessions() {
-       return sessions;
+    public void getSessions(RepositoryCallback<List<Session>> callback) {
+       callback.onComplete(new Result.Success<>(sessions));
     }
 
     @Override
-    public Session getSession(int sessionId) {
+    public void getSession(int sessionId, RepositoryCallback<Session> callback) {
         List<SessionCharacter> sessionCharacters = new ArrayList<>();
         for (int m = 0; m < 100; m++) {
             sessionCharacters.add(new SessionCharacter("character " + m, "hikkari"));
         }
-        return new Session(sessionId, "19205 play after krpo", "natasha",
-                "just fun", 10, 15, "meme police", sessionCharacters, "01.01.01");
+        callback.onComplete(new Result.Success<>(new Session(sessionId, "19205 play after krpo", "natasha",
+                "just fun", 10, 15, "meme police", sessionCharacters, "01.01.01")));
     }
 
     @Override
-    public Session addSession(String sessionName, int maximumPlayers, int gameSystemId) {
+    public void addSession(String sessionName, int maximumPlayers, int gameSystemId, RepositoryCallback<Session> callback) {
         i += 1;
         Session s = new Session();
         s.setId(i);
         s.setName(sessionName);
         s.setMaximumPlayers(maximumPlayers);
         sessions.add(s);
-        return s;
+        callback.onComplete(new Result.Success<>(s));
+    }
+
+    @Override
+    public void deleteSession(int sessionId, RepositoryCallback<String> callback) {
+        for (Session s : sessions) {
+            if (s.getId() == sessionId) {
+                callback.onComplete(new Result.Success<>("Successfully deleted"));
+                sessions.remove(s);
+                return;
+            }
+        }
+        callback.onComplete(new Result.Error<>(new Throwable("Id not found")));
     }
 }
