@@ -14,6 +14,7 @@ import java.util.List;
 public class InfoViewModel extends ViewModel {
     private MutableLiveData<Boolean> isChanged;
     private MutableLiveData<List<Attribute>> attributeList;
+    private int gsid;
 
     public InfoViewModel() {
         reInit();
@@ -24,6 +25,7 @@ public class InfoViewModel extends ViewModel {
         isChanged.setValue(false);
         attributeList = new MutableLiveData<>();
         attributeList.setValue(new ArrayList<>());
+        gsid = -1;
     }
 
     public void loadAttributes(int charId) {
@@ -47,4 +49,10 @@ public class InfoViewModel extends ViewModel {
     }
 
 
+    public int getGSID() {
+        return gsid;
+    }
+    public void setGSID(int id) {
+        gsid = id;
+    }
 }

@@ -24,6 +24,7 @@ import com.nsu.rpgstats.databinding.SlotItemBinding;
 import com.nsu.rpgstats.entities.Slot;
 import com.nsu.rpgstats.ui.characters.WindowViewModel;
 import com.nsu.rpgstats.ui.characters.selection.SelectionViewModel;
+import com.nsu.rpgstats.ui.characters.windows.info.slots.SlotViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +94,7 @@ public class SlotsFragment extends Fragment {
                 mViewModel.loadImage(bindingNewItem, mViewModel.getSlotList().getValue().get(i).getIconUrl());
                 int finalI = i;
                 bindingNewItem.getRoot().setOnClickListener(v -> {
+                    new ViewModelProvider(requireActivity()).get(SlotViewModel.class).reInit();
                     new ViewModelProvider(requireActivity()).get(WindowViewModel.class).setIsShow(true);
                     Bundle bundle = new Bundle();
                     bundle.putInt("slotPos", finalI);

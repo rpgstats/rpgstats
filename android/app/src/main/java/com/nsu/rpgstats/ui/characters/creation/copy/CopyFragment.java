@@ -57,6 +57,8 @@ public class CopyFragment extends Fragment {
 
         binding.cNextButton.setOnClickListener(view -> {
             mSelectionViewModel.addCharacter(binding.InputText.getText().toString() ,mSelectionViewModel.getCharacterList().getValue().get(position));
+
+
         });
 
         binding.cBackButton.setOnClickListener(view -> {

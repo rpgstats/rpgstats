@@ -29,7 +29,11 @@
         android:id="@+id/infoFragment"
         android:name="com.nsu.rpgstats.ui.characters.info.InfoFragment"
         android:label="fragment_info"
-        tools:layout="@layout/fragment_info" />
+        tools:layout="@layout/fragment_info" >
+        <action
+            android:id="@+id/action_infoFragment_to_slotsFragment"
+            app:destination="@id/slotsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/copyFragment"
         android:name="com.nsu.rpgstats.ui.characters.creation.copy.CopyFragment"
@@ -50,4 +54,9 @@
         android:name="com.nsu.rpgstats.ui.characters.creation.new_creation.NewCreationFragment"
         android:label="fragment_new_creation"
         tools:layout="@layout/fragment_new_creation" />
+    <fragment
+        android:id="@+id/slotsFragment"
+        android:name="com.nsu.rpgstats.ui.characters.info.slots.SlotsFragment"
+        android:label="fragment_slots"
+        tools:layout="@layout/fragment_slots" />
 </navigation>

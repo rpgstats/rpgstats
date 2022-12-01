@@ -1,5 +1,7 @@
 package com.nsu.rpgstats.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Slot {
@@ -10,6 +12,7 @@ public class Slot {
     private int characterId;
     private int itemId;
     private Item item = null;
+    private List<Tag> tags = new ArrayList<>();
 
     public Slot(int id, String name, String iconUrl, boolean isWhitelisted, int characterId, int itemId) {
         this.id = id;
@@ -18,6 +21,14 @@ public class Slot {
         this.isWhitelisted = isWhitelisted;
         this.characterId = characterId;
         this.itemId = itemId;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public Item getItem() {

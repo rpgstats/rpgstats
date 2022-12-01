@@ -51,4 +51,7 @@ public class SelectionViewModel extends ViewModel {
     public void saveSlots(List<Slot> value, int id, int position) {
         //todo
     }
+
+    public void downloadCharacter(int position) {
+    }
 }

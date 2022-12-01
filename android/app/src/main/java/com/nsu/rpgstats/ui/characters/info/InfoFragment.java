@@ -41,6 +41,7 @@ public class InfoFragment extends Fragment {
         mViewModel = new ViewModelProvider(requireActivity()).get(SelectionViewModel.class);
         mInfoViewModel = new ViewModelProvider(requireActivity()).get(InfoViewModel.class);
         mInfoViewModel.reInit();
+        mInfoViewModel.setGSID(character.getGameSystemId());
         mInfoViewModel.getIsChanged().observe(getViewLifecycleOwner(), isChanged -> {
             if (isChanged) {
                 binding.deleteText.setText("Save");
@@ -74,7 +75,10 @@ public class InfoFragment extends Fragment {
         });
 
         binding.cDeleteButton.setOnClickListener(view -> {
-            mViewModel.deleteCharacter(position);
+            Bundle bundle = new Bundle();
+            bundle.putInt("id", character.getId());
+            bundle.putInt("position", position);
+            Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.deleteCharacterWarningFragment);
         });
 
         binding.exportButton.setOnClickListener(view -> {

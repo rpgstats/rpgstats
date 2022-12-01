@@ -67,17 +67,9 @@
         android:label="fragment_slot_info"
         tools:layout="@layout/fragment_slot_info" >
         <action
-            android:id="@+id/action_slotInfoFragment_to_slotItemFragment"
-            app:destination="@id/slotItemFragment" />
-        <action
             android:id="@+id/action_slotInfoFragment_to_slotParametersFragment"
             app:destination="@id/slotParametersFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/slotItemFragment"
-        android:name="com.nsu.rpgstats.ui.characters.windows.info.slots.SlotItemFragment"
-        android:label="fragment_slot_item"
-        tools:layout="@layout/fragment_slot_item" />
     <fragment
         android:id="@+id/slotParametersFragment"
         android:name="com.nsu.rpgstats.ui.characters.windows.info.slots.SlotParametersFragment"
