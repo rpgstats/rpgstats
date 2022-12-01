@@ -2,4 +2,52 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"/>
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/selectionFragment">
+    <fragment
+        android:id="@+id/selectionFragment"
+        android:name="com.nsu.rpgstats.ui.characters.selection.SelectionFragment"
+        android:label="fragment_selection"
+        tools:layout="@layout/fragment_selection" >
+        <action
+            android:id="@+id/action_selectionFragment_to_copyFragment"
+            app:destination="@id/copyFragment" />
+        <action
+            android:id="@+id/action_selectionFragment_to_fileCreationFragment"
+            app:destination="@id/fileCreationFragment" />
+        <action
+            android:id="@+id/action_selectionFragment_to_idCreationFragment"
+            app:destination="@id/idCreationFragment" />
+        <action
+            android:id="@+id/action_selectionFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
+        <action
+            android:id="@+id/action_selectionFragment_to_newCreationFragment"
+            app:destination="@id/newCreationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.nsu.rpgstats.ui.characters.info.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/copyFragment"
+        android:name="com.nsu.rpgstats.ui.characters.creation.copy.CopyFragment"
+        android:label="fragment_copy"
+        tools:layout="@layout/fragment_copy" />
+    <fragment
+        android:id="@+id/fileCreationFragment"
+        android:name="com.nsu.rpgstats.ui.characters.creation.file.FileCreationFragment"
+        android:label="fragment_file_creation"
+        tools:layout="@layout/fragment_file_creation" />
+    <fragment
+        android:id="@+id/idCreationFragment"
+        android:name="com.nsu.rpgstats.ui.characters.creation.id.IdCreationFragment"
+        android:label="fragment_id_creation"
+        tools:layout="@layout/fragment_id_creation" />
+    <fragment
+        android:id="@+id/newCreationFragment"
+        android:name="com.nsu.rpgstats.ui.characters.creation.new_creation.NewCreationFragment"
+        android:label="fragment_new_creation"
+        tools:layout="@layout/fragment_new_creation" />
+</navigation>

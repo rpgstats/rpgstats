@@ -1,7 +1,10 @@
 package com.nsu.rpgstats;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+
+import androidx.activity.result.ActivityResultLauncher;
 
 import com.nsu.rpgstats.data.constraints.ConstraintRepository;
 import com.nsu.rpgstats.data.gamesystems.GameSystemsRepository;
@@ -25,6 +28,10 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class AppContainer {
+    public ActivityResultLauncher<Intent> fileActivityLauncher;
+    public ActivityResultLauncher<Intent> iconActivityLauncher;
+    public ActivityResultLauncher<Intent> backgroundActivityLauncher;
+
     public GameSystem currentGameSystem = null;
     public ItemRepository itemRepository = new PlugItemRepository();
     public TagRepository tagRepository = new PlugTagRepository();
