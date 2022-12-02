@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nsu.rpgstats.databinding.ActivityMainBinding;
 import com.nsu.rpgstats.entities.GameSystem;
+import com.nsu.rpgstats.ui.character.CharacterEquipmentActivity;
 import com.nsu.rpgstats.ui.gamesystems.GameSystemsAdapter;
 import com.nsu.rpgstats.ui.gamesystems.AddGameActivityResultCallback;
 import com.nsu.rpgstats.ui.AddGameSystemActivity;
@@ -67,8 +68,9 @@ public class MainActivity extends AppCompatActivity implements GameSystemsAdapte
     }
 
     private void startAddGameSystemActivityForResult() {
-        Intent intent = new Intent(this, AddGameSystemActivity.class);
-        activityLauncher.launch(intent);
+        Intent intent = new Intent(this, CharacterEquipmentActivity.class);
+        startActivity(intent);
+        //activityLauncher.launch(intent);
     }
 
     @Override

@@ -70,14 +70,28 @@ public class CharacterEquipmentActivity extends AppCompatActivity {
         ArrayList<Constraint> bracersConstraints = new ArrayList<>();
         bracersConstraints.add(new Constraint(5, "Only bracers", false, bracersTags));
 
+        // Items that can be equipped
         ArrayList<Modifier> helmetModifiers = new ArrayList<>();
         helmetModifiers.add(new Modifier(0, "Hp up", 5, new Parameter(0, "Hp", new Date(), 0, 999)));
-        items.add(new Item(0, 1337, "Helmet for hp up", helmetTags, helmetModifiers, false));
+        items.add(new Item(0, 0, "Helmet for hp up", helmetTags, helmetModifiers, false));
 
         ArrayList<Modifier> armorModifiers = new ArrayList<>();
         armorModifiers.add(new Modifier(1, "Defense up", 5, new Parameter(1, "Defense", new Date(), 0, 999)));
-        items.add(new Item(1, 1337, "Armor for defense up", armorTags, armorModifiers, false));
+        items.add(new Item(1, 1, "Armor for defense up", armorTags, armorModifiers, false));
 
+        ArrayList<Modifier> ring1Modifiers = new ArrayList<>();
+        ring1Modifiers.add(new Modifier(2, "Attack up", 5, new Parameter(2, "Attack", new Date(), 0, 999)));
+        items.add(new Item(2, 2, "Ring for attack up", ringTags, ring1Modifiers, false));
+
+        ArrayList<Modifier> ring2Modifiers = new ArrayList<>();
+        ring2Modifiers.add(new Modifier(2, "Defense up", 5, new Parameter(2, "Defense", new Date(), 0, 999)));
+        items.add(new Item(3, 3, "Ring for defense up", ringTags, ring2Modifiers, false));
+
+        ArrayList<Modifier> ring3Modifiers = new ArrayList<>();
+        ring3Modifiers.add(new Modifier(2, "Hp up", 5, new Parameter(2, "Hp", new Date(), 0, 999)));
+        items.add(new Item(4, 4, "Ring for hp up", ringTags, ring3Modifiers, false));
+
+        // Slots
         slots.add(new ItemSlot(null, helmetConstraints, true));
         slots.add(new ItemSlot(null, armorConstraints, true));
         slots.add(new ItemSlot(null, ringConstraints, true));
