@@ -71,18 +71,22 @@ docker-compose up
 ### Frontend
 
 1. Open `android` folder in Android-Studio
+
 2. Get your ip of your pc: 
-On unix:
+* On unix:
 ```bash
 ip a
 ```
-On windows:
+* On windows:
 ```cmd
 ipconfig
 ```
+
 3. In `android/app/src/main/res/raw/config.properties` set `server_address` to your ip:
 ```properties
 server_address=192.168.31.144
 ```
+
 4. Run project in Android-Studio
+
 5. Play with app
