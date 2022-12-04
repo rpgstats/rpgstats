@@ -59,7 +59,7 @@ There is a chance, that this thingy can help you!
 there will reside some screens
 </details>
 
-# Run it localy
+# Run app
 
 ### Backend
 
@@ -89,4 +89,7 @@ server_address=192.168.31.144
 
 4. Run project in Android-Studio
 
-5. Play with app
+5. To run it on your phone, you need to build APK. Go to `Build -> Build Bundle(s)/ APK(s) -> Build APK(s)`. It should put .apk file in `android/app/build/outputs/apk/debug/app-debug.apk`. Copy it to your phone, isntall and run.
+
+6. Play with app
+
