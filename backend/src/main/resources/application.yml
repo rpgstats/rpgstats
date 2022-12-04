@@ -6,6 +6,8 @@ spring:
       ddl-auto: update
   main:
     allow-circular-references: true
+  liquibase:
+    change-log: classpath:db/changelog/liquibase-changeLog.xml
 server:
   servlet:
     context-path: /api/v1
