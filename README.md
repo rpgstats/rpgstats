@@ -58,3 +58,31 @@ There is a chance, that this thingy can help you!
 <details>
 there will reside some screens
 </details>
+
+# Run it localy
+
+### Backend
+
+Start db and backend with docker compose:
+```bash
+docker-compose up
+```
+
+### Frontend
+
+1. Open `android` folder in Android-Studio
+2. Get your ip of your pc: 
+On unix:
+```bash
+ip a
+```
+On windows:
+```cmd
+ipconfig
+```
+3. In `android/app/src/main/res/raw/config.properties` set `server_address` to your ip:
+```properties
+server_address=192.168.31.144
+```
+4. Run project in Android-Studio
+5. Play with app
