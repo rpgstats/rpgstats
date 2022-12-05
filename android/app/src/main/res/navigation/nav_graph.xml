@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_infoFragment_to_slotsFragment"
             app:destination="@id/slotsFragment" />
+        <action
+            android:id="@+id/action_infoFragment_to_characterEquipmentFragment"
+            app:destination="@id/characterEquipmentFragment" />
     </fragment>
     <fragment
         android:id="@+id/copyFragment"
@@ -59,4 +62,9 @@
         android:name="com.nsu.rpgstats.ui.characters.info.slots.SlotsFragment"
         android:label="fragment_slots"
         tools:layout="@layout/fragment_slots" />
+    <fragment
+        android:id="@+id/characterEquipmentFragment"
+        android:name="com.nsu.rpgstats.ui.character.CharacterEquipmentFragment"
+        android:label="fragment_character_equipment"
+        tools:layout="@layout/fragment_character_equipment" />
 </navigation>

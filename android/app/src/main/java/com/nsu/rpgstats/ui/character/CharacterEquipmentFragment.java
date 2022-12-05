@@ -1,38 +1,51 @@
 package com.nsu.rpgstats.ui.character;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.nsu.rpgstats.R;
+import com.nsu.rpgstats.databinding.FragmentCharacterEquipmentBinding;
 import com.nsu.rpgstats.entities.Constraint;
 import com.nsu.rpgstats.entities.Item;
 import com.nsu.rpgstats.entities.ItemSlot;
 import com.nsu.rpgstats.entities.Modifier;
 import com.nsu.rpgstats.entities.Parameter;
+import com.nsu.rpgstats.entities.Slot;
 import com.nsu.rpgstats.entities.Tag;
+import com.nsu.rpgstats.ui.characters.selection.SelectionViewModel;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CharacterEquipmentActivity extends AppCompatActivity {
+public class CharacterEquipmentFragment extends Fragment {
     private List<ItemSlot> slots;
+    private List<Slot> slotsFromActivity;
     private List<Item> items;
+    private FragmentCharacterEquipmentBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_character_equipment);
-
+        binding = FragmentCharacterEquipmentBinding.inflate(inflater, container, false);
+        slotsFromActivity = new ViewModelProvider(requireActivity()).get(SelectionViewModel.class).getCharacterList().getValue().get(getArguments().getInt("position")).getSlotList();
         plugSlots();
         initGrid();
+        return binding.getRoot();
     }
 
     private void initGrid() {
-        GridView slotsGrid = findViewById(R.id.charEquipGrid);
-        SlotsAdapter adapter = new SlotsAdapter(this, slots, items);
+        GridView slotsGrid = binding.charEquipGrid;
+        SlotsAdapter adapter = new SlotsAdapter(requireActivity(), slots, items);
         slotsGrid.setNumColumns(3);
 
         slotsGrid.setAdapter(adapter);

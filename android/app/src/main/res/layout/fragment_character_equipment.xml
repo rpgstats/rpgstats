@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingStart="10dp"
     android:paddingEnd="10dp"
-    tools:context=".ui.character.CharacterEquipmentActivity">
+    tools:context=".ui.character.CharacterEquipmentFragment">
 
     <TextView
         android:id="@+id/charEquipTitle"

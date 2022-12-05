@@ -51,7 +51,7 @@ public class AppContainer {
         Log.e(TAG, context.toString());
         RestClient restClient = RestClient.getInstance(getServerAddrFromConfig());
         //gameSystemsRepository = new RestGameSystemsRepository(restClient.getRpgstatsService());
-        gameSystemsRepository = new PlugGameSystemsRepository();
+        gameSystemsRepository = new PlugGameSystemsRepository(); // TODO ubrat' i decommit
     }
 
     private String getServerAddrFromConfig() {

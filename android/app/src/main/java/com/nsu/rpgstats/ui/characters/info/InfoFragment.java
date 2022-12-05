@@ -128,6 +128,13 @@ public class InfoFragment extends Fragment {
             Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.slotsFragment, bundle);
         });
 
+        binding.equipmentButton.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("id", character.getId());
+            bundle.putInt("position", position);
+            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.characterEquipmentFragment, bundle);
+        });
+
         new ViewModelProvider(requireActivity()).get(GameSystemsViewModel.class);
 
         BackgroundViewModel model = new ViewModelProvider(requireActivity()).get(BackgroundViewModel.class);

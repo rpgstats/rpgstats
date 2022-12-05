@@ -207,6 +207,7 @@
                     android:layout_height="wrap_content">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/equipmentButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_marginTop="8dp"
@@ -238,7 +239,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="History"
+                        android:text="Equipment"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
