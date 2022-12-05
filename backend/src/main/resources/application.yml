@@ -3,7 +3,7 @@ spring:
     default: dev
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
   main:
     allow-circular-references: true
   liquibase:

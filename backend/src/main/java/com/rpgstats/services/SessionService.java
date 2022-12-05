@@ -9,6 +9,7 @@ import com.rpgstats.messages.DTO.SessionDto;
 import com.rpgstats.repositories.SessionRepository;
 import com.rpgstats.repositories.UsersSessionRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,24 +20,36 @@ import java.util.stream.Collectors;
 @Service
 public class SessionService {
 
-  final SessionRepository sessionRepository;
-  final UsersSessionRepository usersSessionRepository;
+  SessionRepository sessionRepository;
+  UsersSessionRepository usersSessionRepository;
 
-  final CharacterService characterService;
+  CharacterService characterService;
 
-  final GameSystemService gameSystemService;
-  final ModelMapper modelMapper;
+  GameSystemService gameSystemService;
+  ModelMapper modelMapper;
 
-  public SessionService(
-      SessionRepository sessionRepository,
-      UsersSessionRepository usersSessionRepository,
-      CharacterService characterService,
-      GameSystemService gameSystemService,
-      ModelMapper modelMapper) {
+  @Autowired
+  public void setSessionRepository(SessionRepository sessionRepository) {
     this.sessionRepository = sessionRepository;
+  }
+
+  @Autowired
+  public void setUsersSessionRepository(UsersSessionRepository usersSessionRepository) {
     this.usersSessionRepository = usersSessionRepository;
+  }
+
+  @Autowired
+  public void setCharacterService(CharacterService characterService) {
     this.characterService = characterService;
+  }
+
+  @Autowired
+  public void setGameSystemService(GameSystemService gameSystemService) {
     this.gameSystemService = gameSystemService;
+  }
+
+  @Autowired
+  public void setModelMapper(ModelMapper modelMapper) {
     this.modelMapper = modelMapper;
   }
 
