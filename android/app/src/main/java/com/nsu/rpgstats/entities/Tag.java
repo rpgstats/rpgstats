@@ -1,8 +1,9 @@
 package com.nsu.rpgstats.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Tag implements Identifiable{
+public class Tag implements Identifiable, Serializable {
     private final Integer id;
     private String name;
     private String creationDate;

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".ui.characters.windows.info.slots.SlotWarningUnsaveFragment">
+    tools:context=".ui.characters.windows.info.slots.SlotsWarningUnsaveFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -89,7 +89,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="Do you want to unsave slot changes?"
+            android:text="Do you want to unsave slots changes?"
             android:textColor="@color/delete_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

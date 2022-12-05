@@ -1,11 +1,12 @@
 package com.nsu.rpgstats.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-public class Attribute {
+public class Attribute implements Serializable {
     private List<Constraint> constraintList = new ArrayList<>();
     private HashMap<Integer, Parameter> parameterHashMap = new HashMap<>();
     private List<Modifier> modifierList = new ArrayList<>();

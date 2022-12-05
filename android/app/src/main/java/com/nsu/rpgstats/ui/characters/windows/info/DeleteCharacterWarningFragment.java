@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.databinding.FragmentDeleteCharacterWarningBinding;
-import com.nsu.rpgstats.databinding.FragmentSlotWarningUnsaveBinding;
 import com.nsu.rpgstats.ui.characters.selection.SelectionViewModel;
 
 public class DeleteCharacterWarningFragment extends Fragment {
@@ -22,7 +21,6 @@ public class DeleteCharacterWarningFragment extends Fragment {
                              Bundle savedInstanceState) {
         FragmentDeleteCharacterWarningBinding binding = FragmentDeleteCharacterWarningBinding.inflate(inflater, container, false);
         binding.No.setOnClickListener(view -> {
-            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.infoFragment);
             Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.emptyFragment);
         });
 

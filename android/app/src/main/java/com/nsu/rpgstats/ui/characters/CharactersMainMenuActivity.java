@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -23,6 +24,7 @@ import java.io.FileNotFoundException;
 public class CharactersMainMenuActivity extends AppCompatActivity {
     private ActivityCharactersMainMenuBinding binding;
     private WindowViewModel mWindowViewModel;
+    private BackgroundViewModel mBackgroundViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,19 @@ public class CharactersMainMenuActivity extends AppCompatActivity {
         mWindowViewModel = new ViewModelProvider(this).get(WindowViewModel.class);
         mWindowViewModel.getIsShow().observe(this, isShow -> {
             binding.windowArea.setVisibility(isShow ? View.VISIBLE : View.GONE);
+        });
+
+        mBackgroundViewModel = new ViewModelProvider(this).get(BackgroundViewModel.class);
+        mBackgroundViewModel.getIcon().observe(this, bitmap -> {
+            binding.include.icon.setImageBitmap(bitmap);
+        });
+
+        mBackgroundViewModel.getBackground().observe(this, bitmap -> {
+            binding.include.background.setImageBitmap(bitmap);
+        });
+
+        mBackgroundViewModel.getName().observe(this, name-> {
+            binding.include.CharTitleName.setText(name);
         });
 
         binding.windowArea.setOnClickListener(view -> {
@@ -48,7 +63,7 @@ public class CharactersMainMenuActivity extends AppCompatActivity {
                         final String filePath = cursor.getString(0);
                         cursor.close();
                         new ViewModelProvider(this).get(FileCreationViewModel.class).setFile(filePath);
-
+                        new ViewModelProvider(this).get(FileCreationViewModel.class).setPath(chosenImageUri);
                     }
                 });
         ((RpgstatsApplication)getApplicationContext()).appContainer.iconActivityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -60,6 +75,7 @@ public class CharactersMainMenuActivity extends AppCompatActivity {
                         final String filePath = cursor.getString(0);
                         cursor.close();
                         new ViewModelProvider(this).get(NewCreationViewModel.class).setImageFilename(filePath);
+                        new ViewModelProvider(this).get(NewCreationViewModel.class).setPathIcon(chosenImageUri);
                     }
                 });
         ((RpgstatsApplication)getApplicationContext()).appContainer.backgroundActivityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -71,6 +87,7 @@ public class CharactersMainMenuActivity extends AppCompatActivity {
                         final String filePath = cursor.getString(0);
                         cursor.close();
                         new ViewModelProvider(this).get(NewCreationViewModel.class).setBackgroundFilename(filePath);
+                        new ViewModelProvider(this).get(NewCreationViewModel.class).setPathBackground(chosenImageUri);
                     }
                 });
     }

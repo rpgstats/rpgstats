@@ -1,8 +1,9 @@
 package com.nsu.rpgstats.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Version {
+public class Version implements Serializable {
     private String description;
     private Character character;
     private String date;

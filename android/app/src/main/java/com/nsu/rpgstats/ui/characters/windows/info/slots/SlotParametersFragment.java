@@ -9,6 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.nsu.rpgstats.ui.BadgeAdapter;
 import com.nsu.rpgstats.ui.characters.info.InfoViewModel;
 import com.nsu.rpgstats.viewmodel.TagViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SlotParametersFragment extends Fragment {
@@ -39,7 +41,7 @@ public class SlotParametersFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentSlotParametersBinding.inflate(inflater, container, false);
         mViewModel = new ViewModelProvider(requireActivity()).get(SlotViewModel.class);
-        tags = mViewModel.getSlot().getValue().getTags();
+        tags = new ArrayList<>(mViewModel.getSlot().getValue().getTags());
         adapter = new BadgeAdapter<>(tags, (pos)->{
             tags.remove(pos);
             adapter.setBadgesList(tags);
@@ -72,10 +74,13 @@ public class SlotParametersFragment extends Fragment {
         binding.Back.setOnClickListener(view -> {
             mViewModel.setIsChanged(true);
             mViewModel.getSlot().getValue().setTags(tags);
-            mViewModel.getSlot().getValue().setWhitelisted(!binding.switch1.getShowText());
+            mViewModel.getSlot().getValue().setWhitelisted(!binding.switch1.isChecked());
             mViewModel.setSlot(mViewModel.getSlot().getValue());
-            Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.slotInfoFragment);
+            getArguments().putBoolean("editedTags", true);
+            Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.slotInfoFragment, getArguments());
         });
+
+        binding.switch1.setChecked(!Boolean.TRUE.equals(mViewModel.getSlot().getValue().isWhitelisted()));
 
 
         binding.tagsChoose.setAdapter(chooseAdapter);

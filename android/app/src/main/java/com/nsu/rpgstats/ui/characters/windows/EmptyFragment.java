@@ -20,12 +20,12 @@ public class EmptyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentEmptyBinding.inflate(inflater, container, false);
+        new ViewModelProvider(requireActivity()).get(WindowViewModel.class).setIsShow(false);
         return binding.getRoot();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        new ViewModelProvider(requireActivity()).get(WindowViewModel.class).setIsShow(false);
     }
 }

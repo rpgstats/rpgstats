@@ -8,6 +8,7 @@ import androidx.activity.result.ActivityResultLauncher;
 
 import com.nsu.rpgstats.data.constraints.ConstraintRepository;
 import com.nsu.rpgstats.data.gamesystems.GameSystemsRepository;
+import com.nsu.rpgstats.data.gamesystems.PlugGameSystemsRepository;
 import com.nsu.rpgstats.data.items.ItemRepository;
 import com.nsu.rpgstats.data.modifiers.ModifierRepository;
 import com.nsu.rpgstats.data.parameters.ParameterRepository;
@@ -49,7 +50,8 @@ public class AppContainer {
         this.context = context;
         Log.e(TAG, context.toString());
         RestClient restClient = RestClient.getInstance(getServerAddrFromConfig());
-        gameSystemsRepository = new RestGameSystemsRepository(restClient.getRpgstatsService());
+        //gameSystemsRepository = new RestGameSystemsRepository(restClient.getRpgstatsService());
+        gameSystemsRepository = new PlugGameSystemsRepository();
     }
 
     private String getServerAddrFromConfig() {

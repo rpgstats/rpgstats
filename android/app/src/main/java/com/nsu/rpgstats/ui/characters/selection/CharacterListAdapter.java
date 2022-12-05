@@ -1,5 +1,6 @@
 package com.nsu.rpgstats.ui.characters.selection;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -35,7 +36,7 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
     @NonNull
     @Override
     public CharacterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CharacterCardBinding binding = CharacterCardBinding.inflate(LayoutInflater.from(parent.getContext()));
+        CharacterCardBinding binding = CharacterCardBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new CharacterHolder(binding, listener);
     }
 

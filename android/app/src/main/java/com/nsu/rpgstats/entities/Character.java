@@ -1,17 +1,22 @@
 package com.nsu.rpgstats.entities;
 
+import android.graphics.Bitmap;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Character {
+public class Character implements Serializable {
     private int id;
     private String name;
     private String description;
     private int gameSystemId;
     private int sessionId;
     private int userId;
-    private Version version;
+    private transient Bitmap icon;
+    private transient Bitmap background;
+    private transient Version version;
     private List<Attribute> attributeList = new ArrayList<>();
     private List<Slot> slotList = new ArrayList<>();
 
@@ -22,6 +27,34 @@ public class Character {
         this.gameSystemId = gameSystemId;
         this.sessionId = sessionId;
         this.userId = userId;
+    }
+
+    public Character(int id, String name, String description, int gameSystemId, int sessionId, int userId, Version version, List<Attribute> attributeList, List<Slot> slotList) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.gameSystemId = gameSystemId;
+        this.sessionId = sessionId;
+        this.userId = userId;
+        this.version = version;
+        this.attributeList = attributeList;
+        this.slotList = slotList;
+    }
+
+    public Bitmap getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Bitmap icon) {
+        this.icon = icon;
+    }
+
+    public Bitmap getBackground() {
+        return background;
+    }
+
+    public void setBackground(Bitmap background) {
+        this.background = background;
     }
 
     public List<Slot> getSlotList() {
@@ -94,18 +127,5 @@ public class Character {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Character character = (Character) o;
-        return id == character.id && gameSystemId == character.gameSystemId && sessionId == character.sessionId && userId == character.userId && Objects.equals(name, character.name) && Objects.equals(description, character.description) && Objects.equals(version, character.version) && Objects.equals(attributeList, character.attributeList) && Objects.equals(slotList, character.slotList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, description, gameSystemId, sessionId, userId, version, attributeList, slotList);
     }
 }

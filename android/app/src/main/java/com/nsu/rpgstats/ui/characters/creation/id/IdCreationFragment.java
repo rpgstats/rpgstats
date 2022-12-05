@@ -42,10 +42,11 @@ public class IdCreationFragment extends Fragment {
             }
             //todo proverka na oshibku Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.errorNoCharacterInSystemFragment); сделать видимым
             mViewModel.addCharacter(binding.CharName.getText().toString(), character);
+            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.selectionFragment);
         });
 
         binding.cBackButton.setOnClickListener(view -> {
-            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.selectedCharacter);
+            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.selectionFragment);
         });
 
         return binding.getRoot();

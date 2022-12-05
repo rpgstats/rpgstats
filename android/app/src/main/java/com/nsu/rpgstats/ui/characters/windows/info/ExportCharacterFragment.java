@@ -20,15 +20,15 @@ public class ExportCharacterFragment extends Fragment {
                              Bundle savedInstanceState) {
         FragmentExportCharacterBinding binding = FragmentExportCharacterBinding.inflate(inflater, container, false);
         binding.back.setOnClickListener(view -> {
-            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.infoFragment);
             Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.emptyFragment);
         });
+
+        binding.IdText.setText(getArguments().getInt("id") + "");
 
         binding.dowload.setOnClickListener(view -> {
             SelectionViewModel model = new ViewModelProvider(requireActivity()).get(SelectionViewModel.class);
             assert getArguments() != null;
-            model.downloadCharacter(getArguments().getInt("position"));
-            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.infoFragment);
+            model.downloadCharacter(getArguments().getInt("position"), getContext());
             Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.emptyFragment);
         });
 

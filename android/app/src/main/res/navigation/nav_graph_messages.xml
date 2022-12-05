@@ -26,9 +26,6 @@
             android:id="@+id/action_emptyFragment_to_slotInfoFragment2"
             app:destination="@id/slotInfoFragment" />
         <action
-            android:id="@+id/action_emptyFragment_to_slotWarningUnsaveFragment"
-            app:destination="@id/slotWarningUnsaveFragment" />
-        <action
             android:id="@+id/action_emptyFragment_to_deleteCharacterWarningFragment"
             app:destination="@id/deleteCharacterWarningFragment" />
         <action
@@ -40,6 +37,9 @@
         <action
             android:id="@+id/action_emptyFragment_to_versionDescriptionFragment"
             app:destination="@id/versionDescriptionFragment" />
+        <action
+            android:id="@+id/action_emptyFragment_to_slotsWarningUnsaveFragment"
+            app:destination="@id/slotsWarningUnsaveFragment" />
     </fragment>
     <fragment
         android:id="@+id/characterVersionFragment"
@@ -76,11 +76,6 @@
         android:label="fragment_slot_parameters"
         tools:layout="@layout/fragment_slot_parameters" />
     <fragment
-        android:id="@+id/slotWarningUnsaveFragment"
-        android:name="com.nsu.rpgstats.ui.characters.windows.info.slots.SlotWarningUnsaveFragment"
-        android:label="fragment_slot_warning_unsave"
-        tools:layout="@layout/fragment_slot_warning_unsave" />
-    <fragment
         android:id="@+id/deleteCharacterWarningFragment"
         android:name="com.nsu.rpgstats.ui.characters.windows.info.DeleteCharacterWarningFragment"
         android:label="fragment_delete_character_warning"
@@ -100,4 +95,9 @@
         android:name="com.nsu.rpgstats.ui.characters.windows.info.VersionDescriptionFragment"
         android:label="fragment_version_description"
         tools:layout="@layout/fragment_version_description" />
+    <fragment
+        android:id="@+id/slotsWarningUnsaveFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.info.slots.SlotsWarningUnsaveFragment"
+        android:label="fragment_slots_warning_unsave"
+        tools:layout="@layout/fragment_slots_warning_unsave" />
 </navigation>

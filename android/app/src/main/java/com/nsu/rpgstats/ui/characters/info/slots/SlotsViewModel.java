@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.databinding.SlotItemBinding;
 import com.nsu.rpgstats.entities.Slot;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public class SlotsViewModel extends ViewModel {
     private MutableLiveData<List<Slot>> slotList;
     private MutableLiveData<Boolean> isChanged;
+    private MutableLiveData<Boolean> toDelete;
 
     public SlotsViewModel() {
         reInit();
@@ -23,6 +25,8 @@ public class SlotsViewModel extends ViewModel {
         slotList.setValue(new ArrayList<>());
         isChanged = new MutableLiveData<>();
         isChanged.setValue(false);
+        toDelete = new MutableLiveData<>();
+        toDelete.setValue(false);
     }
 
     public LiveData<List<Slot>> getSlotList() {
@@ -41,7 +45,15 @@ public class SlotsViewModel extends ViewModel {
         this.isChanged.setValue(isChanged);
     }
 
+    public LiveData<Boolean> getToDelete() {
+        return toDelete;
+    }
+
+    public void setToDelete(Boolean toDelete) {
+        this.toDelete.setValue(toDelete);
+    }
+
     public void loadImage(SlotItemBinding bindingNewItem, String iconUrl) {
-        //todo loadImage
+        bindingNewItem.itemImage.setImageResource(R.drawable.control_items);//todo: load image
     }
 }

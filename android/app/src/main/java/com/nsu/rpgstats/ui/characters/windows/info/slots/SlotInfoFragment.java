@@ -9,6 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,20 @@ public class SlotInfoFragment extends Fragment {
         pos = getArguments().getInt("slotPos");
         Slot slot = new ViewModelProvider(requireActivity()).get(SlotsViewModel.class).getSlotList().getValue().get(pos);
         mViewModel = new ViewModelProvider(requireActivity()).get(SlotViewModel.class);
-        mViewModel.setSlot(slot);
+
+        Slot newSlot = new Slot(slot.getId(),
+                slot.getName(),
+                slot.getIconUrl(),
+                slot.isWhitelisted(),
+                slot.getCharacterId(),
+                slot.getItemId());
+        if (getArguments().getBoolean("editedTags", false)) {
+            new ViewModelProvider(requireActivity()).get(SlotsViewModel.class).setIsChanged(true);
+            slot.setTags(new ArrayList<>(mViewModel.getSlot().getValue().getTags()));
+        } else {
+            newSlot.setTags(new ArrayList<>(slot.getTags()));
+        }
+        mViewModel.setSlot(newSlot);
 
         mViewModel.getSlot().observe(getViewLifecycleOwner(), slot1 -> {
             this.slot = slot1;
@@ -46,10 +60,6 @@ public class SlotInfoFragment extends Fragment {
 
         adapter = new BadgeAdapter<>(slot.getTags(), (pos)-> {}, false, AppCompatResources.getDrawable(requireActivity(), R.drawable.rounded_card));
         binding.Back.setOnClickListener(view -> {
-            if (Boolean.TRUE.equals(mViewModel.getIsChanged().getValue())) {
-                Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.slotWarningUnsaveFragment);
-                return;
-            }
             Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.emptyFragment);
             mViewModel.reInit();
         });
@@ -58,8 +68,9 @@ public class SlotInfoFragment extends Fragment {
         binding.tags.setLayoutManager(new LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false));
 
         binding.params.setOnClickListener(view -> {
+            mViewModel.setSlot(slot);
             mViewModel.setIsChanged(true);
-            Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.slotParametersFragment);
+            Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.slotParametersFragment, getArguments());
         });
 
 

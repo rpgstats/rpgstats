@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,7 @@ public class CopyFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentCopyBinding.inflate(inflater, container, false);
         mSelectionViewModel = new ViewModelProvider(requireActivity()).get(SelectionViewModel.class);
-        mSelectionViewModel.loadData(1); //todo getUserId
+        mSelectionViewModel.loadData(1, getContext()); //todo getUserId
         mViewModel = new ViewModelProvider(requireActivity()).get(CopyViewModel.class);
         mViewModel.reInit();
         mViewModel.loadData(1); //todo charId
@@ -49,6 +50,9 @@ public class CopyFragment extends Fragment {
             binding.selectedCharacter.setText(mSelectionViewModel.getCharacterList().getValue().get(position).getName());
         });
 
+        binding.characterList.setAdapter(adapter);
+        binding.characterList.setLayoutManager(new LinearLayoutManager(getContext()));
+
         binding.GameSystemList.setOnClickListener(view -> {
             binding.charList.setVisibility(View.VISIBLE);
         });
@@ -57,12 +61,11 @@ public class CopyFragment extends Fragment {
 
         binding.cNextButton.setOnClickListener(view -> {
             mSelectionViewModel.addCharacter(binding.InputText.getText().toString() ,mSelectionViewModel.getCharacterList().getValue().get(position));
-
-
+            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.selectionFragment);
         });
 
         binding.cBackButton.setOnClickListener(view -> {
-            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.selectedCharacter);
+            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.selectionFragment);
         });
 
         return binding.getRoot();

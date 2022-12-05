@@ -21,6 +21,7 @@ import com.nsu.rpgstats.databinding.FragmentFileCreationBinding;
 import com.nsu.rpgstats.ui.characters.selection.SelectionViewModel;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class FileCreationFragment extends Fragment {
 
@@ -51,20 +52,23 @@ public class FileCreationFragment extends Fragment {
         binding.cNextButton.setOnClickListener(view -> {
             Character character = null;
             try {
-                character = mViewModel.getCharacter();
+                character = mViewModel.getCharacter(getContext());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 return;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             if (binding.inputText.length() == 0 || character == null) {
                 return;
             }
             //todo proverka na oshibku Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.errorNoCharacterInSystemFragment); сделать видимм
             mSelectionViewModel.addCharacter(binding.inputText.getText().toString(), character);
+            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.selectionFragment);
         });
 
         binding.cBackButton.setOnClickListener(view -> {
-            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.selectedCharacter);
+            Navigation.findNavController(requireActivity(), R.id.mainNavHost).navigate(R.id.selectionFragment);
         });
 
         binding.FileName.setOnClickListener(view -> {
