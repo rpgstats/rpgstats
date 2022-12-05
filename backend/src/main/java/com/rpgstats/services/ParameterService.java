@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class ParameterService {
-  SystemParameterRepository parameterRepository;
-  GameSystemService gameSystemService;
-  ModelMapper mapper;
+  final SystemParameterRepository parameterRepository;
+  final GameSystemService gameSystemService;
+  final ModelMapper mapper;
 
   public ParameterService(
       SystemParameterRepository parameterRepository,
@@ -31,14 +31,14 @@ public class ParameterService {
   }
 
   @Transactional
-  public List<SystemParameterDto> getParametersBySystem(Integer systemId) {
+  public List<SystemParameterDto> getParametersDtoBySystem(Integer systemId) {
     return parameterRepository.findByGameSystem_Id(systemId).stream()
         .map(parameter -> mapper.map(parameter, SystemParameterDto.class))
         .collect(Collectors.toList());
   }
 
   @Transactional
-  public SystemParameterDto getParameter(Integer systemId, Integer parameterId) {
+  public SystemParameterDto getParameterDtoById(Integer systemId, Integer parameterId) {
     return mapper.map(
         parameterRepository
             .findByIdAndGameSystem_Id(parameterId, systemId)

@@ -1,7 +1,6 @@
 package com.rpgstats.services;
 
 import com.rpgstats.entity.GameSystem;
-import com.rpgstats.exceptions.ConflictDataException;
 import com.rpgstats.exceptions.ItemNotFoundException;
 import com.rpgstats.messages.DTO.GameSystemDto;
 import com.rpgstats.messages.GameSystemPostRequest;
@@ -18,10 +17,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class GameSystemService {
-  SystemRepository systemRepository;
+  final SystemRepository systemRepository;
 
-  UserService userService;
-  ModelMapper modelMapper;
+  final UserService userService;
+  final ModelMapper modelMapper;
 
   public GameSystemService(
       SystemRepository systemRepository, UserService userService, ModelMapper modelMapper) {
@@ -44,9 +43,7 @@ public class GameSystemService {
 
   @Transactional
   public GameSystemDto createSystem(Integer userId, GameSystemPostRequest postRequest) {
-    if (systemRepository.existsByName(postRequest.getName())) {
-      throw new ConflictDataException("System with that name already exists");
-    }
+
     GameSystem gameSystem = modelMapper.map(postRequest, GameSystem.class);
     gameSystem.setCreatedAt(Instant.now());
     if (postRequest.getParentSystem() != null) {
@@ -103,5 +100,10 @@ public class GameSystemService {
   @Transactional
   public boolean existById(int systemId) {
     return systemRepository.existsById(systemId);
+  }
+
+  @Transactional
+  public boolean existByIdAndOwnerId(Integer id, Integer ownerId) {
+    return systemRepository.existsByIdAndOwner_Id(id, ownerId);
   }
 }

@@ -18,37 +18,30 @@ import java.util.stream.Collectors;
 @Service
 public class ItemService {
 
+  final SystemItemRepository itemRepository;
 
-  SystemItemRepository itemRepository;
+  final GameSystemService gameSystemService;
+  final ModelMapper mapper;
 
-  GameSystemService gameSystemService;
-  ModelMapper mapper;
-
-  public ItemService(SystemItemRepository itemRepository, GameSystemService gameSystemService, ModelMapper mapper) {
+  public ItemService(
+      SystemItemRepository itemRepository,
+      GameSystemService gameSystemService,
+      ModelMapper mapper) {
     this.itemRepository = itemRepository;
     this.gameSystemService = gameSystemService;
     this.mapper = mapper;
   }
 
   @Transactional
-  public List<SystemItemDto> getItemsBySystem(Integer systemId) {
+  public List<SystemItemDto> getItemsDtoBySystem(Integer systemId) {
     return itemRepository.findByGameSystem_Id(systemId).stream()
         .map(item -> mapper.map(item, SystemItemDto.class))
         .collect(Collectors.toList());
   }
 
   @Transactional
-  public SystemItemDto getItem(Integer systemId, Integer itemId) {
-    return mapper.map(
-        itemRepository
-            .findByIdAndGameSystem_Id(systemId, itemId)
-            .orElseThrow(
-                () ->
-                    new ItemNotFoundException(
-                        String.format(
-                            "Item with id - %d not found in system with id - %d",
-                            itemId, systemId))),
-        SystemItemDto.class);
+  public SystemItemDto getItemDtoById(Integer systemId, Integer itemId) {
+    return mapper.map(getItemById(systemId, itemId), SystemItemDto.class);
   }
 
   @Transactional
@@ -64,28 +57,28 @@ public class ItemService {
 
   @Transactional
   public SystemItemDto changeItem(Integer itemId, Integer systemId, ChangeItemPutRequest request) {
-    SystemItem item =
-        itemRepository
-            .findByIdAndGameSystem_Id(itemId, systemId)
-            .orElseThrow(
-                () ->
-                    new ItemNotFoundException(
-                        String.format(
-                            "Item with id - %d not found in system with id - %d",
-                            itemId, systemId)));
-    item.setName(Objects.requireNonNullElse(request.getName(),item.getName()));
-    item.setIsPresent(Objects.requireNonNullElse(request.getIsPresent(),item.getIsPresent()));
+    SystemItem item = getItemById(systemId, itemId);
+    item.setName(Objects.requireNonNullElse(request.getName(), item.getName()));
+    item.setIsPresent(Objects.requireNonNullElse(request.getIsPresent(), item.getIsPresent()));
     itemRepository.save(item);
     return mapper.map(item, SystemItemDto.class);
   }
 
   @Transactional
   public SystemItemDto deleteItem(Integer itemId, Integer systemId) {
-    SystemItem item =
-        itemRepository
-            .findByIdAndGameSystem_Id(itemId, systemId)
-            .orElseThrow();
+    SystemItem item = itemRepository.findByIdAndGameSystem_Id(itemId, systemId).orElseThrow();
     itemRepository.delete(item);
     return mapper.map(item, SystemItemDto.class);
+  }
+
+  @Transactional
+  public SystemItem getItemById(Integer systemId, Integer itemId) {
+    return itemRepository
+        .findByIdAndGameSystem_Id(systemId, itemId)
+        .orElseThrow(
+            () ->
+                new ItemNotFoundException(
+                    String.format(
+                        "Item with id - %d not found in system with id - %d", itemId, systemId)));
   }
 }

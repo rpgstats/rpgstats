@@ -5,6 +5,7 @@ import com.rpgstats.exceptions.ItemNotFoundException;
 import com.rpgstats.exceptions.ModelException;
 import com.rpgstats.messages.ErrorResponse;
 import io.swagger.v3.oas.annotations.Hidden;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,6 +19,13 @@ public class RestExceptionHandler {
   @ExceptionHandler(ModelException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ResponseEntity<ErrorResponse> handleModelException(Exception exception) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(new ErrorResponse(exception.getMessage()));
+  }
+
+  @ExceptionHandler(ConstraintViolationException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ResponseEntity<ErrorResponse> handleConstraintViolatation(Exception exception) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
         .body(new ErrorResponse(exception.getMessage()));
   }

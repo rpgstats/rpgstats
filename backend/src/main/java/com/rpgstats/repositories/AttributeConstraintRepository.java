@@ -10,5 +10,4 @@ public interface AttributeConstraintRepository extends JpaRepository<AttributeCo
   List<AttributeConstraint> findByAttribute_GameSystem_Id(Integer id);
 
   Optional<AttributeConstraint> findByAttribute_GameSystem_IdAndId(Integer id, Integer id1);
-
 }

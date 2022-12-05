@@ -66,11 +66,15 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeRequests()
+        .antMatchers("/auth/**")
+        .permitAll()
+        .antMatchers("/signup/**")
+        .permitAll()
         .antMatchers("/user/game-systems/{systemId}/**")
         .access("isAuthenticated() and @securityConfig.checkSystemId(authentication,#systemId)")
-        .and()
-        .authorizeRequests()
-        .antMatchers("/user/**")
+        .antMatchers("/swagger-ui/**", "/v3/api-docs/**")
+        .permitAll()
+        .anyRequest()
         .authenticated()
         .and()
         .csrf()

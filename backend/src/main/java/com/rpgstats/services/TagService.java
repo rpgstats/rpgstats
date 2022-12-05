@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class TagService {
-  SystemTagRepository tagRepository;
-  GameSystemService gameSystemService;
-  ModelMapper mapper;
+  final SystemTagRepository tagRepository;
+  final GameSystemService gameSystemService;
+  final ModelMapper mapper;
 
   public TagService(
       SystemTagRepository tagRepository, GameSystemService gameSystemService, ModelMapper mapper) {
@@ -35,16 +35,8 @@ public class TagService {
   }
 
   @Transactional
-  public SystemTagDto getTag(Integer systemId, Integer tagId) {
-    return mapper.map(
-        tagRepository
-            .findByIdAndGameSystem_Id(tagId, systemId)
-            .orElseThrow(
-                () ->
-                    new ItemNotFoundException(
-                        String.format(
-                            "Tag with id - %d not found in system with id - %d", tagId, systemId))),
-        SystemTagDto.class);
+  public SystemTagDto getTagDtoById(Integer systemId, Integer tagId) {
+    return mapper.map(getTagById(tagId, systemId), SystemTagDto.class);
   }
 
   @Transactional
@@ -59,7 +51,7 @@ public class TagService {
 
   @Transactional
   public SystemTagDto changeTag(Integer tagId, Integer systemId, ChangeTagPutRequest request) {
-    SystemTag tag = tagRepository.findByIdAndGameSystem_Id(tagId, systemId).orElseThrow();
+    SystemTag tag = getTagById(tagId, systemId);
     tag.setName(request.getName());
     tagRepository.save(tag);
     return mapper.map(tag, SystemTagDto.class);
@@ -67,23 +59,16 @@ public class TagService {
 
   @Transactional
   public SystemTagDto deleteTag(Integer tagId, Integer systemId) {
-    SystemTag tag =
-        tagRepository
-            .findByIdAndGameSystem_Id(tagId, systemId)
-            .orElseThrow(
-                () ->
-                    new ItemNotFoundException(
-                        String.format(
-                            "Tag with id - %d not found in system with id - %d", tagId, systemId)));
+    SystemTag tag = getTagById(tagId, systemId);
     tagRepository.delete(tag);
     return mapper.map(tag, SystemTagDto.class);
   }
 
   @Transactional
-  public SystemTag getTagById(Integer id) {
+  public SystemTag getTagById(Integer tagId, Integer systemId) {
     return tagRepository
-        .findById(id)
+        .findByIdAndGameSystem_Id(tagId, systemId)
         .orElseThrow(
-            () -> new ItemNotFoundException(String.format("Tag by id - %d not found", id)));
+            () -> new ItemNotFoundException(String.format("Tag by id - %d not found", tagId)));
   }
 }

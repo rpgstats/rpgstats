@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 @Service
 public class AttributeService {
 
-  SystemAttributeRepository attributeRepository;
-  GameSystemService gameSystemService;
-  ModelMapper mapper;
+  final SystemAttributeRepository attributeRepository;
+  final GameSystemService gameSystemService;
+  final ModelMapper mapper;
 
   public AttributeService(
       SystemAttributeRepository attributeRepository,
@@ -38,7 +38,7 @@ public class AttributeService {
   }
 
   @Transactional
-  public SystemAttributeDto getAttribute(Integer systemId, Integer attributeId) {
+  public SystemAttributeDto getAttributeDtoById(Integer systemId, Integer attributeId) {
     return mapper.map(
         attributeRepository
             .findByGameSystem_IdAndId(systemId, attributeId)
@@ -65,14 +65,7 @@ public class AttributeService {
   @Transactional
   public SystemAttributeDto changeAttribute(
       Integer attributeId, Integer systemId, ChangeAttributePutRequest request) {
-    SystemAttribute attribute =
-        attributeRepository
-            .findByIdAndGameSystem_Id(attributeId, systemId)
-            .orElseThrow(
-                () ->
-                    new ItemNotFoundException(
-                        String.format(
-                            "No attribute with id - %d in system - %d", attributeId, systemId)));
+    SystemAttribute attribute = getAttributeById(attributeId, systemId);
     attribute.setName(request.getName());
     attribute.setIsPresent(request.getIsPresent());
     attributeRepository.save(attribute);
@@ -81,23 +74,18 @@ public class AttributeService {
 
   @Transactional
   public SystemAttributeDto deleteAttribute(Integer attributeId, Integer systemId) {
-    SystemAttribute attribute =
-        attributeRepository
-            .findByIdAndGameSystem_Id(attributeId, systemId)
-            .orElseThrow(
-                () ->
-                    new ItemNotFoundException(
-                        String.format(
-                            "No attribute with id - %d in system - %d", attributeId, systemId)));
+    SystemAttribute attribute = getAttributeById(attributeId, systemId);
     attributeRepository.delete(attribute);
     return mapper.map(attribute, SystemAttributeDto.class);
   }
 
   @Transactional
-  protected SystemAttribute getAttributeById(Integer id) {
+  protected SystemAttribute getAttributeById(Integer attributeId, Integer systemId) {
     return attributeRepository
-        .findById(id)
+        .findByIdAndGameSystem_Id(attributeId, systemId)
         .orElseThrow(
-            () -> new ItemNotFoundException(String.format("Attribute not found by id - %d", id)));
+            () ->
+                new ItemNotFoundException(
+                    String.format("Attribute not found by id - %d", attributeId)));
   }
 }

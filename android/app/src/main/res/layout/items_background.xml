@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/GameSystemNameText"
+            android:id="@+id/CharTitleName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="game_system_name"

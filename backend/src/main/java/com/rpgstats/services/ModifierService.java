@@ -24,13 +24,13 @@ import java.util.stream.Collectors;
 public class ModifierService {
 
   Logger log = LoggerFactory.getLogger(ModifierService.class);
-  GameSystemService gameSystemService;
-  ParameterModifierRepository parameterModifierRepository;
-  SystemParameterRepository systemParameterRepository;
-  SystemRepository systemRepository;
+  final GameSystemService gameSystemService;
+  final ParameterModifierRepository parameterModifierRepository;
+  final SystemParameterRepository systemParameterRepository;
+  final SystemRepository systemRepository;
 
-  ParameterService parameterService;
-  ModelMapper mapper;
+  final ParameterService parameterService;
+  final ModelMapper mapper;
 
   public ModifierService(
       GameSystemService gameSystemService,
@@ -48,14 +48,14 @@ public class ModifierService {
   }
 
   @Transactional
-  public List<SystemParameterModifierDto> getParameterModifiersBySystem(Integer systemId) {
+  public List<SystemParameterModifierDto> getParameterModifiersDtoBySystem(Integer systemId) {
     return parameterModifierRepository.findByParameter_GameSystem_Id(systemId).stream()
         .map(parameterModifier -> mapper.map(parameterModifier, SystemParameterModifierDto.class))
         .collect(Collectors.toList());
   }
 
   @Transactional
-  public SystemParameterModifierDto getParameterModifier(
+  public SystemParameterModifierDto getParameterModifierDtoById(
       Integer systemId, Integer parameterModifierId) {
     return mapper.map(
         parameterModifierRepository.findByIdAndParameter_GameSystem_Id(

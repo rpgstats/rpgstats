@@ -35,7 +35,7 @@ public class Constraint implements Identifiable {
         this.id = id;
     }
 
-    public Boolean getBlackList() {
+    public Boolean isBlackList() {
         return isBlackList;
     }
 

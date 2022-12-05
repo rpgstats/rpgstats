@@ -12,4 +12,6 @@ public interface SystemRepository extends JpaRepository<GameSystem, Integer> {
   Optional<GameSystem> findByIdAndOwner_Id(Integer id, Integer id1);
 
   boolean existsByName(String name);
+
+  boolean existsByIdAndOwner_Id(Integer id, Integer id1);
 }

@@ -3,9 +3,11 @@ spring:
     default: dev
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
   main:
     allow-circular-references: true
+  liquibase:
+    change-log: classpath:db/changelog/liquibase-changeLog.xml
 server:
   servlet:
     context-path: /api/v1
