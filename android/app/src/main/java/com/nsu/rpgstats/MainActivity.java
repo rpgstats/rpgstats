@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity implements GameSystemsAdapte
 
         // setup add game system button
         binding.gameSystemsTab.plusButton.setOnClickListener(view -> {
-            startActivity(new Intent(this, CharactersMainMenuActivity.class));
-            //startAddGameSystemActivityForResult();
+            //startActivity(new Intent(this, CharactersMainMenuActivity.class));
+            startAddGameSystemActivityForResult();
         });
     }
 
