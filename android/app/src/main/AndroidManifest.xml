@@ -23,6 +23,13 @@
             android:theme="@style/Theme.Rpgstats.NoActionBar">
         </activity>
         <activity
+            android:name=".ui.character.CharacterEquipmentActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Rpgstats.NoActionBar">

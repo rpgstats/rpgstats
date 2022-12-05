@@ -40,14 +40,14 @@ public class PlugConstraintRepository implements ConstraintRepository{
 
     @Override
     public int addConstraint(int gameSystem, Constraint constraint) {
-        Constraint c = new Constraint(constraint.getId(), constraint.getName(), constraint.getBlackList(), constraint.getTags());
+        Constraint c = new Constraint(constraint.getId(), constraint.getName(), constraint.isBlackList(), constraint.getTags());
         constraints.put(currentId, c);
         return currentId++;
     }
 
     @Override
     public void editConstraint(int gameSystem, int id, Constraint constraint) {
-        Constraint c = new Constraint(constraint.getId(), constraint.getName(), constraint.getBlackList(), constraint.getTags());
+        Constraint c = new Constraint(constraint.getId(), constraint.getName(), constraint.isBlackList(), constraint.getTags());
         constraints.remove(id);
         constraints.put(id, c);
     }

@@ -118,6 +118,7 @@
     <string name="add_constraint">Add constraint</string>
     <string name="add_property">Add property</string>
     <string name="game_system_description_header">Description</string>
+    <string name="slot_icon_desc">slot icon</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
