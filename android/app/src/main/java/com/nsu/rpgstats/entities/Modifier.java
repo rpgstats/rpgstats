@@ -1,8 +1,9 @@
 package com.nsu.rpgstats.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Modifier implements Identifiable{
+public class Modifier implements Identifiable, Serializable {
     private Integer id;
     private String name;
     private Integer value;

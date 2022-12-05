@@ -1,8 +1,9 @@
 package com.nsu.rpgstats.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Parameter implements Identifiable {
+public class Parameter implements Identifiable, Serializable {
     private Integer id;
     private String name;
     private Date createdAt;

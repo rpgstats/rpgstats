@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nsu.rpgstats.databinding.ActivityMainBinding;
 import com.nsu.rpgstats.entities.GameSystem;
+import com.nsu.rpgstats.ui.characters.CharactersMainMenuActivity;
 import com.nsu.rpgstats.ui.gamesystems.GameSystemsAdapter;
 import com.nsu.rpgstats.ui.gamesystems.AddGameActivityResultCallback;
 import com.nsu.rpgstats.ui.AddGameSystemActivity;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements GameSystemsAdapte
 
         // setup add game system button
         binding.gameSystemsTab.plusButton.setOnClickListener(view -> {
+            //startActivity(new Intent(this, CharactersMainMenuActivity.class));
             startAddGameSystemActivityForResult();
         });
     }
