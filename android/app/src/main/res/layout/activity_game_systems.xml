@@ -2,31 +2,13 @@
 <LinearLayout
     android:id="@+id/main_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.gamesystems.GameSystemsActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.Rpgstats.AppBarOverlay">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/Theme.Rpgstats.PopupOverlay" />
-
-        <include layout="@layout/user_info"
-            android:layout_marginBottom="@dimen/activity_margin"
-            android:layout_marginStart="@dimen/activity_margin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <include android:id="@+id/app_bar" layout="@layout/toolbar_user_settings"/>
 
     <LinearLayout
         android:layout_width="match_parent"

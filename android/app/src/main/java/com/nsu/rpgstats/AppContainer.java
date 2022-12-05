@@ -18,10 +18,16 @@ import com.nsu.rpgstats.data.parameters.PlugParameterRepository;
 import com.nsu.rpgstats.data.properties.PlugPropertyRepository;
 import com.nsu.rpgstats.data.properties.PropertyRepository;
 import com.nsu.rpgstats.data.gamesystems.RestGameSystemsRepository;
+import com.nsu.rpgstats.data.sessions.PlugSessionsRepository;
+import com.nsu.rpgstats.data.sessions.RestSessionRepository;
+import com.nsu.rpgstats.data.sessions.SessionsRepository;
+import com.nsu.rpgstats.data.user.PlugUserRepository;
+import com.nsu.rpgstats.data.user.UserRepository;
 import com.nsu.rpgstats.entities.GameSystem;
 import com.nsu.rpgstats.data.items.PlugItemRepository;
 import com.nsu.rpgstats.data.tags.PlugTagRepository;
 import com.nsu.rpgstats.data.tags.TagRepository;
+import com.nsu.rpgstats.entities.Session;
 import com.nsu.rpgstats.network.RestClient;
 
 import java.io.IOException;
@@ -34,12 +40,16 @@ public class AppContainer {
     public ActivityResultLauncher<Intent> backgroundActivityLauncher;
 
     public GameSystem currentGameSystem = null;
+    public Session currentSession = null;
+
     public ItemRepository itemRepository = new PlugItemRepository();
     public TagRepository tagRepository = new PlugTagRepository();
     public ModifierRepository modifierRepository = new PlugModifierRepository();
     public ParameterRepository parameterRepository = new PlugParameterRepository();
     public PropertyRepository propertyRepository = new PlugPropertyRepository();
     public ConstraintRepository constraintRepository = new PlugConstraintRepository();
+    public UserRepository userRepository = new PlugUserRepository();
+    public SessionsRepository sessionsRepository = new PlugSessionsRepository();
 
     private final Context context;
     public GameSystemsRepository gameSystemsRepository;
@@ -50,7 +60,8 @@ public class AppContainer {
         this.context = context;
         Log.e(TAG, context.toString());
         RestClient restClient = RestClient.getInstance(getServerAddrFromConfig());
-        //gameSystemsRepository = new RestGameSystemsRepository(restClient.getRpgstatsService());
+        gameSystemsRepository = new RestGameSystemsRepository(restClient.getRpgstatsService());
+        sessionsRepository = new RestSessionRepository(restClient.getSessionService());
         gameSystemsRepository = new PlugGameSystemsRepository(); // TODO ubrat' i decommit
     }
 

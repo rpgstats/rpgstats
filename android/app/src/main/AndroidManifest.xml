@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".RpgstatsApplication"
@@ -18,14 +18,11 @@
         android:theme="@style/Theme.Rpgstats"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity android:name=".ui.characters.CharactersMainMenuActivity"/>
         <activity
-            android:name=".ui.characters.CharactersMainMenuActivity"
-            android:theme="@style/Theme.Rpgstats.NoActionBar">
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Rpgstats.NoActionBar">
+            android:name=".ui.user.WelcomeActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,11 +33,19 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name=".ui.user.SignInActivity" />
+        <activity android:name=".ui.user.SignUpActivity" />
+
+        <activity android:name=".ui.sessions.SessionsActivity" />
+        <activity android:name=".ui.sessions.SessionInfoActivity" />
+        <activity android:name=".ui.sessions.AddSessionActivity" />
+        <activity android:name=".ui.sessions.SessionCharactersListActivity" />
+
+
+        <activity android:name=".ui.gamesystems.GameSystemsActivity" />
         <activity android:name=".ui.AddGameSystemActivity" />
         <activity android:name=".ui.gamesystems.GameSystemInfoActivity" />
-        <activity
-            android:name=".ui.items.ItemsActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".ui.items.ItemsActivity" />
         <activity android:name=".ui.NpcActivity" />
         <activity android:name=".ui.parameters.ParametersActivity" />
         <activity android:name=".ui.properties.PropertiesActivity" />

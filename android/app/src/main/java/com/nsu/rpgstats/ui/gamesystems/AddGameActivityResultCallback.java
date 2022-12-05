@@ -7,7 +7,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.nsu.rpgstats.databinding.ActivityMainBinding;
+import com.nsu.rpgstats.databinding.ActivityGameSystemsBinding;
 import com.nsu.rpgstats.viewmodel.GameSystemsViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -16,10 +16,10 @@ public class AddGameActivityResultCallback implements ActivityResultCallback<Act
     public final static String GAME_SYSTEM_DESCRIPTION_EXTRA = "new_game_system_description";
 
     private final GameSystemsViewModel gameSystemsViewModel;
-    private final ActivityMainBinding binding;
+    private final ActivityGameSystemsBinding binding;
     private final AppCompatActivity activity;
 
-    public AddGameActivityResultCallback(GameSystemsViewModel gameSystemsViewModel, AppCompatActivity activity, ActivityMainBinding binding) {
+    public AddGameActivityResultCallback(GameSystemsViewModel gameSystemsViewModel, AppCompatActivity activity, ActivityGameSystemsBinding binding) {
         this.gameSystemsViewModel = gameSystemsViewModel;
         this.binding = binding;
         this.activity = activity;

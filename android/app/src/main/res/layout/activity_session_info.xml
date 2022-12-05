@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.sessions.SessionInfoActivity">
+
+    <include android:id="@+id/app_bar" layout="@layout/toolbar_user_settings"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar"
+        tools:layout_editor_absoluteX="16dp">
+
+
+        <TextView
+            android:id="@+id/session_name_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/session_name"
+            android:textAlignment="center"
+            style="@style/Text.HeaderStyle"/>
+
+
+        <RelativeLayout
+            android:id="@+id/session_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/author" />
+
+            <TextView
+                android:id="@+id/session_author_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/user_name" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/session_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/description" />
+
+            <TextView
+                android:id="@+id/session_description_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/description" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/session_players_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/players_number" />
+
+            <TextView
+                android:id="@+id/session_players_number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/players_number" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/session_max_players_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/maximum_players" />
+
+            <TextView
+                android:id="@+id/session_max_players_number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/maximum_players" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/session_game_system"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/game_system" />
+
+            <TextView
+                android:id="@+id/session_game_system_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/game_system" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/session_character_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:gravity="center_vertical"
+                android:text="@string/character_list" />
+
+            <Button
+                android:id="@+id/session_character_list_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/open" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/session_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>

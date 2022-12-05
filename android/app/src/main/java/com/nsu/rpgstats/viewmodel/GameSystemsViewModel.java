@@ -47,20 +47,17 @@ public class GameSystemsViewModel extends AndroidViewModel {
             return;
         }
 
-        gameSystemsRepository.addGameSystem(gameSystemName, description, new RepositoryCallback<GameSystem>() {
-            @Override
-            public void onComplete(Result<GameSystem> result) {
-                if (result instanceof  Result.Success) {
-                    gameSystems.getValue().add(((Result.Success<GameSystem>) result).data);
-                    gameSystems.setValue(gameSystems.getValue());
-                    //gameSystems.setValue(((Result.Success<List<GameSystem>>) result).data);
-                    Log.e("ADD GAME SYSTEM", "successfully add gs");
-                    onGameCreationText("Successfully add game system");
-                } else if (result instanceof Result.Error) {
-                    String err = ((Result.Error<GameSystem>) result).throwable.getMessage();
-                    Log.e("CAN NOT ADD GS", err);
-                    onGameCreationText("Can not create game system, error: " + err);
-                }
+        gameSystemsRepository.addGameSystem(gameSystemName, description, result -> {
+            if (result instanceof  Result.Success) {
+                gameSystems.getValue().add(((Result.Success<GameSystem>) result).data);
+                gameSystems.setValue(gameSystems.getValue());
+                //gameSystems.setValue(((Result.Success<List<GameSystem>>) result).data);
+                Log.e("ADD GAME SYSTEM", "successfully add gs");
+                onGameCreationText("Successfully add game system");
+            } else if (result instanceof Result.Error) {
+                String err = ((Result.Error<GameSystem>) result).throwable.getMessage();
+                Log.e("CAN NOT ADD GS", err);
+                onGameCreationText("Can not create game system, error: " + err);
             }
         });
     }

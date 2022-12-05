@@ -7,12 +7,14 @@ import android.content.res.loader.ResourcesProvider;
 import android.util.Log;
 
 import com.nsu.rpgstats.RpgstatsApplication;
+import com.nsu.rpgstats.entities.Session;
 import com.nsu.rpgstats.network.dto.LoginRequest;
 import com.nsu.rpgstats.network.dto.LoginResponse;
 import com.nsu.rpgstats.network.dto.MessageResponse;
 import com.nsu.rpgstats.network.dto.SignupRequest;
 import com.nsu.rpgstats.network.services.AuthService;
 import com.nsu.rpgstats.network.services.GamesystemsService;
+import com.nsu.rpgstats.network.services.SessionService;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -33,6 +35,7 @@ public class RestClient {
 
     private final GamesystemsService gamesystemsService;
     private final AuthService authService;
+    private final SessionService sessionService;
     private final AuthInterceptor authInterceptor;
 
     public static RestClient getInstance(String serverAddress) {
@@ -57,6 +60,7 @@ public class RestClient {
                 .build();
         gamesystemsService = retrofit.create(GamesystemsService.class);
         authService = retrofit.create(AuthService.class);
+        sessionService = retrofit.create(SessionService.class);
 
         // todo: This setup exsists only while not realized login functionality
         testSetupAuth();
@@ -110,4 +114,7 @@ public class RestClient {
                 .build();
     }
 
+    public SessionService getSessionService() {
+        return sessionService;
+    }
 }

@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:layout_marginLeft="@dimen/activity_margin">
+    android:layout_marginLeft="@dimen/activity_margin"
+    android:id="@+id/user">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -19,12 +20,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="\@user_name"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="master" />
+            android:text="master"
+        android:textColor="@color/white"/>
+
     </LinearLayout>
 
 
