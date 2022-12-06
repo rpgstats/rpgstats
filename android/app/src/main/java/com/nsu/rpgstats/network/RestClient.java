@@ -61,51 +61,6 @@ public class RestClient {
         gamesystemsService = retrofit.create(GamesystemsService.class);
         authService = retrofit.create(AuthService.class);
         sessionService = retrofit.create(SessionService.class);
-
-        // todo: This setup exsists only while not realized login functionality
-        testSetupAuth();
-
-    }
-
-    private void testSetupAuth() {
-        authService.signup(
-                        new SignupRequest("test", "test", "test"))
-                .enqueue(new Callback<MessageResponse>() {
-                    @Override
-                    public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
-                        if (response.code() != 200) {
-                            Log.e(TAG, "Can not signup!!!:" + response.code() + " " + call.request().toString());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<MessageResponse> call, Throwable t) {
-                        Log.e(TAG, "Can not signup!!!", t);
-                    }
-                });
-
-
-        authService.login(
-                        new LoginRequest("test", "test"))
-                .enqueue(new Callback<LoginResponse>() {
-                    @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        if (response.code() != 200) {
-                            Log.e(TAG, "Can not login!!!:" + response.code() + " " + response.body());
-                        } else {
-                            assert response.body() != null;
-                            Log.e(TAG, "Set token to " + response.body().getAuthToken());
-                            authInterceptor.setToken(response.body().getAuthToken());
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
-
-                    }
-                });
-
     }
 
     private OkHttpClient createOkHttpClient() {
@@ -116,5 +71,9 @@ public class RestClient {
 
     public SessionService getSessionService() {
         return sessionService;
+    }
+
+    public AuthService getAuthService() {
+        return authService;
     }
 }

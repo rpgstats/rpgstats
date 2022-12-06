@@ -7,7 +7,7 @@ public class EmailValidator extends UserInputValidator{
 
     @Override
     public boolean isValid(CharSequence text) {
-        String regex = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$]";
+        String regex = "^(.+)@(\\S+)$";
         return text.length() > 0 && text.toString().matches(regex);
     }
 }

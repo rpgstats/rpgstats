@@ -22,6 +22,7 @@ import com.nsu.rpgstats.data.sessions.PlugSessionsRepository;
 import com.nsu.rpgstats.data.sessions.RestSessionRepository;
 import com.nsu.rpgstats.data.sessions.SessionsRepository;
 import com.nsu.rpgstats.data.user.PlugUserRepository;
+import com.nsu.rpgstats.data.user.RestUserRepository;
 import com.nsu.rpgstats.data.user.UserRepository;
 import com.nsu.rpgstats.entities.GameSystem;
 import com.nsu.rpgstats.data.items.PlugItemRepository;
@@ -48,7 +49,7 @@ public class AppContainer {
     public ParameterRepository parameterRepository = new PlugParameterRepository();
     public PropertyRepository propertyRepository = new PlugPropertyRepository();
     public ConstraintRepository constraintRepository = new PlugConstraintRepository();
-    public UserRepository userRepository = new PlugUserRepository();
+    public UserRepository userRepository;
     public SessionsRepository sessionsRepository = new PlugSessionsRepository();
 
     private final Context context;
@@ -61,7 +62,7 @@ public class AppContainer {
         Log.e(TAG, context.toString());
         RestClient restClient = RestClient.getInstance(getServerAddrFromConfig());
         gameSystemsRepository = new RestGameSystemsRepository(restClient.getRpgstatsService());
-        gameSystemsRepository = new PlugGameSystemsRepository(); // TODO ubrat' i decommit
+        userRepository = new RestUserRepository(restClient.getAuthService());
     }
 
     private String getServerAddrFromConfig() {

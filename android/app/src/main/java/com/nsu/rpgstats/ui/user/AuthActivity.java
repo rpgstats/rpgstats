@@ -18,6 +18,7 @@ public class AuthActivity extends Activity implements AuthListener {
     public void onSuccessAuth() {
         Intent i = new Intent(this, SessionsActivity.class);
         startActivity(i);
+        finish();
     }
 
     @Override
