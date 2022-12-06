@@ -65,7 +65,7 @@ there will reside some screens
 
 Start db and backend with docker compose:
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 
 ### Frontend
@@ -92,4 +92,5 @@ server_address=192.168.31.144
 5. To run it on your phone, you need to build APK. Go to `Build -> Build Bundle(s)/ APK(s) -> Build APK(s)`. It should put .apk file in `android/app/build/outputs/apk/debug/app-debug.apk`. Copy it to your phone, isntall and run.
 
 6. Play with app
+
 
