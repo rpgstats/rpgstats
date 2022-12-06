@@ -12,17 +12,18 @@ import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
-import com.nsu.rpgstats.data.sessions.PlugSessionsRepository;
-import com.nsu.rpgstats.data.sessions.SessionsRepository;
 import com.nsu.rpgstats.databinding.ActivitySessionsBinding;
+import com.nsu.rpgstats.entities.GameSystem;
 import com.nsu.rpgstats.entities.Session;
+import com.nsu.rpgstats.ui.gamesystems.GameSystemsActivity;
+import com.nsu.rpgstats.ui.profile.ChangeModeListener;
 import com.nsu.rpgstats.ui.profile.ProfileSettingsPopup;
 import com.nsu.rpgstats.viewmodel.sessions.SessionsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SessionsActivity extends AppCompatActivity {
+public class SessionsActivity extends AppCompatActivity implements ChangeModeListener {
     private static final String TAG = SessionsActivity.class.getSimpleName();
     private ActivitySessionsBinding binding;
 
@@ -41,7 +42,7 @@ public class SessionsActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.appBar.toolbar);
         binding.appBar.getRoot().setOnClickListener((v) -> {
-            new ProfileSettingsPopup().show(v);
+            new ProfileSettingsPopup(this).show(v);
         });
 
         viewModel = new ViewModelProvider(this).get(SessionsViewModel.class);
@@ -95,4 +96,10 @@ public class SessionsActivity extends AppCompatActivity {
         return sessionItems;
     }
 
+    @Override
+    public void onChangeMode() {
+        Intent i = new Intent(this, GameSystemsActivity.class);
+        startActivity(i);
+        finish();
+    }
 }

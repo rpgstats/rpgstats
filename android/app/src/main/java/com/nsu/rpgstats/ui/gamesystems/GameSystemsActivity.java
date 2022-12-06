@@ -18,12 +18,16 @@ import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivityGameSystemsBinding;
 import com.nsu.rpgstats.entities.GameSystem;
 import com.nsu.rpgstats.ui.AddGameSystemActivity;
+import com.nsu.rpgstats.ui.profile.ChangeModeListener;
+import com.nsu.rpgstats.ui.profile.ProfileSettingsPopup;
+import com.nsu.rpgstats.ui.sessions.SessionsActivity;
 import com.nsu.rpgstats.viewmodel.GameSystemsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameSystemsActivity extends AppCompatActivity implements GameSystemsAdapter.OnGameSystemClickListener {
+public class GameSystemsActivity extends AppCompatActivity implements GameSystemsAdapter.OnGameSystemClickListener,
+        ChangeModeListener {
 
     private static final String TAG = GameSystemsActivity.class.getSimpleName();
     private ActivityGameSystemsBinding binding;
@@ -39,6 +43,10 @@ public class GameSystemsActivity extends AppCompatActivity implements GameSystem
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBar.toolbar);
+        binding.appBar.getRoot().setOnClickListener((v) -> {
+            new ProfileSettingsPopup(this).show(v);
+        });
+
 
         mGameSystems = new ArrayList<>();
         GameSystemsViewModel gameSystemsViewModel = new ViewModelProvider(this).get(GameSystemsViewModel.class);
@@ -99,5 +107,12 @@ public class GameSystemsActivity extends AppCompatActivity implements GameSystem
         ((RpgstatsApplication)getApplication()).appContainer.currentGameSystem = mGameSystems.get(position);
         Intent intent = new Intent(this, GameSystemInfoActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onChangeMode() {
+        Intent i = new Intent(this, SessionsActivity.class);
+        startActivity(i);
+        finish();
     }
 }

@@ -66,6 +66,13 @@
                     android:text="@string/check_status" />
 
                 <Button
+                    android:id="@+id/change_mode_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_mode" />
+
+
+                <Button
                     android:id="@+id/back_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

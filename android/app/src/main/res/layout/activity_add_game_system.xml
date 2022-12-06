@@ -46,11 +46,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/enter_name_hint" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/game_system_header" />
-
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

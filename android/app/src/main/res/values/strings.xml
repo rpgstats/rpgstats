@@ -160,5 +160,8 @@
     <string name="change_login">Change Login</string>
     <string name="back_with_arrow"><![CDATA[<- back]]></string>
     <string name="profile_settings">Profile settings</string>
+    <string name="player">Player</string>
+    <string name="master">Master</string>
+    <string name="change_mode">Change mode</string>
 
 </resources>

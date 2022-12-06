@@ -3,13 +3,19 @@ package com.nsu.rpgstats.ui.profile;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.nsu.rpgstats.R;
 
 public class ProfileSettingsPopup {
+
+    private ChangeModeListener changeModeListener;
+
+    public ProfileSettingsPopup(ChangeModeListener changeModeListener) {
+        this.changeModeListener = changeModeListener;
+    }
+
     public void show(final View view) {
         //Create a View object yourself through inflater
         LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
@@ -28,6 +34,7 @@ public class ProfileSettingsPopup {
         {
             popupWindow.dismiss();
         });
+        popupView.findViewById(R.id.change_mode_button).setOnClickListener(v-> changeModeListener.onChangeMode());
 
         //Handler for clicking on the inactive zone of the window
         popupView.setOnTouchListener((v, event) -> {
@@ -36,4 +43,9 @@ public class ProfileSettingsPopup {
         });
 
     }
+
+    private void setup() {
+
+    }
+
 }
