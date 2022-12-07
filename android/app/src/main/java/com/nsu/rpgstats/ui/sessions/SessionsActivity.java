@@ -15,6 +15,7 @@ import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivitySessionsBinding;
 import com.nsu.rpgstats.entities.GameSystem;
 import com.nsu.rpgstats.entities.Session;
+import com.nsu.rpgstats.ui.characters.CharactersMainMenuActivity;
 import com.nsu.rpgstats.ui.gamesystems.GameSystemsActivity;
 import com.nsu.rpgstats.ui.profile.ChangeModeListener;
 import com.nsu.rpgstats.ui.profile.ProfileSettingsPopup;
@@ -43,6 +44,12 @@ public class SessionsActivity extends AppCompatActivity implements ChangeModeLis
         setSupportActionBar(binding.appBar.toolbar);
         binding.appBar.getRoot().setOnClickListener((v) -> {
             new ProfileSettingsPopup(this).show(v);
+        });
+
+        binding.switchButton.setOnClickListener(v -> {
+            Intent i = new Intent(this, CharactersMainMenuActivity.class);
+            startActivity(i);
+            finish();
         });
 
         viewModel = new ViewModelProvider(this).get(SessionsViewModel.class);

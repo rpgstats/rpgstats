@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.ActivityCharactersMainMenuBinding;
 import com.nsu.rpgstats.ui.characters.creation.file.FileCreationViewModel;
 import com.nsu.rpgstats.ui.characters.creation.new_creation.NewCreationViewModel;
+import com.nsu.rpgstats.ui.sessions.SessionsActivity;
 
 import java.io.FileNotFoundException;
 
@@ -31,6 +33,9 @@ public class CharactersMainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCharactersMainMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        setupSwitchToSessions();
+
         mWindowViewModel = new ViewModelProvider(this).get(WindowViewModel.class);
         mWindowViewModel.getIsShow().observe(this, isShow -> {
             binding.windowArea.setVisibility(isShow ? View.VISIBLE : View.GONE);
@@ -90,6 +95,14 @@ public class CharactersMainMenuActivity extends AppCompatActivity {
                         new ViewModelProvider(this).get(NewCreationViewModel.class).setPathBackground(chosenImageUri);
                     }
                 });
+    }
+
+    private void setupSwitchToSessions() {
+        binding.switchButton.setOnClickListener(v -> {
+            Intent i = new Intent(this, SessionsActivity.class);
+            startActivity(i);
+            finish();
+        });
     }
 
 }
