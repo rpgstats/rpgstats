@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Tag(name = "Game-System User Endpoints")
@@ -55,6 +56,13 @@ public class GameSystemsUserController {
   @Autowired
   public void setAuthService(AuthService authService) {
     this.authService = authService;
+  }
+
+  @GetMapping
+  @Operation(summary = "Get own game systems")
+  @ApiResponse(responseCode = "200")
+  public List<GameSystemDto> getGameSystems(@Parameter(hidden = true) @AuthenticationPrincipal Jwt jwt) {
+    return gameSystemService.getSystemsByOwnerId(authService.getIdFromJwt(jwt));
   }
 
   @PostMapping()
