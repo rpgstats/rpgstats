@@ -76,4 +76,8 @@ public class RestClient {
     public AuthService getAuthService() {
         return authService;
     }
+
+    public void setToken(String token) {
+        authInterceptor.setToken(token);
+    }
 }

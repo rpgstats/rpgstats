@@ -25,7 +25,7 @@ public class SignUpActivity extends AuthActivity {
         setContentView(binding.getRoot());
 
         UserRepository userRepository = ((RpgstatsApplication)getApplication()).appContainer.userRepository;
-        signUpModelView = new SignUpModelView(userRepository, this);
+        signUpModelView = new SignUpModelView(getApplication(), userRepository, this);
 
         EditText loginEdit = binding.signupLoginEdit;
         EditText passwordEdit = binding.signupPasswordEdit;

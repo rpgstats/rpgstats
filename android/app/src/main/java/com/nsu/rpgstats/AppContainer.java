@@ -8,7 +8,6 @@ import androidx.activity.result.ActivityResultLauncher;
 
 import com.nsu.rpgstats.data.constraints.ConstraintRepository;
 import com.nsu.rpgstats.data.gamesystems.GameSystemsRepository;
-import com.nsu.rpgstats.data.gamesystems.PlugGameSystemsRepository;
 import com.nsu.rpgstats.data.items.ItemRepository;
 import com.nsu.rpgstats.data.modifiers.ModifierRepository;
 import com.nsu.rpgstats.data.parameters.ParameterRepository;
@@ -19,9 +18,7 @@ import com.nsu.rpgstats.data.properties.PlugPropertyRepository;
 import com.nsu.rpgstats.data.properties.PropertyRepository;
 import com.nsu.rpgstats.data.gamesystems.RestGameSystemsRepository;
 import com.nsu.rpgstats.data.sessions.PlugSessionsRepository;
-import com.nsu.rpgstats.data.sessions.RestSessionRepository;
 import com.nsu.rpgstats.data.sessions.SessionsRepository;
-import com.nsu.rpgstats.data.user.PlugUserRepository;
 import com.nsu.rpgstats.data.user.RestUserRepository;
 import com.nsu.rpgstats.data.user.UserRepository;
 import com.nsu.rpgstats.entities.GameSystem;
@@ -29,6 +26,7 @@ import com.nsu.rpgstats.data.items.PlugItemRepository;
 import com.nsu.rpgstats.data.tags.PlugTagRepository;
 import com.nsu.rpgstats.data.tags.TagRepository;
 import com.nsu.rpgstats.entities.Session;
+import com.nsu.rpgstats.entities.user.User;
 import com.nsu.rpgstats.network.RestClient;
 
 import java.io.IOException;
@@ -42,6 +40,7 @@ public class AppContainer {
 
     public GameSystem currentGameSystem = null;
     public Session currentSession = null;
+    public User currentUser = null;
 
     public ItemRepository itemRepository = new PlugItemRepository();
     public TagRepository tagRepository = new PlugTagRepository();
@@ -57,10 +56,12 @@ public class AppContainer {
 
     private static final String TAG = AppContainer.class.getSimpleName();
 
+    private final RestClient restClient;
+
     public AppContainer(Context context) {
         this.context = context;
         Log.e(TAG, context.toString());
-        RestClient restClient = RestClient.getInstance(getServerAddrFromConfig());
+        restClient = RestClient.getInstance(getServerAddrFromConfig());
         gameSystemsRepository = new RestGameSystemsRepository(restClient.getRpgstatsService());
         userRepository = new RestUserRepository(restClient.getAuthService());
     }
@@ -78,4 +79,7 @@ public class AppContainer {
         }
     }
 
+    public void setToken(String token) {
+        restClient.setToken(token);
+    }
 }

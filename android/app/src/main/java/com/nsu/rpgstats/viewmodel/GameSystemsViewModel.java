@@ -71,7 +71,8 @@ public class GameSystemsViewModel extends AndroidViewModel {
 
     private void loadGameSystems() {
         gameSystems.setValue(new ArrayList<>());
-        gameSystemsRepository.getGameSystems(2, result -> {
+        int ownerId = ((RpgstatsApplication)getApplication()).appContainer.currentUser.getId();
+        gameSystemsRepository.getGameSystems(ownerId, result -> {
             if (result instanceof  Result.Success) {
                 List<GameSystem> gs = ((Result.Success<List<GameSystem>>) result).data;
                 Log.d(TAG, "get game systems: " + Arrays.toString(gs.toArray()));

@@ -5,7 +5,7 @@ import android.util.Log;
 import com.nsu.rpgstats.data.RepositoryCallback;
 import com.nsu.rpgstats.data.Result;
 import com.nsu.rpgstats.data.gamesystems.RestGameSystemsRepository;
-import com.nsu.rpgstats.entities.user.AuthToken;
+import com.nsu.rpgstats.entities.user.AuthInfo;
 import com.nsu.rpgstats.entities.user.SignInUserInfo;
 import com.nsu.rpgstats.entities.user.SignUpUserInfo;
 import com.nsu.rpgstats.network.dto.LoginRequest;
@@ -27,14 +27,14 @@ public class RestUserRepository implements UserRepository {
     }
 
     @Override
-    public void signInUser(SignInUserInfo signInUserInfo, RepositoryCallback<AuthToken> callback) {
+    public void signInUser(SignInUserInfo signInUserInfo, RepositoryCallback<AuthInfo> callback) {
         service.login(new LoginRequest(signInUserInfo.getUsername(), signInUserInfo.getPassword()))
                 .enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         Log.d(TAG, "Response: " + response);
                         if (response.isSuccessful() && response.body() != null) {
-                            AuthToken authToken = new AuthToken(response.body().getAuthToken());
+                            AuthInfo authToken = new AuthInfo(response.body().getAuthToken(), response.body().getId());
                             callback.onComplete(new Result.Success<>(authToken));
                         } else {
                             callback.onComplete(new Result.Error<>(new Throwable("Wrong email or password")));

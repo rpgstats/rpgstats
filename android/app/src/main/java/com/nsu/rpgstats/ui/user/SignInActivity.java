@@ -23,7 +23,7 @@ public class SignInActivity extends AuthActivity{
         setContentView(binding.getRoot());
 
         UserRepository userRepository = ((RpgstatsApplication)getApplication()).appContainer.userRepository;
-        signInModelView = new SignInModelView(userRepository, this);
+        signInModelView = new SignInModelView(getApplication(), userRepository, this);
 
         EditText loginEdit = binding.signinLoginEditText;
         EditText passwordEdit = binding.signinPasswordEditText;
