@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.nsu.rpgstats.databinding.ActivitySessionInfoBinding;
 import com.nsu.rpgstats.entities.Session;
+import com.nsu.rpgstats.ui.profile.InvitePlayerPopup;
 import com.nsu.rpgstats.viewmodel.sessions.SessionInfoViewModel;
 
 import java.util.Locale;
@@ -42,9 +43,16 @@ public class SessionInfoActivity extends AppCompatActivity {
 //        setInfo();
         setCharacterListListener();
         setDeleteListener();
+        setInvitePlayerListener();
         //setSupportActionBar(binding.toolbar);
         viewModel.onActivityDidLoad();
 
+    }
+
+    private void setInvitePlayerListener() {
+        binding.sessionInfoInviteButton.setOnClickListener(v -> {
+            new InvitePlayerPopup().show(v);
+        });
     }
 
     private void setDeleteListener() {

@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.sessions.SessionInfoActivity">
 
-    <include android:id="@+id/app_bar" layout="@layout/toolbar_user_settings"/>
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/toolbar_user_settings" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -18,13 +20,36 @@
         tools:layout_editor_absoluteX="16dp">
 
 
-        <TextView
-            android:id="@+id/session_name_text"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/session_name"
-            android:textAlignment="center"
-            style="@style/Text.HeaderStyle"/>
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:id="@+id/session_name_text"
+                style="@style/Text.HeaderStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/session_name"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/session_info_invite_button"
+                android:layout_width="42dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:src="@drawable/invite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/session_name_text"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <RelativeLayout

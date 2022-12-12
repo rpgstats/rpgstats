@@ -163,5 +163,8 @@
     <string name="player">Player</string>
     <string name="master">Master</string>
     <string name="change_mode">Change mode</string>
+    <string name="invite_players">Invite Players</string>
+    <string name="link">Link</string>
+    <string name="copy">copy</string>
 
 </resources>
