@@ -13,6 +13,8 @@ import com.nsu.rpgstats.data.Result;
 import com.nsu.rpgstats.data.sessions.SessionsRepository;
 import com.nsu.rpgstats.entities.Session;
 
+import java.util.Objects;
+
 public class SessionInfoViewModel extends AndroidViewModel {
     private static final String TAG = SessionInfoViewModel.class.getSimpleName();
 
@@ -23,7 +25,7 @@ public class SessionInfoViewModel extends AndroidViewModel {
     public SessionInfoViewModel(@NonNull Application application) {
         super(application);
         session = new MutableLiveData<>();
-        repository = ((RpgstatsApplication)getApplication()).appContainer.sessionsRepository;
+        repository = ((RpgstatsApplication) getApplication()).appContainer.sessionsRepository;
     }
 
     public void onActivityDidLoad() {
@@ -51,5 +53,9 @@ public class SessionInfoViewModel extends AndroidViewModel {
                 }
             });
         }
+    }
+
+    public String getLinkForCurrentSession() {
+        return  "/sessions/" + Objects.requireNonNull(session.getValue()).getId().toString() + "/join";
     }
 }

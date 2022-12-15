@@ -2,6 +2,8 @@ package com.nsu.rpgstats;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -64,6 +66,8 @@ public class AppContainer {
         restClient = RestClient.getInstance(getServerAddrFromConfig());
         gameSystemsRepository = new RestGameSystemsRepository(restClient.getRpgstatsService());
         userRepository = new RestUserRepository(restClient.getAuthService());
+
+
     }
 
     private String getServerAddrFromConfig() {
@@ -71,13 +75,28 @@ public class AppContainer {
         InputStream rawResource = context.getResources().openRawResource(R.raw.config);
         try {
             props.load(rawResource);
-            Log.i(TAG, "Successfully set addr to " + props.getProperty("server_address"));
-            return props.getProperty("server_address");
+            String servAddr = props.getProperty("server_address");
+            Log.i(TAG, "Successfully set addr to " + servAddr);
+
+
+            // ad
+            addServerAddrToConfig(servAddr);
+
+            return servAddr;
         } catch (IOException e) {
             Log.e(TAG, "Can not get address from config file");
             return "";
         }
+
     }
+
+    private void addServerAddrToConfig(String servAddr) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getString(R.string.server_address_key), servAddr + ":8080");
+        editor.apply();
+    }
+
 
     public void setToken(String token) {
         restClient.setToken(token);

@@ -1,5 +1,6 @@
 package com.nsu.rpgstats.ui.user;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
