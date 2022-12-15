@@ -25,6 +25,6 @@ public interface SessionService {
     @DELETE("user/sessions/{sessionId}")
     Call<String> deleteSession(@Path("sessionId") int id);
 
-    @POST("/user/sessions")
+    @POST("user/sessions")
     Call<Session> addSession(@Body SessionRequest session);
 }

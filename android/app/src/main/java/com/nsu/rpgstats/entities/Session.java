@@ -11,6 +11,7 @@ public class Session {
     private int playersNumber;
     private int maximumPlayers;
     private String gameSystem;
+    private int gameSystemId;
     private List<SessionCharacter> characters;
 
     private String creationDate;
@@ -36,6 +37,15 @@ public class Session {
     public Session() {
 
     }
+
+    public Session(int i, String sessionName, String description, int maximumPlayers, int gameSystemId) {
+        id = i;
+        name = sessionName;
+        this.description = description;
+        this.maximumPlayers = maximumPlayers;
+        this.gameSystemId = gameSystemId;
+    }
+
 
     public String getName() {
         return name;
@@ -107,5 +117,13 @@ public class Session {
 
     public void setCharacters(List<SessionCharacter> characters) {
         this.characters = characters;
+    }
+
+    public int getGameSystemId() {
+        return gameSystemId;
+    }
+
+    public void setGameSystemId(int gameSystemId) {
+        this.gameSystemId = gameSystemId;
     }
 }

@@ -7,11 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.data.Result;
-import com.nsu.rpgstats.data.sessions.PlugSessionsRepository;
 import com.nsu.rpgstats.data.sessions.SessionsRepository;
 import com.nsu.rpgstats.entities.Session;
 
@@ -46,11 +44,14 @@ public class SessionsViewModel extends AndroidViewModel {
         loadSessions();
     }
 
-    private void loadSessions() {
+    public void loadSessions() {
         repository.getSessions((res) -> {
             if (res instanceof Result.Success) {
                 sessions.setValue(((Result.Success<List<Session>>) res).data);
+            } else if (res instanceof Result.Error){
+                Log.e(TAG, "Can not load sessions ", ((Result.Error<List<Session>>) res).throwable);
             }
         });
+
     }
 }

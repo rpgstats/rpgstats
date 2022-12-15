@@ -23,6 +23,7 @@ import com.nsu.rpgstats.viewmodel.sessions.SessionsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SessionsActivity extends AppCompatActivity implements ChangeModeListener {
     private static final String TAG = SessionsActivity.class.getSimpleName();
@@ -92,7 +93,7 @@ public class SessionsActivity extends AppCompatActivity implements ChangeModeLis
     @Override
     protected void onResume() {
         super.onResume();
-        sessionItemAdapter.set(sessionsToSessionItems(viewModel.getSessions().getValue()));
+        viewModel.loadSessions();
     }
 
     private ArrayList<SessionItem> sessionsToSessionItems(List<Session> sessions) {
