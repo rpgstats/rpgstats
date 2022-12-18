@@ -41,7 +41,11 @@ public class SlotParametersFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentSlotParametersBinding.inflate(inflater, container, false);
         mViewModel = new ViewModelProvider(requireActivity()).get(SlotViewModel.class);
-        tags = new ArrayList<>(mViewModel.getSlot().getValue().getTags());
+        mViewModel.getSlot().observe(getViewLifecycleOwner(), slot -> {
+            tags = new ArrayList<>(mViewModel.getSlot().getValue().getTags());
+            adapter.setBadgesList(tags);
+        });
+        tags = new ArrayList<>();
         adapter = new BadgeAdapter<>(tags, (pos)->{
             tags.remove(pos);
             adapter.setBadgesList(tags);

@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
+import com.nsu.rpgstats.data.Result;
 import com.nsu.rpgstats.entities.Character;
 import com.nsu.rpgstats.databinding.FragmentNewCreationBinding;
 import com.nsu.rpgstats.entities.GameSystem;
@@ -34,7 +35,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class NewCreationFragment extends Fragment {
 
@@ -43,6 +49,8 @@ public class NewCreationFragment extends Fragment {
     private SelectionViewModel mSelectionViewModel;
     private GameSystemsViewModel mGameSystemsModel;
     private Integer userId;
+    private List<GameSystem> gs = new ArrayList<>();
+    GameSystemsAdapter adapter;
 
     public static NewCreationFragment newInstance() {
         return new NewCreationFragment();
@@ -56,9 +64,28 @@ public class NewCreationFragment extends Fragment {
         mViewModel = new ViewModelProvider(requireActivity()).get(NewCreationViewModel.class);
         mViewModel.reInit();
         mSelectionViewModel = new ViewModelProvider(requireActivity()).get(SelectionViewModel.class);
-        mGameSystemsModel = new ViewModelProvider(requireActivity()).get(GameSystemsViewModel.class);
-        userId = 0; //getUserId;
-
+        userId = ((RpgstatsApplication)requireActivity().getApplication()).appContainer.currentUser.getId();
+        gs = new ViewModelProvider(requireActivity()).get(GameSystemsViewModel.class).getGameSystems().getValue();
+        new ViewModelProvider(requireActivity()).get(GameSystemsViewModel.class).getGameSystems().observe(getViewLifecycleOwner(), gameSystems -> {
+            gs = gameSystems;
+            adapter.setGameSystemsList(gameSystems);
+        });
+//        ((RpgstatsApplication)requireActivity().getApplication()).appContainer.gameSystemsRepository.getGameSystems(userId, result -> {
+//            if (result instanceof  Result.Success) {
+//                List<GameSystem> gs = ((Result.Success<List<GameSystem>>) result).data;
+//                Log.d("GAME SYSTEMS", "get game systems: " + Arrays.toString(gs.toArray()));
+//                this.gs = gs;
+//                adapter.setGameSystemsList(this.gs);
+//            } else if (result instanceof Result.Error) {
+//                Log.e("GAME SYSTEMS", "can not load game systems, reason: " +
+//                        ((Result.Error<List<GameSystem>>) result).throwable.getMessage());
+//            }
+//        });
+        if (gs.size() == 0) {
+            gs.add(new GameSystem(-1, "no game system",
+                    new SimpleDateFormat("dd.MM.yyyy", Locale.US).format(new Date()),
+                    "username" + userId, "description", -1, -1, -1, -1));
+        }
         mViewModel.getImageFilename().observe(getViewLifecycleOwner(), filename -> {
             binding.imageName.setText(filename != null ? filename: "");
         });
@@ -139,9 +166,8 @@ public class NewCreationFragment extends Fragment {
             binding.GSList.setVisibility(View.GONE);
         });
 
-        GameSystemsViewModel viewModel = new ViewModelProvider(requireActivity()).get(GameSystemsViewModel.class);
-        GameSystemsAdapter adapter = new GameSystemsAdapter(viewModel.getGameSystems().getValue(), position -> {
-            mViewModel.setGameSystem(viewModel.getGameSystems().getValue().get(position));
+        adapter = new GameSystemsAdapter(gs, position -> {
+            mViewModel.setGameSystem(gs.get(position));
             binding.GSList.setVisibility(View.GONE);
         });
         binding.GSRecycerView.setAdapter(adapter);

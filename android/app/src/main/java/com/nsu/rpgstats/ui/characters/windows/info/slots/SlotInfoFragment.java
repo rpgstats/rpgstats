@@ -55,7 +55,7 @@ public class SlotInfoFragment extends Fragment {
 
         mViewModel.getSlot().observe(getViewLifecycleOwner(), slot1 -> {
             this.slot = slot1;
-            adapter.setBadgesList(slot.getTags());
+            adapter.setBadgesList(slot1.getTags());
         });
 
         adapter = new BadgeAdapter<>(slot.getTags(), (pos)-> {}, false, AppCompatResources.getDrawable(requireActivity(), R.drawable.rounded_card));
