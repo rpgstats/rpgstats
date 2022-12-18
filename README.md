@@ -58,3 +58,39 @@ There is a chance, that this thingy can help you!
 <details>
 there will reside some screens
 </details>
+
+# Run app
+
+### Backend
+
+Start db and backend with docker compose:
+```bash
+docker-compose up --build
+```
+
+### Frontend
+
+1. Open `android` folder in Android-Studio
+
+2. Get your ip of your pc: 
+* On unix:
+```bash
+ip a
+```
+* On windows:
+```cmd
+ipconfig
+```
+
+3. In `android/app/src/main/res/raw/config.properties` set `server_address` to your ip:
+```properties
+server_address=192.168.31.144
+```
+
+4. Run project in Android-Studio
+
+5. To run it on your phone, you need to build APK. Go to `Build -> Build Bundle(s)/ APK(s) -> Build APK(s)`. It should put .apk file in `android/app/build/outputs/apk/debug/app-debug.apk`. Copy it to your phone, isntall and run.
+
+6. Play with app
+
+
