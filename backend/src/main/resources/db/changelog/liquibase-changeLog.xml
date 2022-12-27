@@ -5,4 +5,5 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <include file="migrations/create.sql" relativeToChangelogFile="true"/>
     <include file="migrations/example.sql" relativeToChangelogFile="true"/>
+    <include file="migrations/delete_ling.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
