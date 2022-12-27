@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_messages"
+    app:startDestination="@id/emptyFragment">
+
+    <fragment
+        android:id="@+id/emptyFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.EmptyFragment"
+        android:label="fragment_empty"
+        tools:layout="@layout/fragment_empty" >
+        <action
+            android:id="@+id/action_emptyFragment_to_characterVersionFragment"
+            app:destination="@id/characterVersionFragment" />
+        <action
+            android:id="@+id/action_emptyFragment_to_addCharacterFragment"
+            app:destination="@id/addCharacterFragment" />
+        <action
+            android:id="@+id/action_emptyFragment_to_errorNoCharacterInSystemFragment"
+            app:destination="@id/errorNoCharacterInSystemFragment" />
+        <action
+            android:id="@+id/action_emptyFragment_to_slotErrorFragment"
+            app:destination="@id/slotErrorFragment" />
+        <action
+            android:id="@+id/action_emptyFragment_to_slotInfoFragment2"
+            app:destination="@id/slotInfoFragment" />
+        <action
+            android:id="@+id/action_emptyFragment_to_deleteCharacterWarningFragment"
+            app:destination="@id/deleteCharacterWarningFragment" />
+        <action
+            android:id="@+id/action_emptyFragment_to_exportCharacterFragment"
+            app:destination="@id/exportCharacterFragment" />
+        <action
+            android:id="@+id/action_emptyFragment_to_unsaveWarningFragment"
+            app:destination="@id/unsaveWarningFragment" />
+        <action
+            android:id="@+id/action_emptyFragment_to_versionDescriptionFragment"
+            app:destination="@id/versionDescriptionFragment" />
+        <action
+            android:id="@+id/action_emptyFragment_to_slotsWarningUnsaveFragment"
+            app:destination="@id/slotsWarningUnsaveFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterVersionFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.creation.copy.CharacterVersionFragment"
+        android:label="fragment_character_version"
+        tools:layout="@layout/fragment_character_version" />
+    <fragment
+        android:id="@+id/addCharacterFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.creation.AddCharacterFragment"
+        android:label="fragment_add_character"
+        tools:layout="@layout/fragment_add_character" />
+    <fragment
+        android:id="@+id/errorNoCharacterInSystemFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.creation.ErrorNoCharacterInSystemFragment"
+        android:label="fragment_error_no_character_in_system"
+        tools:layout="@layout/fragment_error_no_character_in_system" />
+    <fragment
+        android:id="@+id/slotErrorFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.info.slots.SlotErrorFragment"
+        android:label="fragment_slot_error"
+        tools:layout="@layout/fragment_slot_error" />
+    <fragment
+        android:id="@+id/slotInfoFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.info.slots.SlotInfoFragment"
+        android:label="fragment_slot_info"
+        tools:layout="@layout/fragment_slot_info" >
+        <action
+            android:id="@+id/action_slotInfoFragment_to_slotParametersFragment"
+            app:destination="@id/slotParametersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/slotParametersFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.info.slots.SlotParametersFragment"
+        android:label="fragment_slot_parameters"
+        tools:layout="@layout/fragment_slot_parameters" />
+    <fragment
+        android:id="@+id/deleteCharacterWarningFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.info.DeleteCharacterWarningFragment"
+        android:label="fragment_delete_character_warning"
+        tools:layout="@layout/fragment_delete_character_warning" />
+    <fragment
+        android:id="@+id/exportCharacterFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.info.ExportCharacterFragment"
+        android:label="fragment_export_character"
+        tools:layout="@layout/fragment_export_character" />
+    <fragment
+        android:id="@+id/unsaveWarningFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.info.UnsaveWarningFragment"
+        android:label="fragment_unsave_warning"
+        tools:layout="@layout/fragment_unsave_warning" />
+    <fragment
+        android:id="@+id/versionDescriptionFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.info.VersionDescriptionFragment"
+        android:label="fragment_version_description"
+        tools:layout="@layout/fragment_version_description" />
+    <fragment
+        android:id="@+id/slotsWarningUnsaveFragment"
+        android:name="com.nsu.rpgstats.ui.characters.windows.info.slots.SlotsWarningUnsaveFragment"
+        android:label="fragment_slots_warning_unsave"
+        tools:layout="@layout/fragment_slots_warning_unsave" />
+</navigation>

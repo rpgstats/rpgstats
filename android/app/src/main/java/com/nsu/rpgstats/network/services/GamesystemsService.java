@@ -11,8 +11,8 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface GamesystemsService {
-    @GET("game-systems")
-    Call<List<GameSystem>> getGameSystems(@Query("ownerId") int ownerId);
+    @GET("user/game-systems")
+    Call<List<GameSystem>> getGameSystems();
 
     @GET("user/game-systems/{id}")
     Call<GameSystem> getGameSystem(@Path("id") int id);

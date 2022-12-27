@@ -1,5 +1,6 @@
 <resources>
     <dimen name="activity_margin">16dp</dimen>
+    <dimen name="welcome_activity_white_card_margin">32dp</dimen>
     <dimen name="item_vertical_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="header_text_size">32sp</dimen>
@@ -13,5 +14,6 @@
     <dimen name="button_text_size">18sp</dimen>
     <dimen name="details_list_height">150dp</dimen>
     <dimen name="big_list_height">400dp</dimen>
+    <dimen name="dim_between_edittext">10dp</dimen>
 
 </resources>

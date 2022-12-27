@@ -31,7 +31,7 @@ public class PlugGameSystemsRepository implements GameSystemsRepository{
     }
 
     @Override
-    public void getGameSystems(int ownerId, RepositoryCallback<List<GameSystem>> callback) {
+    public void getGameSystems(RepositoryCallback<List<GameSystem>> callback) {
         callback.onComplete(new Result.Success<>(new ArrayList<>(gameSystems.values())));
     }
 

@@ -7,12 +7,14 @@ import android.content.res.loader.ResourcesProvider;
 import android.util.Log;
 
 import com.nsu.rpgstats.RpgstatsApplication;
+import com.nsu.rpgstats.entities.Session;
 import com.nsu.rpgstats.network.dto.LoginRequest;
 import com.nsu.rpgstats.network.dto.LoginResponse;
 import com.nsu.rpgstats.network.dto.MessageResponse;
 import com.nsu.rpgstats.network.dto.SignupRequest;
 import com.nsu.rpgstats.network.services.AuthService;
 import com.nsu.rpgstats.network.services.GamesystemsService;
+import com.nsu.rpgstats.network.services.SessionService;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -33,6 +35,7 @@ public class RestClient {
 
     private final GamesystemsService gamesystemsService;
     private final AuthService authService;
+    private final SessionService sessionService;
     private final AuthInterceptor authInterceptor;
 
     public static RestClient getInstance(String serverAddress) {
@@ -57,51 +60,7 @@ public class RestClient {
                 .build();
         gamesystemsService = retrofit.create(GamesystemsService.class);
         authService = retrofit.create(AuthService.class);
-
-        // todo: This setup exsists only while not realized login functionality
-        testSetupAuth();
-
-    }
-
-    private void testSetupAuth() {
-        authService.signup(
-                        new SignupRequest("test", "test", "test"))
-                .enqueue(new Callback<MessageResponse>() {
-                    @Override
-                    public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
-                        if (response.code() != 200) {
-                            Log.e(TAG, "Can not signup!!!:" + response.code() + " " + call.request().toString());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<MessageResponse> call, Throwable t) {
-                        Log.e(TAG, "Can not signup!!!", t);
-                    }
-                });
-
-
-        authService.login(
-                        new LoginRequest("test", "test"))
-                .enqueue(new Callback<LoginResponse>() {
-                    @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        if (response.code() != 200) {
-                            Log.e(TAG, "Can not login!!!:" + response.code() + " " + response.body());
-                        } else {
-                            assert response.body() != null;
-                            Log.e(TAG, "Set token to " + response.body().getAuthToken());
-                            authInterceptor.setToken(response.body().getAuthToken());
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
-
-                    }
-                });
-
+        sessionService = retrofit.create(SessionService.class);
     }
 
     private OkHttpClient createOkHttpClient() {
@@ -110,4 +69,15 @@ public class RestClient {
                 .build();
     }
 
+    public SessionService getSessionService() {
+        return sessionService;
+    }
+
+    public AuthService getAuthService() {
+        return authService;
+    }
+
+    public void setToken(String token) {
+        authInterceptor.setToken(token);
+    }
 }

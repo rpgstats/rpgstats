@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface GameSystemsRepository {
 
-    void getGameSystems(int ownerId, RepositoryCallback<List<GameSystem>> callback);
+    void getGameSystems(RepositoryCallback<List<GameSystem>> callback);
 
     void getGameSystem(int id, RepositoryCallback<GameSystem> callback);
 
