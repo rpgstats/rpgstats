@@ -24,9 +24,9 @@ public class RestGameSystemsRepository implements GameSystemsRepository {
 
 
     @Override
-    public void getGameSystems(int ownerId,RepositoryCallback<List<GameSystem>> callback) {
+    public void getGameSystems(RepositoryCallback<List<GameSystem>> callback) {
 
-        service.getGameSystems(ownerId)
+        service.getGameSystems()
                 .enqueue(new Callback<List<GameSystem>>() {
                     @Override
                     public void onResponse(Call<List<GameSystem>> call, Response<List<GameSystem>> response) {

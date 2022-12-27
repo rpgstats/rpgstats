@@ -76,12 +76,6 @@ public class SessionsActivity extends AppCompatActivity implements ChangeModeLis
             sessionItemAdapter.set(sessionsToSessionItems(sessions));
         });
 
-//        FastAdapterDiffUtil.INSTANCE.calculateDiff(sessionItemAdapter, sessionsToSessionItems(sessions)).
-//                dispatchUpdatesTo(sessionsFastAdapter);
-
-        //sessions = new ArrayList<>();
-        //SessionsViewModel
-
         binding.sessionsTab.plusButton.setOnClickListener(view ->
         {
             Intent i = new Intent(this, AddSessionActivity.class);

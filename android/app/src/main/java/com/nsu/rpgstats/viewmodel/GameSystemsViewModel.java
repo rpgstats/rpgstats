@@ -30,6 +30,7 @@ public class GameSystemsViewModel extends AndroidViewModel {
         super(application);
         gameSystemsRepository = ((RpgstatsApplication)getApplication()).appContainer.gameSystemsRepository;
         creationGameResult = new MutableLiveData<>(new CreationGameResult(""));
+        getGameSystems();
     }
 
 
@@ -71,8 +72,7 @@ public class GameSystemsViewModel extends AndroidViewModel {
 
     private void loadGameSystems() {
         gameSystems.setValue(new ArrayList<>());
-        int ownerId = ((RpgstatsApplication)getApplication()).appContainer.currentUser.getId();
-        gameSystemsRepository.getGameSystems(ownerId, result -> {
+        gameSystemsRepository.getGameSystems(result -> {
             if (result instanceof  Result.Success) {
                 List<GameSystem> gs = ((Result.Success<List<GameSystem>>) result).data;
                 Log.d(TAG, "get game systems: " + Arrays.toString(gs.toArray()));
