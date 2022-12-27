@@ -9,6 +9,7 @@ import android.widget.SimpleAdapter;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.nsu.rpgstats.R;
 import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.data.parameters.ParameterRepository;
@@ -37,6 +38,8 @@ public class ParametersActivity extends Activity {
             Intent i = new Intent(this, ParameterManageActivity.class);
             i.putExtra("Mode", ManageFormMode.ADD.name());
             startActivity(i);
+            Snackbar.make(view, "Parameter created", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         });
     }
 
