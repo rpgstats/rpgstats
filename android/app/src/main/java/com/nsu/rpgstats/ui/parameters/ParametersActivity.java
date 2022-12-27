@@ -8,6 +8,11 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.nsu.rpgstats.R;
@@ -16,60 +21,76 @@ import com.nsu.rpgstats.data.parameters.ParameterRepository;
 import com.nsu.rpgstats.databinding.ActivityParametersBinding;
 import com.nsu.rpgstats.entities.Parameter;
 import com.nsu.rpgstats.ui.ManageFormMode;
+import com.nsu.rpgstats.viewmodel.parameters.ParameterManageViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ParametersActivity extends Activity {
+public class ParametersActivity extends AppCompatActivity {
     ActivityParametersBinding binding;
+    ParameterAdapter adapter;
+
+    ParameterManageViewModel model;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityParametersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        ParameterRepository parameterRepository = ((RpgstatsApplication) getApplication()).appContainer.parameterRepository;
+        model = new ViewModelProvider(this).get(ParameterManageViewModel.class);
+        subscribeToViewModel(model.getParams());
 
-        fillParamList(parameterRepository.getParameters(0));
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        binding.recycler.setLayoutManager(layoutManager);
+        setRecyclerView();
 
-        Button addParameter = findViewById(R.id.addParameterButton);
-        addParameter.setOnClickListener(view -> {
+        binding.addParameterButton.setOnClickListener(view -> {
             Intent i = new Intent(this, ParameterManageActivity.class);
             i.putExtra("Mode", ManageFormMode.ADD.name());
             startActivity(i);
-            Snackbar.make(view, "Parameter created", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
         });
     }
 
-    private void fillParamList(List<Parameter> params) {
-        ListView listView = findViewById(R.id.paramListView);
-        final ArrayList<HashMap<String, String>> paramNameDate = new ArrayList<>();
-        HashMap<String, String> map;
-        for (Parameter param : params) {
-            map = new HashMap<>();
-            map.put("Name", param.getName());
-            map.put("Created at", param.getCreatedAt().toString());
-            paramNameDate.add(map);
+    private void subscribeToViewModel(LiveData<List<Parameter>> liveData) {
+        liveData.observe(this, params -> {
+            adapter.setParams(params);
+        });
+    }
+
+    private void setRecyclerView() {
+        if(adapter == null){
+            adapter = new ParameterAdapter();
         }
-
-        SimpleAdapter adapter = new SimpleAdapter(this, paramNameDate,
-                android.R.layout.simple_list_item_2,
-                new String[]{"Name", "Created at"},
-                new int[]{android.R.id.text1, android.R.id.text2});
-
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener((parent, itemClicked, position, id) -> {
-            Intent i = new Intent(ParametersActivity.this, ParameterDetailsActivity.class);
-            Bundle b = new Bundle();
-            b.putString("name", params.get((int) id).getName());
-            b.putString("date", params.get((int) id).getCreatedAt().toString());
-            b.putInt("min", params.get((int) id).getMin());
-            b.putInt("max", params.get((int) id).getMax());
-            i.putExtras(b);
-            startActivity(i);
-        });
+        binding.recycler.setAdapter(adapter);
     }
+
+    /*
+     * кошмарный код на память
+     */
+
+//    private void fillParamList() {
+//        List<Parameter> params = model.getParams().getValue(); // replace
+//        final ArrayList<HashMap<String, String>> paramNameDate = new ArrayList<>();
+//        HashMap<String, String> map;
+//        for (Parameter param : params) {
+//            map = new HashMap<>();
+//            map.put("Name", param.getName());
+//            map.put("Created at", param.getCreatedAt().toString());
+//            paramNameDate.add(map);
+//        }
+//
+//        adapter = new SimpleAdapter(this, paramNameDate,
+//                android.R.layout.simple_list_item_2,
+//                new String[]{"Name", "Created at"},
+//                new int[]{android.R.id.text1, android.R.id.text2});
+//
+//        binding.paramListView.setAdapter(adapter);
+//
+//        binding.paramListView.setOnItemClickListener((parent, itemClicked, position, id) -> {
+//            Intent i = new Intent(ParametersActivity.this, ParameterDetailsActivity.class);
+//            i.putExtras(paramToBundle(params.get((int) id)));
+//            startActivity(i);
+//        });
+//    }
 }

@@ -36,32 +36,26 @@ public class ParameterDetailsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Bundle b = getIntent().getExtras();
+        putPlaceholdersFromBundle(b);
+        initSnaks();
 
-        TextView name = findViewById(R.id.paramName);
-        String nameIs = "Name: " + b.getString("name");
-        name.setText(nameIs);
+        registerResultLauncher();
 
-        TextView date = findViewById(R.id.createdAt);
-        String createdAtIs = "Created at " + b.getString("date");
-        date.setText(createdAtIs);
+        binding.paramEdit.setOnClickListener(view -> {
+            Intent i = new Intent(this, ParameterManageActivity.class);
+            i.putExtra("Mode", ManageFormMode.EDIT.name());
+            i.putExtras(b);
+            activityLauncher.launch(i);
+        });
 
-        TextView min = findViewById(R.id.minValue);
-        String minIs = "Minimum value: " + b.getInt("min");
-        min.setText(minIs);
 
-        TextView max = findViewById(R.id.maxValue);
-        String maxIs = "Maximum value: " + b.getInt("max");
-        max.setText(maxIs);
+        binding.paramDelete.setOnClickListener(view -> {
+            DialogFragment confirmation = new ConfirmationFragment();
+            confirmation.show(getSupportFragmentManager(), "Delete parameter confirmation");
+        });
+    }
 
-        Button edit = findViewById(R.id.paramEdit);
-
-        error_bar = Snackbar.make(binding.getRoot(), "Parameter manage: error", Snackbar.LENGTH_LONG)
-                .setAction("Action", null);
-        add_bar = Snackbar.make(binding.getRoot(), "Parameter manage: added", Snackbar.LENGTH_LONG)
-                .setAction("Action", null);
-        edit_bar = Snackbar.make(binding.getRoot(), "Parameter manage: edited", Snackbar.LENGTH_LONG)
-                .setAction("Action", null);
-
+    private void registerResultLauncher() {
         activityLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>(){
@@ -83,19 +77,25 @@ public class ParameterDetailsActivity extends AppCompatActivity {
                 }
         );
 
+    }
 
-        edit.setOnClickListener(view -> {
-            Intent i = new Intent(this, ParameterManageActivity.class);
-            i.putExtra("Mode", ManageFormMode.EDIT.name());
-            i.putExtras(b);
-            activityLauncher.launch(i);
-        });
+    void putPlaceholdersFromBundle(Bundle b){
+        String nameIs = "Name: " + b.getString("name");
+        binding.paramName.setText(nameIs);
+        String createdAtIs = "Created at " + b.getString("date");
+        binding.createdAt.setText(createdAtIs);
+        String minIs = "Minimum value: " + b.getInt("min");
+        binding.minValue.setText(minIs);
+        String maxIs = "Maximum value: " + b.getInt("max");
+        binding.maxValue.setText(maxIs);
+    }
 
-        Button delete = findViewById(R.id.paramDelete);
-
-        delete.setOnClickListener(view -> {
-            DialogFragment confirmation = new ConfirmationFragment();
-            confirmation.show(getSupportFragmentManager(), "Delete parameter confirmation");
-        });
+    void initSnaks(){
+        error_bar = Snackbar.make(binding.getRoot(), "Parameter manage: error", Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        add_bar = Snackbar.make(binding.getRoot(), "Parameter manage: added", Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        edit_bar = Snackbar.make(binding.getRoot(), "Parameter manage: edited", Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
     }
 }

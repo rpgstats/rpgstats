@@ -14,11 +14,15 @@
         android:text="@string/parameter_manage"
         android:textSize="@dimen/header_text_size" />
 
-    <ListView
-        android:id="@+id/paramListView"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="@dimen/big_list_height"
-        android:layout_gravity="center_vertical" />
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/recycler">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
         android:id="@+id/addParameterButton"

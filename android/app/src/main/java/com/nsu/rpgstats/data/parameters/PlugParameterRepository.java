@@ -1,5 +1,8 @@
 package com.nsu.rpgstats.data.parameters;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.nsu.rpgstats.entities.Parameter;
 
 import java.util.ArrayList;
@@ -8,7 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PlugParameterRepository implements ParameterRepository {
-    private HashMap<Integer, Parameter> parameters;
+    private HashMap<Integer, Parameter> parameters; // <system, param>
+    private MutableLiveData mutableLiveData = new MutableLiveData<>();
     private Integer currentId;
 
     public PlugParameterRepository() {
@@ -28,8 +32,9 @@ public class PlugParameterRepository implements ParameterRepository {
     }
 
     @Override
-    public List<Parameter> getParameters(int gameSystem) {
-        return new ArrayList<>(parameters.values());
+    public LiveData<List<Parameter>> getParameters(int gameSystem) {
+        mutableLiveData.postValue(new ArrayList<Parameter>(parameters.values()));
+        return mutableLiveData;
     }
 
     @Override
@@ -39,7 +44,7 @@ public class PlugParameterRepository implements ParameterRepository {
 
     @Override
     public int addParameter(int gameSystem, Parameter parameter) {
-        Parameter p = new Parameter(parameter.getId(), parameter.getName(), parameter.getCreatedAt(),
+        Parameter p = new Parameter(currentId, parameter.getName(), new Date(),
                 parameter.getMin(), parameter.getMax());
         parameters.put(currentId, p);
         return currentId++;
@@ -47,7 +52,7 @@ public class PlugParameterRepository implements ParameterRepository {
 
     @Override
     public void editParameter(int gameSystem, int id, Parameter parameter) {
-        Parameter p = new Parameter(parameter.getId(), parameter.getName(), parameter.getCreatedAt(),
+        Parameter p = new Parameter(id, parameter.getName(), parameter.getCreatedAt(),
                 parameter.getMin(), parameter.getMax());
         parameters.remove(id);
         parameters.put(id, p);

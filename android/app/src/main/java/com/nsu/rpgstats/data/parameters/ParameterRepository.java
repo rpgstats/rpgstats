@@ -1,11 +1,13 @@
 package com.nsu.rpgstats.data.parameters;
 
+import androidx.lifecycle.LiveData;
+
 import com.nsu.rpgstats.entities.Parameter;
 
 import java.util.List;
 
 public interface ParameterRepository {
-    List<Parameter> getParameters(int gameSystem);
+    LiveData<List<Parameter>> getParameters(int gameSystem);
 
     Parameter getParameter(int gameSystemId, int id);
 
