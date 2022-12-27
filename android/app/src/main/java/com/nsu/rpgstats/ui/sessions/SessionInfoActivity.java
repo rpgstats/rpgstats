@@ -95,7 +95,7 @@ public class SessionInfoActivity extends AppCompatActivity implements InvitePlay
         binding.sessionAuthorText.setText(session.getAuthor());
         binding.sessionDescriptionText.setText(session.getDescription());
         binding.sessionPlayersNumberText.setText(String.format(Locale.US, "%d", session.getPlayersNumber()));
-        binding.sessionMaxPlayersNumberText.setText(String.format(Locale.US, "%d", session.getMaximumPlayers()));
+        binding.sessionMaxPlayersNumberText.setText(String.format(Locale.US, "%d", session.getMaxNumberOfPlayers()));
         binding.sessionGameSystemText.setText(session.getGameSystem());
     }
 }

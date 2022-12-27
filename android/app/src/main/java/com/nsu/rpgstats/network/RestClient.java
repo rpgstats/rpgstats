@@ -1,25 +1,13 @@
 package com.nsu.rpgstats.network;
 
-import android.app.Application;
-import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.loader.ResourcesProvider;
 import android.util.Log;
 
-import com.nsu.rpgstats.RpgstatsApplication;
-import com.nsu.rpgstats.entities.Session;
-import com.nsu.rpgstats.network.dto.LoginRequest;
-import com.nsu.rpgstats.network.dto.LoginResponse;
-import com.nsu.rpgstats.network.dto.MessageResponse;
-import com.nsu.rpgstats.network.dto.SignupRequest;
 import com.nsu.rpgstats.network.services.AuthService;
 import com.nsu.rpgstats.network.services.GamesystemsService;
 import com.nsu.rpgstats.network.services.SessionService;
 
 import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -37,10 +25,11 @@ public class RestClient {
     private final AuthService authService;
     private final SessionService sessionService;
     private final AuthInterceptor authInterceptor;
+    private boolean loggingHttpEnabled;
 
-    public static RestClient getInstance(String serverAddress) {
+    public static RestClient getInstance(String serverAddress, boolean loggingHttpEnabled) {
         if (restClient == null) {
-            restClient = new RestClient(serverAddress);
+            restClient = new RestClient(serverAddress, loggingHttpEnabled);
         }
 
         return restClient;
@@ -50,7 +39,8 @@ public class RestClient {
         return gamesystemsService;
     }
 
-    private RestClient(String serverAddress) {
+    private RestClient(String serverAddress, boolean loggingHttpEnabled) {
+        this.loggingHttpEnabled = loggingHttpEnabled;
         authInterceptor = new AuthInterceptor();
         String BASE_URL = "http://" + serverAddress + ":8080/api/v1/";
         Retrofit retrofit = new Retrofit.Builder()
@@ -64,9 +54,14 @@ public class RestClient {
     }
 
     private OkHttpClient createOkHttpClient() {
-        return new OkHttpClient.Builder()
-                .addInterceptor(authInterceptor)
-                .build();
+        OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
+        httpBuilder.addInterceptor(authInterceptor);
+        if (loggingHttpEnabled) {
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            httpBuilder.addInterceptor(logging);
+        }
+        return httpBuilder.build();
     }
 
     public SessionService getSessionService() {

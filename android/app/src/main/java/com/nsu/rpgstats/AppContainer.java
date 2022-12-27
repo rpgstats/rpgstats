@@ -60,35 +60,21 @@ public class AppContainer {
     private static final String TAG = AppContainer.class.getSimpleName();
 
     private final RestClient restClient;
+    private final AppConfig appConfig;
 
     public AppContainer(Context context) {
         this.context = context;
         Log.e(TAG, context.toString());
-        restClient = RestClient.getInstance(getServerAddrFromConfig());
+
+        appConfig = new AppConfig(context);
+        appConfig.LoadConfig();
+        restClient = RestClient.getInstance(appConfig.getServerAddress(), appConfig.isLoggingHttpEnabled());
         gameSystemsRepository = new RestGameSystemsRepository(restClient.getRpgstatsService());
         userRepository = new RestUserRepository(restClient.getAuthService());
         sessionsRepository = new RestSessionRepository(restClient.getSessionService());
     }
 
-    private String getServerAddrFromConfig() {
-        Properties props = new Properties();
-        InputStream rawResource = context.getResources().openRawResource(R.raw.config);
-        try {
-            props.load(rawResource);
-            String servAddr = props.getProperty("server_address");
-            Log.i(TAG, "Successfully set addr to " + servAddr);
 
-
-            // ad
-            addServerAddrToConfig(servAddr);
-
-            return servAddr;
-        } catch (IOException e) {
-            Log.e(TAG, "Can not get address from config file");
-            return "";
-        }
-
-    }
 
     private void addServerAddrToConfig(String servAddr) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);

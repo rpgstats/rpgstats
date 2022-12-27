@@ -2,11 +2,11 @@ package com.nsu.rpgstats.network.dto;
 
 public class SessionRequest {
 
-    private String name;
-    private String description;
-    private int maxNumberOfPlayers;
-    private int systemId;
-    private boolean creatorAsPlayer;
+    private final String name;
+    private final String description;
+    private final int maxNumberOfPlayers;
+    private final int systemId;
+    private final boolean creatorAsPlayer;
 
     public SessionRequest(String name, String description, int maximumPlayers, int gameSystemId, boolean creatorAsPlayer) {
         this.name = name;

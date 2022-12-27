@@ -60,6 +60,7 @@
                 android:text="@string/game_system_header" />
 
             <Spinner
+                android:id="@+id/dropdown_gamesystems"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/choose_game_system_hint" />
