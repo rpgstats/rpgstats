@@ -119,13 +119,21 @@ public class SessionService {
   @Transactional
   public SessionDto createSession(User user, CreateSessionPostRequest createSessionPostRequest) {
     GameSystem gameSystem = gameSystemService.getSystemById(createSessionPostRequest.getSystemId());
-    Session session = modelMapper.map(createSessionPostRequest, Session.class);
+    Session session = new Session();
+    session.setName(createSessionPostRequest.getName());
+    session.setDescription(createSessionPostRequest.getDescription());
+    session.setMaxNumberOfPlayers(createSessionPostRequest.getMaxNumberOfPlayers());
+    session.setCreatorAsPlayer(createSessionPostRequest.getCreatorAsPlayer());
     session.setCreator(user);
     session.setCreatedAt(Instant.now());
     session.setGameSystem(gameSystem);
     sessionRepository.save(session);
     if (createSessionPostRequest.getCreatorAsPlayer()) {
       UsersSession usersSession = new UsersSession();
+      UsersSessionId usersSessionId = new UsersSessionId();
+      usersSessionId.setSessionId(session.getId());
+      usersSessionId.setUserId(user.getId());
+      usersSession.setId(usersSessionId);
       usersSession.setSession(session);
       usersSession.setUser(user);
       usersSessionRepository.save(usersSession);
