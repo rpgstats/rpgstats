@@ -1,15 +1,17 @@
 package com.nsu.rpgstats.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Session {
     private Integer id;
     private String name;
     private String author;
+    private int creatorId;
     private String description;
     private int playersNumber;
-    private int maximumPlayers;
+    private int maxNumberOfPlayers;
+    private boolean creatorAsPlayer;
+    private String createdAt;
     private String gameSystem;
     private int gameSystemId;
     private List<SessionCharacter> characters;
@@ -28,7 +30,7 @@ public class Session {
         this.author = author;
         this.description = description;
         this.playersNumber = playersNumber;
-        this.maximumPlayers = maximumPlayers;
+        this.maxNumberOfPlayers = maximumPlayers;
         this.gameSystem = gameSystem;
         this.characters = characters;
         this.creationDate = creationDate;
@@ -42,7 +44,7 @@ public class Session {
         id = i;
         name = sessionName;
         this.description = description;
-        this.maximumPlayers = maximumPlayers;
+        this.maxNumberOfPlayers = maximumPlayers;
         this.gameSystemId = gameSystemId;
     }
 
@@ -83,8 +85,8 @@ public class Session {
         return playersNumber;
     }
 
-    public int getMaximumPlayers() {
-        return maximumPlayers;
+    public int getMaxNumberOfPlayers() {
+        return maxNumberOfPlayers;
     }
 
     public String getGameSystem() {
@@ -107,8 +109,8 @@ public class Session {
         this.playersNumber = playersNumber;
     }
 
-    public void setMaximumPlayers(int maximumPlayers) {
-        this.maximumPlayers = maximumPlayers;
+    public void setMaxNumberOfPlayers(int maxNumberOfPlayers) {
+        this.maxNumberOfPlayers = maxNumberOfPlayers;
     }
 
     public void setGameSystem(String gameSystem) {

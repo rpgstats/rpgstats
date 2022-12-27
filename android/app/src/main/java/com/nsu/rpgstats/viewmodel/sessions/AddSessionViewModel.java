@@ -34,10 +34,10 @@ public class AddSessionViewModel extends AndroidViewModel {
         gameSystems = new MutableLiveData<>();
     }
 
-    public void onAddSessionButtonClick(String sessionName, String maximumPlayers) {
+    public void onAddSessionButtonClick(String sessionName, String maximumPlayers, int sessionId) {
         repository.addSession(sessionName,
                 Integer.parseInt(maximumPlayers),
-                0,
+                sessionId,
                 (res)-> {
 
                 });

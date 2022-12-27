@@ -44,7 +44,7 @@ public class PlugSessionsRepository implements SessionsRepository {
         Session s = new Session();
         s.setId(i);
         s.setName(sessionName);
-        s.setMaximumPlayers(maximumPlayers);
+        s.setMaxNumberOfPlayers(maximumPlayers);
         sessions.add(s);
         callback.onComplete(new Result.Success<>(s));
     }
