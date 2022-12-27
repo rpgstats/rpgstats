@@ -3,10 +3,15 @@ package com.nsu.rpgstats.ui.parameters;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -30,8 +35,15 @@ import java.util.List;
 public class ParametersActivity extends AppCompatActivity {
     ActivityParametersBinding binding;
     ParameterAdapter adapter;
+    private ActivityResultLauncher<Intent> activityLauncher;
+
 
     ParameterManageViewModel model;
+
+    private Snackbar error_bar;
+    private Snackbar edit_bar;
+    private Snackbar add_bar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +57,13 @@ public class ParametersActivity extends AppCompatActivity {
         binding.recycler.setLayoutManager(layoutManager);
         setRecyclerView();
 
+        initSnaks();
+        registerResultLauncher();
+
         binding.addParameterButton.setOnClickListener(view -> {
             Intent i = new Intent(this, ParameterManageActivity.class);
             i.putExtra("Mode", ManageFormMode.ADD.name());
-            startActivity(i);
+            activityLauncher.launch(i);
         });
     }
 
@@ -58,11 +73,42 @@ public class ParametersActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("TAG", "onresume");
+        adapter.setParams(model.getParams().getValue());
+    }
+
     private void setRecyclerView() {
         if(adapter == null){
             adapter = new ParameterAdapter();
         }
         binding.recycler.setAdapter(adapter);
+    }
+
+    private void registerResultLauncher() {
+        activityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>(){
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        String res = result.getData().getStringExtra("RESULT_STRING");
+                        if(res == null){
+                            error_bar.show();
+                        }else {
+                            switch (res) {
+                                case "add_ok":
+                                    add_bar.show();
+                                case "edit_ok":
+                                    edit_bar.show();
+                            }
+                            Log.i("TAG", res);
+                        }
+                    }
+                }
+        );
+
     }
 
     /*
@@ -93,4 +139,13 @@ public class ParametersActivity extends AppCompatActivity {
 //            startActivity(i);
 //        });
 //    }
+
+    void initSnaks(){
+        error_bar = Snackbar.make(binding.getRoot(), "Parameter manage: error", Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        add_bar = Snackbar.make(binding.getRoot(), "Parameter manage: added", Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+        edit_bar = Snackbar.make(binding.getRoot(), "Parameter manage: edited", Snackbar.LENGTH_LONG)
+                .setAction("Action", null);
+    }
 }

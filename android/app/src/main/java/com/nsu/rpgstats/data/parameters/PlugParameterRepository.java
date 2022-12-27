@@ -1,5 +1,7 @@
 package com.nsu.rpgstats.data.parameters;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -12,7 +14,7 @@ import java.util.List;
 
 public class PlugParameterRepository implements ParameterRepository {
     private HashMap<Integer, Parameter> parameters; // <system, param>
-    private MutableLiveData mutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Parameter>> mutableLiveData = new MutableLiveData<>();
     private Integer currentId;
 
     public PlugParameterRepository() {
@@ -47,6 +49,7 @@ public class PlugParameterRepository implements ParameterRepository {
         Parameter p = new Parameter(currentId, parameter.getName(), new Date(),
                 parameter.getMin(), parameter.getMax());
         parameters.put(currentId, p);
+        mutableLiveData.postValue(new ArrayList<Parameter>(parameters.values()));
         return currentId++;
     }
 
@@ -56,5 +59,9 @@ public class PlugParameterRepository implements ParameterRepository {
                 parameter.getMin(), parameter.getMax());
         parameters.remove(id);
         parameters.put(id, p);
+        mutableLiveData.postValue(new ArrayList<Parameter>(parameters.values()));
+        Log.i("TAG", "params changed in repo");
     }
+
+
 }

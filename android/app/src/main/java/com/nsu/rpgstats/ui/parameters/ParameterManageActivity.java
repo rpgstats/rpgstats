@@ -40,8 +40,16 @@ public class ParameterManageActivity extends AppCompatActivity implements Manage
 
         binding.confirmAddParameterButton.setOnClickListener(view -> {
             model.setName(binding.newParamName.getText().toString());
-            model.setMin(Integer.valueOf(binding.newParamMin.getText().toString()));
-            model.setMax(Integer.valueOf(binding.newParamMax.getText().toString()));
+            if(binding.newParamMin.getText().toString().equals("")){
+                model.setMin(0);
+            }else {
+                model.setMin(Integer.valueOf(binding.newParamMin.getText().toString()));
+            }
+            if(binding.newParamMax.getText().toString().equals("")){
+                model.setMax(0);
+            }else {
+                model.setMax(Integer.valueOf(binding.newParamMax.getText().toString()));
+            }
 
             if (mode.equals(ManageFormMode.ADD.name())) {
                 model.onAddClick();

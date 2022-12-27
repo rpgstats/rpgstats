@@ -2,6 +2,7 @@ package com.nsu.rpgstats.ui.parameters;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -22,6 +23,7 @@ public class ParameterAdapter extends RecyclerView.Adapter<ParameterAdapter.Para
     List<Parameter> mParams = Collections.emptyList();
 
     void setParams(List<Parameter> params){
+        Log.i("TAG", "params changed locally");
         mParams = params;
         notifyDataSetChanged();
     }

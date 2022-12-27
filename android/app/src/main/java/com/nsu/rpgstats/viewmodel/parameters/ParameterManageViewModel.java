@@ -66,7 +66,7 @@ public class ParameterManageViewModel extends AndroidViewModel {
 
     public void setMin(Integer min) {this.min = min;}
 
-    public void setMax(Integer min) {this.min = min;}
+    public void setMax(Integer max) {this.max = max;}
 
     public void setId(Integer id) {this.id = id;}
 }
