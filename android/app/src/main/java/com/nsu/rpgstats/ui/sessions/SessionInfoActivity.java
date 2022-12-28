@@ -80,6 +80,7 @@ public class SessionInfoActivity extends AppCompatActivity implements InvitePlay
 
     private void deleteSession() {
         viewModel.onDeleteCurrentSession();
+        finish();
     }
 
     private void setCharacterListListener() {
