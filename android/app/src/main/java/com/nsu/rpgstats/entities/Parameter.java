@@ -52,6 +52,6 @@ public class Parameter implements Identifiable, Serializable {
 
     @Override
     public Integer getId() {
-        return null;
+        return id;
     }
 }

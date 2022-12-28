@@ -69,4 +69,9 @@ public class ParameterManageViewModel extends AndroidViewModel {
     public void setMax(Integer max) {this.max = max;}
 
     public void setId(Integer id) {this.id = id;}
+
+    public void onDeleteClick() {
+        Log.i("TAG", "deleting.." + id);
+        mParamRepository.removeParameter(0, id);
+    }
 }

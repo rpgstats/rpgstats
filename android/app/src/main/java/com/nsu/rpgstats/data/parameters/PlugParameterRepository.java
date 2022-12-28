@@ -1,5 +1,6 @@
 package com.nsu.rpgstats.data.parameters;
 
+import android.os.Build;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -63,5 +64,9 @@ public class PlugParameterRepository implements ParameterRepository {
         Log.i("TAG", "params changed in repo");
     }
 
+    public void removeParameter(int gameSystem, int id){
+        parameters.remove(id);
+        mutableLiveData.postValue(new ArrayList<Parameter>(parameters.values()));
+    }
 
 }

@@ -14,4 +14,6 @@ public interface ParameterRepository {
     int addParameter(int gameSystem, Parameter parameter);
 
     void editParameter(int gameSystem, int id, Parameter parameter);
+
+    void removeParameter(int gameSystem, int id);
 }

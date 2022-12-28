@@ -4,8 +4,11 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentResultListener;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -20,6 +23,7 @@ import com.nsu.rpgstats.databinding.ActivityParameterDetailsBinding;
 import com.nsu.rpgstats.ui.ConfirmationFragment;
 import com.nsu.rpgstats.ui.ManageFormMode;
 import com.nsu.rpgstats.ui.gamesystems.AddGameActivityResultCallback;
+import com.nsu.rpgstats.viewmodel.parameters.ParameterManageViewModel;
 
 public class ParameterDetailsActivity extends AppCompatActivity {
     private ActivityParameterDetailsBinding binding;
@@ -28,6 +32,8 @@ public class ParameterDetailsActivity extends AppCompatActivity {
     private Snackbar error_bar;
     private Snackbar edit_bar;
     private Snackbar add_bar;
+    private ParameterManageViewModel model;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,8 @@ public class ParameterDetailsActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         putPlaceholdersFromBundle(b);
         initSnaks();
+        model = new ViewModelProvider(this).get(ParameterManageViewModel.class);
+        model.setId(b.getInt("id"));
 
         registerResultLauncher();
 
@@ -46,6 +54,18 @@ public class ParameterDetailsActivity extends AppCompatActivity {
             i.putExtra("Mode", ManageFormMode.EDIT.name());
             i.putExtras(b);
             activityLauncher.launch(i);
+        });
+
+        getSupportFragmentManager().setFragmentResultListener("deleteRequest", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                String result = bundle.getString("bundleKey");
+                if(result.equals("del")){
+                    Log.i("TAG", "deleting..");
+                    model.onDeleteClick();
+                    finish();
+                }
+            }
         });
 
 

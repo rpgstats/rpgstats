@@ -20,10 +20,22 @@ public class ConfirmationFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogTheme);
         // TODO: send deletion to server
         builder.setMessage("Are you sure?")
-                .setPositiveButton("Yes", (dialog, id) ->
-                        Toast.makeText(getContext(), "Deleted (no)", Toast.LENGTH_SHORT).show())
-                .setNegativeButton("No", (dialog, id) ->
-                        Toast.makeText(getContext(), "Cancelled", Toast.LENGTH_SHORT).show());
+                .setPositiveButton(
+                        "Yes",
+                        (dialog, id) -> {
+                            Toast.makeText(getContext(), "Deleted", Toast.LENGTH_SHORT).show();
+                            Bundle result = new Bundle();
+                            result.putString("bundleKey", "del");
+                            getParentFragmentManager().setFragmentResult("deleteRequest", result);
+                        })
+                .setNegativeButton(
+                        "No",
+                        (dialog, id) -> {
+                            Toast.makeText(getContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                            Bundle result = new Bundle();
+                            result.putString("bundleKey", "nodel");
+                            getParentFragmentManager().setFragmentResult("deleteRequest", result);
+                        });
         return builder.create();
     }
 
