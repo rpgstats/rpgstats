@@ -30,6 +30,8 @@ public class CharacterService {
 
   SessionService sessionService;
 
+  GameSystemService gameSystemService;
+
   ItemService itemService;
   ModelMapper modelMapper;
 
@@ -54,6 +56,11 @@ public class CharacterService {
   @Autowired
   public void setSessionService(SessionService sessionService) {
     this.sessionService = sessionService;
+  }
+
+  @Autowired
+  public void setGameSystemService(GameSystemService gameSystemService) {
+    this.gameSystemService = gameSystemService;
   }
 
   @Autowired
@@ -101,6 +108,9 @@ public class CharacterService {
     Session session =
         sessionService.getUserSessionByIdAndUserId(
             createCharacterPostRequest.getSessionId(), user.getId());
+
+    GameSystem system = gameSystemService.getSystemById(createCharacterPostRequest.getSystemId());
+
     if (characterRepository.existsBySession_IdAndName(
         session.getId(), createCharacterPostRequest.getName())) {
       throw new ConflictDataException("Name already in use");
@@ -110,6 +120,7 @@ public class CharacterService {
     character.setSession(session);
     character.setDescription(createCharacterPostRequest.getDescription());
     character.setName(createCharacterPostRequest.getName());
+    character.setSystem(system);
     characterRepository.save(character);
     return modelMapper.map(character, UserCharacterDto.class);
   }
