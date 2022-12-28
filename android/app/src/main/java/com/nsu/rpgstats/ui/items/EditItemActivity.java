@@ -80,10 +80,10 @@ public class EditItemActivity extends AppCompatActivity {
             modifierBadgeAdapter.setBadgesList(modifiers);
         }, true, AppCompatResources.getDrawable(this, R.drawable.rounded_card));
 
-        binding.Tags.setAdapter(tagBadgeAdapter);
-        binding.Modifiers.setAdapter(modifierBadgeAdapter);
         binding.Tags.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         binding.Modifiers.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        binding.Tags.setAdapter(tagBadgeAdapter);
+        binding.Modifiers.setAdapter(modifierBadgeAdapter);
 
 
         menuTagBadgeAdapter = new BadgeAdapter<>(menuTags, position -> {
@@ -116,7 +116,7 @@ public class EditItemActivity extends AppCompatActivity {
         unsetBackgroundListeners();
 
         binding.EditItemTagsMenu.AddedTags.setAdapter(menuTagBadgeAdapter);
-        binding.EditItemTagsMenu.AddedTags.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        binding.EditItemTagsMenu.AddedTags.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
         binding.EditItemModifierMenu.AddedModifiers.setAdapter(menuModifierBadgeAdapter);
         binding.EditItemModifierMenu.AddedModifiers.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));

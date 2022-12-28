@@ -94,6 +94,7 @@ public class BadgeAdapter<T extends Identifiable> extends RecyclerView.Adapter<B
             holder.binding.DeleteImage.setVisibility(ImageView.GONE);
         }
         holder.binding.Background.setBackground(background);
+        Log.i("TAG", "BadgeAdapter: " + mBadges.get(position).toString());
     }
 
     @Override
