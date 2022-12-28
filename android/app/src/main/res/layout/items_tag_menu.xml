@@ -24,6 +24,7 @@
             android:background="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@+id/AddedTags"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TagsMenuHeader"
             app:srcCompat="@android:drawable/ic_menu_more" />
 
         <TextView
@@ -65,13 +66,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/TagMenuBackButton"
-            android:layout_width="80dp"
-            android:layout_height="48dp"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
             android:layout_marginStart="15dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/rounded_card"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/TagMenuAddButton">
 
             <TextView
                 android:id="@+id/TagsMenuBackButtonText"
@@ -81,6 +83,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView9"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -90,19 +93,22 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="5dp"
                 app:srcCompat="?attr/actionModeCloseDrawable" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/TagMenuAddButton"
-            android:layout_width="80dp"
-            android:layout_height="48dp"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/rounded_card"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/TagMenuBackButton">
 
             <TextView
                 android:id="@+id/TagsAddButtonText"
@@ -112,12 +118,14 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView11"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

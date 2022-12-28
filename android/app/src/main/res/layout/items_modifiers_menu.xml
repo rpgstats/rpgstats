@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
-            android:text="@string/item_modifier_text"
+            android:text="Parameters"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ModifiersMenuHeader" />
 
@@ -61,14 +61,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ModifierMenuBackButton"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/rounded_card"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ModifierMenuAddButton"
             app:layout_constraintTop_toBottomOf="@+id/AddedModifiers">
 
             <TextView
@@ -80,6 +81,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:text="@string/item_modifier_back_text"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView6"
@@ -98,14 +100,16 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ModifierMenuAddButton"
-            android:layout_width="80dp"
-            android:layout_height="0dp"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
             android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/rounded_card"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ModifierMenuBackButton"
             app:layout_constraintTop_toBottomOf="@+id/AddedModifiers">
 
             <TextView
@@ -117,6 +121,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:text="@string/item_modifier_add_text"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView10"
@@ -162,6 +167,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toTopOf="@+id/spinner5"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ModifiersMenuHeader"
             app:srcCompat="@android:drawable/ic_menu_more" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
