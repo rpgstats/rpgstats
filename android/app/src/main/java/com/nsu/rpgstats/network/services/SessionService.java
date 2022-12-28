@@ -1,6 +1,7 @@
 package com.nsu.rpgstats.network.services;
 
 import com.nsu.rpgstats.entities.Session;
+import com.nsu.rpgstats.entities.SessionCharacter;
 import com.nsu.rpgstats.network.dto.ErrorResponse;
 import com.nsu.rpgstats.network.dto.SessionRequest;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -30,7 +32,7 @@ public interface SessionService {
     Call<Session> addSession(@Body SessionRequest session);
 
     @GET("user/sessions/{sessionId}/characters")
-    Call<ArrayList<Character>> getSessionCharacters(@Path("sessionId") int id);
+    Call<List<SessionCharacter>> getSessionCharacters(@Path("sessionId") int id);
 
     @GET("user/sessions/{sessionId}/characters/{characterId}")
     Call<Character> getSessionCharacter(@Path("sessionId") int sessionId,

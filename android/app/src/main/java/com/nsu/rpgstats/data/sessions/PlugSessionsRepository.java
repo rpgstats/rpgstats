@@ -60,4 +60,9 @@ public class PlugSessionsRepository implements SessionsRepository {
         }
         callback.onComplete(new Result.Error<>(new Throwable("Id not found")));
     }
+
+    @Override
+    public void getSessionCharacters(int sessionId, RepositoryCallback<List<SessionCharacter>> callback) {
+
+    }
 }

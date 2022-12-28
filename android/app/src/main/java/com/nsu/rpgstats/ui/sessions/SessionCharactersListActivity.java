@@ -17,6 +17,7 @@ import com.nsu.rpgstats.databinding.ActivitySessionCharacterListBinding;
 import com.nsu.rpgstats.databinding.PopupAddCharacterToSessionBinding;
 import com.nsu.rpgstats.entities.Session;
 import com.nsu.rpgstats.entities.SessionCharacter;
+import com.nsu.rpgstats.viewmodel.sessions.SessionCharactersViewModel;
 import com.nsu.rpgstats.viewmodel.sessions.SessionsViewModel;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import java.util.List;
 public class SessionCharactersListActivity extends AppCompatActivity {
     private static final String TAG = SessionCharactersListActivity.class.getSimpleName();
     private ActivitySessionCharacterListBinding binding;
-    private SessionsViewModel viewModel;
+    private SessionCharactersViewModel viewModel;
 
     ItemAdapter<SessionCharacterItem> sessionCharacterAdapter;
 
@@ -37,7 +38,7 @@ public class SessionCharactersListActivity extends AppCompatActivity {
 
         binding.sessionCharactersTab.tabName.setText(R.string.characters);
 
-        viewModel = new ViewModelProvider(this).get(SessionsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(SessionCharactersViewModel.class);
 
 
         binding.sessionCharactersList.simpleRecyclerView.setLayoutManager
@@ -48,7 +49,11 @@ public class SessionCharactersListActivity extends AppCompatActivity {
         binding.sessionCharactersList.simpleRecyclerView.setAdapter(sessionsFastAdapter);
 
         Session currentSession = ((RpgstatsApplication) getApplication()).appContainer.currentSession;
-        sessionCharacterAdapter.set(charactersToCharacterItems(currentSession.getCharacters()));
+        viewModel.getSessionCharacters(currentSession.getId()).observe(this,
+                characters -> {
+                    sessionCharacterAdapter.set(charactersToCharacterItems(characters));
+                });
+        viewModel.loadSessionCharacters(currentSession.getId());
 
 
         // setup plus button

@@ -5,6 +5,7 @@ import android.util.Log;
 import com.nsu.rpgstats.data.RepositoryCallback;
 import com.nsu.rpgstats.data.Result;
 import com.nsu.rpgstats.entities.Session;
+import com.nsu.rpgstats.entities.SessionCharacter;
 import com.nsu.rpgstats.network.dto.SessionRequest;
 import com.nsu.rpgstats.network.services.SessionService;
 
@@ -96,6 +97,24 @@ public class RestSessionRepository implements SessionsRepository {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                callback.onComplete(new Result.Error<>(t));
+            }
+        });
+    }
+
+    @Override
+    public void getSessionCharacters(int sessionId, RepositoryCallback<List<SessionCharacter>> callback) {
+        sessionService.getSessionCharacters(sessionId).enqueue( new Callback<List<SessionCharacter>>() {
+            @Override
+            public void onResponse(Call<List<SessionCharacter>> call, Response<List<SessionCharacter>> response) {
+                Log.d(TAG, "Response: " + response);
+                if (response.body() != null) {
+                    callback.onComplete(new Result.Success<>(response.body()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SessionCharacter>> call, Throwable t) {
                 callback.onComplete(new Result.Error<>(t));
             }
         });
