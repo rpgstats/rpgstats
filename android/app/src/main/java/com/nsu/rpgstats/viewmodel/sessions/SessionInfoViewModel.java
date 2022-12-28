@@ -48,8 +48,9 @@ public class SessionInfoViewModel extends AndroidViewModel {
         if (session.getValue() != null) {
             repository.deleteSession(session.getValue().getId(), (res) -> {
                 if (res instanceof Result.Success) {
-                    Log.d(TAG, "Successfully deleted");
-                    session.setValue(null);
+                    Log.d(TAG, "Successfully deleted session " + session.getValue().getId());
+                } else if (res instanceof Result.Error){
+                    Log.d(TAG, "Can not delete session " + session.getValue().getId());
                 }
             });
         }

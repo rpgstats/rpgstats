@@ -37,7 +37,9 @@ public class DeleteSessionPopup  {
 
         Button backButton = popupView.findViewById(R.id.yes_button);
         Button addButton = popupView.findViewById(R.id.no_button);
-        backButton.setOnClickListener(v -> listener.onDeleteSession());
+        backButton.setOnClickListener(v ->
+        {listener.onDeleteSession();
+        popupWindow.dismiss();});
         addButton.setOnClickListener(v -> popupWindow.dismiss());
     }
 }

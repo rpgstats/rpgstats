@@ -11,17 +11,16 @@ public class Session {
     private int playersNumber;
     private int maxNumberOfPlayers;
     private boolean creatorAsPlayer;
-    private String createdAt;
     private String gameSystem;
     private int gameSystemId;
     private List<SessionCharacter> characters;
 
-    private String creationDate;
+    private String createdAt;
 
     public Session(Integer id, String name, String creationDate) {
         this.id = id;
         this.name = name;
-        this.creationDate = creationDate;
+        this.createdAt = creationDate;
     }
 
     public Session(Integer id, String name, String author, String description, int playersNumber, int maximumPlayers, String gameSystem, List<SessionCharacter> characters, String creationDate) {
@@ -33,7 +32,7 @@ public class Session {
         this.maxNumberOfPlayers = maximumPlayers;
         this.gameSystem = gameSystem;
         this.characters = characters;
-        this.creationDate = creationDate;
+        this.createdAt = creationDate;
     }
 
     public Session() {
@@ -57,12 +56,12 @@ public class Session {
         this.name = name;
     }
 
-    public String getCreationDate() {
-        return creationDate;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Integer getId() {

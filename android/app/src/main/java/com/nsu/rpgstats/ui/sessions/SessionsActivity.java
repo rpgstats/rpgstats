@@ -104,4 +104,5 @@ public class SessionsActivity extends AppCompatActivity implements ChangeModeLis
         startActivity(i);
         finish();
     }
+
 }

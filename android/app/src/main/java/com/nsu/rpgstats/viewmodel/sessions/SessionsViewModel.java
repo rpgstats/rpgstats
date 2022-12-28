@@ -54,4 +54,15 @@ public class SessionsViewModel extends AndroidViewModel {
         });
 
     }
+
+    public void deleteSession(int sessionId) {
+        repository.deleteSession(sessionId, (res) -> {
+            if (res instanceof Result.Success) {
+                Log.d(TAG, "Successfully delete system with id " + sessionId);
+                loadSessions();
+            } else if (res instanceof Result.Error) {
+                Log.d(TAG, "Can not delete session with id " + sessionId);
+            }
+        });
+    }
 }

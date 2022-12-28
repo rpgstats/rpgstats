@@ -35,7 +35,7 @@ public class SessionItem extends AbstractBindingItem<SessionItemBinding> {
     @Override
     public void bindView(@NonNull SessionItemBinding binding, @NonNull List<?> payloads) {
         binding.sessionNameTextView.setText(session.getName());
-        binding.sessionCreationDateTextView.setText(session.getCreationDate());
+        binding.sessionCreationDateTextView.setText(session.getCreatedAt());
     }
 
     @Override
