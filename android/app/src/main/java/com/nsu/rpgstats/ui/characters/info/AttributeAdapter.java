@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nsu.rpgstats.databinding.AttributeCardBinding;
 import com.nsu.rpgstats.entities.Attribute;
+import com.nsu.rpgstats.entities.Modifier;
 
 import java.util.List;
 
@@ -34,15 +35,18 @@ public class AttributeAdapter extends RecyclerView.Adapter<AttributeAdapter.Attr
     @NonNull
     @Override
     public AttributeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        AttributeCardBinding binding = AttributeCardBinding.inflate(LayoutInflater.from(parent.getContext()));
+        AttributeCardBinding binding = AttributeCardBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new AttributeHolder(binding, listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AttributeHolder holder, int position) {
         holder.binding.attributeName.setText(attributeList.get(position).getName());
-        holder.binding.ConstraintName.setText("constraint1");
-        holder.binding.valueInput.setText("0");
+        int value = 0;
+        for (Modifier modifier : attributeList.get(position).getModifierList()) {
+            value += modifier.getValue();
+        }
+        holder.binding.value.setText(value + "");
     }
 
     @Override
@@ -56,9 +60,7 @@ public class AttributeAdapter extends RecyclerView.Adapter<AttributeAdapter.Attr
         public AttributeHolder(AttributeCardBinding binding, ClickListener listener) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.valueInput.setOnClickListener(view -> {
-                listener.onClickListener(getAdapterPosition());
-            });
+
         }
     }
 

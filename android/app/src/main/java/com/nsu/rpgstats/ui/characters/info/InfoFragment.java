@@ -9,23 +9,32 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.nsu.rpgstats.AppContainer;
 import com.nsu.rpgstats.R;
+import com.nsu.rpgstats.RpgstatsApplication;
+import com.nsu.rpgstats.entities.Attribute;
 import com.nsu.rpgstats.entities.Character;
 import com.nsu.rpgstats.databinding.FragmentInfoBinding;
 import com.nsu.rpgstats.entities.GameSystem;
+import com.nsu.rpgstats.entities.Modifier;
+import com.nsu.rpgstats.entities.Parameter;
+import com.nsu.rpgstats.entities.Slot;
 import com.nsu.rpgstats.ui.characters.BackgroundViewModel;
 import com.nsu.rpgstats.ui.characters.WindowViewModel;
 import com.nsu.rpgstats.ui.characters.selection.SelectionViewModel;
 import com.nsu.rpgstats.viewmodel.GameSystemInfoViewModel;
 import com.nsu.rpgstats.viewmodel.GameSystemsViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class InfoFragment extends Fragment {
 
@@ -49,6 +58,29 @@ public class InfoFragment extends Fragment {
         mViewModel = new ViewModelProvider(requireActivity()).get(SelectionViewModel.class);
         mInfoViewModel = new ViewModelProvider(requireActivity()).get(InfoViewModel.class);
         Character character = mViewModel.getCharacterList().getValue().get(position);
+
+        List<Parameter> parameters = ((RpgstatsApplication) requireActivity().getApplication()).appContainer.parameterRepository.getParameters(character.getGameSystemId()).getValue();
+        if (parameters != null) {
+            character.setAttributeList(new ArrayList<>());
+            for (Parameter parameter : parameters) {
+                List<Modifier> modifierList = new ArrayList<>();
+                for (Slot slot : character.getSlotList()) {
+                    if (slot.getItem() != null) {
+                        for (Modifier modifier : slot.getItem().getModifiers()) {
+                            if (Objects.equals(modifier.getParameter().getId(), parameter.getId()) && Objects.equals(modifier.getParameter().getName(), parameter.getName())) {
+                                modifierList.add(modifier);
+                            }
+                        }
+                    }
+                }
+                Attribute attribute = new Attribute(parameter.getId(), parameter.getName(), true, character.getGameSystemId(), parameter);
+                attribute.setModifierList(modifierList);
+                character.getAttributeList().add(attribute);
+            }
+        }
+
+
+
         this.character = new Character(
                 character.getId(),
                 character.getName(),
@@ -92,9 +124,9 @@ public class InfoFragment extends Fragment {
             mInfoViewModel.setIsChanged(true);
         });
 
-        adapter = new AttributeAdapter(mInfoViewModel.getAttributeList().getValue(), pos -> {
-            mInfoViewModel.setIsChanged(true);
-        });
+        adapter = new AttributeAdapter(character.getAttributeList(), pos -> {});
+        binding.Attributes.setAdapter(adapter);
+        binding.Attributes.setLayoutManager(new LinearLayoutManager(getContext()));
 
         binding.cBackButton.setOnClickListener(view -> {
             if (mInfoViewModel.getIsChanged().getValue()) {
