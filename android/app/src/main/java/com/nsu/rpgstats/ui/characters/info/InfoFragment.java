@@ -1,7 +1,11 @@
 package com.nsu.rpgstats.ui.characters.info;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
@@ -15,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.nsu.rpgstats.AppContainer;
 import com.nsu.rpgstats.R;
@@ -146,6 +151,12 @@ public class InfoFragment extends Fragment {
         });
 
         binding.exportButton.setOnClickListener(view -> {
+            ClipboardManager clipboardManager = (ClipboardManager)(requireActivity().getSystemService(CLIPBOARD_SERVICE));
+            String text = character.getId() + "";
+            ClipData clipData = ClipData.newPlainText("text", text);
+            clipboardManager.setPrimaryClip(clipData);
+            Toast.makeText(requireActivity(), "Id скопирован в буффер обмена",Toast.LENGTH_SHORT).show();
+
             new ViewModelProvider(requireActivity()).get(WindowViewModel.class).setIsShow(true);
             Bundle bundle = new Bundle();
             bundle.putInt("id", character.getId());

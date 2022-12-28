@@ -69,4 +69,10 @@ public class SelectionFragment extends Fragment {
 
         return binding.getRoot();
     }
+
+    @Override
+    public void onDestroy() {
+        mViewModel.saveCharacters(requireActivity());
+        super.onDestroy();
+    }
 }

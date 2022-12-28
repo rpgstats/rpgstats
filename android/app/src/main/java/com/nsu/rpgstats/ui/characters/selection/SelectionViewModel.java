@@ -49,6 +49,13 @@ public class SelectionViewModel extends ViewModel {
     }
 
     public void addCharacter(String name, Character oldCharacter) {
+        int charId = 0;
+        for (Character character : characterList.getValue()) {
+            if (character.getId() >= charId) {
+                charId = character.getId() + 1;
+            }
+        }
+
         Character newCharacter = null;
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             ObjectOutputStream ous = new ObjectOutputStream(baos);
@@ -60,10 +67,12 @@ public class SelectionViewModel extends ViewModel {
             ois.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+            return;
         }
         newCharacter.setBackground(oldCharacter.getBackground());
         newCharacter.setIcon(oldCharacter.getIcon());
         newCharacter.setName(name);
+        newCharacter.setId(charId);
 
         characterList.getValue().add(newCharacter);//todo repo
         characterList.setValue(characterList.getValue());
