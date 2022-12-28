@@ -1,9 +1,10 @@
 package com.nsu.rpgstats.entities;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class Item {
+public class Item implements Serializable {
     private final Integer id;
 
     private Integer pictureId;

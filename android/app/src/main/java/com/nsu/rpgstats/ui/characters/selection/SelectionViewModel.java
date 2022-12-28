@@ -80,6 +80,7 @@ public class SelectionViewModel extends ViewModel {
 
     public void loadData(int UserId, Context context) {
         this.context = context;
+        userId = UserId;
         if (characterList.getValue() == null) {
             try (ObjectInputStream file = new ObjectInputStream(new FileInputStream(new File(context.getExternalFilesDir(null), "Characters" + userId + ".obj")))) {
                 characterList.setValue((List<Character>) file.readObject());
@@ -135,15 +136,23 @@ public class SelectionViewModel extends ViewModel {
         }
     }
 
-
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
+    public void saveCharacters(Context context) {
         try (ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(new File(context.getExternalFilesDir(null), "Characters" + userId + ".obj")))) {
             file.writeObject(characterList.getValue());
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    @Override
+    protected void onCleared() {
+        try (ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(new File(context.getExternalFilesDir(null), "Characters" + userId + ".obj")))) {
+            file.writeObject(characterList.getValue());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        super.onCleared();
     }
 }

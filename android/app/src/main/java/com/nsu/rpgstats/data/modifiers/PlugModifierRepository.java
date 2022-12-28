@@ -15,14 +15,16 @@ public class PlugModifierRepository implements ModifierRepository{
     public PlugModifierRepository() {
         modifiers = new HashMap<>();
         generateModifierList();
-        currentId = 123;
+        currentId = 306;
     }
 
     private void generateModifierList() {
-        for (int i = 117; i < 123; i++) {
-            modifiers.put(i, new Modifier(i, "Attack up " + i, i,
-                    new Parameter(i, "Attack", new Date(), 0, 993)));
-        }
+        modifiers.put(300, new Modifier(300, "Attack up", 10, new Parameter(117, "Attack", new Date(), 0, 993)));
+        modifiers.put(301, new Modifier(301, "Defense up", 10, new Parameter(120, "Defense", new Date(), 0, 993)));
+        modifiers.put(302, new Modifier(302, "Defense up", 50, new Parameter(120, "Defense", new Date(), 0, 993)));
+        modifiers.put(303, new Modifier(303, "Health points up", 50, new Parameter(118, "Defense", new Date(), 0, 993)));
+        modifiers.put(304, new Modifier(304, "Attack up", 5, new Parameter(117, "Attack", new Date(), 0, 993)));
+        modifiers.put(305, new Modifier(305, "Poisoned", 15, new Parameter(117, "Attack", new Date(), 0, 993)));
     }
 
     @Override
