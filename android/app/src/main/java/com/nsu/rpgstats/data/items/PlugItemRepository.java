@@ -39,7 +39,7 @@ public class PlugItemRepository implements ItemRepository{
         tags.add(new Tag(5, "Small", "Date", false));
         modifiers = new ArrayList<>();
         modifiers.add(new Modifier(301, "Defense up", 10,
-                new Parameter(120, "Defense", new Date(), 0, 993)));
+                new Parameter(120, "Defense", new Date(), 3, 996)));
         items.put(201 ,new Item(201, 1337, "Helmet of Atos", tags, modifiers, false));
 
         tags = new ArrayList<>();
@@ -47,7 +47,7 @@ public class PlugItemRepository implements ItemRepository{
         tags.add(new Tag(7, "Mithril", "Date", false));
         modifiers = new ArrayList<>();
         modifiers.add(new Modifier(302, "Defense up", 50,
-                new Parameter(120, "Defense", new Date(), 0, 993)));
+                new Parameter(120, "Defense", new Date(), 3, 996)));
         items.put(202 ,new Item(202, 1337, "Mithril chest plate", tags, modifiers, false));
 
         tags = new ArrayList<>();
@@ -56,7 +56,7 @@ public class PlugItemRepository implements ItemRepository{
         tags.add(new Tag(2, "Magical", "Date", false));
         modifiers = new ArrayList<>();
         modifiers.add(new Modifier(303, "Health points up", 50,
-                new Parameter(118, "Health points", new Date(), 0, 993)));
+                new Parameter(118, "Health points", new Date(), 1, 994)));
         items.put(203 ,new Item(203, 1337, "Ring of health", tags, modifiers, false));
 
         tags = new ArrayList<>();

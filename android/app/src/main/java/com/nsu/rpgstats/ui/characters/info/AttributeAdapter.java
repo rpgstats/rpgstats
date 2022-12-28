@@ -1,5 +1,6 @@
 package com.nsu.rpgstats.ui.characters.info;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,9 +43,15 @@ public class AttributeAdapter extends RecyclerView.Adapter<AttributeAdapter.Attr
     @Override
     public void onBindViewHolder(@NonNull AttributeHolder holder, int position) {
         holder.binding.attributeName.setText(attributeList.get(position).getName());
-        int value = 0;
+        int value = attributeList.get(position).getParameter().getMin();
         for (Modifier modifier : attributeList.get(position).getModifierList()) {
             value += modifier.getValue();
+        }
+        if (value > attributeList.get(position).getParameter().getMax()) {
+            value = attributeList.get(position).getParameter().getMax();
+        }
+        if (value < attributeList.get(position).getParameter().getMin()) {
+            value = attributeList.get(position).getParameter().getMin();
         }
         holder.binding.value.setText(value + "");
     }

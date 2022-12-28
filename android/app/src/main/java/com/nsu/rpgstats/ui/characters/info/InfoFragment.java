@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -120,13 +122,41 @@ public class InfoFragment extends Fragment {
         Log.d("Name", "onCreateView: " + character.getDescription() );
 
         binding.charName.setText(character.getName());
-        binding.charName.setOnClickListener(view -> {
-            mInfoViewModel.setIsChanged(true);
+        final String startDesc = character.getDescription();
+        final String startName = character.getName();
+        binding.charName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mInfoViewModel.setIsChanged(true);
+            }
         });
 
         binding.charDesc.setText(character.getDescription());
-        binding.charDesc.setOnClickListener(view -> {
-            mInfoViewModel.setIsChanged(true);
+        binding.charDesc.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mInfoViewModel.setIsChanged(true);
+            }
         });
 
         adapter = new AttributeAdapter(character.getAttributeList(), pos -> {});

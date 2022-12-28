@@ -76,6 +76,7 @@ public class SelectionViewModel extends ViewModel {
 
         characterList.getValue().add(newCharacter);//todo repo
         characterList.setValue(characterList.getValue());
+        saveCharacters(context);
     }
 
     public Character getCharacterById(int id) {
@@ -123,16 +124,19 @@ public class SelectionViewModel extends ViewModel {
         newCharacter.setIcon(oldCharacter.getIcon());
         characterList.getValue().add(position, newCharacter);//todo repo
         characterList.setValue(characterList.getValue());
+        saveCharacters(context);
     }
 
     public void deleteCharacter(int position) {
         characterList.getValue().remove(position);//todo repo
         characterList.setValue(characterList.getValue());
+        saveCharacters(context);
     }
 
     public void saveSlots(List<Slot> value, int id, int position) {
         characterList.getValue().get(position).setSlotList(value);//todo repo
         characterList.setValue(characterList.getValue());
+        saveCharacters(context);
     }
 
     public void downloadCharacter(int position, Context context) {

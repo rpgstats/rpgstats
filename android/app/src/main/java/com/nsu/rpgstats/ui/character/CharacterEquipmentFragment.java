@@ -68,7 +68,7 @@ public class CharacterEquipmentFragment extends Fragment {
                 Item currentItem = slotsFromActivity.get(finalI).getItem();
 
                 StringBuilder title = new StringBuilder();
-                title.append(currentItem == null ? "Slot unequipped" : "Slot with item ");
+                title.append(currentItem == null ? "Slot unequipped" : "Slot equipped: ");
                 title.append(currentItem == null ? "" : currentItem.getName());
 
                 builder.setTitle(title.toString());
@@ -161,14 +161,25 @@ public class CharacterEquipmentFragment extends Fragment {
     }
 
     private boolean fits(Item item, List<Tag> tags, boolean isWhitelisted) {
+        if (isWhitelisted) {
+            List<Tag> itemTags = item.getTags();
+            for (Tag it : itemTags) {
+                for (Tag tag : tags) {
+                    if (Objects.equals(tag.getId(), it.getId())) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
         List<Tag> itemTags = item.getTags();
         for (Tag it : itemTags) {
             for (Tag tag : tags) {
                 if (Objects.equals(tag.getId(), it.getId())) {
-                    return !isWhitelisted;
+                    return false;
                 }
             }
         }
-        return isWhitelisted;
+        return true;
     }
 }

@@ -58,7 +58,7 @@ public class Modifier implements Identifiable, Serializable {
 
     @Override
     public String toString() {
-        return name;
+        return name + " " + value;
     }
 
     @Override
