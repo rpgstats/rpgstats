@@ -121,7 +121,7 @@ public class InfoFragment extends Fragment {
             Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.exportCharacterFragment, bundle);
         });
 
-        binding.slotButton.setOnClickListener(view -> {
+        binding.SlotButton.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
             bundle.putInt("id", character.getId());
             bundle.putInt("position", position);
