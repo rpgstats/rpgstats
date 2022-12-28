@@ -16,17 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/ShowList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintBottom_toTopOf="@+id/AddedTags"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/TagsMenuHeader"
-            app:srcCompat="@android:drawable/ic_menu_more" />
-
         <TextView
             android:id="@+id/TagsMenuHeader"
             android:layout_width="wrap_content"
@@ -42,27 +31,50 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:text="@string/item_tags_tags_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TagsMenuHeader" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/AddedTags"
+        <Spinner
+            android:id="@+id/spinner5"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/rounded_border"
-            android:foregroundGravity="center_vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/TagMenuBackButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TagsMenuTagsText" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/AddedTags"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner5" />
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/AddedTags"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_marginStart="4dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="4dp"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:background="@drawable/rounded_border"-->
+<!--            android:foregroundGravity="center_vertical"-->
+<!--            android:paddingStart="20dp"-->
+<!--            android:paddingEnd="20dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/TagMenuBackButton"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/TagsMenuTagsText" />-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/TagMenuBackButton"
@@ -73,6 +85,7 @@
             android:background="@drawable/rounded_card"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/AddedTags"
             app:layout_constraintEnd_toStartOf="@id/TagMenuAddButton">
 
             <TextView
@@ -108,6 +121,7 @@
             android:background="@drawable/rounded_card"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/AddedTags"
             app:layout_constraintStart_toEndOf="@id/TagMenuBackButton">
 
             <TextView
@@ -139,9 +153,10 @@
             android:layout_height="100dp"
             android:background="@drawable/rounded_border"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/AddedTags"
-            app:layout_constraintStart_toStartOf="@+id/AddedTags"
-            app:layout_constraintTop_toTopOf="@+id/AddedTags">
+            app:layout_constraintEnd_toEndOf="@+id/spinner5"
+            app:layout_constraintStart_toStartOf="@+id/spinner5"
+            app:layout_constraintTop_toTopOf="@+id/spinner5"
+            app:layout_constraintBottom_toTopOf="@id/TagMenuBackButton">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ViewTags"
@@ -149,10 +164,22 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:foregroundGravity="center_vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/ShowList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/spinner5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TagsMenuHeader"
+            app:srcCompat="@android:drawable/ic_menu_more" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

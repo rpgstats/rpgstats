@@ -116,7 +116,7 @@ public class EditItemActivity extends AppCompatActivity {
         unsetBackgroundListeners();
 
         binding.EditItemTagsMenu.AddedTags.setAdapter(menuTagBadgeAdapter);
-        binding.EditItemTagsMenu.AddedTags.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        binding.EditItemTagsMenu.AddedTags.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
         binding.EditItemModifierMenu.AddedModifiers.setAdapter(menuModifierBadgeAdapter);
         binding.EditItemModifierMenu.AddedModifiers.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
