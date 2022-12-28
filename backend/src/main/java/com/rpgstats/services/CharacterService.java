@@ -106,7 +106,7 @@ public class CharacterService {
   public UserCharacterDto createUserCharacter(
       User user, CreateCharacterPostRequest createCharacterPostRequest) {
     Session session =
-        sessionService.getUserSessionByIdAndUserId(
+        sessionService.getSessionByIdAndUserId(
             createCharacterPostRequest.getSessionId(), user.getId());
 
     GameSystem system = gameSystemService.getSystemById(createCharacterPostRequest.getSystemId());

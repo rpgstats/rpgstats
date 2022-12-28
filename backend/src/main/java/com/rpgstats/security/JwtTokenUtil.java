@@ -12,7 +12,7 @@ public class JwtTokenUtil {
   @Autowired JwtEncoder encoder;
   @Autowired JwtDecoder decoder;
 
-  public static final long JWT_TOKEN_VALIDITY = 60 * 10;
+  public static final long JWT_TOKEN_VALIDITY = 60 * 10 * 10;
 
   public String getUserNameFromJwtToken(String authToken) {
     Jwt jwt = this.decoder.decode(authToken);

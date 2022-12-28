@@ -28,7 +28,7 @@ public class Character {
 
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "system_id", nullable = false)
+  @JoinColumn(name = "game_system_id", nullable = false)
   private GameSystem system;
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
