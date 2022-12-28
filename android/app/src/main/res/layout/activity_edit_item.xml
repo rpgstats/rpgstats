@@ -95,7 +95,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_weight="0">
 
             <ImageView
@@ -111,7 +111,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Tags"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/rounded_border"
@@ -135,7 +135,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_weight="0">
 
             <ImageView
@@ -152,7 +152,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Modifiers"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/rounded_border"
