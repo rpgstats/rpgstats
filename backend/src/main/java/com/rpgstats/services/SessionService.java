@@ -144,7 +144,7 @@ public class SessionService {
   @Transactional
   public SessionDto updateSession(
       User user, UpdateSessionPutRequest updateSessionPutRequest, Integer id) {
-    Session session = getUserSessionByIdAndUserId(id, user.getId());
+    Session session = getSessionByIdAndUserId(id, user.getId());
     session.setName(updateSessionPutRequest.getName());
     session.setDescription(updateSessionPutRequest.getDescription());
     session.setCreatorAsPlayer(updateSessionPutRequest.getCreatorAsPlayer());
@@ -154,8 +154,15 @@ public class SessionService {
 
   @Transactional
   public void deleteSession(User user, Integer id) {
-    Session session = getUserSessionByIdAndUserId(id, user.getId());
+    Session session = getSessionByIdAndUserId(id, user.getId());
     sessionRepository.delete(session);
+  }
+
+  @Transactional
+  public Session getSessionByIdAndUserId(Integer id, Integer ownerId) {
+    return sessionRepository.findByIdAndCreator_Id(id,ownerId)
+            .orElseThrow(() -> new ItemNotFoundException("No such session"));
+
   }
 
   @Transactional
