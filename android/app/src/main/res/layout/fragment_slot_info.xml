@@ -86,11 +86,11 @@
             android:maxHeight="80dp"
             android:minWidth="80dp"
             android:minHeight="80dp"
-            android:src="@drawable/control_items"
+            android:src="@drawable/control_items_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView20"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            />
 
         <TextView
             android:id="@+id/textView17"
@@ -105,7 +105,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
