@@ -66,7 +66,7 @@ public class PlugItemRepository implements ItemRepository{
         modifiers = new ArrayList<>();
         modifiers.add(new Modifier(304, "Attack up", 5,
                 new Parameter(117, "Attack", new Date(), 0, 993)));
-        modifiers.add(new Modifier(305, "Poisoned", 15,
+        modifiers.add(new Modifier(305, "Attack up", 15,
                 new Parameter(117, "Attack", new Date(), 0, 993)));
         items.put(204 ,new Item(204, 1337, "Poisoned dagger", tags, modifiers, false));
     }

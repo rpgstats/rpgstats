@@ -55,8 +55,13 @@ public class NpcActivity extends AppCompatActivity {
                 return;
             }
             int value = Integer.parseInt(binding.inputValue.getText().toString());
-            ((RpgstatsApplication)getApplication()).appContainer.modifierRepository.addModifier(gameSystem,
-                    new Modifier(0, value > 0 ? parameter.getName() + " up" : parameter.getName() + " down", value, parameter));
+            if (binding.inputName.getText().toString().equals("")) {
+                ((RpgstatsApplication) getApplication()).appContainer.modifierRepository.addModifier(gameSystem,
+                        new Modifier(0, value > 0 ? parameter.getName() + " up" : parameter.getName() + " down", value, parameter));
+            } else {
+                ((RpgstatsApplication) getApplication()).appContainer.modifierRepository.addModifier(gameSystem,
+                        new Modifier(0, binding.inputName.getText().toString(), value, parameter));
+            }
             Toast.makeText(this, "Modifier created", Toast.LENGTH_SHORT).show();
             finish();
         });

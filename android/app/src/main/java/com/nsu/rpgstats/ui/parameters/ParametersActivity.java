@@ -69,7 +69,9 @@ public class ParametersActivity extends AppCompatActivity {
 
     private void subscribeToViewModel(LiveData<List<Parameter>> liveData) {
         liveData.observe(this, params -> {
-            adapter.setParams(params);
+            if (params != null) {
+                adapter.setParams(params);
+            }
         });
     }
 
