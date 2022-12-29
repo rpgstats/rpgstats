@@ -20,7 +20,8 @@
             android:id="@+id/game_systems_tab"
             layout="@layout/game_systems_tab"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            />
 
         <include
             android:id="@+id/game_list"

@@ -8,14 +8,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/game_systems_header"
-        android:textColor="@color/black"
+        android:textColor="@color/gray"
         android:textSize="@dimen/header_text_size"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center_vertical"
+        android:fontFamily="@font/rubik_medium"/>
 
     <ImageView
         android:id="@+id/plus_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginStart="@dimen/text_margin"
-        android:src="@drawable/plus_sign"/>
+        android:background="@drawable/rounded_border"
+        android:src="@drawable/add_plus"
+        android:maxWidth="80dp"
+        android:maxHeight="80dp"
+        android:minWidth="80dp"
+        android:minHeight="80dp"
+        android:padding="10dp"/>
 </LinearLayout>

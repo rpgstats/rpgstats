@@ -18,7 +18,13 @@
             android:text="Slots"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/rubik_medium"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="@dimen/header_text_size"
+            android:textColor="@color/gray"/>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
@@ -67,14 +73,20 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/SaveButton"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="50dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/rounded_card"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_min="100dp">
+            app:layout_constraintWidth_min="100dp"
+            android:layout_weight="1"
+            android:layout_gravity="center|bottom"
+            android:textSize="@dimen/subheader_text_size"
+            android:backgroundTint="@color/gray"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:id="@+id/textView1"
@@ -83,7 +95,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="Save"
+                android:textSize="20dp"
                 android:textColor="@color/white"
+                android:fontFamily="@font/rubik_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -92,14 +106,20 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/BackButton"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/rounded_card"
+            android:layout_marginStart="45dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_min="100dp">
+            app:layout_constraintWidth_min="100dp"
+            android:layout_weight="1"
+            android:layout_gravity="center|bottom"
+            android:textSize="@dimen/subheader_text_size"
+            android:backgroundTint="@color/gray"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:id="@+id/textView2"
@@ -108,7 +128,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="Back"
+                android:textSize="20dp"
                 android:textColor="@color/white"
+                android:fontFamily="@font/rubik_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -44,7 +44,8 @@
                 android:textColor="@color/gray"
                 android:textSize="22sp"
                 android:layout_marginLeft="10dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                />
 
             <EditText
                 android:id="@+id/new_session_name_edit"
