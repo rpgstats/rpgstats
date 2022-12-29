@@ -41,19 +41,30 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/item_edit_header"
-                android:textSize="24sp"
+                android:textSize="32sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/rubik_medium"
+                android:gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/gray"
+/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/EditItemNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="@string/item_edit_item_name" />
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/rubik_medium"
+            android:text="@string/item_edit_item_name"
+            android:textColor="@color/gray"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -62,36 +73,44 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="20dp"
                 android:layout_weight="0"
-                android:background="@drawable/rounded_border"
+                android:background="@drawable/rounded_edit_text"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:hint="@string/enter_name_hint"
+                android:fontFamily="@font/rubik"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textSize="20sp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/EditItemNameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:minHeight="48dp"
-                    android:paddingLeft="24dp"
-                    android:paddingRight="24dp" />
+                    android:fontFamily="@font/rubik"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/EditItemTagText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_weight="0"
-            android:text="@string/item_edit_item_tag" />
+            android:text="@string/item_edit_item_tag"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/rubik_medium"
+            android:textColor="@color/gray"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -102,7 +121,7 @@
                 android:id="@+id/EditItemTagsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginEnd="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -111,17 +130,27 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Tags"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/rounded_border"
+                android:background="@drawable/rounded_edit_text"
                 android:foregroundGravity="center_vertical"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/EditItemTagsButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="20dp"
+                android:layout_weight="0"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:hint="@string/enter_name_hint"
+                android:fontFamily="@font/rubik"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textSize="20sp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -129,9 +158,14 @@
             android:id="@+id/EditItemModifiersText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_weight="0"
-            android:text="@string/item_edit_item_modifiers" />
+            android:text="@string/item_edit_item_modifiers"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/rubik_medium"
+            android:textColor="@color/gray"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -152,17 +186,27 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Modifiers"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/rounded_border"
+                android:background="@drawable/rounded_edit_text"
                 android:foregroundGravity="center_vertical"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/EditItemModifierButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="20dp"
+                android:layout_weight="0"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:hint="@string/enter_name_hint"
+                android:fontFamily="@font/rubik"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textSize="20sp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -174,8 +218,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/EditItemBackButton"
                 android:layout_width="128dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="55dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_card"
                 app:layout_constraintStart_toStartOf="parent"
@@ -185,11 +229,12 @@
                     android:id="@+id/EditItemBackText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_marginStart="28dp"
                     android:layout_weight="0"
                     android:text="@string/item_edit_back_text"
                     android:textColor="@color/white"
                     android:textSize="20sp"
+                    android:fontFamily="@font/rubik_medium"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -199,7 +244,7 @@
                     android:id="@+id/imageView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/EditItemBackText"
@@ -212,18 +257,19 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/EditItemEditButton"
                 android:layout_width="128dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="55dp"
                 android:background="@drawable/rounded_card"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+>
 
                 <ImageView
                     android:id="@+id/imageView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_marginStart="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/EditItemAddText"
                     app:layout_constraintStart_toStartOf="parent"
@@ -234,10 +280,11 @@
                     android:id="@+id/EditItemAddText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_marginStart="28dp"
                     android:text="@string/item_edit_edit_text"
                     android:textColor="@color/white"
                     android:textSize="20sp"
+                    android:fontFamily="@font/rubik_medium"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
