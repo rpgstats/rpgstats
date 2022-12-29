@@ -155,8 +155,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/spinner5"
             app:layout_constraintStart_toStartOf="@+id/spinner5"
-            app:layout_constraintTop_toTopOf="@+id/spinner5"
-            app:layout_constraintBottom_toTopOf="@id/TagMenuBackButton">
+            app:layout_constraintTop_toTopOf="@+id/spinner5">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ViewTags"

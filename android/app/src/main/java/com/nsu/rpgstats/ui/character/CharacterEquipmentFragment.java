@@ -2,6 +2,7 @@ package com.nsu.rpgstats.ui.character;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -62,10 +63,13 @@ public class CharacterEquipmentFragment extends Fragment {
             SlotItemBinding bindingNewItem = SlotItemBinding.bind(view);
             mSlotsViewModel.loadImage(bindingNewItem, slotsFromActivity.get(i).getIconUrl());
             int finalI = i;
+            Item currentItem = slotsFromActivity.get(finalI).getItem();
+            bindingNewItem.container.setBackground(currentItem != null ? AppCompatResources.getDrawable(getContext(), R.drawable.rounded_delete_bourder) :
+                    AppCompatResources.getDrawable(getContext(), R.drawable.rounded_border));
             bindingNewItem.getRoot().setOnClickListener(v -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity(), R.style.AlertDialogTheme);
 
-                Item currentItem = slotsFromActivity.get(finalI).getItem();
+
 
                 StringBuilder title = new StringBuilder();
                 title.append(currentItem == null ? "Slot unequipped" : "Slot equipped: ");
@@ -74,7 +78,7 @@ public class CharacterEquipmentFragment extends Fragment {
                 builder.setTitle(title.toString());
 
                 builder.setNeutralButton("Info", ((dialogInterface, i1) -> {
-                    AlertDialog.Builder infoBuilder = new AlertDialog.Builder(requireActivity());
+                    AlertDialog.Builder infoBuilder = new AlertDialog.Builder(requireActivity(), R.style.AlertDialogTheme);
                     StringBuilder message = new StringBuilder();
 
                     if (currentItem != null) {
@@ -138,6 +142,7 @@ public class CharacterEquipmentFragment extends Fragment {
                     if (checked[0] == -1) {
                         Item item = slotsFromActivity.get(finalI).getItem();
                         slotsFromActivity.get(finalI).setItem(null);
+                        bindingNewItem.container.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.rounded_border));
                         return;
                     }
 
@@ -145,7 +150,7 @@ public class CharacterEquipmentFragment extends Fragment {
                     Item checkedItem = fittingItems.get(checked[0]);
                     String type = checkedItem.getTags().get(0).getName();
                     slotsFromActivity.get(finalI).setItem(checkedItem);
-
+                    bindingNewItem.container.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.rounded_delete_bourder));
                 });
                 builder.setNegativeButton("Cancel", (dialogInterface, i13) -> {
                     Toast.makeText(requireActivity(), "Canceled", Toast.LENGTH_SHORT).show();
