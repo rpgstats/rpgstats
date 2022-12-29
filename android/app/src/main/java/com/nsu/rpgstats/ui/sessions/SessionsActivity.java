@@ -82,6 +82,7 @@ public class SessionsActivity extends AppCompatActivity implements ChangeModeLis
             startActivity(i);
         });
 
+        binding.appBar.userInfo.modeInfo.setText(R.string.player_mode);
     }
 
     @Override

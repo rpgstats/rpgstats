@@ -72,6 +72,8 @@ public class GameSystemsActivity extends AppCompatActivity implements GameSystem
             //startActivity(new Intent(this, CharactersMainMenuActivity.class));
             startAddGameSystemActivityForResult();
         });
+
+        binding.appBar.userInfo.modeInfo.setText(R.string.master_mode);
     }
 
     private void startAddGameSystemActivityForResult() {
