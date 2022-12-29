@@ -63,14 +63,11 @@ public class CharacterEquipmentFragment extends Fragment {
             SlotItemBinding bindingNewItem = SlotItemBinding.bind(view);
             mSlotsViewModel.loadImage(bindingNewItem, slotsFromActivity.get(i).getIconUrl());
             int finalI = i;
-            Item currentItem = slotsFromActivity.get(finalI).getItem();
-            bindingNewItem.container.setBackground(currentItem != null ? AppCompatResources.getDrawable(getContext(), R.drawable.rounded_delete_bourder) :
+            bindingNewItem.container.setBackground(slotsFromActivity.get(finalI).getItem() != null ? AppCompatResources.getDrawable(getContext(), R.drawable.rounded_card) :
                     AppCompatResources.getDrawable(getContext(), R.drawable.rounded_border));
             bindingNewItem.getRoot().setOnClickListener(v -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity(), R.style.AlertDialogTheme);
-
-
-
+                Item currentItem = slotsFromActivity.get(finalI).getItem();
                 StringBuilder title = new StringBuilder();
                 title.append(currentItem == null ? "Slot unequipped" : "Slot equipped: ");
                 title.append(currentItem == null ? "" : currentItem.getName());
@@ -150,7 +147,7 @@ public class CharacterEquipmentFragment extends Fragment {
                     Item checkedItem = fittingItems.get(checked[0]);
                     String type = checkedItem.getTags().get(0).getName();
                     slotsFromActivity.get(finalI).setItem(checkedItem);
-                    bindingNewItem.container.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.rounded_delete_bourder));
+                    bindingNewItem.container.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.rounded_card));
                 });
                 builder.setNegativeButton("Cancel", (dialogInterface, i13) -> {
                     Toast.makeText(requireActivity(), "Canceled", Toast.LENGTH_SHORT).show();
