@@ -3,7 +3,9 @@ package com.nsu.rpgstats.ui.characters;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -22,11 +24,24 @@ import com.nsu.rpgstats.ui.characters.creation.new_creation.NewCreationViewModel
 import com.nsu.rpgstats.ui.sessions.SessionsActivity;
 
 import java.io.FileNotFoundException;
+import java.util.Objects;
 
 public class CharactersMainMenuActivity extends AppCompatActivity {
     private ActivityCharactersMainMenuBinding binding;
     private WindowViewModel mWindowViewModel;
     private BackgroundViewModel mBackgroundViewModel;
+
+    @Override
+    public void onBackPressed() {
+        NavController windowController = Navigation.findNavController(this, R.id.windowNavHost);
+        String winName = Objects.requireNonNull(windowController.getCurrentDestination()).getDisplayName();
+        if (!winName.equals("com.nsu.rpgstats:id/emptyFragment")) {
+            Log.d("back pressed win name", winName);
+            Navigation.findNavController(this, R.id.windowNavHost).navigate(R.id.emptyFragment);
+            return;
+        }
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

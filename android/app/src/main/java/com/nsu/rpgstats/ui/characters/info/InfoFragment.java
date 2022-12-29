@@ -1,7 +1,11 @@
 package com.nsu.rpgstats.ui.characters.info;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
@@ -9,23 +13,35 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.nsu.rpgstats.AppContainer;
 import com.nsu.rpgstats.R;
+import com.nsu.rpgstats.RpgstatsApplication;
+import com.nsu.rpgstats.entities.Attribute;
 import com.nsu.rpgstats.entities.Character;
 import com.nsu.rpgstats.databinding.FragmentInfoBinding;
 import com.nsu.rpgstats.entities.GameSystem;
+import com.nsu.rpgstats.entities.Modifier;
+import com.nsu.rpgstats.entities.Parameter;
+import com.nsu.rpgstats.entities.Slot;
 import com.nsu.rpgstats.ui.characters.BackgroundViewModel;
 import com.nsu.rpgstats.ui.characters.WindowViewModel;
 import com.nsu.rpgstats.ui.characters.selection.SelectionViewModel;
 import com.nsu.rpgstats.viewmodel.GameSystemInfoViewModel;
 import com.nsu.rpgstats.viewmodel.GameSystemsViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class InfoFragment extends Fragment {
 
@@ -49,6 +65,29 @@ public class InfoFragment extends Fragment {
         mViewModel = new ViewModelProvider(requireActivity()).get(SelectionViewModel.class);
         mInfoViewModel = new ViewModelProvider(requireActivity()).get(InfoViewModel.class);
         Character character = mViewModel.getCharacterList().getValue().get(position);
+
+        List<Parameter> parameters = ((RpgstatsApplication) requireActivity().getApplication()).appContainer.parameterRepository.getParameters(character.getGameSystemId()).getValue();
+        if (parameters != null) {
+            character.setAttributeList(new ArrayList<>());
+            for (Parameter parameter : parameters) {
+                List<Modifier> modifierList = new ArrayList<>();
+                for (Slot slot : character.getSlotList()) {
+                    if (slot.getItem() != null) {
+                        for (Modifier modifier : slot.getItem().getModifiers()) {
+                            if (Objects.equals(modifier.getParameter().getId(), parameter.getId()) && Objects.equals(modifier.getParameter().getName(), parameter.getName())) {
+                                modifierList.add(modifier);
+                            }
+                        }
+                    }
+                }
+                Attribute attribute = new Attribute(parameter.getId(), parameter.getName(), true, character.getGameSystemId(), parameter);
+                attribute.setModifierList(modifierList);
+                character.getAttributeList().add(attribute);
+            }
+        }
+
+
+
         this.character = new Character(
                 character.getId(),
                 character.getName(),
@@ -83,18 +122,46 @@ public class InfoFragment extends Fragment {
         Log.d("Name", "onCreateView: " + character.getDescription() );
 
         binding.charName.setText(character.getName());
-        binding.charName.setOnClickListener(view -> {
-            mInfoViewModel.setIsChanged(true);
+        final String startDesc = character.getDescription();
+        final String startName = character.getName();
+        binding.charName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mInfoViewModel.setIsChanged(true);
+            }
         });
 
         binding.charDesc.setText(character.getDescription());
-        binding.charDesc.setOnClickListener(view -> {
-            mInfoViewModel.setIsChanged(true);
+        binding.charDesc.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mInfoViewModel.setIsChanged(true);
+            }
         });
 
-        adapter = new AttributeAdapter(mInfoViewModel.getAttributeList().getValue(), pos -> {
-            mInfoViewModel.setIsChanged(true);
-        });
+        adapter = new AttributeAdapter(character.getAttributeList(), pos -> {});
+        binding.Attributes.setAdapter(adapter);
+        binding.Attributes.setLayoutManager(new LinearLayoutManager(getContext()));
 
         binding.cBackButton.setOnClickListener(view -> {
             if (mInfoViewModel.getIsChanged().getValue()) {
@@ -114,6 +181,12 @@ public class InfoFragment extends Fragment {
         });
 
         binding.exportButton.setOnClickListener(view -> {
+            ClipboardManager clipboardManager = (ClipboardManager)(requireActivity().getSystemService(CLIPBOARD_SERVICE));
+            String text = character.getId() + "";
+            ClipData clipData = ClipData.newPlainText("text", text);
+            clipboardManager.setPrimaryClip(clipData);
+            Toast.makeText(requireActivity(), "Id скопирован в буффер обмена",Toast.LENGTH_SHORT).show();
+
             new ViewModelProvider(requireActivity()).get(WindowViewModel.class).setIsShow(true);
             Bundle bundle = new Bundle();
             bundle.putInt("id", character.getId());
@@ -121,7 +194,7 @@ public class InfoFragment extends Fragment {
             Navigation.findNavController(requireActivity(), R.id.windowNavHost).navigate(R.id.exportCharacterFragment, bundle);
         });
 
-        binding.slotButton.setOnClickListener(view -> {
+        binding.SlotButton.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
             bundle.putInt("id", character.getId());
             bundle.putInt("position", position);

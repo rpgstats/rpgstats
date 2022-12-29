@@ -102,9 +102,16 @@ public class NewCreationFragment extends Fragment {
             if (binding.charName.getText().length() == 0 || mViewModel.getGameSystem().getValue() == null) {
                 return;
             }
+            int id = 0;
+            List<Character> characters = mSelectionViewModel.getCharacterList().getValue();
+            for (Character character : characters) {
+                if (character.getId() >= id) {
+                    id = character.getId() + 1;
+                }
+            }
 
             GameSystem gs = mViewModel.getGameSystem().getValue();
-            Character character = new Character(0, binding.charName.getText().toString(), "", gs.getId(), gs.getGameSessionNumber(), userId);
+            Character character = new Character(id, binding.charName.getText().toString(), "", gs.getId(), gs.getGameSessionNumber(), userId);
             BitmapFactory.Options options = new BitmapFactory.Options();
             if (mViewModel.getPathIcon().getValue() != null) {
                 try (InputStream file = getContext().getContentResolver().openInputStream(mViewModel.getPathIcon().getValue())) {

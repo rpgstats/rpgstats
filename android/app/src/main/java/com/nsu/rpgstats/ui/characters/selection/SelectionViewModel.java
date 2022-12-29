@@ -49,6 +49,13 @@ public class SelectionViewModel extends ViewModel {
     }
 
     public void addCharacter(String name, Character oldCharacter) {
+        int charId = 0;
+        for (Character character : characterList.getValue()) {
+            if (character.getId() >= charId) {
+                charId = character.getId() + 1;
+            }
+        }
+
         Character newCharacter = null;
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             ObjectOutputStream ous = new ObjectOutputStream(baos);
@@ -60,13 +67,16 @@ public class SelectionViewModel extends ViewModel {
             ois.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+            return;
         }
         newCharacter.setBackground(oldCharacter.getBackground());
         newCharacter.setIcon(oldCharacter.getIcon());
         newCharacter.setName(name);
+        newCharacter.setId(charId);
 
         characterList.getValue().add(newCharacter);//todo repo
         characterList.setValue(characterList.getValue());
+        saveCharacters(context);
     }
 
     public Character getCharacterById(int id) {
@@ -80,6 +90,7 @@ public class SelectionViewModel extends ViewModel {
 
     public void loadData(int UserId, Context context) {
         this.context = context;
+        userId = UserId;
         if (characterList.getValue() == null) {
             try (ObjectInputStream file = new ObjectInputStream(new FileInputStream(new File(context.getExternalFilesDir(null), "Characters" + userId + ".obj")))) {
                 characterList.setValue((List<Character>) file.readObject());
@@ -113,16 +124,19 @@ public class SelectionViewModel extends ViewModel {
         newCharacter.setIcon(oldCharacter.getIcon());
         characterList.getValue().add(position, newCharacter);//todo repo
         characterList.setValue(characterList.getValue());
+        saveCharacters(context);
     }
 
     public void deleteCharacter(int position) {
         characterList.getValue().remove(position);//todo repo
         characterList.setValue(characterList.getValue());
+        saveCharacters(context);
     }
 
     public void saveSlots(List<Slot> value, int id, int position) {
         characterList.getValue().get(position).setSlotList(value);//todo repo
         characterList.setValue(characterList.getValue());
+        saveCharacters(context);
     }
 
     public void downloadCharacter(int position, Context context) {
@@ -135,15 +149,23 @@ public class SelectionViewModel extends ViewModel {
         }
     }
 
-
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
+    public void saveCharacters(Context context) {
         try (ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(new File(context.getExternalFilesDir(null), "Characters" + userId + ".obj")))) {
             file.writeObject(characterList.getValue());
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    @Override
+    protected void onCleared() {
+        try (ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(new File(context.getExternalFilesDir(null), "Characters" + userId + ".obj")))) {
+            file.writeObject(characterList.getValue());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        super.onCleared();
     }
 }

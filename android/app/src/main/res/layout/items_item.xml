@@ -53,6 +53,7 @@
                 android:foregroundGravity="left"
                 android:orientation="horizontal"
                 app:flow_horizontalAlign="start"
+                app:flow_horizontalBias="0"
                 app:flow_horizontalGap="4dp"
                 app:flow_horizontalStyle="packed"
                 app:flow_verticalAlign="baseline"

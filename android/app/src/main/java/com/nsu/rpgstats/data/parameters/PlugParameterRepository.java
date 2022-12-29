@@ -19,6 +19,7 @@ public class PlugParameterRepository implements ParameterRepository {
     private Integer currentId;
 
     public PlugParameterRepository() {
+        mutableLiveData.setValue(new ArrayList<>());
         parameters = new HashMap<>();
         generateParameterList();
         currentId = 124;

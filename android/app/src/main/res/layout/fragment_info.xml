@@ -148,6 +148,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/Attributes"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -166,6 +167,7 @@
                     android:layout_height="wrap_content">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/SlotButton"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_marginTop="8dp"
@@ -178,7 +180,7 @@
                         app:layout_constraintWidth_min="100dp">
 
                         <TextView
-                            android:id="@+id/slotButton"
+                            android:id="@+id/slotButtonText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"

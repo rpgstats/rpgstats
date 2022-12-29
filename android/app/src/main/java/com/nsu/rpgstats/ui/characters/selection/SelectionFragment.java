@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nsu.rpgstats.R;
+import com.nsu.rpgstats.RpgstatsApplication;
 import com.nsu.rpgstats.databinding.FragmentSelectionBinding;
 import com.nsu.rpgstats.ui.characters.BackgroundViewModel;
 import com.nsu.rpgstats.ui.characters.WindowViewModel;
@@ -41,8 +42,9 @@ public class SelectionFragment extends Fragment {
 
         mViewModel.getCharacterList().observe(getViewLifecycleOwner(), characterList -> {
             adapter.setCharacterList(characterList);
+            mViewModel.saveCharacters(requireActivity());
         });
-        mViewModel.loadData(1, getContext()); //todo getUserId;
+        mViewModel.loadData( ((RpgstatsApplication)requireActivity().getApplication()).appContainer.currentUser.getId() , getContext());
 
         adapter = new CharacterListAdapter(mViewModel.getCharacterList().getValue(), position -> {
             Bundle bundle = new Bundle();
@@ -66,5 +68,11 @@ public class SelectionFragment extends Fragment {
         model.setName("");
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroy() {
+        mViewModel.saveCharacters(requireActivity());
+        super.onDestroy();
     }
 }

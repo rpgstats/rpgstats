@@ -47,7 +47,7 @@ public class SlotInfoFragment extends Fragment {
                 slot.getItemId());
         if (getArguments().getBoolean("editedTags", false)) {
             new ViewModelProvider(requireActivity()).get(SlotsViewModel.class).setIsChanged(true);
-            slot.setTags(new ArrayList<>(mViewModel.getSlot().getValue().getTags()));
+            newSlot.setTags(new ArrayList<>(mViewModel.getSlot().getValue().getTags()));
         } else {
             newSlot.setTags(new ArrayList<>(slot.getTags()));
         }

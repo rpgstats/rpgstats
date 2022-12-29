@@ -1,5 +1,6 @@
 package com.nsu.rpgstats.ui.characters.info;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nsu.rpgstats.databinding.AttributeCardBinding;
 import com.nsu.rpgstats.entities.Attribute;
+import com.nsu.rpgstats.entities.Modifier;
 
 import java.util.List;
 
@@ -34,15 +36,24 @@ public class AttributeAdapter extends RecyclerView.Adapter<AttributeAdapter.Attr
     @NonNull
     @Override
     public AttributeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        AttributeCardBinding binding = AttributeCardBinding.inflate(LayoutInflater.from(parent.getContext()));
+        AttributeCardBinding binding = AttributeCardBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new AttributeHolder(binding, listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AttributeHolder holder, int position) {
         holder.binding.attributeName.setText(attributeList.get(position).getName());
-        holder.binding.ConstraintName.setText("constraint1");
-        holder.binding.valueInput.setText("0");
+        int value = attributeList.get(position).getParameter().getMin();
+        for (Modifier modifier : attributeList.get(position).getModifierList()) {
+            value += modifier.getValue();
+        }
+        if (value > attributeList.get(position).getParameter().getMax()) {
+            value = attributeList.get(position).getParameter().getMax();
+        }
+        if (value < attributeList.get(position).getParameter().getMin()) {
+            value = attributeList.get(position).getParameter().getMin();
+        }
+        holder.binding.value.setText(value + "");
     }
 
     @Override
@@ -56,9 +67,7 @@ public class AttributeAdapter extends RecyclerView.Adapter<AttributeAdapter.Attr
         public AttributeHolder(AttributeCardBinding binding, ClickListener listener) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.valueInput.setOnClickListener(view -> {
-                listener.onClickListener(getAdapterPosition());
-            });
+
         }
     }
 

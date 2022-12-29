@@ -1,5 +1,7 @@
 package com.nsu.rpgstats.entities;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -53,5 +55,11 @@ public class Parameter implements Identifiable, Serializable {
     @Override
     public Integer getId() {
         return id;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name;
     }
 }
