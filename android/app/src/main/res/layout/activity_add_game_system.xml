@@ -14,13 +14,13 @@
         style="@style/Text.HeaderStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/rubik_medium"
         android:gravity="center_horizontal"
         android:text="@string/add_game_system_header"
-        android:fontFamily="@font/rubik_medium"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textSize="@dimen/header_text_size"
-        android:textColor="@color/gray"/>
+        android:textColor="@color/gray"
+        android:textSize="@dimen/header_text_size" />
 
     <LinearLayout
         android:layout_width="match_parent"
