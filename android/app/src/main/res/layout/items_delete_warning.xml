@@ -20,24 +20,30 @@
             android:id="@+id/DeleteHeaderText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:text="@string/delete_warning_header"
             android:textColor="@color/delete_red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/DeleteText"
             android:layout_width="176dp"
             android:layout_height="37dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/rubik"
             android:text="@string/delete_warning_text"
             android:textColor="@color/delete_red"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/DeleteHeaderText"
-            app:layout_constraintVertical_bias="0.13" />
+            app:layout_constraintVertical_bias="0.209" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/DeleteYesButton"
@@ -60,7 +66,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/white"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -84,7 +92,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/white"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

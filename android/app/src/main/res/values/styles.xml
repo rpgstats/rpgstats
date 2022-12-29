@@ -18,6 +18,7 @@
 
     <style name="Text">
         <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@fo</item>
     </style>
 
     <style name="EditLayoutStyle" parent="Theme.Rpgstats">

@@ -15,36 +15,60 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/header_text_size"
         android:gravity="center"
-        android:text="@string/parameter_add_new" />
+        android:text="@string/parameter_add_new"
+        android:fontFamily="@font/rubik_medium"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/gray" />
 
     <EditText
         android:id="@+id/newParamName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
         android:hint="@string/parameter_name"
         android:autofillHints="@string/parameter_name"
-        android:inputType="text" />
+        android:inputType="text"
+        android:background="@drawable/rounded_edit_text"
+        android:fontFamily="@font/rubik"
+        android:paddingLeft="@dimen/edit_text_margin"
+        />
 
     <EditText
         android:id="@+id/newParamMin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
         android:hint="@string/parameter_min_value"
         android:autofillHints="@string/parameter_min_value"
-        android:inputType="number" />
+        android:inputType="number"
+        android:background="@drawable/rounded_edit_text"
+        android:fontFamily="@font/rubik"
+        android:paddingLeft="@dimen/edit_text_margin"/>
 
     <EditText
         android:id="@+id/newParamMax"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
         android:hint="@string/parameter_max_value"
         android:autofillHints="@string/parameter_max_value"
-        android:inputType="number" />
+        android:inputType="number"
+        android:background="@drawable/rounded_edit_text"
+        android:fontFamily="@font/rubik"
+        android:paddingLeft="@dimen/edit_text_margin"/>
 
     <Button
         android:id="@+id/confirmAddParameterButton"
-        android:layout_width="match_parent"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:text="@string/parameter_confirm" />
+        android:text="@string/parameter_confirm"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/gray"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
 
 </LinearLayout>

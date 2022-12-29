@@ -95,6 +95,10 @@
         <activity android:name=".ui.parameters.ParameterDetailsActivity" />
         <activity android:name=".ui.properties.PropertyDetailsActivity" />
         <activity android:name=".ui.properties.PropertyManageActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

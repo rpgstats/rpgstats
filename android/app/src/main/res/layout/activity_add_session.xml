@@ -20,8 +20,13 @@
             style="@style/Text.HeaderStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/add_session" />
+            android:gravity="center"
+            android:text="@string/add_session"
+            android:fontFamily="@font/rubik_medium"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="@dimen/header_text_size"
+            android:textColor="@color/gray"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,41 +39,71 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/game_system_name_header" />
+                android:text="@string/game_system_name_header"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/gray"
+                android:textSize="22sp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/new_session_name_edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/enter_name_hint" />
+                android:layout_height="48dp"
+                android:hint="@string/enter_name_hint"
+                android:background="@drawable/rounded_edit_text"
+                android:fontFamily="@font/rubik"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textSize="20sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/maximum_players" />
+                android:text="@string/maximum_players"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/gray"
+                android:textSize="22sp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/new_session_max_players_number_edit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:hint="@string/enter_players_number"
-                android:inputType="number" />
+                android:inputType="number"
+                android:background="@drawable/rounded_edit_text"
+                android:fontFamily="@font/rubik"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textSize="20sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/game_system_header" />
+                android:text="@string/game_system_header"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/gray"
+                android:textSize="22sp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"/>
 
             <Spinner
                 android:id="@+id/dropdown_gamesystems"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/choose_game_system_hint" />
+                android:hint="@string/choose_game_system_hint"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/is_creator_also_a_player" />
+                android:text="@string/is_creator_also_a_player"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/gray"
+                android:textSize="22sp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,26 +113,43 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/yes" />
+                    android:text="@string/yes"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textColor="@color/gray"
+                    android:textSize="22sp"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="2dp"/>
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false" />
+                    android:checked="false"
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/no" />
+                    android:text="@string/no"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textColor="@color/gray"
+                    android:textSize="22sp"
+                    android:layout_marginLeft="10dp"/>
 
             </LinearLayout>
 
             <Button
                 android:id="@+id/add_session_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
                 android:text="@string/add_button"
-                android:gravity="center_horizontal"/>
+                android:textSize="@dimen/subheader_text_size"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/gray"
+                android:textColor="@color/white"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="130dp"
+                android:fontFamily="@font/rubik_medium"
+                android:gravity="center"/>
         </LinearLayout>
 
     </LinearLayout>

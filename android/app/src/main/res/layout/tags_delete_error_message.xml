@@ -19,10 +19,11 @@
             android:id="@+id/TagsDeleteErrorMessageHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:text="@string/tags_delete_error"
             android:textColor="@color/delete_red"
-            android:textSize="20sp"
+            android:fontFamily="@font/rubik_medium"
+            android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,14 +32,16 @@
             android:id="@+id/TagsDeleteErrorMessageText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="24dp"
+            android:fontFamily="@font/rubik"
+            android:textSize="16sp"
             android:text="@string/tag_delete_error"
             android:textColor="@color/delete_red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TagsDeleteErrorMessageHeader" />
+            app:layout_constraintTop_toBottomOf="@+id/TagsDeleteErrorMessageHeader"
+            app:layout_constraintVertical_bias="0.428" />
 
         <TextView
             android:id="@+id/TagsDeleteMessage"
@@ -46,6 +49,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="ErrorMessage"
+            android:fontFamily="@font/rubik"
+            android:textSize="16sp"
             android:textColor="@color/delete_red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

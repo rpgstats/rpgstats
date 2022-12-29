@@ -31,9 +31,9 @@
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/item_default_margin"
+                android:layout_margin="20dp"
                 android:background="@drawable/rounded_border"
-                android:padding="@dimen/item_default_margin"
+                android:padding="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -45,11 +45,16 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/item_default_margin"
                 android:text="Item Name"
-                android:textSize="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/rubik_medium"
+                android:paddingStart="15dp"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/header_text_size" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
@@ -67,13 +72,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/item_default_margin"
-                android:text="@string/item_view_tags_text" />
+                android:text="@string/item_view_tags_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.11"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/gray"
+                android:textSize="22sp"/>
 
             <ListView
                 android:id="@+id/Tags"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_margin="@dimen/item_default_margin">
+                android:layout_margin="@dimen/item_default_margin"
+                android:fontFamily="@font/rubik">
 
             </ListView>
 
@@ -88,29 +99,42 @@
                 android:id="@+id/ItemViewModifiersText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/item_view_modifiers_text" />
+                android:text="@string/item_view_modifiers_text"
+                android:layout_margin="@dimen/item_default_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.11"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/gray"
+                android:textSize="22sp"/>
 
             <ListView
                 android:id="@+id/Modifiers"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_margin="@dimen/item_default_margin">
+                android:layout_margin="@dimen/item_default_margin"
+                android:fontFamily="@font/rubik">
 
             </ListView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ViewItemInfoCopyButton"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
                 android:layout_margin="@dimen/item_default_margin"
-                android:background="@drawable/rounded_card">
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_card"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0.22000003"
+                android:backgroundTint="@color/gray"
+                android:textColor="@color/white">
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/item_default_margin"
-                    android:layout_marginStart="16dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -125,23 +149,32 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/rubik"
+                    android:textSize="20sp"
+                    app:layout_constraintHorizontal_bias="0.75" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ViewItemInfoDeleteButtom"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
                 android:layout_margin="@dimen/item_default_margin"
-                android:background="@drawable/rounded_card">
+                android:background="@drawable/rounded_card"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0.22000003"
+                android:backgroundTint="@color/gray"
+                android:textColor="@color/white">
 
                 <ImageView
                     android:id="@+id/imageView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/item_default_margin"
-                    android:layout_marginStart="16dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -156,7 +189,10 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/rubik"
+                    android:textSize="20sp"
+                    app:layout_constraintHorizontal_bias="0.75"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

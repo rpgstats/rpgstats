@@ -23,9 +23,9 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="5dp">
+            app:cardCornerRadius="25dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,44 +39,89 @@
                     android:layout_gravity="center"
                     android:padding="10dp"
                     android:text="@string/profile_settings"
-                    android:textSize="@dimen/subheader_text_size"/>
+                    android:textSize="@dimen/subheader_text_size"
+                    android:fontFamily="@font/rubik_medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"/>
 
                 <Button
                     android:id="@+id/change_login_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/change_login" />
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:text="@string/change_login"
+                    android:layout_gravity="center"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/rubik"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="@color/gray"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="10dp"/>
 
                 <Button
                     android:id="@+id/change_password_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="63dp"
-                    android:text="@string/change_password" />
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:text="@string/change_password"
+                    android:layout_gravity="center"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/rubik"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="@color/gray"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="8dp"/>
 
                 <Button
                     android:id="@+id/change_icon_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/change_icon" />
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:text="@string/change_icon"
+                    android:layout_gravity="center"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/rubik"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="@color/gray"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="8dp"/>
 
                 <Button
                     android:id="@+id/check_status_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/check_status" />
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:text="@string/check_status"
+                    android:layout_gravity="center"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/rubik"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="@color/gray"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="8dp"/>
 
                 <Button
                     android:id="@+id/change_mode_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/change_mode" />
+                    android:layout_width="170dp"
+                    android:layout_height="40dp"
+                    android:text="@string/change_mode"
+                    android:layout_gravity="center"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/rubik"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="@color/gray"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="8dp"/>
 
 
                 <Button
                     android:id="@+id/back_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/back_with_arrow" />
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:text="@string/back_with_arrow"
+                    android:layout_gravity="center"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/rubik"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="@color/gray"
+                    android:textColor="@color/white"
+                    android:layout_margin="15dp"/>
 
 
             </LinearLayout>

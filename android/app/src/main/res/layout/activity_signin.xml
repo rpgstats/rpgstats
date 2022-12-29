@@ -8,8 +8,8 @@
     tools:context=".ui.user.SignInActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="330dp"
+        android:layout_height="400dp"
         android:background="@drawable/rounded_white_card"
         android:orientation="vertical"
         android:padding="@dimen/welcome_activity_white_card_margin"
@@ -20,37 +20,50 @@
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
             android:layout_weight="1"
+            android:fontFamily="@font/rubik_medium"
             android:text="@string/sign_in"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:textSize="@dimen/subheader_text_size" />
+            android:textSize="@dimen/header_text_size"
+            android:textColor="@color/gray"/>
 
         <EditText
             android:id="@+id/signin_login_edit_text"
-            android:layout_marginTop="@dimen/dim_between_edittext"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="8dp"
+            android:layout_marginTop="@dimen/dim_between_edittext"
             android:layout_weight="1"
+            android:background="@drawable/rounded_edit_text"
+            android:fontFamily="@font/rubik"
             android:hint="@string/enter_login"
-            android:textSize="@dimen/subheader_text_size"/>
+            android:paddingLeft="@dimen/edit_text_margin"
+            android:textSize="@dimen/subheader_text_size" />
 
         <EditText
             android:id="@+id/signin_password_edit_text"
             android:layout_marginTop="@dimen/dim_between_edittext"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="8dp"
             android:layout_weight="1"
             android:inputType="textPassword"
             android:hint="@string/enter_password"
+            android:background="@drawable/rounded_edit_text"
+            android:paddingLeft="@dimen/edit_text_margin"
             android:textSize="@dimen/subheader_text_size" />
 
         <Button
             android:id="@+id/signin_button"
-            android:layout_marginTop="@dimen/dim_between_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_in" />
+            android:layout_width="170dp"
+            android:layout_height="8dp"
+            android:layout_weight="1"
+            android:layout_gravity="center|bottom"
+            android:text="@string/sign_in"
+            android:textSize="@dimen/subheader_text_size"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/gray"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

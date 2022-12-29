@@ -4,35 +4,45 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@color/cardview_dark_background"
-    android:padding="16dp"
+    android:padding="7dp"
     >
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:id="@+id/items_button"
-        android:src="@drawable/control_items" />
+        android:src="@drawable/control_items"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"/>
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:id="@+id/npc_button"
-        android:src="@drawable/control_npc" />
+        android:src="@drawable/control_npc"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/properties_button"
-        android:src="@drawable/control_properties" />
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:src="@drawable/control_properties"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"/>
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:id="@+id/tags_button"
-        android:src="@drawable/control_tags" />
+        android:src="@drawable/control_tags"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="5dp"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/parameters_button"
-        android:src="@drawable/control_parameters" />
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:src="@drawable/control_parameters"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="2dp"/>
 </LinearLayout>
