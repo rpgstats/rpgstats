@@ -8,7 +8,7 @@
         android:centerColor="@color/white" />
     <!-- shape property for the view based on the value particular view would be drawn -->
     <corners
-        android:radius="25dp" />
+        android:radius="40dp" />
 
     <size
         android:height="40dp"

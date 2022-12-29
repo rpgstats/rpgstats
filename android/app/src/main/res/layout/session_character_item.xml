@@ -3,7 +3,7 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:background="@drawable/rounded_card"
         android:gravity="center_vertical"
         android:layout_marginBottom="@dimen/item_vertical_margin"

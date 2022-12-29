@@ -24,26 +24,42 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_medium"
                 android:text="@string/add_character"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:padding="10dp"/>
+                android:textColor="@color/gray"
+                android:padding="10dp" />
 
             <EditText
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/choose_character" />
+                android:layout_height="40dp"
+                android:hint="@string/choose_character"
+                android:background="@drawable/rounded_edit_text"
+                android:fontFamily="@font/rubik"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textSize="20dp"/>
 
             <Button
                 android:id="@+id/back_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/back" />
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="@string/back"
+                android:fontFamily="@font/rubik"
+                android:background="@drawable/rounded_button"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp" />
             <Button
                 android:id="@+id/add_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/add" />
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="@string/add"
+                android:fontFamily="@font/rubik"
+                android:background="@drawable/rounded_button"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"/>
 
 
         </LinearLayout>

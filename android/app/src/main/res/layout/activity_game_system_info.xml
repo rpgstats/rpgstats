@@ -22,8 +22,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/game_system_information"
-            android:textAlignment="center"
-            style="@style/Text.HeaderStyle"/>
+            android:fontFamily="@font/rubik_medium"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:paddingStart="100dp"
+            android:textSize="@dimen/header_text_size"
+            android:textColor="@color/gray"/>
 
 
         <RelativeLayout
@@ -35,14 +39,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/description"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                android:layout_marginTop="22dp"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/description_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/description"
-                android:layout_alignParentEnd="true"/>
+                android:layout_alignParentEnd="true"
+                android:textSize="15sp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="10dp"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -54,14 +66,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/owner"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                android:layout_marginTop="22dp"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/owner_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/owner"
-                android:layout_alignParentEnd="true"/>
+                android:layout_alignParentEnd="true"
+                android:textSize="15sp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="10dp"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -73,14 +93,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/game_sessions_number"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                android:layout_marginTop="22dp"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/game_sessions_number_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/game_sessions_number"
-                android:layout_alignParentEnd="true"/>
+                android:layout_alignParentEnd="true"
+                android:textSize="15sp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="10dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -92,14 +120,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/child_game_system_number"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                android:layout_marginTop="22dp"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/child_game_system_number_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/child_game_system_number"
-                android:layout_alignParentEnd="true"/>
+                android:text="CGS_number"
+                android:layout_alignParentEnd="true"
+                android:textSize="15sp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="10dp" />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/items"
@@ -110,14 +146,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/items_number"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                android:layout_marginTop="22dp"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/items_number_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/items_number"
-                android:layout_alignParentEnd="true"/>
+                android:layout_alignParentEnd="true"
+                android:textSize="15sp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="10dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -129,14 +173,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/npc_number"
-                android:layout_alignParentStart="true"/>
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/rubik_medium"
+                android:textColor="@color/gray"
+                android:textSize="20sp"
+                android:layout_marginTop="22dp"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/npc_number_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/npc_number"
-                android:layout_alignParentEnd="true"/>
+                android:layout_alignParentEnd="true"
+                android:textSize="15sp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="10dp" />
         </RelativeLayout>
     </LinearLayout>
 

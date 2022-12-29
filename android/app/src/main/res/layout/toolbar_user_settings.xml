@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/activity_margin"
-        android:layout_marginBottom="@dimen/activity_margin" />
+        android:layout_marginBottom="@dimen/activity_margin"
+        />
 
 </com.google.android.material.appbar.AppBarLayout>

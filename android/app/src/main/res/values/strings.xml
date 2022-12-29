@@ -9,7 +9,7 @@
     <string name="game_system_information">Information</string>
     <string name="description">Description</string>
     <string name="owner">Owner</string>
-    <string name="game_sessions_number">Game sessions number</string>
+    <string name="game_sessions_number">Sessions number</string>
     <string name="child_game_system_number">Child game system number</string>
     <string name="items_number">Items number</string>
     <string name="npc_number">NPC number</string>
@@ -24,7 +24,7 @@
     <string name="choose_icon_hint">Choose icon</string>
     <string name="game_system_background_header">Background</string>
     <string name="choose_background_hint">Choose background</string>
-    <string name="add_button">Add</string>
+    <string name="add_button">ADD</string>
     <string name="cannot_create_game">Failed game creation. Empty name</string>
 
     <!-- parameter -->
@@ -38,7 +38,7 @@
     <string name="parameter_details">Parameter details</string>
     <string name="parameter_created_at">Created at</string>
     <string name="parameter_edit_button_text">Edit</string>
-    <string name="parameter_delete_button_text">Delete</string>
+    <string name="parameter_delete_button_text">DELETE</string>
     <string name="parameter_manage">Manage parameters</string>
     <string name="parameter_add_button_text">New parameter</string>
 
@@ -56,47 +56,47 @@
     <string name="item_add_item_name">Name</string>
     <string name="item_add_item_tag">Tags</string>
     <string name="item_add_item_modifiers">Modifiers</string>
-    <string name="item_add_back_text">Back</string>
-    <string name="item_add_add_text">Add</string>
+    <string name="item_add_back_text">BACK</string>
+    <string name="item_add_add_text">ADD</string>
     <string name="item_edit_header">Edit item</string>
     <string name="item_edit_item_name">Name</string>
     <string name="item_edit_item_tag">Tags</string>
     <string name="item_edit_item_modifiers">Modifiers</string>
-    <string name="item_edit_back_text">Back</string>
+    <string name="item_edit_back_text">BACK</string>
     <string name="item_edit_edit_text">Edit</string>
     <string name="item_view_tags_text">Tags</string>
     <string name="item_view_modifiers_text">Modifiers</string>
-    <string name="item_view_copy_text">Copy</string>
-    <string name="item_view_delete_text">Delete</string>
-    <string name="delete_warning_header">Delete</string>
+    <string name="item_view_copy_text">COPY</string>
+    <string name="item_view_delete_text">DELETE</string>
+    <string name="delete_warning_header">DELETE</string>
     <string name="delete_warning_text">Are you sure you want to delete this item?</string>
     <string name="delete_warning_yes">Yes</string>
     <string name="delete_warning_no">No</string>
-    <string name="item_tags_back">Back</string>
-    <string name="item_tags_add">Add</string>
+    <string name="item_tags_back">BACK</string>
+    <string name="item_tags_add">ADD</string>
     <string name="item_tags_header">Add tags</string>
     <string name="item_tags_tags_text">Tags</string>
     <string name="item_modifiers_header">Add Modifier</string>
     <string name="item_modifier_text">Parametrs</string>
-    <string name="item_modifier_back_text">Back</string>
-    <string name="item_modifier_add_text">Add</string>
+    <string name="item_modifier_back_text">BACK</string>
+    <string name="item_modifier_add_text">ADD</string>
 
     <!-- tags -->
     <string name="tags_tags_list_header">Tag list</string>
     <string name="tags_add_header">Add tag</string>
     <string name="tags_add_tag_hint">TagName</string>
     <string name="tags_add_tag_text">Name</string>
-    <string name="tags_add_back_text">Back</string>
-    <string name="tags_add_add_text">Add</string>
+    <string name="tags_add_back_text">BACK</string>
+    <string name="tags_add_add_text">ADD</string>
     <string name="tag_edit_header">Edit tag</string>
     <string name="tags_edit_tag_text">Name</string>
     <string name="tags_edit_tag_hint">TagName</string>
-    <string name="tags_edit_back_text">Back</string>
+    <string name="tags_edit_back_text">BACK</string>
     <string name="tags_edit_edit_text">Edit</string>
     <string name="tags_view_info_header">TagName</string>
     <string name="tags_view_info_text">Created:</string>
-    <string name="tags_view_info_copy_text">Copy</string>
-    <string name="tags_view_info_delete_text">Delete</string>
+    <string name="tags_view_info_copy_text">COPY</string>
+    <string name="tags_view_info_delete_text">DELETE</string>
     <string name="tags_delete_error">Error</string>
     <string name="tag_delete_error">Unable to delete tag:</string>
     <string name="tag_create_error">Error</string>
@@ -124,8 +124,8 @@
 
     <!-- Auth -->
     <string name="welcome">WELCOME</string>
-    <string name="sign_in">sign in</string>
-    <string name="sign_up">sign up</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="sign_up">SIGN UP</string>
     <string name="enter_login">Enter login</string>
     <string name="enter_email">Enter email</string>
     <string name="enter_password">Enter password</string>
@@ -138,34 +138,34 @@
     <string name="maximum_players">Maximum Players</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
-    <string name="session_name">session name</string>
+    <string name="session_name">Session Name</string>
     <string name="user_name">\@user_name</string>
     <string name="author">Author</string>
     <string name="players_number">Players Number</string>
     <string name="game_system">Game System</string>
     <string name="open">open</string>
     <string name="character_list">Character List</string>
-    <string name="delete">delete</string>
+    <string name="delete">DELETE</string>
     <string name="sessions">Sessions</string>
     <string name="enter_players_number">Enter players number</string>
     <string name="tab_name">Tab name</string>
     <string name="characters">Characters</string>
-    <string name="back">Back</string>
+    <string name="back">BACK</string>
     <string name="add_character">Add Character</string>
-    <string name="add">Add</string>
+    <string name="add">ADD</string>
     <string name="choose_character">Choose character</string>
     <string name="check_status">Check Status</string>
     <string name="change_icon">Change Icon</string>
     <string name="change_password">Change Password</string>
     <string name="change_login">Change Login</string>
-    <string name="back_with_arrow"><![CDATA[<- back]]></string>
-    <string name="profile_settings">Profile settings</string>
+    <string name="back_with_arrow">BACK</string>
+    <string name="profile_settings">Profile Settings</string>
     <string name="player">Player</string>
     <string name="master">Master</string>
-    <string name="change_mode">Change mode</string>
+    <string name="change_mode">Change Mode</string>
     <string name="invite_players">Invite Players</string>
     <string name="link">Link</string>
-    <string name="copy">copy</string>
+    <string name="copy">COPY</string>
     <string name="server_address_key">SERVER_ADDRESS_KEY</string>
     <string name="preference_file_key">PREFERENCE_FILE_KEY</string>
 

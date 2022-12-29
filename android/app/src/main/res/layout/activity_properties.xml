@@ -13,17 +13,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/property_manage"
-        android:textSize="@dimen/header_text_size" />
+        android:textSize="@dimen/header_text_size"
+        android:fontFamily="@font/rubik_medium"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/gray"
+        android:layout_marginTop="30dp"/>
 
     <ListView
         android:id="@+id/propListView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/big_list_height"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/rubik_medium" />
 
     <Button
         android:id="@+id/addPropertyButton"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="@string/parameter_add_button_text" />
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/gray"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="@string/parameter_add_button_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/subheader_text_size" />
 </LinearLayout>

@@ -14,15 +14,24 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/header_text_size"
         android:gravity="center"
-        android:text="@string/property_add_new" />
+        android:text="@string/property_add_new"
+        android:fontFamily="@font/rubik_medium"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/gray"/>
 
     <EditText
         android:id="@+id/newPropName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:hint="@string/property_name"
         android:autofillHints="@string/property_name"
-        android:inputType="text" />
+        android:inputType="text"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_edit_text"
+        android:fontFamily="@font/rubik"
+        android:paddingLeft="@dimen/edit_text_margin"/>
 
     <ListView
         android:id="@+id/property_manage_modifiers_list"
@@ -31,9 +40,15 @@
 
     <Button
         android:id="@+id/add_modifier_button"
-        android:layout_width="match_parent"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:text="@string/add_modifier" />
+        android:text="@string/add_modifier"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/gray"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
 
     <ListView
         android:id="@+id/property_manage_constraints_list"
@@ -42,14 +57,25 @@
 
     <Button
         android:id="@+id/add_constraint_button"
-        android:layout_width="match_parent"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:text="@string/add_constraint" />
+        android:text="@string/add_constraint"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/gray"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
 
     <Button
         android:id="@+id/confirmAddPropertyButton"
-        android:layout_width="match_parent"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:text="@string/parameter_confirm" />
+        android:text="@string/parameter_confirm"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/gray"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
 
 </LinearLayout>
