@@ -46,6 +46,9 @@ public class ParameterAdapter extends RecyclerView.Adapter<ParameterAdapter.Para
 
     @Override
     public int getItemCount() {
+        if(mParams == null){
+            return 0;
+        }
         return mParams.size();
     }
 
