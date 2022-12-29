@@ -28,14 +28,20 @@
 
         <TextView
             android:id="@+id/AddTagHeader"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/tags_add_header"
-            android:textSize="24dp"
+            android:textSize="@dimen/header_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/gray"
+            />
 
         <TextView
             android:id="@+id/AddTagText"
@@ -47,21 +53,30 @@
             app:layout_constraintHorizontal_bias="0.07"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25" />
+            app:layout_constraintVertical_bias="0.25"
+            android:fontFamily="@font/rubik_medium"
+            android:textColor="@color/gray"
+            android:textSize="22sp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/rounded_border"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/AddTagText">
+            app:layout_constraintTop_toBottomOf="@+id/AddTagText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/rounded_edit_text"
+            android:fontFamily="@font/rubik"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textSize="20sp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/AddTagInputName"
@@ -75,8 +90,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/AddTagBackButton"
-            android:layout_width="175dp"
-            android:layout_height="100dp"
+            android:layout_width="155dp"
+            android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/rounded_card"
@@ -91,6 +106,7 @@
                 android:text="@string/tags_add_back_text"
                 android:textColor="@color/white"
                 android:textSize="20dp"
+                android:layout_marginLeft="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -110,8 +126,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/AddTagAddButton"
-            android:layout_width="175dp"
-            android:layout_height="0dp"
+            android:layout_width="155dp"
+            android:layout_height="50dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/rounded_card"
             app:layout_constraintBottom_toBottomOf="@+id/AddTagBackButton"
@@ -125,6 +141,7 @@
                 android:text="@string/tags_add_add_text"
                 android:textColor="@color/white"
                 android:textSize="20dp"
+                android:layout_marginLeft="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
